@@ -1,25 +1,22 @@
+import 'package:tixe_app/global/widget/tixe_scaffold.dart';
+import 'package:tixe_app/modules/sign_up/views/components/sign_up_social_login_buttons.dart';
+import '../controller/sign_up_controller.dart';
+import '/global/widget/global_text.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_app/global/widget/global_button.dart';
-import 'package:tixe_app/global/widget/global_image_loader.dart';
 import 'package:tixe_app/global/widget/global_textformfield.dart';
-import 'package:tixe_app/global/widget/tixe_scaffold.dart';
-import 'package:tixe_app/modules/sign_in/controller/sign_in_controller.dart';
-import 'package:tixe_app/modules/sign_in/views/components/sign_in_social_login_buttons.dart';
-import 'package:tixe_app/utils/app_routes.dart';
 import 'package:tixe_app/utils/extension.dart';
 import 'package:tixe_app/utils/navigation.dart';
-import 'package:tixe_app/utils/styles/k_assets.dart';
 import 'package:tixe_app/utils/styles/k_colors.dart';
-import '/global/widget/global_text.dart';
-import 'package:flutter/material.dart';
 
-class SignInScreen extends StatelessWidget {
-  const SignInScreen({super.key});
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = context.read(signInController.notifier);
+    final controller = context.read(signUpController.notifier);
     return TixeScaffold(
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -41,19 +38,14 @@ class SignInScreen extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      if (!isKeyboardOpen) const Spacer(),
-                      GlobalImageLoader(
-                        imagePath: KAssetName.tixeLogo.imagePath,
-                        height: 48.h,
-                        width: 170.w,
-                        fit: BoxFit.cover,
-                      ),
-                      if (!isKeyboardOpen) const Spacer(),
-                      GlobalText(
-                        str: context.loc.sign_in_to_continue,
-                        color: KColor.white.color,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w600,
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: GlobalText(
+                          str: context.loc.creating_account,
+                          color: KColor.white.color,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                       SizedBox(height: 10.h),
                       Align(
@@ -96,33 +88,50 @@ class SignInScreen extends StatelessWidget {
                           return null;
                         },
                       ),
-                      SizedBox(height: 30.h),
+                      SizedBox(height: 10.h),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: GlobalText(
+                          str: context.loc.reenter_password,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: KColor.grey.color,
+                        ),
+                      ),
+                      SizedBox(height: 10.h),
+                      GlobalTextFormfield(
+                        textEditingController:
+                            controller.confirmPasswordController,
+                        validator: (value) {
+                          if (value != controller.passwordController.text) {
+                            return context.loc.password_not_match;
+                          }
+                          return null;
+                        },
+                      ),
+                      if (!isKeyboardOpen) const Spacer(),
                       Consumer(builder: (context, ref, child) {
-                        final state = ref.watch(signInController);
+                        final state = ref.watch(signUpController);
                         return GlobalButton(
                           onPressed: state.isButtonEnabled ? () {} : null,
-                          buttonText: context.loc.sign_in,
+                          buttonText: context.loc.create_account,
                         );
                       }),
                       SizedBox(height: 30.h),
-                      const SignInSocialLoginButtons(),
+                      const SignUpSocialLoginButtons(),
                       SizedBox(height: 30.h),
                       Wrap(
                         children: [
-                          GlobalText(
-                            str: context.loc.are_you_new,
-                            color: KColor.white.color,
-                          ),
                           InkWell(
-                            onTap: () {
-                              Navigation.push(
-                                appRoutes: AppRoutes.signUp,
-                              );
-                            },
+                            onTap: () => Navigation.pop(),
                             child: GlobalText(
-                              str: context.loc.create_an_account,
+                              str: context.loc.please_login,
                               color: KColor.btnGradient1.color,
                             ),
+                          ),
+                          GlobalText(
+                            str: context.loc.if_you_have_account,
+                            color: KColor.white.color,
                           ),
                         ],
                       ),

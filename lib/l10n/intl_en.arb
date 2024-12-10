@@ -15,5 +15,13 @@
   "password": "Password",
   "sign_in": "Sign In",
   "are_you_new": "Are you new? ",
-  "create_an_account": "Create an Account"
+  "create_an_account": "Create an Account",
+  "creating_account": "Creating Account",
+  "reenter_password": "Re-enter Password",
+  "create_account": "Create Account",
+  "please_login": "Please Login ",
+  "if_you_have_account": "If you have an account",
+  "password_not_match": "Password not matched",
+  "email_or_phone_required": "Email or Phone is required",
+  "password_required": "Password is required"
 }

@@ -6,11 +6,13 @@ import '../../utils/styles/k_colors.dart';
 class GlobalTextFormfield extends StatelessWidget {
   final TextEditingController? textEditingController;
   final Function(String value)? onChanged;
+  final FormFieldValidator<String?>? validator;
 
   const GlobalTextFormfield({
     super.key,
     this.textEditingController,
     this.onChanged,
+    this.validator,
   });
 
   @override
@@ -18,6 +20,8 @@ class GlobalTextFormfield extends StatelessWidget {
     return TextFormField(
       controller: textEditingController,
       onChanged: onChanged,
+      validator: validator,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       onTapOutside: (event) {
         FocusScope.of(context).unfocus();
       },
