@@ -36,7 +36,7 @@ class VerifyEmailController extends StateNotifier<VerifyEmailState> {
 
   startTimer() {
     state = state.copyWith(showResendOtpButton: false);
-    state = state.copyWith(leftTime: "2:00");
+    state = state.copyWith(leftTime: "02:00");
     final DateTime now = DateTime.now();
     late DateTime leftTime;
     leftTime = DateTime(now.year, now.month, now.day, now.hour, 2, 00);
@@ -45,7 +45,7 @@ class VerifyEmailController extends StateNotifier<VerifyEmailState> {
       const Duration(seconds: 1),
       (time) {
         leftTime = leftTime.subtract(const Duration(seconds: 1));
-        state = state.copyWith(leftTime: DateFormat('m:ss').format(leftTime));
+        state = state.copyWith(leftTime: DateFormat('0m:ss').format(leftTime));
         if (time.tick >= 120) {
           state = state.copyWith(showResendOtpButton: true);
           stopTimer();
