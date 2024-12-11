@@ -5,7 +5,9 @@ import 'package:tixe_app/global/widget/tixe_scaffold.dart';
 import 'package:tixe_app/modules/auth/verify_email/controller/verify_email_controller.dart';
 import 'package:tixe_app/modules/auth/verify_email/views/components/verify_email_otp_field.dart';
 import 'package:tixe_app/modules/auth/verify_email/views/components/verify_email_resend_otp.dart';
+import 'package:tixe_app/utils/app_routes.dart';
 import 'package:tixe_app/utils/extension.dart';
+import 'package:tixe_app/utils/navigation.dart';
 import 'package:tixe_app/utils/styles/k_colors.dart';
 import '/global/widget/global_text.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +47,11 @@ class VerifyEmailScreen extends StatelessWidget {
             Consumer(builder: (context, ref, child) {
               final state = ref.watch(verifyEmailController);
               return GlobalButton(
-                onPressed: state.isButtonEnabled ? () {} : null,
+                onPressed: state.isButtonEnabled
+                    ? () {
+                        Navigation.push(appRoutes: AppRoutes.personalDetails);
+                      }
+                    : null,
                 buttonText: context.loc.verify_email,
               );
             }),

@@ -3,47 +3,33 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../utils/styles/k_colors.dart';
 
-class GlobalTextFormfield extends StatelessWidget {
+class GlobalBottomSheetTextFormField extends StatelessWidget {
   final TextEditingController? textEditingController;
-  final Function(String value)? onChanged;
-  final FormFieldValidator<String?>? validator;
-  final bool readOnly;
-  final FocusNode? focusNode;
-  final Widget? suffixIcon;
-  final String? hintText;
+  final VoidCallback? onTap;
 
-  const GlobalTextFormfield({
+  const GlobalBottomSheetTextFormField({
     super.key,
     this.textEditingController,
-    this.onChanged,
-    this.validator,
-    this.readOnly = false,
-    this.focusNode,
-    this.suffixIcon,
-    this.hintText,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    final style = TextStyle(
-      fontSize: 14.sp,
-      fontWeight: FontWeight.w400,
-      color: KColor.black.color,
-    );
     return TextFormField(
       controller: textEditingController,
-      onChanged: onChanged,
-      validator: validator,
-      focusNode: focusNode,
-      readOnly: readOnly,
+      onTap: onTap,
       autovalidateMode: AutovalidateMode.onUserInteraction,
+      readOnly: true,
+      focusNode: AlwaysDisabledFocusNode(),
       onTapOutside: (event) {
         FocusScope.of(context).unfocus();
       },
-      style: style,
+      style: TextStyle(
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w400,
+        color: KColor.black.color,
+      ),
       decoration: InputDecoration(
-        hintText: hintText,
-        hintStyle: style,
         filled: true,
         fillColor: KColor.white.color,
         border: OutlineInputBorder(
@@ -55,8 +41,13 @@ class GlobalTextFormfield extends StatelessWidget {
             color: KColor.btnGradient1.color,
           ),
         ),
-        suffixIcon: suffixIcon,
+        suffixIcon: Icon(Icons.keyboard_arrow_down_sharp),
       ),
     );
   }
+}
+
+class AlwaysDisabledFocusNode extends FocusNode {
+  @override
+  bool get hasFocus => false;
 }

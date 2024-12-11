@@ -8,11 +8,13 @@ import '../../utils/styles/styles.dart';
 class GlobalButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final String buttonText;
+  final EdgeInsets? margin;
 
   const GlobalButton({
     super.key,
     required this.onPressed,
     required this.buttonText,
+    this.margin,
   });
 
   @override
@@ -26,6 +28,7 @@ class GlobalButton extends StatelessWidget {
               onPressed!();
             },
       child: Container(
+        margin: margin,
         padding: EdgeInsets.symmetric(
           horizontal: 30.w,
           vertical: 16.h,

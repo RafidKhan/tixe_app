@@ -6,10 +6,12 @@ import 'package:tixe_app/utils/styles/styles.dart';
 
 class TixeScaffold extends StatelessWidget {
   final Widget body;
+  final Widget? bottomNavigationBar;
 
   const TixeScaffold({
     super.key,
     required this.body,
+    this.bottomNavigationBar,
   });
 
   @override
@@ -34,6 +36,7 @@ class TixeScaffold extends StatelessWidget {
         ),
         child: body,
       ),
+      bottomNavigationBar: bottomNavigationBar,
     );
   }
 }

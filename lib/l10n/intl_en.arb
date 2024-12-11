@@ -27,5 +27,15 @@
   "account_created": "Account Created!",
   "email_sent": "An email has been sent to your account with a verification code. Please enter the code",
   "resend": "Resend",
-  "verify_email": "Verify Email"
+  "verify_email": "Verify Email",
+  "personal_details": "Personal Details",
+  "your_name": "Your Name",
+  "state": "State",
+  "city": "City",
+  "address": "Address",
+  "country": "Country",
+  "arms_license": "Arms License",
+  "upload_docs": "Upload Docs",
+  "next": "Next",
+  "search": "Search"
 }

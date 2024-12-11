@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tixe_app/global/model/global_option_item.dart';
+import 'package:tixe_app/global/widget/global_bottomsheet_widget.dart';
 import '/global/widget/global_button.dart';
 import '/global/widget/global_text.dart';
 import '/utils/navigation.dart';
@@ -34,6 +36,7 @@ class ViewUtil {
 
   // this varialble is for internet connection check.
   static bool isPresentedDialog = false;
+
   static showInternetDialog({
     required VoidCallback onPressed,
   }) async {
@@ -105,7 +108,6 @@ class ViewUtil {
           ),
           title: title,
           content: content,
-         
         );
       },
     );
@@ -143,5 +145,21 @@ class ViewUtil {
       ),
     );
   }
-}
 
+  static Future<void> showOptionPickerBottomSheet({
+    required List<GlobalOptionData> options,
+    required Function(GlobalOptionData item) onSelect,
+  }) async {
+    await showModalBottomSheet(
+      context: Navigation.key.currentContext!,
+      isScrollControlled: true,
+      backgroundColor: KColor.bodyGradient1.color,
+      builder: (context) {
+        return GlobalBottomSheetWidget(
+          options: options,
+          onSelect: onSelect,
+        );
+      },
+    );
+  }
+}
