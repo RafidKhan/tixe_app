@@ -32,7 +32,7 @@ class GlobalButton extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.r),
-          color: isButtonEnabled ? null : KColor.grey.color,
+          color: isButtonEnabled ? null : KColor.disabledBtnColor.color,
           gradient: isButtonEnabled
               ? LinearGradient(
                   begin: Alignment.topCenter,
