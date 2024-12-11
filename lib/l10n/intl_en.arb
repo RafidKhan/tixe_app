@@ -23,5 +23,9 @@
   "if_you_have_account": "If you have an account",
   "password_not_match": "Password not matched",
   "email_or_phone_required": "Email or Phone is required",
-  "password_required": "Password is required"
+  "password_required": "Password is required",
+  "account_created": "Account Created!",
+  "email_sent": "An email has been sent to your account with a verification code. Please enter the code",
+  "resend": "Resend",
+  "verify_email": "Verify Email"
 }

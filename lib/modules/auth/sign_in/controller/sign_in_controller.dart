@@ -3,7 +3,7 @@ import 'package:riverpod/riverpod.dart';
 import 'package:tixe_app/modules/boilerplate/controller/state/boilerplate_state.dart';
 import 'package:tixe_app/modules/boilerplate/repository/boilerplate_interface.dart';
 import 'package:tixe_app/modules/boilerplate/repository/boilerplate_repository.dart';
-import 'package:tixe_app/modules/sign_in/controller/state/sign_in_state.dart';
+import 'package:tixe_app/modules/auth/sign_in/controller/state/sign_in_state.dart';
 
 final signInController =
     StateNotifierProvider.autoDispose<SignInController, SignInState>(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod/riverpod.dart';
-import 'package:tixe_app/modules/sign_up/controller/state/sign_up_state.dart';
-import 'package:tixe_app/modules/sign_up/repository/sign_up_interface.dart';
-import 'package:tixe_app/modules/sign_up/repository/sign_up_repository.dart';
+import 'package:tixe_app/modules/auth/sign_up/controller/state/sign_up_state.dart';
+import 'package:tixe_app/modules/auth/sign_up/repository/sign_up_interface.dart';
+import 'package:tixe_app/modules/auth/sign_up/repository/sign_up_repository.dart';
 
 final signUpController =
     StateNotifierProvider.autoDispose<SignUpController, SignUpState>(
