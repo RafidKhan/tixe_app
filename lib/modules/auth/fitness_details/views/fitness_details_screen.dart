@@ -123,6 +123,9 @@ class FitnessDetailsScreen extends StatelessWidget {
                   );
                   Future.delayed(const Duration(seconds: 2), () {
                     ViewUtil.hideLoader();
+                    Navigation.pushAndRemoveUntil(
+                      appRoutes: AppRoutes.signIn,
+                    );
                   });
                 }
               : null,

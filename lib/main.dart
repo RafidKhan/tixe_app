@@ -8,15 +8,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tixe_flutter_app/constant/app_url.dart';
 import 'package:tixe_flutter_app/data_provider/pref_helper.dart';
-import 'package:tixe_flutter_app/modules/auth/fitness_details/views/fitness_details_screen.dart';
 import 'package:tixe_flutter_app/modules/splash/views/splash_screen.dart';
 import 'package:tixe_flutter_app/utils/app_version.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/network_connection.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
-
-import 'modules/auth/personal_details/views/personal_details_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -92,8 +89,8 @@ class MyApp extends StatelessWidget {
             primaryColor: KColor.primary.color,
             visualDensity: VisualDensity.adaptivePlatformDensity,
             colorScheme: ThemeData().colorScheme.copyWith(
-              secondary: KColor.primary.color,
-            ),
+                  secondary: KColor.primary.color,
+                ),
           ),
           builder: (context, widget) {
             return ScrollConfiguration(
@@ -104,7 +101,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: const FitnessDetailsScreen(),
+      child: const SplashScreen(),
     );
   }
 }
