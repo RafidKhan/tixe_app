@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 enum KColor {
   primary,
+  secondary,
   black,
   white,
   btnGradient1,
@@ -12,7 +13,9 @@ enum KColor {
   grey,
   disabledBtnColor,
   shadeGradient1,
-  shadeGradient2
+  shadeGradient2,
+  cardGradient1,
+  cardGradient2,
 }
 
 extension KColorExtention on KColor {
@@ -20,6 +23,8 @@ extension KColorExtention on KColor {
     switch (this) {
       case KColor.primary:
         return const Color(0xff121106);
+      case KColor.secondary:
+        return const Color(0xffF8BA1C);
       case KColor.black:
         return Colors.black;
       case KColor.white:
@@ -42,6 +47,10 @@ extension KColorExtention on KColor {
         return const Color(0xff575548);
       case KColor.shadeGradient2:
         return const Color(0xff24231F);
+      case KColor.cardGradient1:
+        return const Color(0xff444339);
+      case KColor.cardGradient2:
+        return const Color(0xff44433C);
     }
   }
 }

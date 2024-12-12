@@ -3,10 +3,13 @@ enum KAssetName {
   tixeLogoPng,
   applePng,
   errorPng,
+  icHamburgerPng,
   fitnessPng,
   trainingPng,
+  demoTrainingPng,
   googlePng,
   facebookPng,
+  tixeMainBgPng,
   workoutPng,
   splashBgPng,
 }
@@ -24,14 +27,20 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/apple.png';
       case KAssetName.errorPng:
         return '$_imagesDir/error.png';
+      case KAssetName.icHamburgerPng:
+        return '$_imagesDir/icHamburger.png';
       case KAssetName.fitnessPng:
         return '$_imagesDir/fitness.png';
       case KAssetName.trainingPng:
         return '$_imagesDir/training.png';
+      case KAssetName.demoTrainingPng:
+        return '$_imagesDir/demo_training.png';
       case KAssetName.googlePng:
         return '$_imagesDir/google.png';
       case KAssetName.facebookPng:
         return '$_imagesDir/facebook.png';
+      case KAssetName.tixeMainBgPng:
+        return '$_imagesDir/tixe_main_bg.png';
       case KAssetName.workoutPng:
         return '$_imagesDir/workout.png';
       case KAssetName.splashBgPng:

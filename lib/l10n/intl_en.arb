@@ -43,5 +43,9 @@
   "your_height": "Your Height",
   "your_weight": "Your Weight",
   "optimizing_for_you": "Optimizing for you!",
-  "please_wait_till_optimize": "Please wait for a while till we optimize the experience with the data you have provided"
+  "please_wait_till_optimize": "Please wait for a while till we optimize the experience with the data you have provided",
+  "good_day": "Good Day!",
+  "home": "Home",
+  "training": "Training",
+  "trainings": "Trainings"
 }

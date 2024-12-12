@@ -49,7 +49,11 @@ class SplashScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 30.h),
                   GlobalButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigation.pushAndRemoveUntil(
+                        appRoutes: AppRoutes.dashboard,
+                      );
+                    },
                     buttonText: context.loc.explore_now,
                   ),
                   SizedBox(height: 30.h),
