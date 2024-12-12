@@ -6,8 +6,9 @@ import 'package:tixe_flutter_app/global/widget/global_bottomsheet_textformfield.
 import 'package:tixe_flutter_app/global/widget/global_textformfield.dart';
 import 'package:tixe_flutter_app/global/widget/tixe_scaffold.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/controller/personal_details_controller.dart';
-import 'package:tixe_flutter_app/utils/custom_file_picker.dart';
+import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
+import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 import '/global/widget/global_text.dart';
@@ -158,7 +159,13 @@ class PersonalDetailsScreen extends StatelessWidget {
         final state = ref.watch(personalDetailsController);
 
         return GlobalBottomButton(
-          onPressed: state.isButtonEnabled ? () {} : null,
+          onPressed: state.isButtonEnabled
+              ? () {
+                  Navigation.push(
+                    appRoutes: AppRoutes.fitnessDetails,
+                  );
+                }
+              : null,
           buttonText: context.loc.next,
         );
       }),

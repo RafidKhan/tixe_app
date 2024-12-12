@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tixe_flutter_app/constant/app_url.dart';
 import 'package:tixe_flutter_app/data_provider/pref_helper.dart';
+import 'package:tixe_flutter_app/modules/auth/fitness_details/views/fitness_details_screen.dart';
 import 'package:tixe_flutter_app/modules/splash/views/splash_screen.dart';
 import 'package:tixe_flutter_app/utils/app_version.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
@@ -103,7 +104,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: const PersonalDetailsScreen(),
+      child: const FitnessDetailsScreen(),
     );
   }
 }

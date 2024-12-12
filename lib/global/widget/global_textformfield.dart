@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../utils/styles/k_colors.dart';
@@ -11,6 +12,8 @@ class GlobalTextFormfield extends StatelessWidget {
   final FocusNode? focusNode;
   final Widget? suffixIcon;
   final String? hintText;
+  final TextInputType? keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
 
   const GlobalTextFormfield({
     super.key,
@@ -21,6 +24,8 @@ class GlobalTextFormfield extends StatelessWidget {
     this.focusNode,
     this.suffixIcon,
     this.hintText,
+    this.keyboardType,
+    this.inputFormatters,
   });
 
   @override
@@ -36,6 +41,8 @@ class GlobalTextFormfield extends StatelessWidget {
       validator: validator,
       focusNode: focusNode,
       readOnly: readOnly,
+      keyboardType: keyboardType,
+      inputFormatters: inputFormatters,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       onTapOutside: (event) {
         FocusScope.of(context).unfocus();
