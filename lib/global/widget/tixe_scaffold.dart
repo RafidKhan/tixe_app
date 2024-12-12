@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tixe_app/data_provider/api_client.dart';
-import 'package:tixe_app/global/widget/global_appbar.dart';
-import 'package:tixe_app/utils/extension.dart';
-import 'package:tixe_app/utils/styles/styles.dart';
+import 'package:tixe_flutter_app/data_provider/api_client.dart';
+import 'package:tixe_flutter_app/global/widget/global_appbar.dart';
+import 'package:tixe_flutter_app/utils/extension.dart';
+import 'package:tixe_flutter_app/utils/styles/styles.dart';
 
 class TixeScaffold extends StatelessWidget {
   final Widget body;

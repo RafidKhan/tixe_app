@@ -1,13 +1,13 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tixe_app/data_provider/api_client.dart';
-import 'package:tixe_app/global/widget/global_button.dart';
-import 'package:tixe_app/global/widget/global_image_loader.dart';
-import 'package:tixe_app/utils/app_routes.dart';
-import 'package:tixe_app/utils/extension.dart';
-import 'package:tixe_app/utils/navigation.dart';
-import 'package:tixe_app/utils/styles/k_assets.dart';
-import 'package:tixe_app/utils/styles/k_colors.dart';
+import 'package:tixe_flutter_app/data_provider/api_client.dart';
+import 'package:tixe_flutter_app/global/widget/global_button.dart';
+import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
+import 'package:tixe_flutter_app/utils/app_routes.dart';
+import 'package:tixe_flutter_app/utils/extension.dart';
+import 'package:tixe_flutter_app/utils/navigation.dart';
+import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
+import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 import '/global/widget/global_appbar.dart';
 import '/global/widget/global_text.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +28,7 @@ class SplashScreen extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           children: [
             GlobalImageLoader(
-              imagePath: KAssetName.splashBg.imagePath,
+              imagePath: KAssetName.splashBgPng.imagePath,
               height: context.height,
               width: context.width,
               fit: BoxFit.fill,

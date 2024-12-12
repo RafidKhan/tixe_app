@@ -1,4 +1,4 @@
-# tixe_app
+# tixe_flutter_app
 
 A new Flutter project.
 

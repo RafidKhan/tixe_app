@@ -4,9 +4,63 @@ plugins {
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
 }
+def dartEnvironmentVariables = [
+    APP_FLAVOR: project.hasProperty('mode')
+];
+
+if (project.hasProperty('dart-defines')) {
+    dartEnvironmentVariables = dartEnvironmentVariables +
+        project.property('dart-defines')
+            .split(',')
+            .collectEntries { entry ->
+                def pair = new String(entry.decodeBase64(), 'UTF-8').split('=')
+                if (pair.first() == 'mode') {
+                  project.ext.APP_FLAVOR = pair.last()
+                }
+                [(pair.first()): pair.last()]
+            }
+}
+
+def renamePath = { outputFileName ->
+  gradle.projectsEvaluated {
+    tasks.whenObjectAdded { task ->
+      task.doLast {
+        def flutterApkDir = new File("${project.buildDir}/outputs/flutter-apk/app-release.apk")
+        if (flutterApkDir.exists()) {
+          flutterApkDir.renameTo(new File("${project.buildDir}/outputs/flutter-apk/$outputFileName"))
+        }
+      }
+    }
+  }
+}
+
+def appFlavor() {
+  if (project.hasProperty('APP_FLAVOR')) {
+    return "${project.ext.APP_FLAVOR}_"
+  }
+}
+
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader("UTF-8") { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterVersionCode = localProperties.getProperty("flutter.versionCode")
+if (flutterVersionCode == null) {
+    flutterVersionCode = "1"
+}
+
+def flutterVersionName = localProperties.getProperty("flutter.versionName")
+if (flutterVersionName == null) {
+    flutterVersionName = "1.0"
+}
 
 android {
-    namespace = "com.example.tixe_app"
+    namespace = "com.example.tixe_flutter_app"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -15,19 +69,15 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
-    }
-
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.tixe_app"
+        applicationId = "com.example.tixe_flutter_app"
         // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
+        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
-        versionCode = flutter.versionCode
-        versionName = flutter.versionName
+        versionCode = flutterVersionCode.toInteger()
+        versionName = flutterVersionName
     }
 
     buildTypes {
@@ -35,6 +85,18 @@ android {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.debug
+            android.applicationVariants.all { variant ->
+                variant.outputs.all {
+                    if(appFlavor() != null){
+                         def appName = variant.getMergedFlavor().applicationId
+                         int lastIndex = appName.lastIndexOf('.')
+                         def modifiedAppName = lastIndex != -1 ? appName.substring(lastIndex + 1) : appName
+                         outputFileName = "${modifiedAppName}_${appFlavor()}${flutter.versionName}(${flutter.versionCode}).apk"
+                         renamePath(outputFileName)
+                    }
+                }
+            }
+        
         }
     }
 }

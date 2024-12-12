@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tixe_app/global/widget/global_text.dart';
+import 'package:tixe_flutter_app/global/widget/global_text.dart';
 
 import '../../utils/styles/styles.dart';
 

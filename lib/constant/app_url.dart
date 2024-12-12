@@ -1,4 +1,4 @@
-import 'package:tixe_app/utils/enum.dart';
+import 'package:tixe_flutter_app/utils/enum.dart';
 
 enum AppUrl {
   base,

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:riverpod/riverpod.dart';
-import 'package:tixe_app/global/model/global_option_item.dart';
-import 'package:tixe_app/modules/auth/personal_details/repository/personal_details_interface.dart';
-import 'package:tixe_app/modules/auth/personal_details/repository/personal_details_repository.dart';
+import 'package:tixe_flutter_app/global/model/global_option_item.dart';
+import 'package:tixe_flutter_app/modules/auth/personal_details/repository/personal_details_interface.dart';
+import 'package:tixe_flutter_app/modules/auth/personal_details/repository/personal_details_repository.dart';
 
 import 'state/personal_details_state.dart';
 

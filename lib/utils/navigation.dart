@@ -29,7 +29,8 @@ class Navigation {
 
   //it will pop all the screen  and take you to the new screen
   //E:g : when you will goto the login to home page then you will use this
-  static Future pushAndRemoveUntil<T extends Object>({
+  static Future pushAndRemoveUntil<T extends Object>(
+    {
     required AppRoutes appRoutes,
     String? routeName,
     T? arguments,
@@ -55,7 +56,8 @@ class Navigation {
   // it means screen B replace in screen A .
   //if you pressed back then you will not find screen A. it remove from stack
 
-  static Future pushReplacement<T extends Object>({
+  static Future pushReplacement<T extends Object>(
+     {
     required AppRoutes appRoutes,
     String? routeName,
     T? arguments,
@@ -73,7 +75,8 @@ class Navigation {
 
   //it will pop all the screen and take you to the first screen of the stack
   //that means you will go to the Home page
-  static Future pushAndRemoveSpecificScreen<T extends Object>({
+  static Future pushAndRemoveSpecificScreen<T extends Object>(
+    {
     required AppRoutes appRoutes,
     String? routeName,
     T? arguments,
@@ -95,15 +98,13 @@ class Navigation {
   //E.g : if you remove 3 route from stack then pass the argument to 3
   static popUntil(int removeProviousPage) {
     int screenPop = 0;
-    return Navigator.of(
-      Navigation.key.currentContext!,
-    ).popUntil((_) => screenPop++ >= removeProviousPage);
+    return Navigator.of(Navigation.key.currentContext!)
+        .popUntil((_) => screenPop++ >= removeProviousPage);
   }
 
   //Remove single page from stack
   static void pop() {
-    return Navigator.pop(
-      Navigation.key.currentContext!,
-    );
+    return Navigator.pop(Navigation.key.currentContext!);
   }
 }
+

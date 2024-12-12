@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tixe_app/global/widget/global_image_loader.dart';
-import 'package:tixe_app/global/widget/global_svg_loader.dart';
-import 'package:tixe_app/utils/styles/k_assets.dart';
+import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
+import 'package:tixe_flutter_app/global/widget/global_svg_loader.dart';
+import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 
 class SignUpSocialLoginButtons extends StatelessWidget {
   const SignUpSocialLoginButtons({super.key});
@@ -13,19 +13,19 @@ class SignUpSocialLoginButtons extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         GlobalImageLoader(
-          imagePath: KAssetName.facebook.imagePath,
+          imagePath: KAssetName.facebookPng.imagePath,
           height: 40.h,
           width: 40.w,
         ),
         SizedBox(width: 10.w),
         GlobalImageLoader(
-          imagePath: KAssetName.apple.imagePath,
+          imagePath: KAssetName.applePng.imagePath,
           height: 40.h,
           width: 40.w,
         ),
         SizedBox(width: 10.w),
         GlobalImageLoader(
-          imagePath: KAssetName.google.imagePath,
+          imagePath: KAssetName.googlePng.imagePath,
           height: 40.h,
           width: 40.w,
         ),

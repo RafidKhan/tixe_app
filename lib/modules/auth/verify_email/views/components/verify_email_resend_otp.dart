@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
-import 'package:tixe_app/global/widget/global_text.dart';
-import 'package:tixe_app/utils/extension.dart';
+import 'package:tixe_flutter_app/global/widget/global_text.dart';
+import 'package:tixe_flutter_app/utils/extension.dart';
 
 import '../../../../../utils/styles/k_colors.dart';
 import '../../controller/verify_email_controller.dart';

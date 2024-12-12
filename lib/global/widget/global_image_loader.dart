@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:tixe_app/utils/enum.dart';
-import 'package:tixe_app/utils/styles/k_assets.dart';
+import 'package:tixe_flutter_app/utils/enum.dart';
+import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 
 class GlobalImageLoader extends StatelessWidget {
   const GlobalImageLoader({
@@ -26,7 +26,7 @@ class GlobalImageLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String defaultPlaceHolder = placeHolder ?? KAssetName.error.imagePath;
+    final String defaultPlaceHolder = placeHolder ?? KAssetName.errorPng.imagePath;
     if (imageFor == ImageFor.network) {
       return CachedNetworkImage(
         imageUrl: imagePath,

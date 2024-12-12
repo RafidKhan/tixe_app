@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -7,14 +6,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tixe_app/constant/app_url.dart';
-import 'package:tixe_app/data_provider/pref_helper.dart';
-import 'package:tixe_app/modules/splash/views/splash_screen.dart';
-import 'package:tixe_app/utils/app_version.dart';
-import 'package:tixe_app/utils/enum.dart';
-import 'package:tixe_app/utils/navigation.dart';
-import 'package:tixe_app/utils/network_connection.dart';
-import 'package:tixe_app/utils/styles/k_colors.dart';
+import 'package:tixe_flutter_app/constant/app_url.dart';
+import 'package:tixe_flutter_app/data_provider/pref_helper.dart';
+import 'package:tixe_flutter_app/modules/splash/views/splash_screen.dart';
+import 'package:tixe_flutter_app/utils/app_version.dart';
+import 'package:tixe_flutter_app/utils/enum.dart';
+import 'package:tixe_flutter_app/utils/navigation.dart';
+import 'package:tixe_flutter_app/utils/network_connection.dart';
+import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -90,8 +89,8 @@ class MyApp extends StatelessWidget {
             primaryColor: KColor.primary.color,
             visualDensity: VisualDensity.adaptivePlatformDensity,
             colorScheme: ThemeData().colorScheme.copyWith(
-                  secondary: KColor.primary.color,
-                ),
+              secondary: KColor.primary.color,
+            ),
           ),
           builder: (context, widget) {
             return ScrollConfiguration(

@@ -1,10 +1,7 @@
-import 'package:riverpod/riverpod.dart';
-import 'package:tixe_app/modules/boilerplate/controller/state/boilerplate_state.dart';
-import 'package:tixe_app/modules/boilerplate/repository/boilerplate_interface.dart';
-import 'package:tixe_app/modules/boilerplate/repository/boilerplate_repository.dart';
-import 'package:tixe_app/modules/splash/controller/state/splash_state.dart';
-import 'package:tixe_app/modules/splash/repository/splash_interface.dart';
-import 'package:tixe_app/modules/splash/repository/splash_repository.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tixe_flutter_app/modules/splash/controller/state/splash_state.dart';
+import 'package:tixe_flutter_app/modules/splash/repository/splash_interface.dart';
+import 'package:tixe_flutter_app/modules/splash/repository/splash_repository.dart';
 
 final splashController =
     StateNotifierProvider.autoDispose<SplashController, SplashState>(

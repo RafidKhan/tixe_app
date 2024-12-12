@@ -3,8 +3,6 @@ enum LanguageOption {
   English,
 }
 
-
-
 enum Method {
   POST,
   GET,
@@ -25,9 +23,8 @@ enum ImageFor {
   network,
   file,
 }
+
 enum SvgFor {
   asset,
   network,
 }
-
-

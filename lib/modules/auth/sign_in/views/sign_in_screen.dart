@@ -1,16 +1,16 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tixe_app/global/widget/global_button.dart';
-import 'package:tixe_app/global/widget/global_image_loader.dart';
-import 'package:tixe_app/global/widget/global_textformfield.dart';
-import 'package:tixe_app/global/widget/tixe_scaffold.dart';
-import 'package:tixe_app/modules/auth/sign_in/controller/sign_in_controller.dart';
-import 'package:tixe_app/modules/auth/sign_in/views/components/sign_in_social_login_buttons.dart';
-import 'package:tixe_app/utils/app_routes.dart';
-import 'package:tixe_app/utils/extension.dart';
-import 'package:tixe_app/utils/navigation.dart';
-import 'package:tixe_app/utils/styles/k_assets.dart';
-import 'package:tixe_app/utils/styles/k_colors.dart';
+import 'package:tixe_flutter_app/global/widget/global_button.dart';
+import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
+import 'package:tixe_flutter_app/global/widget/global_textformfield.dart';
+import 'package:tixe_flutter_app/global/widget/tixe_scaffold.dart';
+import 'package:tixe_flutter_app/modules/auth/sign_in/controller/sign_in_controller.dart';
+import 'package:tixe_flutter_app/modules/auth/sign_in/views/components/sign_in_social_login_buttons.dart';
+import 'package:tixe_flutter_app/utils/app_routes.dart';
+import 'package:tixe_flutter_app/utils/extension.dart';
+import 'package:tixe_flutter_app/utils/navigation.dart';
+import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
+import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 import '/global/widget/global_text.dart';
 import 'package:flutter/material.dart';
 
@@ -43,7 +43,7 @@ class SignInScreen extends StatelessWidget {
                     children: [
                       if (!isKeyboardOpen) const Spacer(),
                       GlobalImageLoader(
-                        imagePath: KAssetName.tixeLogo.imagePath,
+                        imagePath: KAssetName.tixeLogoPng.imagePath,
                         height: 48.h,
                         width: 170.w,
                         fit: BoxFit.cover,
