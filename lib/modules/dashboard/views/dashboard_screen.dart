@@ -1,20 +1,27 @@
-import '/global/widget/global_appbar.dart';
-import '/global/widget/global_text.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tixe_flutter_app/modules/dashboard/controller/dashboard_controller.dart';
 import 'package:flutter/material.dart';
+import 'components/dashboard_bottom_nav_bar.dart';
 
 class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({Key? key}) : super(key: key);
+  const DashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final screens = [
+      const SizedBox.shrink(),
+      const SizedBox.shrink(),
+      const SizedBox.shrink(),
+      const SizedBox.shrink(),
+    ];
     return Scaffold(
-      appBar: GlobalAppBar(
-        title: "Dashboard",
+      body: Consumer(
+        builder: (context, ref, child) {
+          final state = ref.watch(dashboardController);
+          return screens[state.selectedIndex];
+        },
       ),
-      body: const Center(
-        child: GlobalText(str: "Project Setup"),
-      ),
+      bottomNavigationBar: const DashboardBottomNavBar(),
     );
   }
 }
-

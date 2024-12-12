@@ -100,7 +100,13 @@ class SignInScreen extends StatelessWidget {
                       Consumer(builder: (context, ref, child) {
                         final state = ref.watch(signInController);
                         return GlobalButton(
-                          onPressed: state.isButtonEnabled ? () {} : null,
+                          onPressed: state.isButtonEnabled
+                              ? () {
+                                  Navigation.pushAndRemoveUntil(
+                                    appRoutes: AppRoutes.dashboard,
+                                  );
+                                }
+                              : null,
                           buttonText: context.loc.sign_in,
                         );
                       }),

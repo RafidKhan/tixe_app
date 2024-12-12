@@ -11,6 +11,8 @@ enum KColor {
   transparent,
   grey,
   disabledBtnColor,
+  shadeGradient1,
+  shadeGradient2
 }
 
 extension KColorExtention on KColor {
@@ -36,6 +38,10 @@ extension KColorExtention on KColor {
         return const Color(0xffC3C5CA);
       case KColor.disabledBtnColor:
         return const Color(0xffE2CB02).withOpacity(0.3);
+      case KColor.shadeGradient1:
+        return const Color(0xff575548);
+      case KColor.shadeGradient2:
+        return const Color(0xff24231F);
     }
   }
 }
