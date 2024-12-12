@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/model/global_option_item.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottomsheet_widget.dart';
+import 'package:tixe_flutter_app/global/widget/global_loader_page.dart';
 import '/global/widget/global_button.dart';
 import '/global/widget/global_text.dart';
 import '/utils/navigation.dart';
@@ -145,6 +146,7 @@ class ViewUtil {
       ),
     );
   }
+
   static Future<void> showOptionPickerBottomSheet({
     required List<GlobalOptionData> options,
     required Function(GlobalOptionData item) onSelect,
@@ -160,5 +162,25 @@ class ViewUtil {
         );
       },
     );
+  }
+
+  static Future<void> showLoaderPage({
+    required String title,
+    required String message,
+  }) async {
+    await showDialog(
+      context: Navigation.key.currentContext!,
+      barrierDismissible: false,
+      builder: (context) {
+        return GlobalLoaderPage(
+          title: title,
+          message: message,
+        );
+      },
+    );
+  }
+
+  static void hideLoader() {
+    Navigation.pop();
   }
 }

@@ -115,7 +115,17 @@ class FitnessDetailsScreen extends StatelessWidget {
         final state = ref.watch(fitnessDetailsController);
 
         return GlobalBottomButton(
-          onPressed: state.isButtonEnabled ? () {} : null,
+          onPressed: state.isButtonEnabled
+              ? () {
+                  ViewUtil.showLoaderPage(
+                    title: context.loc.optimizing_for_you,
+                    message: context.loc.please_wait_till_optimize,
+                  );
+                  Future.delayed(const Duration(seconds: 2), () {
+                    ViewUtil.hideLoader();
+                  });
+                }
+              : null,
           buttonText: context.loc.next,
         );
       }),
