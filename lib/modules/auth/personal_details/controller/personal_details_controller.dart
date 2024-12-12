@@ -4,6 +4,7 @@ import 'package:tixe_flutter_app/global/model/global_option_item.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/repository/personal_details_interface.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/repository/personal_details_repository.dart';
 
+import '../../../../utils/custom_file_picker.dart';
 import 'state/personal_details_state.dart';
 
 final personalDetailsController = StateNotifierProvider.autoDispose<
@@ -45,7 +46,12 @@ class PersonalDetailsController extends StateNotifier<PersonalDetailsState> {
   }
 
   void setArmsLicense() {
-    checkButtonStatus();
+    CustomFilePicker.pickSingleFile(
+      onSuccess: (file) {
+        state = state.copyWith(armsLicense: file);
+        checkButtonStatus();
+      },
+    );
   }
 
   void setStateData(GlobalOptionData option) {

@@ -1,19 +1,15 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tixe_flutter_app/data_provider/api_client.dart';
 import 'package:tixe_flutter_app/global/model/global_option_item.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottom_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottomsheet_textformfield.dart';
-import 'package:tixe_flutter_app/global/widget/global_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_textformfield.dart';
 import 'package:tixe_flutter_app/global/widget/tixe_scaffold.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/controller/personal_details_controller.dart';
+import 'package:tixe_flutter_app/utils/custom_file_picker.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
-import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
-
-import '/global/widget/global_appbar.dart';
 import '/global/widget/global_text.dart';
 import 'package:flutter/material.dart';
 
@@ -88,7 +84,7 @@ class PersonalDetailsScreen extends StatelessWidget {
                             ViewUtil.showOptionPickerBottomSheet(
                               options: List.generate(
                                 10,
-                                    (index) => GlobalOptionData(
+                                (index) => GlobalOptionData(
                                     id: index, value: "Serial:: ${index + 1}"),
                               ),
                               onSelect: (option) {
@@ -119,7 +115,7 @@ class PersonalDetailsScreen extends StatelessWidget {
                   ViewUtil.showOptionPickerBottomSheet(
                     options: List.generate(
                       10,
-                          (index) => GlobalOptionData(
+                      (index) => GlobalOptionData(
                           id: index, value: "Serial:: ${index + 1}"),
                     ),
                     onSelect: (option) {
@@ -137,9 +133,23 @@ class PersonalDetailsScreen extends StatelessWidget {
                 focusNode: AlwaysDisabledFocusNode(),
                 suffixIcon: _uploadDocumentButton(
                   context,
-                  onTap: () {},
+                  onTap: () {
+                    controller.setArmsLicense();
+                  },
                 ),
               ),
+              SizedBox(height: 10.h),
+              Consumer(builder: (context, ref, child) {
+                final state = ref.watch(personalDetailsController);
+                if (state.armsLicense != null) {
+                  return GlobalText(
+                    str: state.armsLicense!.path.split('/').last,
+                    color: KColor.white.color,
+                  );
+                }
+
+                return const SizedBox.shrink();
+              })
             ],
           ),
         ),
