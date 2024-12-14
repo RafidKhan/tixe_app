@@ -81,6 +81,7 @@ class MyApp extends StatelessWidget {
               ? const Locale('en', 'US')
               : const Locale('bn', 'BD'),
           theme: ThemeData(
+            scaffoldBackgroundColor: KColor.primary.color,
             progressIndicatorTheme: ProgressIndicatorThemeData(
               color: KColor.primary.color,
             ),

@@ -4,6 +4,7 @@ import 'package:tixe_flutter_app/global/widget/global_text.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
+import '../../../../../global/widget/global_slot_breakdown_container.dart';
 import '../../../../../global/widget/global_slot_item_widget.dart';
 
 class TrainingAvailableSlots extends StatelessWidget {
@@ -11,6 +12,7 @@ class TrainingAvailableSlots extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ValueNotifier<int> selectedSlotIndex = ValueNotifier(0);
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.w),
       width: context.width,
@@ -30,10 +32,17 @@ class TrainingAvailableSlots extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemCount: 10,
               itemBuilder: (context, index) {
-                return GlobalSlotItemWidget(
-                  showSelectedIcon: false,
-                  isSelected: index == 0,
-                );
+                return ValueListenableBuilder(
+                    valueListenable: selectedSlotIndex,
+                    builder: (context, data, child) {
+                      return GlobalSlotItemWidget(
+                        showSelectedIcon: false,
+                        isSelected: index == selectedSlotIndex.value,
+                        onTap: () {
+                          selectedSlotIndex.value = index;
+                        },
+                      );
+                    });
               },
               separatorBuilder: (context, index) {
                 return SizedBox(
@@ -41,7 +50,9 @@ class TrainingAvailableSlots extends StatelessWidget {
                 );
               },
             ),
-          )
+          ),
+          SizedBox(height: 20.h),
+          const GlobalSlotBreakDownContainer(),
         ],
       ),
     );

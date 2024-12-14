@@ -123,8 +123,7 @@ class TrainingItemWidget extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10.r),
-                child: Container(
-                  color: Colors.red,
+                child: SizedBox(
                   width: context.width,
                   child: GlobalImageLoader(
                     imagePath: KAssetName.warJpg.imagePath,
