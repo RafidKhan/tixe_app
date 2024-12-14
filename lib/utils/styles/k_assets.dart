@@ -1,4 +1,5 @@
 enum KAssetName {
+  warJpg,
   homePng,
   tixeLogoPng,
   applePng,
@@ -6,6 +7,7 @@ enum KAssetName {
   icHamburgerPng,
   fitnessPng,
   trainingPng,
+  starPng,
   demoTrainingPng,
   googlePng,
   facebookPng,
@@ -19,6 +21,8 @@ extension AssetsExtension on KAssetName {
     const String _rootPath = 'assets';
   const String _imagesDir = '$_rootPath/images';
     switch (this) {
+      case KAssetName.warJpg:
+        return '$_imagesDir/war.jpg';
       case KAssetName.homePng:
         return '$_imagesDir/home.png';
       case KAssetName.tixeLogoPng:
@@ -33,6 +37,8 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/fitness.png';
       case KAssetName.trainingPng:
         return '$_imagesDir/training.png';
+      case KAssetName.starPng:
+        return '$_imagesDir/star.png';
       case KAssetName.demoTrainingPng:
         return '$_imagesDir/demo_training.png';
       case KAssetName.googlePng:

@@ -47,5 +47,8 @@
   "good_day": "Good Day!",
   "home": "Home",
   "training": "Training",
-  "trainings": "Trainings"
+  "trainings": "Trainings",
+  "active_enrolment": "Active Enrolment",
+  "reviews": "Reviews",
+  "available_slots": "Available slots"
 }

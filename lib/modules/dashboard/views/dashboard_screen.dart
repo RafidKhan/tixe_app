@@ -21,21 +21,11 @@ class DashboardScreen extends StatelessWidget {
     ];
     return TixeMainScaffold(
       extendBody: true,
-      body: Container(
-        height: context.height,
-        width: context.width,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(KAssetName.tixeMainBgPng.imagePath),
-            fit: BoxFit.fill,
-          ),
-        ),
-        child: Consumer(
-          builder: (context, ref, child) {
-            final state = ref.watch(dashboardController);
-            return screens[state.selectedIndex];
-          },
-        ),
+      body: Consumer(
+        builder: (context, ref, child) {
+          final state = ref.watch(dashboardController);
+          return screens[state.selectedIndex];
+        },
       ),
       bottomNavigationBar: const DashboardBottomNavBar(),
     );

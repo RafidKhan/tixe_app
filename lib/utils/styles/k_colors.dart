@@ -11,11 +11,13 @@ enum KColor {
   bodyGradient2,
   transparent,
   grey,
+  liteGrey,
   disabledBtnColor,
   shadeGradient1,
   shadeGradient2,
   cardGradient1,
   cardGradient2,
+  green,
 }
 
 extension KColorExtention on KColor {
@@ -51,6 +53,10 @@ extension KColorExtention on KColor {
         return const Color(0xff444339);
       case KColor.cardGradient2:
         return const Color(0xff44433C);
+      case KColor.green:
+        return const Color(0xff01B469);
+      case KColor.liteGrey:
+        return const Color(0xff6C6B68);
     }
   }
 }
