@@ -66,5 +66,11 @@
   "gears_fee": "Gears Fee",
   "convenience": "Convenience",
   "gears_checklist": "Gears Checklist",
-  "done": "Done"
+  "done": "Done",
+  "discount_code": "Discount Code",
+  "apply_code": "Apply code",
+  "discount": "Discount",
+  "grand_total": "Grand Total",
+  "payment_method": "Payment Method",
+  "stripe": "Stripe"
 }

@@ -8,8 +8,8 @@ import 'package:tixe_flutter_app/modules/training_flow/training_details/views/co
 import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
-import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
+import '../../../../global/widget/global_divider.dart';
 import 'components/training_description.dart';
 import 'components/training_detail_header.dart';
 import 'components/training_gears_and_equipments.dart';
@@ -37,10 +37,7 @@ class TrainingDetailsScreen extends StatelessWidget {
                   SizedBox(height: 10.h),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20.w),
-                    child: Divider(
-                      color: KColor.btnGradient1.color,
-                      thickness: 0.1.h,
-                    ),
+                    child: const GlobalDivider(),
                   ),
                   SizedBox(height: 10.h),
                   const TrainingAvailableSlots(),

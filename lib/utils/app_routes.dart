@@ -1,4 +1,3 @@
-import '../modules/training_flow/training_gears_checklist/views/training_gears_checklist_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/views/personal_details_screen.dart';
 import 'package:tixe_flutter_app/modules/auth/sign_in/views/sign_in_screen.dart';
@@ -8,12 +7,15 @@ import 'package:tixe_flutter_app/modules/auth/verify_email/views/verify_email_sc
 import '../modules/auth/fitness_details/views/fitness_details_screen.dart';
 import '../modules/dashboard/views/dashboard_screen.dart';
 import '../modules/home/views/home_screen.dart';
+import '../modules/training_flow/confirm_training_enroll/views/confirm_training_enroll_screen.dart';
 import '../modules/training_flow/training/views/training_screen.dart';
 import '../modules/training_flow/training_details/views/training_details_screen.dart';
 import '../modules/training_flow/training_enrollment/views/training_enrollment_screen.dart';
+import '../modules/training_flow/training_gears_checklist/views/training_gears_checklist_screen.dart';
 
 enum AppRoutes {
   dashboard,
+  confirmTrainingEnroll,
   trainingGearsChecklist,
   trainingEnrollment,
   trainingDetails,
@@ -31,6 +33,8 @@ extension AppRoutesExtention on AppRoutes {
     switch (this) {
 
 
+      case AppRoutes.confirmTrainingEnroll:
+        return const ConfirmTrainingEnrollScreen();
       case AppRoutes.trainingGearsChecklist:
         return const TrainingGearsChecklistScreen();
      case AppRoutes.trainingEnrollment:

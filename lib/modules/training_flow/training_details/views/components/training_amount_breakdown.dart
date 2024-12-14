@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_chip_widget.dart';
+import 'package:tixe_flutter_app/global/widget/global_divider.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
-
-import '../../../../../global/widget/global_slot_item_widget.dart';
 
 class TrainingAmountBreakdown extends StatelessWidget {
   const TrainingAmountBreakdown({super.key});
@@ -22,10 +21,7 @@ class TrainingAmountBreakdown extends StatelessWidget {
           SizedBox(height: 20.h),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: Divider(
-              color: KColor.btnGradient1.color,
-              thickness: 0.1.h,
-            ),
+            child: GlobalDivider(),
           ),
           SizedBox(height: 20.h),
           GlobalText(
@@ -53,7 +49,9 @@ class TrainingAmountBreakdown extends StatelessWidget {
               color: KColor.white.color,
             ),
           ),
-          SizedBox(width: 20.w,),
+          SizedBox(
+            width: 20.w,
+          ),
           Expanded(
             child: GlobalChipWidget(
               title: value,

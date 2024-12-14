@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
 import '/constant/constant_key.dart';
 
@@ -48,7 +49,7 @@ class GlobalText extends StatelessWidget {
       textScaleFactor: 1.0,
       style: style ??
           TextStyle(
-            color: color ?? Colors.black,
+            color: color ?? KColor.white.color,
             fontSize: fontSize?.sp,
             fontWeight: fontWeight ?? FontWeight.w500,
             letterSpacing: letterSpacing,
@@ -60,4 +61,3 @@ class GlobalText extends StatelessWidget {
     );
   }
 }
- 

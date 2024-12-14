@@ -8,6 +8,8 @@ import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
+import '../global_divider.dart';
+
 class TrainingItemWidget extends StatelessWidget {
   final String id;
   final String title;
@@ -105,10 +107,7 @@ class TrainingItemWidget extends StatelessWidget {
               ),
             ),
             SizedBox(height: 10.h),
-            Divider(
-              color: KColor.btnGradient1.color,
-              thickness: 0.1.h,
-            ),
+            const GlobalDivider(),
             SizedBox(height: 10.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -121,7 +120,8 @@ class TrainingItemWidget extends StatelessWidget {
             ),
             SizedBox(height: 10.h),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),              child: ClipRRect(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: ClipRRect(
                 borderRadius: BorderRadius.circular(10.r),
                 child: Container(
                   color: Colors.red,
