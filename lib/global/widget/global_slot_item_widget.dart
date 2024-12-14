@@ -3,8 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
-class TrainingSlotItem extends StatelessWidget {
-  const TrainingSlotItem({super.key});
+class GlobalSlotItemWidget extends StatelessWidget {
+  final bool isSelected;
+  final bool showSelectedIcon;
+
+  const GlobalSlotItemWidget({
+    super.key,
+    required this.isSelected,
+    required this.showSelectedIcon,
+  });
 
   @override
   Widget build(BuildContext context) {
