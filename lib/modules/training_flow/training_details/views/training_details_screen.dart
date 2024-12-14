@@ -1,14 +1,14 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tixe_flutter_app/global/widget/global_bottom_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_button.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training_details/views/components/training_available_slots.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training_details/views/components/training_detail_banners.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training_details/views/components/training_price_and_details.dart';
+import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
+import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
-import '/global/widget/global_text.dart';
-import 'package:flutter/material.dart';
 
 import 'components/training_description.dart';
 import 'components/training_detail_header.dart';
@@ -58,7 +58,9 @@ class TrainingDetailsScreen extends StatelessWidget {
                       horizontal: 20.w,
                       vertical: 20.h,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigation.push(appRoutes: AppRoutes.trainingEnrollment);
+                    },
                     buttonText: context.loc.enroll_now,
                   ),
                 ],

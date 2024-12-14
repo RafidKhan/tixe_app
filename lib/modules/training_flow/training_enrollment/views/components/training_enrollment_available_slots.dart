@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
-import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
 import '../../../../../global/widget/global_slot_item_widget.dart';
 
-class TrainingAvailableSlots extends StatelessWidget {
-  const TrainingAvailableSlots({super.key});
+class TrainingEnrollmentAvailableSlots extends StatelessWidget {
+  const TrainingEnrollmentAvailableSlots({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,23 +24,21 @@ class TrainingAvailableSlots extends StatelessWidget {
             color: KColor.white.color,
           ),
           SizedBox(height: 20.h),
-          SizedBox(
-            height: 90.h,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return GlobalSlotItemWidget(
-                  showSelectedIcon: false,
-                  isSelected: index == 0,
-                );
-              },
-              separatorBuilder: (context, index) {
-                return SizedBox(
-                  width: 10.w,
-                );
-              },
-            ),
+          ListView.separated(
+            itemCount: 5,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              return GlobalSlotItemWidget(
+                showSelectedIcon: true,
+                isSelected: index == 0,
+              );
+            },
+            separatorBuilder: (context, index) {
+              return SizedBox(
+                height: 10.h,
+              );
+            },
           )
         ],
       ),

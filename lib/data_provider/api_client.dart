@@ -1,13 +1,13 @@
 
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '/constant/app_url.dart';
 import '/constant/constant_key.dart';
 import '/data_provider/pref_helper.dart';
-import '/global/widget/error_dialog.dart';
 import '/utils/enum.dart';
 import '/utils/extension.dart';
 import '/utils/navigation.dart';

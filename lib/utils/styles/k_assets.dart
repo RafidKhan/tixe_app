@@ -1,6 +1,7 @@
 enum KAssetName {
   warJpg,
   dummyMapLocationPng,
+  icCheckboxPng,
   homePng,
   tixeLogoPng,
   applePng,
@@ -26,6 +27,8 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/war.jpg';
       case KAssetName.dummyMapLocationPng:
         return '$_imagesDir/dummy_map_location.png';
+      case KAssetName.icCheckboxPng:
+        return '$_imagesDir/icCheckbox.png';
       case KAssetName.homePng:
         return '$_imagesDir/home.png';
       case KAssetName.tixeLogoPng:

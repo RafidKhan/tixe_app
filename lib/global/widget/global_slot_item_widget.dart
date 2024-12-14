@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
+import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
 class GlobalSlotItemWidget extends StatelessWidget {
@@ -20,8 +22,12 @@ class GlobalSlotItemWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: KColor.bodyGradient1.color,
         borderRadius: BorderRadius.circular(10.r),
+        border: Border.all(
+          color:
+              isSelected ? KColor.btnGradient1.color : KColor.transparent.color,
+        ),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 14.h),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
       child: Row(
         children: [
           Container(
@@ -69,7 +75,15 @@ class GlobalSlotItemWidget extends StatelessWidget {
                 color: KColor.grey.color,
               ),
             ],
-          )
+          ),
+          if (isSelected && showSelectedIcon) ...[
+            const Spacer(),
+            GlobalImageLoader(
+              imagePath: KAssetName.icCheckboxPng.imagePath,
+              height: 20.h,
+              width: 20.w,
+            ),
+          ]
         ],
       ),
     );

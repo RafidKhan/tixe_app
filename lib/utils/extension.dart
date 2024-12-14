@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'
     show AppLocalizations;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
 //import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '/constant/constant_key.dart';
 import '/data_provider/pref_helper.dart';
-import 'package:intl/intl.dart';
 
 extension ConvertNum on String {
   static const english = [

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/model/global_option_item.dart';
@@ -11,8 +12,8 @@ import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
+
 import '/global/widget/global_text.dart';
-import 'package:flutter/material.dart';
 
 class PersonalDetailsScreen extends StatelessWidget {
   const PersonalDetailsScreen({super.key});

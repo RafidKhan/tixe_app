@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tixe_flutter_app/global/widget/global_chip_widget.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
@@ -28,22 +29,7 @@ class TrainingPriceAndDetails extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
                 SizedBox(height: 10.h),
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 10.w,
-                    vertical: 3.h,
-                  ),
-                  decoration: BoxDecoration(
-                    color: KColor.white.color,
-                    borderRadius: BorderRadius.circular(3.r),
-                  ),
-                  child: GlobalText(
-                    str: "\$450",
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: KColor.black.color,
-                  ),
-                ),
+                const GlobalChipWidget(title: "\$450"),
               ],
             ),
           ),

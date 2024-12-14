@@ -1,19 +1,19 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tixe_flutter_app/global/model/global_option_item.dart';
-import 'package:tixe_flutter_app/global/widget/scaffold/tixe_scaffold.dart';
-import 'package:tixe_flutter_app/modules/auth/fitness_details/controller/fitness_details_controller.dart';
-import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottom_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottomsheet_textformfield.dart';
 import 'package:tixe_flutter_app/global/widget/global_textformfield.dart';
+import 'package:tixe_flutter_app/global/widget/scaffold/tixe_scaffold.dart';
+import 'package:tixe_flutter_app/modules/auth/fitness_details/controller/fitness_details_controller.dart';
 import 'package:tixe_flutter_app/utils/app_routes.dart';
+import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
+
 import '/global/widget/global_text.dart';
-import 'package:flutter/material.dart';
 
 class FitnessDetailsScreen extends StatelessWidget {
   const FitnessDetailsScreen({super.key});

@@ -55,5 +55,14 @@
   "description": "Description",
   "pre_requisite": "Pre-requisite",
   "gears_equipments": "Gears & Equipments",
-  "enroll_now": "Enroll Now"
+  "enroll_now": "Enroll Now",
+  "enrolling": "Enrolling",
+  "gear_checklist": "Gear Checklist",
+  "gears": "Gears",
+  "check_required_gears": "Check required gears",
+  "check_now": "Check Now",
+  "confirm_and_pay": "Confirm & Pay",
+  "training_fee": "Training Fee",
+  "gears_fee": "Gears Fee",
+  "convenience": "Convenience"
 }

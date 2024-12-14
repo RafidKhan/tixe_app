@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
+
 import '../../../global/widget/training_components/training_item_widget.dart';
 import '../../../utils/styles/k_colors.dart';
-import 'package:flutter/material.dart';
-
 import 'components/home_header.dart';
 
 class HomeScreen extends StatelessWidget {

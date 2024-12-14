@@ -5,6 +5,7 @@ import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/modules/dashboard/controller/dashboard_controller.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
+
 import '/global/widget/global_text.dart';
 
 class DashboardBottomNavBar extends StatelessWidget {
