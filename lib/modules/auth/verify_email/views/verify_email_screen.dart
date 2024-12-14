@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_button.dart';
-import 'package:tixe_flutter_app/global/widget/tixe_scaffold.dart';
+import 'package:tixe_flutter_app/global/widget/scaffold/tixe_scaffold.dart';
 import 'package:tixe_flutter_app/modules/auth/verify_email/controller/verify_email_controller.dart';
 import 'package:tixe_flutter_app/modules/auth/verify_email/views/components/verify_email_otp_field.dart';
 import 'package:tixe_flutter_app/modules/auth/verify_email/views/components/verify_email_resend_otp.dart';

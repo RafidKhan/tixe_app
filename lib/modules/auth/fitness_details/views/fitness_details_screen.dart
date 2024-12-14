@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/model/global_option_item.dart';
-import 'package:tixe_flutter_app/global/widget/tixe_scaffold.dart';
+import 'package:tixe_flutter_app/global/widget/scaffold/tixe_scaffold.dart';
 import 'package:tixe_flutter_app/modules/auth/fitness_details/controller/fitness_details_controller.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

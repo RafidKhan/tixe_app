@@ -7,7 +7,6 @@ import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 import '/global/widget/global_text.dart';
 
-
 class DashboardBottomNavBar extends StatelessWidget {
   const DashboardBottomNavBar({super.key});
 
@@ -91,13 +90,13 @@ class DashboardBottomNavBar extends StatelessWidget {
               borderRadius: BorderRadius.circular(30.r),
               gradient: isSelected
                   ? LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  KColor.btnGradient1.color,
-                  KColor.btnGradient2.color,
-                ],
-              )
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        KColor.btnGradient1.color,
+                        KColor.btnGradient2.color,
+                      ],
+                    )
                   : null,
             ),
             child: Row(

@@ -1,3 +1,4 @@
+import '../modules/training_flow/training/views/training_screen.dart';
 import '../modules/home/views/home_screen.dart';
 import '../modules/auth/fitness_details/views/fitness_details_screen.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import '../modules/dashboard/views/dashboard_screen.dart';
 
 enum AppRoutes {
   dashboard,
+  training,
   home,
   fitnessDetails,
   signIn,
@@ -20,6 +22,8 @@ enum AppRoutes {
 extension AppRoutesExtention on AppRoutes {
   Widget buildWidget<T extends Object>({T? arguments}) {
     switch (this) {
+      case AppRoutes.training:
+        return const TrainingScreen();
       case AppRoutes.home:
         return const HomeScreen();
 

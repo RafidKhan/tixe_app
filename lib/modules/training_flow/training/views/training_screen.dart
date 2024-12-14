@@ -1,13 +1,13 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
-import '../../../global/widget/training_components/training_item_widget.dart';
-import '../../../utils/styles/k_colors.dart';
+import '../../../../global/widget/training_components/training_item_widget.dart';
+import '../../../../utils/styles/k_colors.dart';
 import 'package:flutter/material.dart';
 
-import 'components/home_header.dart';
+import 'components/training_header.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class TrainingScreen extends StatelessWidget {
+  const TrainingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +18,7 @@ class HomeScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: Column(
             children: [
-              const HomeHeader(),
-              // SizedBox(height: 30.h),
+              const TrainingHeader(),
               Expanded(
                 child: ListView.separated(
                   itemCount: 20,
@@ -34,7 +33,7 @@ class HomeScreen extends StatelessWidget {
                       image: KAssetName.demoTrainingPng.imagePath,
                       amount: "450",
                       shortDescription:
-                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus mi non egestas efficitur. Etiam molestie lectus et rutrum finibus.",
+                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus mi non egestas efficitur. Etiam molestie lectus et rutrum finibus.",
                     );
                   },
                 ),
@@ -46,3 +45,6 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+
+

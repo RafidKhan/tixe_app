@@ -4,7 +4,7 @@ import 'package:tixe_flutter_app/global/model/global_option_item.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottom_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottomsheet_textformfield.dart';
 import 'package:tixe_flutter_app/global/widget/global_textformfield.dart';
-import 'package:tixe_flutter_app/global/widget/tixe_scaffold.dart';
+import 'package:tixe_flutter_app/global/widget/scaffold/tixe_scaffold.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/controller/personal_details_controller.dart';
 import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';

@@ -1,4 +1,4 @@
-import 'package:tixe_flutter_app/global/widget/tixe_scaffold.dart';
+import 'package:tixe_flutter_app/global/widget/scaffold/tixe_scaffold.dart';
 import 'package:tixe_flutter_app/modules/auth/sign_up/views/components/sign_up_social_login_buttons.dart';
 import 'package:tixe_flutter_app/utils/app_routes.dart';
 import '../controller/sign_up_controller.dart';
