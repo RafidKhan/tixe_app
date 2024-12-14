@@ -50,5 +50,10 @@
   "trainings": "Trainings",
   "active_enrolment": "Active Enrolment",
   "reviews": "Reviews",
-  "available_slots": "Available slots"
+  "available_slots": "Available slots",
+  "training_location": "Training Location",
+  "description": "Description",
+  "pre_requisite": "Pre-requisite",
+  "gears_equipments": "Gears & Equipments",
+  "enroll_now": "Enroll Now"
 }
