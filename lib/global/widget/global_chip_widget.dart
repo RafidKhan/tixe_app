@@ -15,21 +15,24 @@ class GlobalChipWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 10.w,
-        vertical: 3.h,
-      ),
-      decoration: BoxDecoration(
-        color: KColor.white.color,
-        borderRadius: BorderRadius.circular(3.r),
-      ),
-      child: GlobalText(
-        str: title,
-        fontSize: 12,
-        fontWeight: FontWeight.w400,
-        color: KColor.black.color,
-        textAlign: TextAlign.end,
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: 10.w,
+          vertical: 3.h,
+        ),
+        decoration: BoxDecoration(
+          color: KColor.white.color,
+          borderRadius: BorderRadius.circular(3.r),
+        ),
+        child: GlobalText(
+          str: title,
+          fontSize: 12,
+          fontWeight: FontWeight.w400,
+          color: KColor.black.color,
+          textAlign: TextAlign.end,
+        ),
       ),
     );
   }

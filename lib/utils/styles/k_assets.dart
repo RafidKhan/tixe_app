@@ -2,6 +2,8 @@ enum KAssetName {
   warJpg,
   dummyMapLocationPng,
   icCheckboxPng,
+  selectedRadioPng,
+  dummyGearPng,
   homePng,
   tixeLogoPng,
   applePng,
@@ -10,6 +12,7 @@ enum KAssetName {
   fitnessPng,
   trainingPng,
   starPng,
+  unselectedRadioPng,
   demoTrainingPng,
   googlePng,
   facebookPng,
@@ -29,6 +32,10 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/dummy_map_location.png';
       case KAssetName.icCheckboxPng:
         return '$_imagesDir/icCheckbox.png';
+      case KAssetName.selectedRadioPng:
+        return '$_imagesDir/selectedRadio.png';
+      case KAssetName.dummyGearPng:
+        return '$_imagesDir/dummy_gear.png';
       case KAssetName.homePng:
         return '$_imagesDir/home.png';
       case KAssetName.tixeLogoPng:
@@ -45,6 +52,8 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/training.png';
       case KAssetName.starPng:
         return '$_imagesDir/star.png';
+      case KAssetName.unselectedRadioPng:
+        return '$_imagesDir/unselectedRadio.png';
       case KAssetName.demoTrainingPng:
         return '$_imagesDir/demo_training.png';
       case KAssetName.googlePng:

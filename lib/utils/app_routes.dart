@@ -1,3 +1,4 @@
+import '../modules/training_flow/training_gears_checklist/views/training_gears_checklist_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/views/personal_details_screen.dart';
 import 'package:tixe_flutter_app/modules/auth/sign_in/views/sign_in_screen.dart';
@@ -13,6 +14,7 @@ import '../modules/training_flow/training_enrollment/views/training_enrollment_s
 
 enum AppRoutes {
   dashboard,
+  trainingGearsChecklist,
   trainingEnrollment,
   trainingDetails,
   training,
@@ -28,7 +30,10 @@ extension AppRoutesExtention on AppRoutes {
   Widget buildWidget<T extends Object>({T? arguments}) {
     switch (this) {
 
-      case AppRoutes.trainingEnrollment:
+
+      case AppRoutes.trainingGearsChecklist:
+        return const TrainingGearsChecklistScreen();
+     case AppRoutes.trainingEnrollment:
         return const TrainingEnrollmentScreen();
       case AppRoutes.trainingDetails:
         return const TrainingDetailsScreen();

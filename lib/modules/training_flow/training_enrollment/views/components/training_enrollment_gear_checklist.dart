@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:tixe_flutter_app/global/widget/global_chip_widget.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
+import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
+import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
@@ -73,6 +75,11 @@ class TrainingEnrollmentGearChecklist extends StatelessWidget {
                 const Spacer(),
                 GlobalChipWidget(
                   title: context.loc.check_now,
+                  onTap: () {
+                    Navigation.push(
+                      appRoutes: AppRoutes.trainingGearsChecklist,
+                    );
+                  },
                 ),
               ],
             ),

@@ -19,7 +19,6 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             children: [
               const HomeHeader(),
-              // SizedBox(height: 30.h),
               Expanded(
                 child: ListView.separated(
                   itemCount: 20,
