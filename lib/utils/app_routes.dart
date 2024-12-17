@@ -57,7 +57,9 @@ extension AppRoutesExtention on AppRoutes {
       case AppRoutes.signUp:
         return const SignUpScreen();
       case AppRoutes.verifyEmail:
-        return const VerifyEmailScreen();
+        return VerifyEmailScreen(
+          email: arguments as String,
+        );
       case AppRoutes.personalDetails:
         return const PersonalDetailsScreen();
     }

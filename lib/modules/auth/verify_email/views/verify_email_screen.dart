@@ -6,18 +6,37 @@ import 'package:tixe_flutter_app/global/widget/scaffold/tixe_scaffold.dart';
 import 'package:tixe_flutter_app/modules/auth/verify_email/controller/verify_email_controller.dart';
 import 'package:tixe_flutter_app/modules/auth/verify_email/views/components/verify_email_otp_field.dart';
 import 'package:tixe_flutter_app/modules/auth/verify_email/views/components/verify_email_resend_otp.dart';
-import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
-import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
 import '/global/widget/global_text.dart';
 
-class VerifyEmailScreen extends StatelessWidget {
-  const VerifyEmailScreen({super.key});
+class VerifyEmailScreen extends StatefulWidget {
+  final String email;
+
+  const VerifyEmailScreen({
+    super.key,
+    required this.email,
+  });
+
+  @override
+  State<VerifyEmailScreen> createState() => _VerifyEmailScreenState();
+}
+
+class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    final controller = context.read(verifyEmailController.notifier);
+    Future(() {
+      controller.setEmail(widget.email);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final controller = context.read(verifyEmailController.notifier);
     return TixeScaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(
@@ -50,7 +69,7 @@ class VerifyEmailScreen extends StatelessWidget {
               return GlobalButton(
                 onPressed: state.isButtonEnabled
                     ? () {
-                        Navigation.push(appRoutes: AppRoutes.personalDetails);
+                        controller.verifyRegistrationCode();
                       }
                     : null,
                 buttonText: context.loc.verify_email,

@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:tixe_flutter_app/modules/auth/verify_email/repository/verify_email_interface.dart';
 import 'package:tixe_flutter_app/modules/auth/verify_email/repository/verify_email_repository.dart';
+import 'package:tixe_flutter_app/utils/view_util.dart';
 
 import 'state/verify_email_state.dart';
 
@@ -23,10 +24,15 @@ class VerifyEmailController extends StateNotifier<VerifyEmailState> {
             isButtonEnabled: false,
             showResendOtpButton: false,
             leftTime: "",
+            email: "",
           ),
         ) {
     otpController.addListener(checkButtonStatus);
     startTimer();
+  }
+
+  void setEmail(String email) {
+    state = state.copyWith(email: email);
   }
 
   void checkButtonStatus() {
@@ -56,5 +62,36 @@ class VerifyEmailController extends StateNotifier<VerifyEmailState> {
 
   void stopTimer() {
     _timer?.cancel();
+  }
+
+  Future<void> verifyRegistrationCode() async {
+    ViewUtil.showLoaderPage();
+    await _verifyEmailRepository.verifyRegistrationCode(
+      email: state.email,
+      code: otpController.text.trim(),
+      callback: (response, isSuccess) {
+        ViewUtil.hideLoader();
+        if (isSuccess) {
+          //Navigation.push(appRoutes: AppRoutes.personalDetails);
+        }
+      },
+    );
+  }
+
+  Future<void> resendRegistrationVerificationCode() async {
+    startTimer();
+    ViewUtil.showLoaderPage();
+    await _verifyEmailRepository.resendRegistrationVerificationCode(
+      email: state.email,
+      callback: (response, isSuccess) {
+        ViewUtil.hideLoader();
+        if (isSuccess) {
+          final message = response?.message;
+          if (message != null) {
+            ViewUtil.SSLSnackbar(message);
+          }
+        }
+      },
+    );
   }
 }
