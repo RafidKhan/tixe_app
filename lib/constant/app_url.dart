@@ -3,7 +3,7 @@ import 'package:tixe_flutter_app/utils/enum.dart';
 enum AppUrl {
   base,
   baseImage,
-
+  login,
 }
 
 extension AppUrlExtention on AppUrl {
@@ -19,7 +19,7 @@ extension AppUrlExtention on AppUrl {
         break;
 
       case UrlLink.isDev:
-        _baseUrl = "";
+        _baseUrl = "https://tixeapp.sagsio.com/api/";
         _baseImageUrl = "";
 
         break;
@@ -32,14 +32,12 @@ extension AppUrlExtention on AppUrl {
 
   String get url {
     switch (this) {
-       case AppUrl.base:
+      case AppUrl.base:
         return _baseUrl;
       case AppUrl.baseImage:
         return _baseImageUrl;
-     
-      default:
+      case AppUrl.login:
+        return "login";
     }
-    return "";
   }
 }
-

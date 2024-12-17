@@ -117,10 +117,7 @@ class FitnessDetailsScreen extends StatelessWidget {
         return GlobalBottomButton(
           onPressed: state.isButtonEnabled
               ? () {
-                  ViewUtil.showLoaderPage(
-                    title: context.loc.optimizing_for_you,
-                    message: context.loc.please_wait_till_optimize,
-                  );
+                  ViewUtil.showLoaderPage();
                   Future.delayed(const Duration(seconds: 2), () {
                     ViewUtil.hideLoader();
                     Navigation.pushAndRemoveUntil(

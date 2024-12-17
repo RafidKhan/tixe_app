@@ -1,11 +1,8 @@
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '/constant/constant_key.dart';
 
-
 class PrefHelper {
-
   static Future<SharedPreferences> get _instance async =>
       _prefsInstance ??= await SharedPreferences.getInstance();
   static SharedPreferences? _prefsInstance;
@@ -40,7 +37,7 @@ class PrefHelper {
     await _pref.setStringList(key, value);
   }
 
-  static getString(String key, [String defaultValue = ""]) {
+  static String getString(String key, [String defaultValue = ""]) {
     return _prefsInstance?.getString(key) ?? defaultValue;
   }
 
@@ -68,10 +65,10 @@ class PrefHelper {
     final languageValue = getLanguage();
     _prefsInstance?.clear();
     _prefsInstance?.setInt(AppConstant.LANGUAGE.key, languageValue);
+    _prefsInstance?.remove(AppConstant.TOKEN.key);
   }
 
   static bool isLoggedIn() {
     return (_prefsInstance?.getInt(AppConstant.USER_ID.key) ?? -1) > 0;
   }
 }
-

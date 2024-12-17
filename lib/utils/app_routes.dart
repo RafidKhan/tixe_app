@@ -3,6 +3,7 @@ import 'package:tixe_flutter_app/modules/auth/personal_details/views/personal_de
 import 'package:tixe_flutter_app/modules/auth/sign_in/views/sign_in_screen.dart';
 import 'package:tixe_flutter_app/modules/auth/sign_up/views/sign_up_screen.dart';
 import 'package:tixe_flutter_app/modules/auth/verify_email/views/verify_email_screen.dart';
+import 'package:tixe_flutter_app/modules/splash/views/splash_screen.dart';
 
 import '../modules/auth/fitness_details/views/fitness_details_screen.dart';
 import '../modules/dashboard/views/dashboard_screen.dart';
@@ -14,6 +15,7 @@ import '../modules/training_flow/training_enrollment/views/training_enrollment_s
 import '../modules/training_flow/training_gears_checklist/views/training_gears_checklist_screen.dart';
 
 enum AppRoutes {
+  splash,
   dashboard,
   confirmTrainingEnroll,
   trainingGearsChecklist,
@@ -31,24 +33,24 @@ enum AppRoutes {
 extension AppRoutesExtention on AppRoutes {
   Widget buildWidget<T extends Object>({T? arguments}) {
     switch (this) {
-
-
+      case AppRoutes.splash:
+        return const SplashScreen();
       case AppRoutes.confirmTrainingEnroll:
         return const ConfirmTrainingEnrollScreen();
       case AppRoutes.trainingGearsChecklist:
         return const TrainingGearsChecklistScreen();
-     case AppRoutes.trainingEnrollment:
+      case AppRoutes.trainingEnrollment:
         return const TrainingEnrollmentScreen();
       case AppRoutes.trainingDetails:
         return const TrainingDetailsScreen();
-     case AppRoutes.training:
+      case AppRoutes.training:
         return const TrainingScreen();
       case AppRoutes.home:
         return const HomeScreen();
 
       case AppRoutes.fitnessDetails:
         return const FitnessDetailsScreen();
-     case AppRoutes.dashboard:
+      case AppRoutes.dashboard:
         return const DashboardScreen();
       case AppRoutes.signIn:
         return const SignInScreen();

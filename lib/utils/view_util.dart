@@ -4,6 +4,7 @@ import 'package:tixe_flutter_app/global/model/global_option_item.dart';
 import 'package:tixe_flutter_app/global/widget/error_dialog.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottomsheet_widget.dart';
 import 'package:tixe_flutter_app/global/widget/global_loader_page.dart';
+import 'package:tixe_flutter_app/utils/extension.dart';
 
 import '/global/widget/global_button.dart';
 import '/global/widget/global_text.dart';
@@ -167,16 +168,16 @@ class ViewUtil {
   }
 
   static Future<void> showLoaderPage({
-    required String title,
-    required String message,
+    String? title,
+    String? message,
   }) async {
     await showDialog(
       context: Navigation.key.currentContext!,
       barrierDismissible: false,
       builder: (context) {
         return GlobalLoaderPage(
-          title: title,
-          message: message,
+          title: title ?? context.loc.optimizing_for_you,
+          message: message ?? context.loc.please_wait_till_optimize,
         );
       },
     );
@@ -188,8 +189,10 @@ class ViewUtil {
 
   static Future<void> showError(
     String? errorMessage, {
+    required String from,
     VoidCallback? onCloseTap,
   }) async {
+    'from:: $from'.log();
     await showDialog(
       context: Navigation.key.currentContext!,
       barrierDismissible: false,

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 //localization
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tixe_flutter_app/constant/app_url.dart';
+import 'package:tixe_flutter_app/constant/constant_key.dart';
 import 'package:tixe_flutter_app/data_provider/pref_helper.dart';
+import 'package:tixe_flutter_app/modules/dashboard/views/dashboard_screen.dart';
 import 'package:tixe_flutter_app/modules/splash/views/splash_screen.dart';
 import 'package:tixe_flutter_app/utils/app_version.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
@@ -60,8 +63,22 @@ initServices() async {
   await NetworkConnection.instance.internetAvailable();
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool isLoggedIn = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    isLoggedIn = PrefHelper.getString(AppConstant.TOKEN.key).trim().isNotEmpty;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +118,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: const SplashScreen(),
+      child: isLoggedIn ? const DashboardScreen() : const SplashScreen(),
     );
   }
 }
