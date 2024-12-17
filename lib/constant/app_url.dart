@@ -4,6 +4,8 @@ enum AppUrl {
   base,
   baseImage,
   login,
+  registration,
+  verifyRegistrationCode,
 }
 
 extension AppUrlExtention on AppUrl {
@@ -38,6 +40,10 @@ extension AppUrlExtention on AppUrl {
         return _baseImageUrl;
       case AppUrl.login:
         return "login";
+      case AppUrl.registration:
+        return "register";
+      case AppUrl.verifyRegistrationCode:
+        return "verify-code";
     }
   }
 }

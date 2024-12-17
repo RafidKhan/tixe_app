@@ -5,7 +5,6 @@ import 'package:tixe_flutter_app/global/widget/global_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_textformfield.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_scaffold.dart';
 import 'package:tixe_flutter_app/modules/auth/sign_up/views/components/sign_up_social_login_buttons.dart';
-import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
@@ -117,8 +116,7 @@ class SignUpScreen extends StatelessWidget {
                         return GlobalButton(
                           onPressed: state.isButtonEnabled
                               ? () {
-                                  Navigation.push(
-                                      appRoutes: AppRoutes.verifyEmail);
+                                  controller.signUpUser();
                                 }
                               : null,
                           buttonText: context.loc.create_account,

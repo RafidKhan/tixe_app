@@ -90,7 +90,12 @@ class ApiClient {
   Future<void> _handleError(dynamic error, {String? errorText}) async {
     String errorMessage;
 
-    if (error is DioException) {
+    if (error is DioException &&
+        error.response?.data is Map<String, dynamic> &&
+        error.response?.data['message'] != null) {
+      errorMessage =
+          error.response?.data['message'] ?? 'An unexpected error occurred.';
+    } else if (error is DioException) {
       switch (error.type) {
         case DioException.connectionTimeout:
           errorMessage = 'Connection timed out. Please try again.';

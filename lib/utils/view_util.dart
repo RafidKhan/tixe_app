@@ -24,10 +24,12 @@ class ViewUtil {
 
     return ScaffoldMessenger.of(Navigation.key.currentContext!).showSnackBar(
       SnackBar(
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: KColor.btnGradient1.color,
         content: GlobalText(
           str: msg,
           fontWeight: FontWeight.w500,
-          color: KColor.white.color,
+          color: KColor.black.color,
         ),
         action: SnackBarAction(
           label: btnName ?? "",
