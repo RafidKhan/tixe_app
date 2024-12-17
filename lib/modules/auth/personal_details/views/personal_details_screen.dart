@@ -15,8 +15,23 @@ import 'package:tixe_flutter_app/utils/view_util.dart';
 
 import '/global/widget/global_text.dart';
 
-class PersonalDetailsScreen extends StatelessWidget {
+class PersonalDetailsScreen extends StatefulWidget {
   const PersonalDetailsScreen({super.key});
+
+  @override
+  State<PersonalDetailsScreen> createState() => _PersonalDetailsScreenState();
+}
+
+class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    final controller = context.read(personalDetailsController.notifier);
+    Future(() {
+      controller.loadAllCountries();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,21 +69,26 @@ class PersonalDetailsScreen extends StatelessWidget {
                       children: [
                         _titleWidget(context.loc.state),
                         SizedBox(height: 10.h),
-                        GlobalBottomSheetTextFormField(
-                          textEditingController: controller.stateController,
-                          onTap: () {
-                            ViewUtil.showOptionPickerBottomSheet(
-                              options: List.generate(
-                                10,
-                                (index) => GlobalOptionData(
-                                    id: index, value: "Serial:: ${index + 1}"),
-                              ),
-                              onSelect: (option) {
-                                controller.setStateData(option);
-                              },
-                            );
-                          },
-                        ),
+                        Consumer(builder: (context, ref, child) {
+                          final state = ref.watch(personalDetailsController);
+                          return GlobalBottomSheetTextFormField(
+                            textEditingController: controller.stateController,
+                            onTap: () {
+                              ViewUtil.showOptionPickerBottomSheet(
+                                options: List.generate(
+                                  state.states.length,
+                                  (index) => GlobalOptionData(
+                                    id: index,
+                                    value: state.states[index].name,
+                                  ),
+                                ),
+                                onSelect: (option) {
+                                  controller.setStateData(option);
+                                },
+                              );
+                            },
+                          );
+                        }),
                       ],
                     ),
                   ),
@@ -80,21 +100,26 @@ class PersonalDetailsScreen extends StatelessWidget {
                       children: [
                         _titleWidget(context.loc.city),
                         SizedBox(height: 10.h),
-                        GlobalBottomSheetTextFormField(
-                          textEditingController: controller.cityController,
-                          onTap: () {
-                            ViewUtil.showOptionPickerBottomSheet(
-                              options: List.generate(
-                                10,
-                                (index) => GlobalOptionData(
-                                    id: index, value: "Serial:: ${index + 1}"),
-                              ),
-                              onSelect: (option) {
-                                controller.setCityData(option);
-                              },
-                            );
-                          },
-                        ),
+                        Consumer(builder: (context, ref, child) {
+                          final state = ref.watch(personalDetailsController);
+                          return GlobalBottomSheetTextFormField(
+                            textEditingController: controller.cityController,
+                            onTap: () {
+                              ViewUtil.showOptionPickerBottomSheet(
+                                options: List.generate(
+                                  state.cities.length,
+                                  (index) => GlobalOptionData(
+                                    id: index,
+                                    value: state.cities[index].name,
+                                  ),
+                                ),
+                                onSelect: (option) {
+                                  controller.setCityData(option);
+                                },
+                              );
+                            },
+                          );
+                        }),
                       ],
                     ),
                   )
@@ -111,21 +136,26 @@ class PersonalDetailsScreen extends StatelessWidget {
               ////country
               _titleWidget(context.loc.country),
               SizedBox(height: 10.h),
-              GlobalBottomSheetTextFormField(
-                textEditingController: controller.countryController,
-                onTap: () {
-                  ViewUtil.showOptionPickerBottomSheet(
-                    options: List.generate(
-                      10,
-                      (index) => GlobalOptionData(
-                          id: index, value: "Serial:: ${index + 1}"),
-                    ),
-                    onSelect: (option) {
-                      controller.setCountryData(option);
-                    },
-                  );
-                },
-              ),
+              Consumer(builder: (context, ref, child) {
+                final state = ref.watch(personalDetailsController);
+                return GlobalBottomSheetTextFormField(
+                  textEditingController: controller.countryController,
+                  onTap: () {
+                    ViewUtil.showOptionPickerBottomSheet(
+                      options: List.generate(
+                        state.countries.length,
+                        (index) => GlobalOptionData(
+                          id: index,
+                          value: state.countries[index].name,
+                        ),
+                      ),
+                      onSelect: (option) {
+                        controller.setCountryData(option);
+                      },
+                    );
+                  },
+                );
+              }),
               SizedBox(height: 20.h),
               ////arms license
               _titleWidget(context.loc.arms_license),

@@ -5,8 +5,10 @@ import 'package:intl/intl.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:tixe_flutter_app/modules/auth/verify_email/repository/verify_email_interface.dart';
 import 'package:tixe_flutter_app/modules/auth/verify_email/repository/verify_email_repository.dart';
+import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 
+import '../../../../utils/navigation.dart';
 import 'state/verify_email_state.dart';
 
 final verifyEmailController =
@@ -72,7 +74,9 @@ class VerifyEmailController extends StateNotifier<VerifyEmailState> {
       callback: (response, isSuccess) {
         ViewUtil.hideLoader();
         if (isSuccess) {
-          //Navigation.push(appRoutes: AppRoutes.personalDetails);
+          Navigation.push(
+            appRoutes: AppRoutes.personalDetails,
+          );
         }
       },
     );

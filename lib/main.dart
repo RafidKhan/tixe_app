@@ -17,6 +17,8 @@ import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/network_connection.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
+import 'modules/auth/personal_details/views/personal_details_screen.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -118,7 +120,8 @@ class _MyAppState extends State<MyApp> {
           home: child,
         );
       },
-      child: isLoggedIn ? const DashboardScreen() : const SplashScreen(),
+      child: PersonalDetailsScreen(),
+      //child: isLoggedIn ? const DashboardScreen() : const SplashScreen(),
     );
   }
 }

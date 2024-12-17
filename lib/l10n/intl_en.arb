@@ -72,5 +72,6 @@
   "discount": "Discount",
   "grand_total": "Grand Total",
   "payment_method": "Payment Method",
-  "stripe": "Stripe"
+  "stripe": "Stripe",
+  "loading_data": "Loading Data"
 }

@@ -1,8 +1,12 @@
-import 'package:flutter/cupertino.dart';
+import 'package:country_state_city/utils/utils.dart';
+import 'package:flutter/material.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:tixe_flutter_app/global/model/global_option_item.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/repository/personal_details_interface.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/repository/personal_details_repository.dart';
+import 'package:tixe_flutter_app/utils/extension.dart';
+import 'package:tixe_flutter_app/utils/navigation.dart';
+import 'package:tixe_flutter_app/utils/view_util.dart';
 
 import '../../../../utils/custom_file_picker.dart';
 import 'state/personal_details_state.dart';
@@ -26,6 +30,9 @@ class PersonalDetailsController extends StateNotifier<PersonalDetailsState> {
           const PersonalDetailsState(
             isButtonEnabled: false,
             armsLicense: null,
+            countries: [],
+            states: [],
+            cities: [],
           ),
         ) {
     nameController.addListener(checkButtonStatus);
@@ -62,7 +69,50 @@ class PersonalDetailsController extends StateNotifier<PersonalDetailsState> {
     cityController.text = option.value;
   }
 
-  void setCountryData(GlobalOptionData option) {
+  void setCountryData(GlobalOptionData option) async {
+    final country = state.countries
+        .where(
+          (element) => element.name == option.value,
+        )
+        .firstOrNull;
+    if (country != null) {
+      await loadAllStatesByCountryCode(country.isoCode);
+      await loadCityStatesByCountryCode(country.isoCode);
+    }
+    cityController.clear();
+    stateController.clear();
     countryController.text = option.value;
+  }
+
+  Future<void> loadAllCountries() async {
+    ViewUtil.showLoaderPage(
+      title: Navigation.key.currentContext!.loc.loading_data,
+    );
+    state = state.copyWith(
+      countries: await getAllCountries(),
+    );
+    ViewUtil.hideLoader();
+  }
+
+  Future<void> loadAllStatesByCountryCode(String countryCode) async {
+    ViewUtil.showLoaderPage(
+      title: Navigation.key.currentContext!.loc.loading_data,
+    );
+    state = state.copyWith(
+      states: await getStatesOfCountry(countryCode),
+    );
+
+    ViewUtil.hideLoader();
+  }
+
+  Future<void> loadCityStatesByCountryCode(String countryCode) async {
+    ViewUtil.showLoaderPage(
+      title: Navigation.key.currentContext!.loc.loading_data,
+    );
+    state = state.copyWith(
+      cities: await getCountryCities(countryCode),
+    );
+
+    ViewUtil.hideLoader();
   }
 }
