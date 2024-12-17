@@ -1,27 +1,25 @@
 class GlobalResponse {
-  GlobalResponse({
-    this.message,
-    this.errors,
-    this.code,
-  });
+  final String? status;
+  final int? code;
+  final String? message;
 
-  String? message;
-  List<String>? errors;
-  int? code;
+  GlobalResponse({this.status, this.code, this.message});
 
-  factory GlobalResponse.fromJson(Map<String, dynamic> json) => GlobalResponse(
-        message: json["message"],
-        errors: json["errors"] == null
-            ? null
-            : List<String>.from(json["errors"].map((x) => x)),
-        code: json["code"],
-      );
+  // Factory constructor to create an instance from a JSON map
+  factory GlobalResponse.fromJson(Map<String, dynamic> json) {
+    return GlobalResponse(
+      status: json['status'] as String?,
+      code: json['code'] as int?,
+      message: json['message'] as String?,
+    );
+  }
 
-  Map<String, dynamic> toJson() => {
-        "message": message,
-        "errors":
-            errors == null ? null : List<dynamic>.from(errors!.map((x) => x)),
-        "code": code,
-      };
+  // Method to convert an instance back to a JSON map
+  Map<String, dynamic> toJson() {
+    return {
+      'status': status,
+      'code': code,
+      'message': message,
+    };
+  }
 }
-

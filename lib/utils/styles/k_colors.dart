@@ -20,6 +20,7 @@ enum KColor {
   cardGradient1,
   cardGradient2,
   green,
+  red,
 }
 
 extension KColorExtention on KColor {
@@ -63,6 +64,8 @@ extension KColorExtention on KColor {
         return const Color(0xff2E2D21);
       case KColor.darkGrey2:
         return const Color(0xff222118);
+      case KColor.red:
+        return Colors.red;
     }
   }
 }

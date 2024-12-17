@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/model/global_option_item.dart';
+import 'package:tixe_flutter_app/global/widget/error_dialog.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottomsheet_widget.dart';
 import 'package:tixe_flutter_app/global/widget/global_loader_page.dart';
 
@@ -183,5 +184,23 @@ class ViewUtil {
 
   static void hideLoader() {
     Navigation.pop();
+  }
+
+  static Future<void> showError(
+    String? errorMessage, {
+    VoidCallback? onCloseTap,
+  }) async {
+    await showDialog(
+      context: Navigation.key.currentContext!,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return ErrorDialog(
+          erroMsg: [
+            errorMessage ?? "Something went wrong",
+          ],
+          onCloseTap: onCloseTap,
+        );
+      },
+    );
   }
 }
