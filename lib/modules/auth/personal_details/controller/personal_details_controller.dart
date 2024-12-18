@@ -136,8 +136,9 @@ class PersonalDetailsController extends StateNotifier<PersonalDetailsState> {
       callBack: (response, isSuccess) {
         ViewUtil.hideLoader();
         if (isSuccess) {
-          Navigation.push(
+          Navigation.pushAndRemoveUntil(
             appRoutes: AppRoutes.fitnessDetails,
+            arguments: state.email,
           );
         }
       },

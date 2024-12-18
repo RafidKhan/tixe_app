@@ -15,8 +15,29 @@ import 'package:tixe_flutter_app/utils/view_util.dart';
 
 import '/global/widget/global_text.dart';
 
-class FitnessDetailsScreen extends StatelessWidget {
-  const FitnessDetailsScreen({super.key});
+class FitnessDetailsScreen extends StatefulWidget {
+  final String email;
+
+  const FitnessDetailsScreen({
+    super.key,
+    required this.email,
+  });
+
+  @override
+  State<FitnessDetailsScreen> createState() => _FitnessDetailsScreenState();
+}
+
+class _FitnessDetailsScreenState extends State<FitnessDetailsScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    final controller = context.read(fitnessDetailsController.notifier);
+    Future(() {
+      controller.setEmail(widget.email);
+      controller.loadUnitData();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,13 +85,20 @@ class FitnessDetailsScreen extends StatelessWidget {
                   ),
                   SizedBox(width: 10.w),
                   Expanded(
-                    child: GlobalBottomSheetTextFormField(
-                      textEditingController: controller.heightUnitController,
-                      onTap: () {
-                        ViewUtil.showOptionPickerBottomSheet(
-                          options: controller.heightUnits,
-                          onSelect: (option) {
-                            controller.setHeightUnit(option);
+                    child: Consumer(
+                      builder: (context, ref, child) {
+                        final state = ref.watch(fitnessDetailsController);
+
+                        return GlobalBottomSheetTextFormField(
+                          textEditingController:
+                              controller.heightUnitController,
+                          onTap: () {
+                            ViewUtil.showOptionPickerBottomSheet(
+                              options: state.heightUnits,
+                              onSelect: (option) {
+                                controller.setHeightUnit(option);
+                              },
+                            );
                           },
                         );
                       },
@@ -93,17 +121,20 @@ class FitnessDetailsScreen extends StatelessWidget {
                   ),
                   SizedBox(width: 10.w),
                   Expanded(
-                    child: GlobalBottomSheetTextFormField(
-                      textEditingController: controller.weightUnitController,
-                      onTap: () {
-                        ViewUtil.showOptionPickerBottomSheet(
-                          options: controller.weightUnits,
-                          onSelect: (option) {
-                            controller.setWeightUnit(option);
-                          },
-                        );
-                      },
-                    ),
+                    child: Consumer(builder: (context, ref, child) {
+                      final state = ref.watch(fitnessDetailsController);
+                      return GlobalBottomSheetTextFormField(
+                        textEditingController: controller.weightUnitController,
+                        onTap: () {
+                          ViewUtil.showOptionPickerBottomSheet(
+                            options: state.weightUnits,
+                            onSelect: (option) {
+                              controller.setWeightUnit(option);
+                            },
+                          );
+                        },
+                      );
+                    }),
                   ),
                 ],
               ),

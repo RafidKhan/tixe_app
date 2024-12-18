@@ -49,7 +49,9 @@ extension AppRoutesExtention on AppRoutes {
         return const HomeScreen();
 
       case AppRoutes.fitnessDetails:
-        return const FitnessDetailsScreen();
+        return FitnessDetailsScreen(
+          email: arguments as String,
+        );
       case AppRoutes.dashboard:
         return const DashboardScreen();
       case AppRoutes.signIn:

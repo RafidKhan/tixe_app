@@ -74,7 +74,7 @@ class VerifyEmailController extends StateNotifier<VerifyEmailState> {
       callback: (response, isSuccess) {
         ViewUtil.hideLoader();
         if (isSuccess) {
-          Navigation.push(
+          Navigation.pushAndRemoveUntil(
             appRoutes: AppRoutes.personalDetails,
             arguments: state.email,
           );
