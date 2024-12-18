@@ -148,13 +148,7 @@ class _FitnessDetailsScreenState extends State<FitnessDetailsScreen> {
         return GlobalBottomButton(
           onPressed: state.isButtonEnabled
               ? () {
-                  ViewUtil.showLoaderPage();
-                  Future.delayed(const Duration(seconds: 2), () {
-                    ViewUtil.hideLoader();
-                    Navigation.pushAndRemoveUntil(
-                      appRoutes: AppRoutes.signIn,
-                    );
-                  });
+                  controller.updateRegistrationFitnessDetails();
                 }
               : null,
           buttonText: context.loc.next,

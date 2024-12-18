@@ -6,6 +6,9 @@ import 'package:tixe_flutter_app/global/model/global_option_item.dart';
 import 'package:tixe_flutter_app/modules/auth/fitness_details/controller/state/fitness_details_state.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 
+import '../../../../utils/app_routes.dart';
+import '../../../../utils/navigation.dart';
+import '../model/fitness_details_request.dart';
 import '../repository/fitness_details_interface.dart';
 import '../repository/fitness_details_repository.dart';
 
@@ -98,6 +101,29 @@ class FitnessDetailsController extends StateNotifier<FitnessDetailsState> {
           if (state.weightUnits.isNotEmpty) {
             setWeightUnit(state.weightUnits.first);
           }
+        }
+      },
+    );
+  }
+
+  Future<void> updateRegistrationFitnessDetails() async {
+    ViewUtil.showLoaderPage();
+
+    await _fitnessdetailsRepository.updateRegistrationFitnessDetails(
+      params: FitnessDetailsRequest(
+        email: state.email,
+        age: ageController.text.trim(),
+        height: heightController.text.trim(),
+        heightUnit: heightUnitController.text.trim(),
+        weight: weightController.text.trim(),
+        weightUnit: weightUnitController.text.trim(),
+      ),
+      callback: (response, isSuccess) {
+        ViewUtil.hideLoader();
+        if(isSuccess){
+          Navigation.pushAndRemoveUntil(
+            appRoutes: AppRoutes.signIn,
+          );
         }
       },
     );
