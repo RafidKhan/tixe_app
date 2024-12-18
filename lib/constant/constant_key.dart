@@ -32,7 +32,6 @@ enum AppConstant {
   EN,
   BN,
   FONTFAMILY,
-  
 }
 
 extension AppConstantExtention on AppConstant {
@@ -104,13 +103,9 @@ extension AppConstantExtention on AppConstant {
         return 'bn';
       case AppConstant.FONTFAMILY:
         return 'Arboria';
-    
 
       default:
         return "";
     }
   }
 }
-
-
-

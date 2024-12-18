@@ -1,9 +1,12 @@
 import 'package:country_state_city/utils/utils.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:tixe_flutter_app/global/model/global_option_item.dart';
+import 'package:tixe_flutter_app/modules/auth/personal_details/model/personal_details_request_model.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/repository/personal_details_interface.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/repository/personal_details_repository.dart';
+import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
@@ -28,6 +31,7 @@ class PersonalDetailsController extends StateNotifier<PersonalDetailsState> {
   PersonalDetailsController()
       : super(
           const PersonalDetailsState(
+            email: "",
             isButtonEnabled: false,
             armsLicense: null,
             countries: [],
@@ -114,5 +118,33 @@ class PersonalDetailsController extends StateNotifier<PersonalDetailsState> {
     );
 
     ViewUtil.hideLoader();
+  }
+
+  Future<void> updateRegistrationPersonalInfo() async {
+    ViewUtil.showLoaderPage();
+    final params = PersonalDetailsRequestModel(
+      email: state.email,
+      name: nameController.text.trim(),
+      state: stateController.text.trim(),
+      city: cityController.text.trim(),
+      country: countryController.text.trim(),
+      address: addressController.text.trim(),
+    );
+    await _personalDetailsRepository.updateRegistrationPersonalInfo(
+      params: params,
+      armsLicense: state.armsLicense!,
+      callBack: (response, isSuccess) {
+        ViewUtil.hideLoader();
+        if (isSuccess) {
+          Navigation.push(
+            appRoutes: AppRoutes.fitnessDetails,
+          );
+        }
+      },
+    );
+  }
+
+  void setEmail(String email) {
+    state = state.copyWith(email: email);
   }
 }

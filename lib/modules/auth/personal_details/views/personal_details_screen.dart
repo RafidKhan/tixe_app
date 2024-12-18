@@ -7,16 +7,19 @@ import 'package:tixe_flutter_app/global/widget/global_bottomsheet_textformfield.
 import 'package:tixe_flutter_app/global/widget/global_textformfield.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_scaffold.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/controller/personal_details_controller.dart';
-import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
-import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 
 import '/global/widget/global_text.dart';
 
 class PersonalDetailsScreen extends StatefulWidget {
-  const PersonalDetailsScreen({super.key});
+  final String email;
+
+  const PersonalDetailsScreen({
+    super.key,
+    required this.email,
+  });
 
   @override
   State<PersonalDetailsScreen> createState() => _PersonalDetailsScreenState();
@@ -29,6 +32,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
     super.initState();
     final controller = context.read(personalDetailsController.notifier);
     Future(() {
+      controller.setEmail(widget.email);
       controller.loadAllCountries();
     });
   }
@@ -58,6 +62,37 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
               SizedBox(height: 10.h),
               GlobalTextFormfield(
                 textEditingController: controller.nameController,
+              ),
+              SizedBox(height: 20.h),
+              ////country
+              _titleWidget(context.loc.country),
+              SizedBox(height: 10.h),
+              Consumer(builder: (context, ref, child) {
+                final state = ref.watch(personalDetailsController);
+                return GlobalBottomSheetTextFormField(
+                  textEditingController: controller.countryController,
+                  onTap: () {
+                    ViewUtil.showOptionPickerBottomSheet(
+                      options: List.generate(
+                        state.countries.length,
+                        (index) => GlobalOptionData(
+                          id: index,
+                          value: state.countries[index].name,
+                        ),
+                      ),
+                      onSelect: (option) {
+                        controller.setCountryData(option);
+                      },
+                    );
+                  },
+                );
+              }),
+              SizedBox(height: 20.h),
+              ////address
+              _titleWidget(context.loc.address),
+              SizedBox(height: 10.h),
+              GlobalTextFormfield(
+                textEditingController: controller.addressController,
               ),
               SizedBox(height: 20.h),
               Row(
@@ -126,37 +161,6 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                 ],
               ),
               SizedBox(height: 20.h),
-              ////address
-              _titleWidget(context.loc.address),
-              SizedBox(height: 10.h),
-              GlobalTextFormfield(
-                textEditingController: controller.addressController,
-              ),
-              SizedBox(height: 20.h),
-              ////country
-              _titleWidget(context.loc.country),
-              SizedBox(height: 10.h),
-              Consumer(builder: (context, ref, child) {
-                final state = ref.watch(personalDetailsController);
-                return GlobalBottomSheetTextFormField(
-                  textEditingController: controller.countryController,
-                  onTap: () {
-                    ViewUtil.showOptionPickerBottomSheet(
-                      options: List.generate(
-                        state.countries.length,
-                        (index) => GlobalOptionData(
-                          id: index,
-                          value: state.countries[index].name,
-                        ),
-                      ),
-                      onSelect: (option) {
-                        controller.setCountryData(option);
-                      },
-                    );
-                  },
-                );
-              }),
-              SizedBox(height: 20.h),
               ////arms license
               _titleWidget(context.loc.arms_license),
               SizedBox(height: 10.h),
@@ -175,7 +179,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                 final state = ref.watch(personalDetailsController);
                 if (state.armsLicense != null) {
                   return GlobalText(
-                    str: state.armsLicense!.path.split('/').last,
+                    str: state.armsLicense!.fileName,
                     color: KColor.white.color,
                   );
                 }
@@ -192,9 +196,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
         return GlobalBottomButton(
           onPressed: state.isButtonEnabled
               ? () {
-                  Navigation.push(
-                    appRoutes: AppRoutes.fitnessDetails,
-                  );
+                  controller.updateRegistrationPersonalInfo();
                 }
               : null,
           buttonText: context.loc.next,

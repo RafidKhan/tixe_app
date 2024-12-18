@@ -7,6 +7,8 @@ enum AppUrl {
   registration,
   verifyRegistrationCode,
   resendRegistrationVerificationCode,
+  registrationPersonalDetails,
+  registrationFitnessDetails,
 }
 
 extension AppUrlExtention on AppUrl {
@@ -47,6 +49,10 @@ extension AppUrlExtention on AppUrl {
         return "verify-code";
       case AppUrl.resendRegistrationVerificationCode:
         return "regenerate-code";
+      case AppUrl.registrationPersonalDetails:
+        return "user/personal-details/update";
+      case AppUrl.registrationFitnessDetails:
+        return "user/fitness-details/update";
     }
   }
 }

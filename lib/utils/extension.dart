@@ -1,4 +1,5 @@
 import 'dart:developer' as darttools show log;
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'
@@ -239,4 +240,14 @@ extension DateTimeGreater on DateTime {
       return false;
     }
   }
+}
+
+extension FocusExt on BuildContext {
+  void unFocus() {
+    FocusScope.of(this).unfocus();
+  }
+}
+
+extension FileExt on File{
+  String get fileName => path.split('/').last;
 }

@@ -120,8 +120,7 @@ class _MyAppState extends State<MyApp> {
           home: child,
         );
       },
-      child: PersonalDetailsScreen(),
-      //child: isLoggedIn ? const DashboardScreen() : const SplashScreen(),
+      child: isLoggedIn ? const DashboardScreen() : const SplashScreen(),
     );
   }
 }

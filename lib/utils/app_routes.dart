@@ -61,7 +61,9 @@ extension AppRoutesExtention on AppRoutes {
           email: arguments as String,
         );
       case AppRoutes.personalDetails:
-        return const PersonalDetailsScreen();
+        return PersonalDetailsScreen(
+          email: arguments as String,
+        );
     }
   }
 }

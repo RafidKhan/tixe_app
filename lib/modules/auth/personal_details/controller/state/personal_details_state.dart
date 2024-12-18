@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 @immutable
 class PersonalDetailsState {
+  final String email;
   final bool isButtonEnabled;
   final File? armsLicense;
   final List<CN.Country> countries;
@@ -11,6 +12,7 @@ class PersonalDetailsState {
   final List<CN.City> cities;
 
   const PersonalDetailsState({
+    required this.email,
     required this.isButtonEnabled,
     required this.armsLicense,
     required this.countries,
@@ -19,6 +21,7 @@ class PersonalDetailsState {
   });
 
   PersonalDetailsState copyWith({
+    String? email,
     bool? isButtonEnabled,
     File? armsLicense,
     List<CN.Country>? countries,
@@ -26,6 +29,7 @@ class PersonalDetailsState {
     List<CN.City>? cities,
   }) {
     return PersonalDetailsState(
+      email: email ?? this.email,
       isButtonEnabled: isButtonEnabled ?? this.isButtonEnabled,
       armsLicense: armsLicense ?? this.armsLicense,
       countries: countries ?? this.countries,

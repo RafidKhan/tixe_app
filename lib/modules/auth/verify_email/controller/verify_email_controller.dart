@@ -76,6 +76,7 @@ class VerifyEmailController extends StateNotifier<VerifyEmailState> {
         if (isSuccess) {
           Navigation.push(
             appRoutes: AppRoutes.personalDetails,
+            arguments: state.email,
           );
         }
       },
