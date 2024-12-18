@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:tixe_flutter_app/constant/app_url.dart';
 import 'package:tixe_flutter_app/data_provider/api_client.dart';
 
+import '../../../../utils/enum.dart';
+
 class VerifyEmailApi {
   final ApiClient _apiClient = ApiClient();
 
@@ -12,12 +14,13 @@ class VerifyEmailApi {
     required String code,
     required Function(Response? data, bool isSuccess) callback,
   }) async {
-    await _apiClient.post(
+    await _apiClient.request(
       url: AppUrl.verifyRegistrationCode.url,
-      data: {
+      params: {
         "email": email,
         "code": code,
       },
+      method: Method.POST,
       callback: callback,
     );
   }
@@ -26,11 +29,12 @@ class VerifyEmailApi {
     required String email,
     required Function(Response? data, bool isSuccess) callback,
   }) async {
-    await _apiClient.post(
+    await _apiClient.request(
       url: AppUrl.resendRegistrationVerificationCode.url,
-      data: {
+      params: {
         "email": email,
       },
+      method: Method.POST,
       callback: callback,
     );
   }

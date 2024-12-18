@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:tixe_flutter_app/data_provider/api_client.dart';
+import 'package:tixe_flutter_app/utils/enum.dart';
 
 import '../../../../constant/app_url.dart';
 
@@ -13,12 +14,13 @@ class SignInApi {
     required String password,
     required Function(Response? data, bool isSuccess) callback,
   }) async {
-    await _apiClient.post(
+    await _apiClient.request(
       url: AppUrl.login.url,
-      data: {
+      params: {
         "email": email,
         "password": password,
       },
+      method: Method.POST,
       callback: callback,
     );
   }

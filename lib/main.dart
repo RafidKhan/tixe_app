@@ -121,8 +121,8 @@ class _MyAppState extends State<MyApp> {
           home: child,
         );
       },
-      child: FitnessDetailsScreen(email:""),
-      //child: isLoggedIn ? const DashboardScreen() : const SplashScreen(),
+      //child: FitnessDetailsScreen(email:""),
+      child: isLoggedIn ? const DashboardScreen() : const SplashScreen(),
     );
   }
 }
