@@ -22,7 +22,7 @@ class PersonalDetailsApi {
       fileKeyName: 'arms_license',
       files: [armsLicense],
       callback: callBack,
-      method: Method.PUT,
+      method: Method.POST,
     );
   }
 }

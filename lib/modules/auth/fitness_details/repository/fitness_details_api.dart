@@ -15,7 +15,8 @@ class FitnessDetailsApi {
   }) async {
     await _apiClient.request(
       url: AppUrl.registrationFitnessDetails.url,
-      method: Method.PUT,
+      params: params,
+      method: Method.POST,
       callback: callback,
     );
   }
