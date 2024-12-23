@@ -43,6 +43,7 @@ dev_dependencies:
 
 
   flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.14.1
 
 
 
@@ -53,6 +54,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/app_icon/
 
 
 package_rename_config:
@@ -65,3 +67,9 @@ package_rename_config:
     bundle_name: com.tixe.app
     package_name: com.tixe.app
 
+
+flutter_icons:
+  android: "tixe_app_icon"
+  ios: true
+  image_path: "assets/app_icon/tixe_app_icon.png"
+  remove_alpha_ios: true
