@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:tixe_flutter_app/global/model/global_response.dart';
+import '../model/home_data_response.dart';
 
 @immutable
 abstract class IHomeRepository {
   Future<void> getHomeData({
     required int page,
-    required Function(GlobalResponse? response, bool isSuccess) callback,
+    required Function(HomeDataResponse? response, bool isSuccess) callback,
   });
 }
-
-
-
-

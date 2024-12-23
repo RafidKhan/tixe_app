@@ -28,3 +28,10 @@ enum SvgFor {
   asset,
   network,
 }
+
+enum ServiceType {
+  Training,
+  Workout,
+  Fitness,
+  Undefined,
+}

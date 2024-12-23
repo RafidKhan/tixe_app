@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
 import 'package:tixe_flutter_app/utils/app_routes.dart';
+import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
@@ -11,11 +12,11 @@ import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 import '../global_divider.dart';
 
 class TrainingItemWidget extends StatelessWidget {
-  final String id;
-  final String title;
-  final String amount;
-  final String shortDescription;
-  final String image;
+  final int? id;
+  final String? title;
+  final String? amount;
+  final String? shortDescription;
+  final String? image;
 
   const TrainingItemWidget({
     super.key,
@@ -77,7 +78,7 @@ class TrainingItemWidget extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: GlobalText(
-                str: title,
+                str: title ?? "",
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
                 color: KColor.white.color,
@@ -112,28 +113,33 @@ class TrainingItemWidget extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: GlobalText(
-                str: shortDescription,
+                str: shortDescription ?? "",
                 fontSize: 12,
                 fontWeight: FontWeight.w300,
                 color: KColor.white.color,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
-            SizedBox(height: 10.h),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10.r),
-                child: SizedBox(
-                  width: context.width,
-                  child: GlobalImageLoader(
-                    imagePath: KAssetName.warJpg.imagePath,
-                    height: 130.h,
+            if (image != null) ...[
+              SizedBox(height: 10.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10.r),
+                  child: SizedBox(
                     width: context.width,
-                    fit: BoxFit.fitWidth,
+                    child: GlobalImageLoader(
+                      imagePath: image ?? "",
+                      height: 130.h,
+                      width: context.width,
+                      fit: BoxFit.fitWidth,
+                      imageFor: ImageFor.network,
+                    ),
                   ),
                 ),
-              ),
-            )
+              )
+            ]
           ],
         ),
       ),

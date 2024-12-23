@@ -28,12 +28,12 @@ class TrainingScreen extends StatelessWidget {
                   },
                   itemBuilder: (context, index) {
                     return TrainingItemWidget(
-                      id: "0",
+                      id: 0,
                       title: "Long Range Sniper Training",
                       image: KAssetName.demoTrainingPng.imagePath,
                       amount: "450",
                       shortDescription:
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus mi non egestas efficitur. Etiam molestie lectus et rutrum finibus.",
+                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus mi non egestas efficitur. Etiam molestie lectus et rutrum finibus.",
                     );
                   },
                 ),
@@ -45,6 +45,3 @@ class TrainingScreen extends StatelessWidget {
     );
   }
 }
-
-
-

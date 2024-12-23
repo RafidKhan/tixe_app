@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 //import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '/constant/constant_key.dart';
 import '/data_provider/pref_helper.dart';
+import 'enum.dart';
 
 extension ConvertNum on String {
   static const english = [
@@ -248,6 +249,21 @@ extension FocusExt on BuildContext {
   }
 }
 
-extension FileExt on File{
+extension FileExt on File {
   String get fileName => path.split('/').last;
+}
+
+extension ServiceTypeExtention on String {
+  ServiceType serviceType() {
+    switch (this) {
+      case "Training":
+        return ServiceType.Training;
+      case "Workout":
+        return ServiceType.Workout;
+      case "Fitness":
+        return ServiceType.Fitness;
+      default:
+        return ServiceType.Undefined;
+    }
+  }
 }
