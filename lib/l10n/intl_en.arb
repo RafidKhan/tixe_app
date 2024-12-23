@@ -73,5 +73,6 @@
   "grand_total": "Grand Total",
   "payment_method": "Payment Method",
   "stripe": "Stripe",
-  "loading_data": "Loading Data"
+  "loading_data": "Loading Data",
+  "no_data_found": "No data found"
 }

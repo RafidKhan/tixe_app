@@ -11,6 +11,7 @@ enum AppUrl {
   registrationFitnessDetails,
   settings,
   socialLogin,
+  homeData,
 }
 
 extension AppUrlExtention on AppUrl {
@@ -59,6 +60,8 @@ extension AppUrlExtention on AppUrl {
         return "setting";
       case AppUrl.socialLogin:
         return "social/login";
+      case AppUrl.homeData:
+        return "home?page_size=15&page={PAGE}";
     }
   }
 }
