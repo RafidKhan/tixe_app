@@ -17,21 +17,16 @@ import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/network_connection.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-  // if (Platform.isAndroid) {
-  //   await Firebase.initializeApp();
-  // } else {
-  //   await Firebase.initializeApp(
-  //     options: const FirebaseOptions(
-  //       apiKey: "AIzaSyBRMKTGwllqgOTDin-LKU97plkz3vM-kx8",
-  //       appId: "1:456262419957:ios:19ba8f55cd08f68d46ccbc",
-  //       messagingSenderId: "456262419957",
-  //       projectId: "cashbaba-firebase",
-  //     ),
-  //   );
-  // }
+void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   await initServices();
   //Set Potraite Mode only
   await SystemChrome.setPreferredOrientations(

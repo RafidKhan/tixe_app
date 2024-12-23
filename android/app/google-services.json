@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "398229401622",
+    "project_id": "tixe-69367",
+    "storage_bucket": "tixe-69367.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398229401622:android:2ebd806e2dbd513a5b8537",
+        "android_client_info": {
+          "package_name": "com.tixe.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjHE21knjmUbZtk48_MoeaDwcVk9IFBM4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

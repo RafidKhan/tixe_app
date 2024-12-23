@@ -12,7 +12,7 @@ import '/utils/navigation.dart';
 import '/utils/styles/styles.dart';
 
 class ViewUtil {
-  static SSLSnackbar(
+  static snackBar(
     String msg, {
     String? btnName,
     void Function()? onPressed,
@@ -191,10 +191,8 @@ class ViewUtil {
 
   static Future<void> showError(
     String? errorMessage, {
-    required String from,
     VoidCallback? onCloseTap,
   }) async {
-    'from:: $from'.log();
     await showDialog(
       context: Navigation.key.currentContext!,
       barrierDismissible: false,

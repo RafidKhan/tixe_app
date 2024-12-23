@@ -15,4 +15,24 @@ class GlobalApi {
       method: Method.GET,
     );
   }
+
+  Future<void> performSocialLogin({
+    required String email,
+    required String name,
+    required String client,
+    required String token,
+    required Function(Response? data, bool isSuccess) callback,
+  }) async {
+    await _apiClient.request(
+      url: AppUrl.socialLogin.url,
+      params: {
+        "email": email,
+        "name": name,
+        "client": client,
+        "token": token,
+      },
+      method: Method.POST,
+      callback: callback,
+    );
+  }
 }

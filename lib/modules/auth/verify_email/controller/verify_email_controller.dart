@@ -93,7 +93,7 @@ class VerifyEmailController extends StateNotifier<VerifyEmailState> {
         if (isSuccess) {
           final message = response?.message;
           if (message != null) {
-            ViewUtil.SSLSnackbar(message);
+            ViewUtil.snackBar(message);
           }
         }
       },

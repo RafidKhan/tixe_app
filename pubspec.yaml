@@ -30,6 +30,10 @@ dependencies:
   carousel_slider: ^5.0.0
   country_state_city: ^0.1.6
   talker_dio_logger: any
+  package_rename: ^1.8.0
+  firebase_core: ^3.6.0
+  firebase_auth: ^5.3.1
+  google_sign_in: ^6.2.2
 
 dev_dependencies:
   flutter_test:
@@ -50,4 +54,14 @@ flutter:
   assets:
     - assets/images/
 
+
+package_rename_config:
+  android:
+    app_name: Tixe
+    package_name: com.tixe.app
+
+  ios:
+    app_name: Tixe
+    bundle_name: com.tixe.app
+    package_name: com.tixe.app
 

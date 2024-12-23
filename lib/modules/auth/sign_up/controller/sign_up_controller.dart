@@ -50,7 +50,7 @@ class SignUpController extends StateNotifier<SignUpState> {
         if (isSuccess) {
           final message = response?.message;
           if (message != null) {
-            ViewUtil.SSLSnackbar(message);
+            ViewUtil.snackBar(message);
             Navigation.push(
               appRoutes: AppRoutes.verifyEmail,
               arguments: emailOrPhoneController.text.trim(),

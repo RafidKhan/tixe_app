@@ -10,6 +10,7 @@ enum AppUrl {
   registrationPersonalDetails,
   registrationFitnessDetails,
   settings,
+  socialLogin,
 }
 
 extension AppUrlExtention on AppUrl {
@@ -56,6 +57,8 @@ extension AppUrlExtention on AppUrl {
         return "user/fitness-details/update";
       case AppUrl.settings:
         return "setting";
+      case AppUrl.socialLogin:
+        return "social/login";
     }
   }
 }

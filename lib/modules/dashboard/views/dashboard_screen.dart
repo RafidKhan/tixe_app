@@ -7,12 +7,28 @@ import 'package:tixe_flutter_app/modules/dashboard/controller/dashboard_controll
 import 'package:tixe_flutter_app/modules/home/views/home_screen.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training/views/training_screen.dart';
 import 'package:tixe_flutter_app/utils/app_routes.dart';
+import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 
 import 'components/dashboard_bottom_nav_bar.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
+
+  @override
+  State<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    final controller = context.read(dashboardController.notifier);
+    Future(() {
+      controller.setSelectedIndex(0);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -210,7 +210,8 @@ class ApiClient {
   Map<String, dynamic> _header = {};
 
   final _timeOutDuration = const Duration(milliseconds: 30 * 1000);
-  final _timeOutDuration2 = const Duration(milliseconds: 10);
+
+  //final _timeOutDuration2 = const Duration(milliseconds: 10);
 
   _initDio({
     Map<String, String>? extraHeader,
@@ -426,7 +427,7 @@ class ApiClient {
       callback(response, true); // Success
     } else {
       final globalResponse = GlobalResponse.fromJson(response.data);
-      await ViewUtil.showError(globalResponse.message, from: "CASE 2");
+      await ViewUtil.showError(globalResponse.message);
       callback(null, false); // Error
     }
   }
@@ -460,6 +461,6 @@ class ApiClient {
       errorMessage = errorText ?? 'An unexpected error occurred.';
     }
 
-    await ViewUtil.showError(errorMessage, from: "CASE 1");
+    await ViewUtil.showError(errorMessage);
   }
 }
