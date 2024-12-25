@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
-class TrainingDescription extends StatelessWidget {
+import '../../controller/training_details_controller.dart';
+
+class TrainingDescription extends ConsumerWidget {
   const TrainingDescription({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(trainingDetailsController);
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.w),
       width: context.width,
@@ -23,8 +28,7 @@ class TrainingDescription extends StatelessWidget {
           ),
           SizedBox(height: 20.h),
           GlobalText(
-            str:
-                "Nullam varius ullamcorper dui. Nam sollicitudin sodales metus, id vestibulum ipsum posuere ut. Cras facilisis sem id maximus consectetur. Proin vitae lacinia lorem, iaculis porta massa. Morbi risus sem, scelerisque nec maximus et, fringilla et sem. Mauris id risus malesuada, ullamcorper lacus faucibus, molestie nisi. Mauris et magna ligula. Fusce ipsum nulla, iaculis eu turpis vel, bibendum auctor lorem. Sed a dui tincidunt, pharetra augue eget, mollis nisl. Morbi nec orci eu quam ultrices aliquam. Sed vel enim sit amet ante convallis euismod vel sed massa. Nullam varius ullamcorper dui. Nam sollicitudin sodales metus, id vestibulum ipsum posuere ut. Cras facilisis sem id maximus consectetur. Proin vitae lacinia lorem, iaculis porta massa. Morbi risus sem, scelerisque nec maximus et, fringilla et sem. Mauris id risus malesuada, ullamcorper lacus faucibus, molestie nisi. Mauris et magna ligula. Fusce ipsum nulla, iaculis eu turpis vel, bibendum auctor lorem. Sed a dui tincidunt, pharetra augue eget, mollis nisl. Morbi nec orci eu quam ultrices aliquam. Sed vel enim sit amet ante convallis euismod vel sed massa.",
+            str: state.trainingDetail?.description ?? "",
             fontSize: 12,
             fontWeight: FontWeight.w300,
             color: KColor.white.color,

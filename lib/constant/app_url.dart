@@ -12,6 +12,7 @@ enum AppUrl {
   settings,
   socialLogin,
   homeData,
+  trainingDetails,
 }
 
 extension AppUrlExtention on AppUrl {
@@ -62,6 +63,8 @@ extension AppUrlExtention on AppUrl {
         return "social/login";
       case AppUrl.homeData:
         return "home?page_size=15&page={PAGE}";
+      case AppUrl.trainingDetails:
+        return "training-services/{ID}";
     }
   }
 }

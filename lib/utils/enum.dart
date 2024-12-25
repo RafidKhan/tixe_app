@@ -35,3 +35,9 @@ enum ServiceType {
   Fitness,
   Undefined,
 }
+
+enum ScheduleType {
+  DateBased,
+  DurationBased,
+  Undefined,
+}

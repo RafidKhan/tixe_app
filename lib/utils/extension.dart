@@ -267,3 +267,16 @@ extension ServiceTypeExtention on String {
     }
   }
 }
+
+extension ScheduleTypeExt on String {
+  ScheduleType getScheduleType() {
+    switch (this) {
+      case "date_based":
+        return ScheduleType.DateBased;
+      case "duration_based":
+        return ScheduleType.DurationBased;
+      default:
+        return ScheduleType.Undefined;
+    }
+  }
+}

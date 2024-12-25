@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_chip_widget.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
@@ -7,12 +8,15 @@ import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 
 import '../../../../../utils/styles/k_colors.dart';
+import '../../controller/training_details_controller.dart';
 
-class TrainingPriceAndDetails extends StatelessWidget {
+class TrainingPriceAndDetails extends ConsumerWidget {
   const TrainingPriceAndDetails({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(trainingDetailsController);
+    final trainingDetail = state.trainingDetail;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w),
       child: Row(
@@ -23,13 +27,13 @@ class TrainingPriceAndDetails extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 GlobalText(
-                  str: "Viper Shooting Range, Ohio",
+                  str: "Address N/A",
                   color: KColor.white.color,
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
                 ),
                 SizedBox(height: 10.h),
-                const GlobalChipWidget(title: "\$450"),
+                GlobalChipWidget(title: "\$${trainingDetail!.enrollmentFee}"),
               ],
             ),
           ),
@@ -74,7 +78,7 @@ class TrainingPriceAndDetails extends StatelessWidget {
                     ),
                     Flexible(
                       child: GlobalText(
-                        str: "4.5 (12 ${context.loc.reviews})",
+                        str: "RATING COUNT (TOTAL RATING ${context.loc.reviews})",
                         color: KColor.white.color,
                         fontSize: 12,
                         fontWeight: FontWeight.w500,

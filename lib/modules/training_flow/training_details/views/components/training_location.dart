@@ -26,7 +26,7 @@ class TrainingLocation extends StatelessWidget {
           ),
           SizedBox(height: 20.h),
           GlobalText(
-            str: "34, Parksetreet Road, All Nighter",
+            str: "Address NA",
             color: KColor.white.color,
             fontSize: 14,
             fontWeight: FontWeight.w400,

@@ -4,6 +4,7 @@ import 'package:tixe_flutter_app/modules/auth/sign_in/views/sign_in_screen.dart'
 import 'package:tixe_flutter_app/modules/auth/sign_up/views/sign_up_screen.dart';
 import 'package:tixe_flutter_app/modules/auth/verify_email/views/verify_email_screen.dart';
 import 'package:tixe_flutter_app/modules/splash/views/splash_screen.dart';
+import 'package:tixe_flutter_app/modules/training_flow/training_details/model/training_details_nav_model.dart';
 
 import '../modules/auth/fitness_details/views/fitness_details_screen.dart';
 import '../modules/dashboard/views/dashboard_screen.dart';
@@ -42,7 +43,9 @@ extension AppRoutesExtention on AppRoutes {
       case AppRoutes.trainingEnrollment:
         return const TrainingEnrollmentScreen();
       case AppRoutes.trainingDetails:
-        return const TrainingDetailsScreen();
+        return TrainingDetailsScreen(
+          model: arguments as TrainingDetailsNavModel,
+        );
       case AppRoutes.training:
         return const TrainingScreen();
       case AppRoutes.home:
