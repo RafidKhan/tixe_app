@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:tixe_flutter_app/constant/constant_key.dart';
 import 'package:tixe_flutter_app/data_provider/pref_helper.dart';
@@ -28,6 +29,10 @@ class SignInController extends StateNotifier<SignInState> {
         ) {
     emailOrPhoneController.addListener(checkButtonStatus);
     passwordController.addListener(checkButtonStatus);
+    if (kDebugMode) {
+      emailOrPhoneController.text = "rafid@gmail.com";
+      passwordController.text = "12345678";
+    }
   }
 
   void checkButtonStatus() {

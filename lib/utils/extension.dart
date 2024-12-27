@@ -280,3 +280,17 @@ extension ScheduleTypeExt on String {
     }
   }
 }
+
+extension SubstringExtension on String {
+  String safeSubstring(int subStringLength) {
+    if (isEmpty) return '';
+    return length > subStringLength ? substring(0, subStringLength) : this;
+  }
+}
+
+extension DateExtention on String {
+  int get dayNumber => DateTime.parse(this).weekday;
+
+  String get dayName =>
+      (DateFormat('EEE').format(DateTime.parse(this))).toUpperCase();
+}

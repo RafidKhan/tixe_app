@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tixe_flutter_app/global/model/global_slot_breakdown_model.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 
 import '../../utils/styles/k_colors.dart';
@@ -7,10 +8,15 @@ import 'global_divider.dart';
 import 'global_slot_breakdown.dart';
 
 class GlobalSlotBreakDownContainer extends StatelessWidget {
-  const GlobalSlotBreakDownContainer({super.key});
+  final GlobalSlotBreakdownModel model;
+
+  const GlobalSlotBreakDownContainer({super.key, required this.model});
 
   @override
   Widget build(BuildContext context) {
+    if (model.slotDataList.isEmpty) {
+      return const SizedBox.shrink();
+    }
     return Container(
       width: context.width,
       padding: EdgeInsets.symmetric(
@@ -29,9 +35,12 @@ class GlobalSlotBreakDownContainer extends StatelessWidget {
         child: ListView.separated(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          itemCount: 4,
+          itemCount: model.slotDataList.length,
           itemBuilder: (context, index) {
-            return const GlobalSlotBreakdown();
+            final slotData = model.slotDataList[index];
+            return GlobalSlotBreakdown(
+              slotData: slotData,
+            );
           },
           separatorBuilder: (context, index) {
             return const GlobalDivider();

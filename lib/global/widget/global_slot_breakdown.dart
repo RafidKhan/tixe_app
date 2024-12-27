@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tixe_flutter_app/global/model/global_slot_breakdown_model.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
-
-import 'global_slot_breakdown_container.dart';
 import 'global_text.dart';
 
 class GlobalSlotBreakdown extends StatelessWidget {
-  const GlobalSlotBreakdown({super.key});
+  final SlotData slotData;
+
+  const GlobalSlotBreakdown({
+    super.key,
+    required this.slotData,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,20 +22,32 @@ class GlobalSlotBreakdown extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            height: 50.h,
-            width: 50.w,
+            height: 60.h,
+            width: 60.w,
             padding: EdgeInsets.all(10.r),
             decoration: BoxDecoration(
               color: KColor.liteGrey.color,
               borderRadius: BorderRadius.circular(10.r),
             ),
-            child: Center(
-              child: GlobalText(
-                str: "SUN",
-                color: KColor.white.color,
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-              ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (slotData.date != null)
+                  GlobalText(
+                    str: slotData.date ?? "",
+                    color: KColor.white.color,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
+                GlobalText(
+                  str: slotData.day,
+                  color: KColor.white.color,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+              ],
             ),
           ),
           SizedBox(
@@ -39,7 +55,7 @@ class GlobalSlotBreakdown extends StatelessWidget {
           ),
           Expanded(
             child: GlobalText(
-              str: "4:30 PM - 6:30 PM",
+              str: "${slotData.startTime} - ${slotData.endTime}",
               fontSize: 12,
               fontWeight: FontWeight.w500,
               color: KColor.white.color,

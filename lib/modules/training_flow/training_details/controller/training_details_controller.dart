@@ -3,6 +3,7 @@ import 'package:tixe_flutter_app/modules/training_flow/training_details/controll
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 
+import '../model/training_detail_response.dart';
 import '../repository/training_details_interface.dart';
 import '../repository/training_details_repository.dart';
 
@@ -19,8 +20,10 @@ class TrainingDetailsController extends StateNotifier<TrainingDetailsState> {
           const TrainingDetailsState(
             isLoading: false,
             trainingId: -1,
-            selectedSlotIndex: -1,
             trainingDetail: null,
+            reviewStatistics: null,
+            selectedDateBasedSlot: null,
+            selectedDurationBasedSlot: null,
             scheduleType: ScheduleType.Undefined,
           ),
         );
@@ -42,14 +45,19 @@ class TrainingDetailsController extends StateNotifier<TrainingDetailsState> {
       callback: (response, isSuccess) {
         state = state.copyWith(
           isLoading: false,
-          trainingDetail: response?.data?.firstOrNull,
+          trainingDetail: response?.data?.trainingService?.firstOrNull,
+          reviewStatistics: response?.data?.reviewStatistics,
         );
         setScheduleType();
       },
     );
   }
 
-  void setSlotIndex(int index) {
-    state = state.copyWith(selectedSlotIndex: index);
+  void selectDateBasedSlot(DateBased dateBased) {
+    state = state.copyWith(selectedDateBasedSlot: dateBased);
+  }
+
+  void selectDurationBasedSlot(DurationBased durationBased) {
+    state = state.copyWith(selectedDurationBasedSlot: durationBased);
   }
 }

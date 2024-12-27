@@ -27,7 +27,7 @@ class TrainingPriceAndDetails extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 GlobalText(
-                  str: "Address N/A",
+                  str: state.trainingDetail?.address ?? "",
                   color: KColor.white.color,
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
@@ -78,7 +78,8 @@ class TrainingPriceAndDetails extends ConsumerWidget {
                     ),
                     Flexible(
                       child: GlobalText(
-                        str: "RATING COUNT (TOTAL RATING ${context.loc.reviews})",
+                        str:
+                            "${state.reviewStatistics?.averageRating ?? 0} (${state.reviewStatistics?.totalReviews ?? 0} ${context.loc.reviews})",
                         color: KColor.white.color,
                         fontSize: 12,
                         fontWeight: FontWeight.w500,

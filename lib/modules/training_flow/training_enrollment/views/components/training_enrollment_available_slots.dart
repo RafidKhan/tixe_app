@@ -4,6 +4,7 @@ import 'package:tixe_flutter_app/global/widget/global_text.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
+import '../../../../../global/model/global_slot_breakdown_model.dart';
 import '../../../../../global/widget/global_slot_breakdown_container.dart';
 import '../../../../../global/widget/global_slot_item_widget.dart';
 
@@ -36,6 +37,11 @@ class TrainingEnrollmentAvailableSlots extends StatelessWidget {
                 builder: (context, data, child) {
                   return GlobalSlotItemWidget(
                     showSelectedIcon: true,
+                    startDayNumber: "",
+                    startDayName: "",
+                    endDayNumber: "",
+                    endDayName: "",
+                    dayList: [],
                     isSelected: index == selectedSlotIndex.value,
                     onTap: () {
                       selectedSlotIndex.value = index;
@@ -56,7 +62,11 @@ class TrainingEnrollmentAvailableSlots extends StatelessWidget {
                         if (index == selectedSlotIndex.value) {
                           return Column(
                             children: [
-                              const GlobalSlotBreakDownContainer(),
+                              GlobalSlotBreakDownContainer(
+                                model: GlobalSlotBreakdownModel(
+                                  slotDataList: [],
+                                ),
+                              ),
                               SizedBox(
                                 height: 10.h,
                               ),

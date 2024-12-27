@@ -9,16 +9,28 @@ class GlobalSlotItemWidget extends StatelessWidget {
   final bool isSelected;
   final bool showSelectedIcon;
   final VoidCallback onTap;
+  final String startDayNumber;
+  final String startDayName;
+  final String endDayNumber;
+  final String endDayName;
+  final List<String> dayList;
 
   const GlobalSlotItemWidget({
     super.key,
     required this.isSelected,
     required this.showSelectedIcon,
     required this.onTap,
+    required this.startDayNumber,
+    required this.startDayName,
+    required this.endDayNumber,
+    required this.endDayName,
+    required this.dayList,
   });
 
   @override
   Widget build(BuildContext context) {
+    String dayListString = "";
+    dayListString = dayListString + dayList.join(" ");
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -27,8 +39,9 @@ class GlobalSlotItemWidget extends StatelessWidget {
           color: KColor.bodyGradient1.color,
           borderRadius: BorderRadius.circular(10.r),
           border: Border.all(
-            color:
-                isSelected ? KColor.btnGradient1.color : KColor.transparent.color,
+            color: isSelected
+                ? KColor.btnGradient1.color
+                : KColor.transparent.color,
           ),
         ),
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
@@ -46,13 +59,13 @@ class GlobalSlotItemWidget extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   GlobalText(
-                    str: "03",
+                    str: startDayNumber,
                     color: KColor.white.color,
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
                   ),
                   GlobalText(
-                    str: "SEP",
+                    str: startDayName,
                     color: KColor.white.color,
                     fontSize: 10,
                     fontWeight: FontWeight.w400,
@@ -66,14 +79,15 @@ class GlobalSlotItemWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 GlobalText(
-                  str: "03 Sep - 10 Sep",
+                  str:
+                      "$startDayNumber $startDayName - $endDayNumber $endDayName",
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
                   color: KColor.white.color,
                 ),
                 SizedBox(height: 10.h),
                 GlobalText(
-                  str: "SUN MON TUE",
+                  str: dayListString,
                   fontSize: 9,
                   fontWeight: FontWeight.w400,
                   color: KColor.grey.color,
