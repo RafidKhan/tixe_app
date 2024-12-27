@@ -14,6 +14,8 @@ enum AppUrl {
   homeData,
   trainingDetails,
   gears,
+  setTrainingTimeSchedule,
+  confirmTrainingEnroll,
 }
 
 extension AppUrlExtention on AppUrl {
@@ -68,6 +70,10 @@ extension AppUrlExtention on AppUrl {
         return "training-services/{ID}";
       case AppUrl.gears:
         return "gears";
+      case AppUrl.setTrainingTimeSchedule:
+        return "training-services/enrollment/set-time-schedule";
+      case AppUrl.confirmTrainingEnroll:
+        return "training-services/enrollment/confirm";
     }
   }
 }

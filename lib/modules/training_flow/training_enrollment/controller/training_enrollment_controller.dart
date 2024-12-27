@@ -23,6 +23,7 @@ class TrainingEnrollmentController
             selectedDurationBasedSlot: null,
             model: null,
             totalAmount: "0",
+            isButtonEnabled: false,
           ),
         );
 
@@ -33,10 +34,18 @@ class TrainingEnrollmentController
 
   void selectDateBasedSlot(DateBased dateBased) {
     state = state.copyWith(selectedDateBasedSlot: dateBased);
+    checkButtonStatus();
   }
 
   void selectDurationBasedSlot(DurationBased durationBased) {
     state = state.copyWith(selectedDurationBasedSlot: durationBased);
+    checkButtonStatus();
+  }
+
+  void checkButtonStatus() {
+    state = state.copyWith(
+        isButtonEnabled: state.selectedDurationBasedSlot != null ||
+            state.selectedDateBasedSlot != null);
   }
 
   void calculateTotalAmount() {

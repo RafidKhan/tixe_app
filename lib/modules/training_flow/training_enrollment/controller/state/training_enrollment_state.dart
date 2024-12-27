@@ -7,12 +7,14 @@ class TrainingEnrollmentState {
   final DurationBased? selectedDurationBasedSlot;
   final TrainingEnrollmentNavModel? model;
   final String totalAmount;
+  final bool isButtonEnabled;
 
   const TrainingEnrollmentState({
     required this.selectedDateBasedSlot,
     required this.selectedDurationBasedSlot,
     required this.model,
     required this.totalAmount,
+    required this.isButtonEnabled,
   });
 
   TrainingEnrollmentState copyWith({
@@ -20,6 +22,7 @@ class TrainingEnrollmentState {
     DurationBased? selectedDurationBasedSlot,
     TrainingEnrollmentNavModel? model,
     String? totalAmount,
+    bool? isButtonEnabled,
   }) {
     return TrainingEnrollmentState(
       selectedDateBasedSlot:
@@ -28,6 +31,7 @@ class TrainingEnrollmentState {
           selectedDurationBasedSlot ?? this.selectedDurationBasedSlot,
       model: model ?? this.model,
       totalAmount: totalAmount ?? this.totalAmount,
+      isButtonEnabled: isButtonEnabled ?? this.isButtonEnabled,
     );
   }
 }

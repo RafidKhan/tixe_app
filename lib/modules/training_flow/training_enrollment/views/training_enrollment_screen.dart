@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_divider.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
+import 'package:tixe_flutter_app/modules/training_flow/confirm_training_enroll/model/confirm_training_enrollment_nav_model.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training_details/views/components/training_amount_breakdown.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training_enrollment/controller/training_enrollment_controller.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training_enrollment/views/components/training_enrollment_available_slots.dart';
@@ -72,18 +74,36 @@ class _TrainingEnrollmentScreenState extends State<TrainingEnrollmentScreen> {
                   SizedBox(height: 20.h),
                   const TrainingAmountBreakdown(),
                   SizedBox(height: 20.h),
-                  GlobalButton(
-                    margin: EdgeInsets.symmetric(
-                      horizontal: 20.w,
-                      vertical: 20.h,
-                    ),
-                    onPressed: () {
-                      Navigation.push(
-                        appRoutes: AppRoutes.confirmTrainingEnroll,
-                      );
-                    },
-                    buttonText: context.loc.confirm_and_pay,
-                  ),
+                  Consumer(builder: (context, ref, child) {
+                    final state = ref.watch(trainingEnrollmentController);
+
+                    return GlobalButton(
+                      margin: EdgeInsets.symmetric(
+                        horizontal: 20.w,
+                        vertical: 20.h,
+                      ),
+                      onPressed: state.isButtonEnabled
+                          ? () {
+                              Navigation.push(
+                                appRoutes: AppRoutes.confirmTrainingEnroll,
+                                arguments: ConfirmTrainingEnrollmentNavModel(
+                                  trainingDetail: state.model?.trainingDetail,
+                                  reviewStatistics:
+                                      state.model?.reviewStatistics,
+                                  gearsFee: "0",
+                                  discountAmount: "0",
+                                  totalFee: state.totalAmount,
+                                  selectedDateBasedSlot:
+                                      state.selectedDateBasedSlot,
+                                  selectedDurationBasedSlot:
+                                      state.selectedDurationBasedSlot,
+                                ),
+                              );
+                            }
+                          : null,
+                      buttonText: context.loc.confirm_and_pay,
+                    );
+                  }),
                 ],
               ),
             ),

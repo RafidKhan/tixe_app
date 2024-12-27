@@ -77,9 +77,9 @@ class TrainingEnrollmentGearChecklist extends ConsumerWidget {
                 GlobalChipWidget(
                   title: context.loc.check_now,
                   onTap: () {
-                    Navigation.push(
-                      appRoutes: AppRoutes.trainingGearsChecklist,
-                    );
+                    // Navigation.push(
+                    //   appRoutes: AppRoutes.trainingGearsChecklist,
+                    // );
                   },
                 ),
               ],
