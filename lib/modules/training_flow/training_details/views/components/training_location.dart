@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
+import 'package:tixe_flutter_app/global/widget/global_map_view_widget.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training_details/controller/training_details_controller.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
-
-import '../../../../../utils/styles/k_assets.dart';
 
 class TrainingLocation extends ConsumerWidget {
   const TrainingLocation({super.key});
@@ -35,10 +33,12 @@ class TrainingLocation extends ConsumerWidget {
             fontWeight: FontWeight.w400,
           ),
           SizedBox(height: 20.h),
-          GlobalImageLoader(
-            imagePath: KAssetName.dummyMapLocationPng.imagePath,
-            height: 213.h,
-            width: context.width,
+          GlobalMapViewWidget(
+            // imagePath: KAssetName.dummyMapLocationPng.imagePath,
+            // height: 213.h,
+            // width: context.width,
+            lat: double.tryParse(state.trainingDetail?.lat ?? "0") ?? 0,
+            lon: double.tryParse(state.trainingDetail?.lon ?? "0") ?? 0,
           )
         ],
       ),
