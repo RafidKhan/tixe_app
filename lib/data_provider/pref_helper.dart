@@ -68,7 +68,7 @@ class PrefHelper {
     _prefsInstance?.remove(AppConstant.TOKEN.key);
   }
 
-  static bool isLoggedIn() {
-    return (_prefsInstance?.getInt(AppConstant.USER_ID.key) ?? -1) > 0;
+  static bool getLoginStatus() {
+    return _prefsInstance?.getBool(AppConstant.TOKEN.key) ?? false;
   }
 }

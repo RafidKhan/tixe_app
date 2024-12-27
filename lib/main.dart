@@ -72,7 +72,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    isLoggedIn = PrefHelper.getString(AppConstant.TOKEN.key).trim().isNotEmpty;
+    isLoggedIn = PrefHelper.getLoginStatus();
   }
 
   @override

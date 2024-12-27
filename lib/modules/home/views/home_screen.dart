@@ -6,7 +6,6 @@ import 'package:tixe_flutter_app/global/widget/global_no_data.dart';
 import 'package:tixe_flutter_app/modules/home/controller/home_controller.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
-import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 
 import '../../../global/widget/training_components/training_item_widget.dart';
 import '../../../utils/styles/k_colors.dart';

@@ -10,6 +10,7 @@ import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
+import '../../../data_provider/pref_helper.dart';
 import '../global_divider.dart';
 
 class TrainingItemWidget extends StatelessWidget {
@@ -35,12 +36,14 @@ class TrainingItemWidget extends StatelessWidget {
       focusColor: KColor.transparent.color,
       highlightColor: KColor.transparent.color,
       onTap: () {
-        Navigation.push(
-          appRoutes: AppRoutes.trainingDetails,
-          arguments: TrainingDetailsNavModel(
-            trainingId: id,
-          ),
-        );
+        if (PrefHelper.getLoginStatus()) {
+          Navigation.push(
+            appRoutes: AppRoutes.trainingDetails,
+            arguments: TrainingDetailsNavModel(
+              trainingId: id,
+            ),
+          );
+        } else {}
       },
       child: Container(
         padding: EdgeInsets.symmetric(
