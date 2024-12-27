@@ -4,6 +4,7 @@ import 'package:tixe_flutter_app/global/widget/global_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_divider.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training_details/views/components/training_amount_breakdown.dart';
+import 'package:tixe_flutter_app/modules/training_flow/training_enrollment/controller/training_enrollment_controller.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training_enrollment/views/components/training_enrollment_available_slots.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training_enrollment/views/components/training_enrollment_gear_checklist.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training_enrollment/views/components/training_enrollment_header.dart';
@@ -13,9 +14,31 @@ import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 
 import '../../../../utils/styles/k_colors.dart';
+import '../model/training_enrollment_nav_model.dart';
 
-class TrainingEnrollmentScreen extends StatelessWidget {
-  const TrainingEnrollmentScreen({super.key});
+class TrainingEnrollmentScreen extends StatefulWidget {
+  final TrainingEnrollmentNavModel model;
+
+  const TrainingEnrollmentScreen({
+    super.key,
+    required this.model,
+  });
+
+  @override
+  State<TrainingEnrollmentScreen> createState() =>
+      _TrainingEnrollmentScreenState();
+}
+
+class _TrainingEnrollmentScreenState extends State<TrainingEnrollmentScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    final controller = context.read(trainingEnrollmentController.notifier);
+    Future(() {
+      controller.setModel(widget.model);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

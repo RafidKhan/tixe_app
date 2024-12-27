@@ -9,6 +9,7 @@ import 'package:tixe_flutter_app/modules/training_flow/training_details/model/tr
 import 'package:tixe_flutter_app/modules/training_flow/training_details/views/components/training_available_slots.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training_details/views/components/training_detail_banners.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training_details/views/components/training_price_and_details.dart';
+import 'package:tixe_flutter_app/modules/training_flow/training_enrollment/model/training_enrollment_nav_model.dart';
 import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
@@ -92,7 +93,12 @@ class _TrainingDetailsScreenState extends State<TrainingDetailsScreen> {
                                 ),
                                 onPressed: () {
                                   Navigation.push(
-                                      appRoutes: AppRoutes.trainingEnrollment);
+                                    appRoutes: AppRoutes.trainingEnrollment,
+                                    arguments: TrainingEnrollmentNavModel(
+                                      trainingDetail: state.trainingDetail,
+                                      reviewStatistics: state.reviewStatistics,
+                                    ),
+                                  );
                                 },
                                 buttonText: context.loc.enroll_now,
                               ),

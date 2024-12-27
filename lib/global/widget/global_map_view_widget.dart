@@ -21,20 +21,6 @@ class GlobalMapViewWidget extends StatelessWidget {
       child: SizedBox(
         height: 213.h,
         width: context.width,
-        // child: OSMFlutter(
-        //   controller: MapController(
-        //     // initMapWithUserPosition: const UserTrackingOption.withoutUserPosition(
-        //     //   enableTracking: false,
-        //     // ),
-        //     useExternalTracking: true,
-        //     initPosition: GeoPoint(
-        //       latitude: lat,
-        //       longitude: lon,
-        //     ), // Eiffel Tower location
-        //   ),
-        //   osmOption: const OSMOption(),
-        //   mapIsLoading: const GlobalCircularLoader(),
-        // ),
         child: OSMViewer(
           controller: SimpleMapController(
             initPosition: GeoPoint(
@@ -44,10 +30,6 @@ class GlobalMapViewWidget extends StatelessWidget {
             markerHome: const MarkerIcon(
               icon: Icon(Icons.navigation_outlined),
             ),
-          ),
-          zoomOption: const ZoomOption(
-            initZoom: 16,
-            minZoomLevel: 11,
           ),
         ),
       ),

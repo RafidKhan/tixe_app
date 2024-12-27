@@ -12,6 +12,7 @@ import '../modules/home/views/home_screen.dart';
 import '../modules/training_flow/confirm_training_enroll/views/confirm_training_enroll_screen.dart';
 import '../modules/training_flow/training/views/training_screen.dart';
 import '../modules/training_flow/training_details/views/training_details_screen.dart';
+import '../modules/training_flow/training_enrollment/model/training_enrollment_nav_model.dart';
 import '../modules/training_flow/training_enrollment/views/training_enrollment_screen.dart';
 import '../modules/training_flow/training_gears_checklist/views/training_gears_checklist_screen.dart';
 
@@ -41,7 +42,9 @@ extension AppRoutesExtention on AppRoutes {
       case AppRoutes.trainingGearsChecklist:
         return const TrainingGearsChecklistScreen();
       case AppRoutes.trainingEnrollment:
-        return const TrainingEnrollmentScreen();
+        return TrainingEnrollmentScreen(
+          model: arguments as TrainingEnrollmentNavModel,
+        );
       case AppRoutes.trainingDetails:
         return TrainingDetailsScreen(
           model: arguments as TrainingDetailsNavModel,

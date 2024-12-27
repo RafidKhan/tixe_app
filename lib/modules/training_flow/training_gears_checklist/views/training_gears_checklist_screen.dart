@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/model/global_option_item.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottom_button.dart';
+import 'package:tixe_flutter_app/modules/training_flow/training_gears_checklist/controller/training_gears_checklist_controller.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
@@ -10,8 +11,24 @@ import '../../../../global/widget/gear_components/gear_checklist_item.dart';
 import '../../../../global/widget/scaffold/tixe_main_scaffold.dart';
 import 'components/training_gears_checklist_header.dart';
 
-class TrainingGearsChecklistScreen extends StatelessWidget {
+class TrainingGearsChecklistScreen extends StatefulWidget {
   const TrainingGearsChecklistScreen({super.key});
+
+  @override
+  State<TrainingGearsChecklistScreen> createState() =>
+      _TrainingGearsChecklistScreenState();
+}
+
+class _TrainingGearsChecklistScreenState
+    extends State<TrainingGearsChecklistScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Future(() {
+      //TrainingGearsChecklistController().getGears();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
