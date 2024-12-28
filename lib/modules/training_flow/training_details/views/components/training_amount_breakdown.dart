@@ -24,11 +24,11 @@ class TrainingAmountBreakdown extends ConsumerWidget {
           ),
           _buildRow(
             context.loc.gears_fee,
-            "\$0",
+            "\$${state.totalGearAmount}",
           ),
           _buildRow(
             context.loc.convenience,
-            "\$${state.model?.trainingDetail?.conveiencesFee ?? "0"}",
+            "\$${state.model?.trainingDetail?.enrollmentFee ?? "0"}",
           ),
           SizedBox(height: 20.h),
           Padding(

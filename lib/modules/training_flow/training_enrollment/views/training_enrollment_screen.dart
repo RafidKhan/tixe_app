@@ -97,6 +97,7 @@ class _TrainingEnrollmentScreenState extends State<TrainingEnrollmentScreen> {
                                       state.selectedDateBasedSlot,
                                   selectedDurationBasedSlot:
                                       state.selectedDurationBasedSlot,
+                                  selectedGears: state.selectedGears,
                                 ),
                               );
                             }

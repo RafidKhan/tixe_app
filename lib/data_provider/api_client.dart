@@ -390,7 +390,6 @@ class ApiClient {
       await _handleError(e);
       callback(null, false);
     } catch (e) {
-      'here is: $e'.log();
       await _handleError(e);
       callback(null, false);
     }

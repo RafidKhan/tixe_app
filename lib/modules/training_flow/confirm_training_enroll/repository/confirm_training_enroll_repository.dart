@@ -4,6 +4,7 @@ import 'package:tixe_flutter_app/utils/view_util.dart';
 
 import '../../../../global/model/global_response.dart';
 import '../model/confirm_training_enrollment_request.dart';
+import '../model/confirm_training_gears_request.dart';
 import 'confirm_training_enroll_interface.dart';
 
 class ConfirmTrainingEnrollRepository
@@ -32,6 +33,22 @@ class ConfirmTrainingEnrollRepository
     required Function(GlobalResponse? response, bool isSuccess) callback,
   }) async {
     await _api.confirmEnrollment(
+      params: params.toJson(),
+      callback: (response, success) {
+        callback(
+          success ? GlobalResponse.fromJson(response?.data) : null,
+          success,
+        );
+      },
+    );
+  }
+
+  @override
+  Future<void> setTrainingGears({
+    required SetTrainingGearsRequest params,
+    required Function(GlobalResponse? response, bool isSuccess) callback,
+  }) async {
+    await _api.setTrainingGears(
       params: params.toJson(),
       callback: (response, success) {
         callback(

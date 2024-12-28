@@ -33,4 +33,16 @@ class ConfirmTrainingEnrollApi {
       callback: callback,
     );
   }
+
+  Future<void> setTrainingGears({
+    required Map<String, dynamic> params,
+    required Function(Response? response, bool isSuccess) callback,
+  }) async {
+    await _apiClient.request(
+      url: AppUrl.setTrainingGears.url,
+      method: Method.POST,
+      params: params,
+      callback: callback,
+    );
+  }
 }

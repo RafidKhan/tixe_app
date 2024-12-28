@@ -9,7 +9,9 @@ import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 
 import '../../../../utils/enum.dart';
+import '../../training_gears_checklist/model/custom_gear_data.dart';
 import '../model/confirm_training_enrollment_nav_model.dart';
+import '../model/confirm_training_gears_request.dart';
 import '../repository/confirm_training_enroll_interface.dart';
 import '../repository/confirm_training_enroll_repository.dart';
 
@@ -31,6 +33,50 @@ class ConfirmTrainingEnrollController
 
   void setModel(ConfirmTrainingEnrollmentNavModel model) {
     state = state.copyWith(model: model);
+  }
+
+  int enrollmentId = 0;
+
+  Future<void> setTrainingGears() async {
+    final details = state.model?.trainingDetail;
+    final gears = state.model?.selectedGears ?? [];
+    final List<GearRequestData> gearsData = [];
+
+    for (var e in gears) {
+      if (e.selection != null && e.selection != GearSelection.GotIt) {
+        String buyOrRent = "";
+        if (e.selection == GearSelection.Buy) {
+          buyOrRent = "buy";
+        } else if (e.selection == GearSelection.Rent) {
+          buyOrRent = "rent";
+        }
+        gearsData.add(
+          GearRequestData(
+            gearsId: e.id,
+            buyOrRent: buyOrRent,
+          ),
+        );
+      }
+    }
+
+    final params = SetTrainingGearsRequest(
+      trainingServiceId: details?.id,
+      enrollmentId: enrollmentId,
+      data: gearsData,
+    );
+
+    ViewUtil.showLoaderPage();
+    await _confirmtrainingenrollRepository.setTrainingGears(
+      params: params,
+      callback: (response, isSuccess) {
+        ViewUtil.hideLoader();
+        if (isSuccess) {
+          Future.delayed(const Duration(milliseconds: 200), () {
+            confirmEnrollment();
+          });
+        }
+      },
+    );
   }
 
   Future<void> setTimeSchedule() async {
@@ -82,7 +128,7 @@ class ConfirmTrainingEnrollController
         ViewUtil.hideLoader();
         if (isSuccess) {
           Future.delayed(const Duration(milliseconds: 200), () {
-            confirmEnrollment();
+            setTrainingGears();
           });
         }
       },
@@ -95,7 +141,7 @@ class ConfirmTrainingEnrollController
     ViewUtil.showLoaderPage();
     await _confirmtrainingenrollRepository.confirmEnrollment(
       params: ConfirmTrainingEnrollmentRequest(
-        enrollmentId: details?.id,
+        enrollmentId: enrollmentId,
         trainingFee: num.tryParse(details?.enrollmentFee ?? "0"),
         gearsCost: num.tryParse(state.model?.gearsFee ?? "0"),
         conveiences: num.tryParse(details?.conveiencesFee ?? "0"),
