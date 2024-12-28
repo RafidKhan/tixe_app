@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tixe_flutter_app/data_provider/api_client.dart';
 import 'package:tixe_flutter_app/modules/training_flow/confirm_training_enroll/controller/state/confirm_training_enroll_state.dart';
@@ -127,6 +129,7 @@ class ConfirmTrainingEnrollController
       callback: (response, isSuccess) {
         ViewUtil.hideLoader();
         if (isSuccess) {
+          enrollmentId = response?.data?.id ?? 0;
           Future.delayed(const Duration(milliseconds: 200), () {
             setTrainingGears();
           });

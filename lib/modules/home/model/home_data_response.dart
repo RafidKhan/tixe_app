@@ -83,6 +83,7 @@ class HomeDataItem {
   String? description;
   String? image;
   String? enrollmentFee;
+  String? scheduleType;
 
   HomeDataItem({
     this.id,
@@ -91,6 +92,7 @@ class HomeDataItem {
     this.description,
     this.image,
     this.enrollmentFee,
+    this.scheduleType,
   });
 
   factory HomeDataItem.fromJson(Map<String, dynamic> json) => HomeDataItem(
@@ -100,6 +102,7 @@ class HomeDataItem {
         description: json["description"],
         image: json["image"],
         enrollmentFee: json["enrollment_fee"],
+        scheduleType: json["schedule_type"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -109,5 +112,6 @@ class HomeDataItem {
         "description": description,
         "image": image,
         "enrollment_fee": enrollmentFee,
+        "schedule_type": scheduleType,
       };
 }

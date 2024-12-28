@@ -5,6 +5,7 @@ import 'package:tixe_flutter_app/utils/view_util.dart';
 import '../../../../global/model/global_response.dart';
 import '../model/confirm_training_enrollment_request.dart';
 import '../model/confirm_training_gears_request.dart';
+import '../model/set_time_schedule_response.dart';
 import 'confirm_training_enroll_interface.dart';
 
 class ConfirmTrainingEnrollRepository
@@ -14,13 +15,13 @@ class ConfirmTrainingEnrollRepository
   @override
   Future<void> setTimeSchedule({
     required TimeScheduleRequest params,
-    required Function(GlobalResponse? response, bool isSuccess) callback,
+    required Function(SetTimeScheduleResponse? response, bool isSuccess) callback,
   }) async {
     await _api.setTimeSchedule(
       params: params.toJson(),
       callback: (response, success) {
         callback(
-          success ? GlobalResponse.fromJson(response?.data) : null,
+          success ? SetTimeScheduleResponse.fromJson(response?.data) : null,
           success,
         );
       },
