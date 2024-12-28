@@ -69,6 +69,7 @@ class PrefHelper {
   }
 
   static bool getLoginStatus() {
-    return _prefsInstance?.getBool(AppConstant.TOKEN.key) ?? false;
+    return ((_prefsInstance?.getString(AppConstant.TOKEN.key)) ?? "")
+        .isNotEmpty;
   }
 }

@@ -5,6 +5,7 @@ import 'package:tixe_flutter_app/global/widget/global_chip_widget.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training_enrollment/controller/training_enrollment_controller.dart';
+import 'package:tixe_flutter_app/modules/training_flow/training_gears_checklist/model/training_gears_checklist_nav_model.dart';
 import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
@@ -15,8 +16,8 @@ class TrainingEnrollmentGearChecklist extends ConsumerWidget {
   const TrainingEnrollmentGearChecklist({super.key});
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
-     final state = ref.watch(trainingEnrollmentController);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(trainingEnrollmentController);
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.w),
       width: context.width,
@@ -59,7 +60,8 @@ class TrainingEnrollmentGearChecklist extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     GlobalText(
-                      str: "0/${state.model?.trainingDetail?.gearsEquipments?.length} ${context.loc.gears}",
+                      str:
+                          "0/${state.model?.trainingDetail?.gearsEquipments?.length} ${context.loc.gears}",
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                       color: KColor.white.color,
@@ -77,9 +79,13 @@ class TrainingEnrollmentGearChecklist extends ConsumerWidget {
                 GlobalChipWidget(
                   title: context.loc.check_now,
                   onTap: () {
-                    // Navigation.push(
-                    //   appRoutes: AppRoutes.trainingGearsChecklist,
-                    // );
+                    Navigation.push(
+                      appRoutes: AppRoutes.trainingGearsChecklist,
+                      arguments: TrainingGearsChecklistNavModel(
+                        trainingDetail: state.model?.trainingDetail,
+                        reviewStatistics: state.model?.reviewStatistics,
+                      ),
+                    );
                   },
                 ),
               ],

@@ -104,8 +104,8 @@ class Navigation {
   }
 
   //Remove single page from stack
-  static void pop() {
-    return Navigator.pop(Navigation.key.currentContext!);
+  static void pop({Object? result}) {
+    return Navigator.pop(Navigation.key.currentContext!,result);
   }
 }
 

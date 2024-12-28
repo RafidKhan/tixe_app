@@ -10,10 +10,11 @@ class TrainingGearsChecklistApi {
   TrainingGearsChecklistApi();
 
   Future<void> getGears({
+    required String trainingId,
     required Function(Response? response, bool isSuccess) callback,
   }) async {
     await _apiClient.request(
-      url: AppUrl.gears.url,
+      url: AppUrl.trainingGears.url.replaceAll("{TRAINING_ID}", trainingId),
       method: Method.GET,
       callback: callback,
     );

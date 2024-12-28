@@ -13,7 +13,7 @@ enum AppUrl {
   socialLogin,
   homeData,
   trainingDetails,
-  gears,
+  trainingGears,
   setTrainingTimeSchedule,
   confirmTrainingEnroll,
 }
@@ -68,8 +68,8 @@ extension AppUrlExtention on AppUrl {
         return "home?page_size=15&page={PAGE}";
       case AppUrl.trainingDetails:
         return "training-services/{ID}";
-      case AppUrl.gears:
-        return "gears";
+      case AppUrl.trainingGears:
+        return "training-services/{TRAINING_ID}/gears";
       case AppUrl.setTrainingTimeSchedule:
         return "training-services/enrollment/set-time-schedule";
       case AppUrl.confirmTrainingEnroll:

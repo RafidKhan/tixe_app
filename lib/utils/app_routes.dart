@@ -6,6 +6,7 @@ import 'package:tixe_flutter_app/modules/auth/verify_email/views/verify_email_sc
 import 'package:tixe_flutter_app/modules/splash/views/splash_screen.dart';
 import 'package:tixe_flutter_app/modules/training_flow/confirm_training_enroll/model/confirm_training_enrollment_nav_model.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training_details/model/training_details_nav_model.dart';
+import 'package:tixe_flutter_app/modules/training_flow/training_gears_checklist/model/training_gears_checklist_nav_model.dart';
 
 import '../modules/auth/fitness_details/views/fitness_details_screen.dart';
 import '../modules/dashboard/views/dashboard_screen.dart';
@@ -43,7 +44,7 @@ extension AppRoutesExtention on AppRoutes {
           model: arguments as ConfirmTrainingEnrollmentNavModel,
         );
       case AppRoutes.trainingGearsChecklist:
-        return const TrainingGearsChecklistScreen();
+        return  TrainingGearsChecklistScreen(model: arguments as TrainingGearsChecklistNavModel,);
       case AppRoutes.trainingEnrollment:
         return TrainingEnrollmentScreen(
           model: arguments as TrainingEnrollmentNavModel,

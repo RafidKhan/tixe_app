@@ -74,5 +74,8 @@
   "payment_method": "Payment Method",
   "stripe": "Stripe",
   "loading_data": "Loading Data",
-  "no_data_found": "No data found"
+  "no_data_found": "No data found",
+  "i_got_it": "I got it",
+  "buy": "Buy",
+  "rent": "Rent"
 }

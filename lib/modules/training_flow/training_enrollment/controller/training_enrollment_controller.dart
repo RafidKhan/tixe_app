@@ -52,12 +52,11 @@ class TrainingEnrollmentController
     try {
       final trainingFee =
           num.parse(state.model?.trainingDetail?.enrollmentFee ?? "0");
-      'here is: $trainingFee'.log();
       final convenienceFee =
           num.parse(state.model?.trainingDetail?.conveiencesFee ?? "0");
 
-      final num totalAmount = trainingFee + convenienceFee;
-      state = state.copyWith(totalAmount: totalAmount.toString());
+      final totalAmount = (trainingFee + convenienceFee).toStringAsFixed(2);
+      state = state.copyWith(totalAmount: totalAmount);
     } catch (e) {
       state = state.copyWith(totalAmount: "0");
     }
