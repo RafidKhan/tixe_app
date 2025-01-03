@@ -22,7 +22,7 @@ class TrainingDetailResponse {
 }
 
 class Data {
-  List<TrainingDetail>? trainingService;
+  TrainingDetail? trainingService;
   ReviewStatistics? reviewStatistics;
 
   Data({
@@ -32,18 +32,15 @@ class Data {
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         trainingService: json["training_service"] == null
-            ? []
-            : List<TrainingDetail>.from(json["training_service"]!
-                .map((x) => TrainingDetail.fromJson(x))),
+            ? null
+            : TrainingDetail.fromJson(json["training_service"]),
         reviewStatistics: json["review_statistics"] == null
             ? null
             : ReviewStatistics.fromJson(json["review_statistics"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "training_service": trainingService == null
-            ? []
-            : List<dynamic>.from(trainingService!.map((x) => x.toJson())),
+        "training_service": trainingService?.toJson(),
         "review_statistics": reviewStatistics?.toJson(),
       };
 }

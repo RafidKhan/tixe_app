@@ -45,7 +45,7 @@ class TrainingDetailsController extends StateNotifier<TrainingDetailsState> {
       callback: (response, isSuccess) {
         state = state.copyWith(
           isLoading: false,
-          trainingDetail: response?.data?.trainingService?.firstOrNull,
+          trainingDetail: response?.data?.trainingService,
           reviewStatistics: response?.data?.reviewStatistics,
         );
         setScheduleType();

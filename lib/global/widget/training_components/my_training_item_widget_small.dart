@@ -4,11 +4,11 @@ import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 
-class MyTrainingItemSmall extends StatelessWidget {
+class MyTrainingItemWidgetSmall extends StatelessWidget {
   final String image;
   final String title;
 
-  const MyTrainingItemSmall({
+  const MyTrainingItemWidgetSmall({
     super.key,
     required this.image,
     required this.title,
