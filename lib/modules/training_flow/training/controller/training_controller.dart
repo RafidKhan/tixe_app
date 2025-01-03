@@ -12,7 +12,6 @@ final trainingController =
 class TrainingController extends StateNotifier<TrainingState> {
   final ITrainingRepository _trainingRepository = TrainingRepository();
 
-
   TrainingController()
       : super(
           TrainingState(
@@ -32,8 +31,6 @@ class TrainingController extends StateNotifier<TrainingState> {
     );
   }
 
-
-
   Future<void> callApis() async {
     await getTrainings();
     await getMyTrainings();
@@ -43,9 +40,11 @@ class TrainingController extends StateNotifier<TrainingState> {
     state = state.copyWith(isLoadingMyTrainings: true);
     await _trainingRepository.getMyTrainings(
       callback: (response, isSuccess) {
+        final trainings = (response?.data?.services ?? []);
         state = state.copyWith(
           isLoadingMyTrainings: false,
-          myTrainings: response?.data?.services ?? [],
+          myTrainings:
+              trainings.length >= 5 ? trainings.sublist(0, 5) : trainings,
         );
       },
     );
