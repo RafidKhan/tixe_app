@@ -47,7 +47,7 @@ class HomeController extends StateNotifier<HomeState> {
       isLoadingMore: false,
       homeDataList: [],
       page: 1,
-      totalDataSize: 1,
+      totalDataSize: 0,
     );
   }
 
