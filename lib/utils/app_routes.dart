@@ -1,3 +1,5 @@
+import 'package:tixe_flutter_app/modules/workout_flow/workout_details/model/workout_details_nav_model.dart';
+import 'package:tixe_flutter_app/modules/workout_flow/workout_details/views/workout_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/views/personal_details_screen.dart';
 import 'package:tixe_flutter_app/modules/auth/sign_in/views/sign_in_screen.dart';
@@ -24,6 +26,7 @@ import '../modules/training_flow/training_gears_checklist/views/training_gears_c
 
 enum AppRoutes {
   splash,
+  workoutDetails,
   workout,
   dashboard,
   confirmTrainingEnroll,
@@ -44,6 +47,10 @@ enum AppRoutes {
 extension AppRoutesExtention on AppRoutes {
   Widget buildWidget<T extends Object>({T? arguments}) {
     switch (this) {
+      case AppRoutes.workoutDetails:
+        return WorkoutDetailsScreen(
+          navModel: arguments as WorkoutDetailsNavModel,
+        );
       case AppRoutes.workout:
         return const WorkoutScreen();
       case AppRoutes.splash:

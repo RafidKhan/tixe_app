@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
+import 'package:tixe_flutter_app/modules/workout_flow/workout_details/model/workout_details_nav_model.dart';
+import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
+import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
@@ -40,12 +43,12 @@ class WorkoutItemWidget extends StatelessWidget {
       highlightColor: KColor.transparent.color,
       onTap: () {
         if (PrefHelper.getLoginStatus()) {
-          // Navigation.push(
-          //   appRoutes: AppRoutes.trainingDetails,
-          //   arguments: TrainingDetailsNavModel(
-          //     trainingId: id,
-          //   ),
-          // );
+          Navigation.push(
+            appRoutes: AppRoutes.workoutDetails,
+            arguments: WorkoutDetailsNavModel(
+              id: id,
+            ),
+          );
         } else {}
       },
       child: Container(

@@ -6,6 +6,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart'
     show AppLocalizations;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
 
 //import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '/constant/constant_key.dart';
@@ -251,6 +253,29 @@ extension FocusExt on BuildContext {
 
 extension FileExt on File {
   String get fileName => path.split('/').last;
+}
+
+extension FileExtention on String {
+  Future<File?> getThumbnailFromVideo({required int maxHeight}) async {
+    try {
+      final fileName = await VideoThumbnail.thumbnailFile(
+        video: this,
+        thumbnailPath: (await getTemporaryDirectory()).path,
+        imageFormat: ImageFormat.JPEG,
+        maxHeight: maxHeight,
+        quality: 75,
+      );
+      if (fileName != null) {
+        if (await File(fileName).exists()) {
+          return File(fileName);
+        }
+      }
+
+      return null;
+    } catch (e) {
+      return null;
+    }
+  }
 }
 
 extension ServiceTypeExtention on String {

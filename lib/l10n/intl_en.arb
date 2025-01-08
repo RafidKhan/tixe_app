@@ -84,5 +84,8 @@
   "workouts": "Workouts",
   "workout": "Workout",
   "free": "Free",
-  "minute": "Minute"
+  "minute": "Minute",
+  "videos": "Videos",
+  "instructions": "Instructions",
+  "add_to_workout_routine": "Add to Workout Routine"
 }
