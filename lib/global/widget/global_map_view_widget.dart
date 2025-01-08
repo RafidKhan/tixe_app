@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tixe_flutter_app/global/widget/global_circular_loader.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 
 class GlobalMapViewWidget extends StatelessWidget {

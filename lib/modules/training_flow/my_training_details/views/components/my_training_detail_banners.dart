@@ -6,14 +6,14 @@ import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 
-import '../../controller/training_details_controller.dart';
+import '../../controller/my_training_details_controller.dart';
 
-class TrainingDetailBanners extends ConsumerWidget {
-  const TrainingDetailBanners({super.key});
+class MyTrainingDetailBanners extends ConsumerWidget {
+  const MyTrainingDetailBanners({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(trainingDetailsController);
+    final state = ref.watch(myTrainingDetailsController);
 
     final trainingDetail = state.trainingDetail;
 

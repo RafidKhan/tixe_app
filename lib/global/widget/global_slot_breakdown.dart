@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/model/global_slot_breakdown_model.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
+
 import 'global_text.dart';
 
 class GlobalSlotBreakdown extends StatelessWidget {

@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:talker_dio_logger/talker_dio_logger_interceptor.dart';
+import 'package:talker_dio_logger/talker_dio_logger_settings.dart';
 import 'package:tixe_flutter_app/constant/app_url.dart';
 import 'package:tixe_flutter_app/constant/constant_key.dart';
 import 'package:tixe_flutter_app/data_provider/pref_helper.dart';
@@ -10,8 +12,6 @@ import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/network_connection.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
-import 'package:talker_dio_logger/talker_dio_logger_interceptor.dart';
-import 'package:talker_dio_logger/talker_dio_logger_settings.dart';
 
 import '../global/model/global_response.dart';
 
@@ -215,14 +215,14 @@ class ApiClient {
           contentType ?? AppConstant.APPLICATION_JSON.key,
       HttpHeaders.authorizationHeader:
           "${AppConstant.BEARER.key} ${PrefHelper.getString(AppConstant.TOKEN.key)}",
-      AppConstant.APP_VERSION.key:
-          PrefHelper.getString(AppConstant.APP_VERSION.key),
-      AppConstant.BUILD_NUMBER.key:
-          PrefHelper.getString(AppConstant.BUILD_NUMBER.key),
-      AppConstant.DEVICE_OS.key: deviseOs,
-      AppConstant.LANGUAGE.key: PrefHelper.getLanguage() == 1
-          ? AppConstant.EN.key
-          : AppConstant.BN.key,
+      // AppConstant.APP_VERSION.key:
+      //     PrefHelper.getString(AppConstant.APP_VERSION.key),
+      // AppConstant.BUILD_NUMBER.key:
+      //     PrefHelper.getString(AppConstant.BUILD_NUMBER.key),
+      // AppConstant.DEVICE_OS.key: deviseOs,
+      // AppConstant.LANGUAGE.key: PrefHelper.getLanguage() == 1
+      //     ? AppConstant.EN.key
+      //     : AppConstant.BN.key,
     };
     if (extraHeader != null) {
       headers.addAll(extraHeader);

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training/controller/training_controller.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
+
 import '../../../../global/widget/global_circular_loader.dart';
 import '../../../../global/widget/training_components/training_item_widget.dart';
 import '../../../../utils/styles/k_colors.dart';

@@ -1,5 +1,4 @@
 import 'package:country_state_city/utils/utils.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:tixe_flutter_app/global/model/global_option_item.dart';

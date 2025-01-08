@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training_gears_checklist/model/training_gears_checklist_nav_model.dart';
-import 'package:tixe_flutter_app/modules/training_flow/training_gears_checklist/views/training_gears_checklist_screen.dart';
 
 import '../../model/custom_gear_data.dart';
 

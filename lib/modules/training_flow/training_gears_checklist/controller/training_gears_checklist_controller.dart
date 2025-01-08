@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training_gears_checklist/controller/state/training_gears_checklist_state.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training_gears_checklist/model/custom_gear_data.dart';
-import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 
 import '../model/training_gears_checklist_nav_model.dart';

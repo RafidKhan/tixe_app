@@ -5,6 +5,8 @@ import 'package:tixe_flutter_app/modules/auth/sign_up/views/sign_up_screen.dart'
 import 'package:tixe_flutter_app/modules/auth/verify_email/views/verify_email_screen.dart';
 import 'package:tixe_flutter_app/modules/splash/views/splash_screen.dart';
 import 'package:tixe_flutter_app/modules/training_flow/confirm_training_enroll/model/confirm_training_enrollment_nav_model.dart';
+import 'package:tixe_flutter_app/modules/training_flow/my_training_details/views/my_training_details_screen.dart';
+import 'package:tixe_flutter_app/modules/training_flow/training/model/my_trainings_response.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training/views/components/my_trainings/my_trainings_screen.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training_details/model/training_details_nav_model.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training_gears_checklist/model/training_gears_checklist_nav_model.dart';
@@ -34,6 +36,7 @@ enum AppRoutes {
   verifyEmail,
   personalDetails,
   myTrainings,
+  myTrainingDetails,
 }
 
 extension AppRoutesExtention on AppRoutes {
@@ -82,6 +85,8 @@ extension AppRoutesExtention on AppRoutes {
         );
       case AppRoutes.myTrainings:
         return const MyTrainingsScreen();
+      case AppRoutes.myTrainingDetails:
+        return MyTrainingDetailsScreen(model: arguments as MyTrainingData);
     }
   }
 }

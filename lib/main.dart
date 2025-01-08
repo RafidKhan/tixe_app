@@ -1,13 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 //localization
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tixe_flutter_app/constant/app_url.dart';
-import 'package:tixe_flutter_app/constant/constant_key.dart';
 import 'package:tixe_flutter_app/data_provider/pref_helper.dart';
 import 'package:tixe_flutter_app/modules/dashboard/views/dashboard_screen.dart';
 import 'package:tixe_flutter_app/modules/splash/views/splash_screen.dart';
@@ -17,7 +16,6 @@ import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/network_connection.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
-import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 void main() async {

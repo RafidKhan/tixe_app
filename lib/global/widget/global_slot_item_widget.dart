@@ -6,9 +6,10 @@ import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
 class GlobalSlotItemWidget extends StatelessWidget {
+  final EdgeInsets? margin;
   final bool isSelected;
   final bool showSelectedIcon;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final String startDayNumber;
   final String startDayName;
   final String endDayNumber;
@@ -17,6 +18,7 @@ class GlobalSlotItemWidget extends StatelessWidget {
 
   const GlobalSlotItemWidget({
     super.key,
+    this.margin,
     required this.isSelected,
     required this.showSelectedIcon,
     required this.onTap,
@@ -35,6 +37,7 @@ class GlobalSlotItemWidget extends StatelessWidget {
       onTap: onTap,
       child: Container(
         height: 90.h,
+        margin: margin,
         decoration: BoxDecoration(
           color: KColor.bodyGradient1.color,
           borderRadius: BorderRadius.circular(10.r),

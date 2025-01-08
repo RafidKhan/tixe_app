@@ -7,9 +7,7 @@ import 'package:tixe_flutter_app/global/widget/global_bottomsheet_textformfield.
 import 'package:tixe_flutter_app/global/widget/global_textformfield.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_scaffold.dart';
 import 'package:tixe_flutter_app/modules/auth/fitness_details/controller/fitness_details_controller.dart';
-import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
-import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 

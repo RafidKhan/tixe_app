@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tixe_flutter_app/data_provider/api_client.dart';
 import 'package:tixe_flutter_app/modules/training_flow/confirm_training_enroll/controller/state/confirm_training_enroll_state.dart';
 import 'package:tixe_flutter_app/modules/training_flow/confirm_training_enroll/model/confirm_training_enrollment_request.dart';
 import 'package:tixe_flutter_app/modules/training_flow/confirm_training_enroll/model/time_schedule_request.dart';

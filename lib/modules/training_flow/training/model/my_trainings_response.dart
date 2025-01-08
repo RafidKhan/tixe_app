@@ -95,6 +95,7 @@ class MyTrainingData {
   String? address;
   String? scheduleType;
   String? discountCode;
+  TimeScheduleData? timeSchedule;
 
   MyTrainingData({
     this.id,
@@ -115,6 +116,7 @@ class MyTrainingData {
     this.address,
     this.scheduleType,
     this.discountCode,
+    this.timeSchedule,
   });
 
   factory MyTrainingData.fromJson(Map<String, dynamic> json) => MyTrainingData(
@@ -144,6 +146,9 @@ class MyTrainingData {
         address: json["address"],
         scheduleType: json["schedule_type"],
         discountCode: json["discount_code"],
+        timeSchedule: json["time_schedule"] == null
+            ? null
+            : TimeScheduleData.fromJson(json["time_schedule"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -171,6 +176,7 @@ class MyTrainingData {
         "address": address,
         "schedule_type": scheduleType,
         "discount_code": discountCode,
+        "time_schedule": timeSchedule?.toJson(),
       };
 }
 
@@ -187,5 +193,58 @@ class GearsEquipment {
 
   Map<String, dynamic> toJson() => {
         "title": title,
+      };
+}
+
+class TimeScheduleData {
+  String? startDate;
+  String? endDate;
+  List<Date>? dates;
+
+  TimeScheduleData({
+    this.startDate,
+    this.endDate,
+    this.dates,
+  });
+
+  factory TimeScheduleData.fromJson(Map<String, dynamic> json) =>
+      TimeScheduleData(
+        startDate: json["start_date"],
+        endDate: json["end_date"],
+        dates: json["dates"] == null
+            ? []
+            : List<Date>.from(json["dates"]!.map((x) => Date.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "start_date": startDate,
+        "end_date": endDate,
+        "dates": dates == null
+            ? []
+            : List<dynamic>.from(dates!.map((x) => x.toJson())),
+      };
+}
+
+class Date {
+  String? date;
+  String? startAt;
+  String? endAt;
+
+  Date({
+    this.date,
+    this.startAt,
+    this.endAt,
+  });
+
+  factory Date.fromJson(Map<String, dynamic> json) => Date(
+        date: json["date"],
+        startAt: json["start_at"],
+        endAt: json["end_at"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "date": date,
+        "start_at": startAt,
+        "end_at": endAt,
       };
 }

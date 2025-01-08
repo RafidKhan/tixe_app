@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../model/home_data_response.dart';
 
 @immutable

@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+
 
 class PersonalDetailsRequestModel {
   final String email;

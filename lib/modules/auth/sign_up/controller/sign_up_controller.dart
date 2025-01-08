@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:tixe_flutter_app/modules/auth/sign_up/controller/state/sign_up_state.dart';
@@ -28,6 +29,11 @@ class SignUpController extends StateNotifier<SignUpState> {
     emailOrPhoneController.addListener(checkButtonStatus);
     passwordController.addListener(checkButtonStatus);
     confirmPasswordController.addListener(checkButtonStatus);
+    if (kDebugMode) {
+      emailOrPhoneController.text = "rafid@gmail.com";
+      passwordController.text = "12345678";
+      confirmPasswordController.text = "12345678";
+    }
   }
 
   void checkButtonStatus() {

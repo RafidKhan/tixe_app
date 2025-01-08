@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training/controller/training_controller.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../../../global/widget/global_circular_loader.dart';
 import '../../../../../../global/widget/training_components/my_training_item_widget_big.dart';
 import 'my_training_header.dart';
@@ -63,11 +64,7 @@ class _MyTrainingsScreenState extends State<MyTrainingsScreen> {
                       itemBuilder: (context, index) {
                         final item = state.myTrainings[index];
                         return MyTrainingItemWidgetBig(
-                          id: item.id,
-                          title: item.title,
-                          image: item.image,
-                          amount: item.enrollmentFee,
-                          shortDescription: item.description,
+                          data: item,
                         );
                       },
                     );

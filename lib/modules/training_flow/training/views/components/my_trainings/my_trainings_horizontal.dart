@@ -59,10 +59,7 @@ class MyTrainingsHorizontal extends ConsumerWidget {
                   state.myTrainings.length >= 5 ? 5 : state.myTrainings.length,
               itemBuilder: (context, index) {
                 final data = state.myTrainings[index];
-                return MyTrainingItemWidgetSmall(
-                  title: data.title ?? "",
-                  image: data.image ?? "",
-                );
+                return MyTrainingItemWidgetSmall(data: data);
               },
               separatorBuilder: (context, index) {
                 return SizedBox(

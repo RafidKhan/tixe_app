@@ -3,7 +3,6 @@ import 'package:tixe_flutter_app/modules/training_flow/training_details/model/tr
 import 'package:tixe_flutter_app/modules/training_flow/training_enrollment/controller/state/training_enrollment_state.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training_enrollment/model/training_enrollment_nav_model.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training_gears_checklist/model/custom_gear_data.dart';
-import 'package:tixe_flutter_app/utils/extension.dart';
 
 import '../repository/training_enrollment_interface.dart';
 import '../repository/training_enrollment_repository.dart';

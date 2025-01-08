@@ -1,9 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 
-import '../../../../constant/app_url.dart';
-import '../model/time_schedule_request.dart';
 import '/data_provider/api_client.dart';
+import '../../../../constant/app_url.dart';
 
 class ConfirmTrainingEnrollApi {
   final ApiClient _apiClient = ApiClient();

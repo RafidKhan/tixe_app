@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tixe_flutter_app/global/model/global_option_item.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottom_button.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training_gears_checklist/controller/training_gears_checklist_controller.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training_gears_checklist/model/training_gears_checklist_nav_model.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
-import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 
 import '../../../../global/widget/gear_components/gear_checklist_item.dart';
 import '../../../../global/widget/scaffold/tixe_main_scaffold.dart';
