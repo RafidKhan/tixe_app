@@ -21,6 +21,7 @@ enum KColor {
   cardGradient2,
   green,
   red,
+  workoutColor,
 }
 
 extension KColorExtention on KColor {
@@ -66,6 +67,8 @@ extension KColorExtention on KColor {
         return const Color(0xff222118);
       case KColor.red:
         return Colors.red;
+      case KColor.workoutColor:
+        return const Color(0xffD8FFBA);
     }
   }
 }

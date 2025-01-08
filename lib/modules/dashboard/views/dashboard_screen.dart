@@ -6,6 +6,7 @@ import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart'
 import 'package:tixe_flutter_app/modules/dashboard/controller/dashboard_controller.dart';
 import 'package:tixe_flutter_app/modules/home/views/home_screen.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training/views/training_screen.dart';
+import 'package:tixe_flutter_app/modules/workout_flow/workout/views/workout_screen.dart';
 import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
@@ -35,7 +36,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     final screens = [
       const HomeScreen(),
       const TrainingScreen(),
-      const SizedBox.shrink(),
+      const WorkoutScreen(),
       Center(
         child: GlobalButton(
           onPressed: () {

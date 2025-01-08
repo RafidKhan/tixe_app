@@ -19,6 +19,7 @@ enum AppUrl {
   setTrainingGears,
   myTrainings,
   trainingsList,
+  workouts,
 }
 
 extension AppUrlExtention on AppUrl {
@@ -83,6 +84,8 @@ extension AppUrlExtention on AppUrl {
         return "enrollment/training-services";
       case AppUrl.trainingsList:
         return "training-services";
+      case AppUrl.workouts:
+        return "workout-services";
     }
   }
 }

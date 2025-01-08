@@ -80,5 +80,9 @@
   "rent": "Rent",
   "my_trainings": "My Trainings",
   "see_all": "See All",
-  "schedule": "Schedule"
+  "schedule": "Schedule",
+  "workouts": "Workouts",
+  "workout": "Workout",
+  "free": "Free",
+  "minute": "Minute"
 }
