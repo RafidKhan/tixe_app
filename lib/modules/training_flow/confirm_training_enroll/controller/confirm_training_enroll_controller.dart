@@ -161,4 +161,17 @@ class ConfirmTrainingEnrollController
       },
     );
   }
+
+  Future<void> verifyTrainingDiscountCode() async {
+    if (state.model?.trainingDetail?.id != null) {}
+
+    ViewUtil.showLoaderPage();
+    await _confirmtrainingenrollRepository.verifyTrainingDiscountCode(
+      code: "",
+      trainingId: state.model?.trainingDetail?.id ?? 0,
+      callback: (response, isSuccess) {
+        ViewUtil.hideLoader();
+      },
+    );
+  }
 }

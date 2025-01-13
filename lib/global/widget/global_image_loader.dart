@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:tixe_flutter_app/global/widget/global_circular_loader.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
-import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
 class GlobalImageLoader extends StatelessWidget {
   const GlobalImageLoader({
@@ -39,9 +38,12 @@ class GlobalImageLoader extends StatelessWidget {
         fit: fit,
         progressIndicatorBuilder: (context, url, downloadProgress) =>
             const GlobalCircularLoader(),
-        errorWidget: (context, url, error) => Icon(
-          Icons.error,
-          color: KColor.red.color,
+        errorWidget: (context, url, error) => Image.asset(
+          defaultPlaceHolder,
+          height: height,
+          width: width,
+          fit: BoxFit.contain,
+          color: color,
         ),
       );
     } else if (imageFor == ImageFor.file) {
@@ -50,9 +52,12 @@ class GlobalImageLoader extends StatelessWidget {
         height: height,
         width: width,
         fit: fit,
-        errorBuilder: (context, exception, stackTrace) =>  Icon(
-          Icons.error,
-          color: KColor.red.color,
+        errorBuilder: (context, exception, stackTrace) => Image.asset(
+          defaultPlaceHolder,
+          height: height,
+          width: width,
+          fit: fit,
+          color: color,
         ),
       );
     } else {
@@ -62,9 +67,12 @@ class GlobalImageLoader extends StatelessWidget {
         width: width,
         fit: fit,
         color: color,
-        errorBuilder: (context, exception, stackTrace) => Icon(
-          Icons.error,
-          color: KColor.red.color,
+        errorBuilder: (context, exception, stackTrace) => Image.asset(
+          defaultPlaceHolder,
+          height: height,
+          width: width,
+          fit: fit,
+          color: color,
         ),
       );
     }

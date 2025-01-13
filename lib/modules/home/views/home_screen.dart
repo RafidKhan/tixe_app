@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_circular_loader.dart';
 import 'package:tixe_flutter_app/global/widget/global_no_data.dart';
+import 'package:tixe_flutter_app/global/widget/workout_components/workout_item_widget.dart';
 import 'package:tixe_flutter_app/modules/home/controller/home_controller.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
@@ -67,6 +68,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                 image: item.image,
                                 amount: item.enrollmentFee,
                                 shortDescription: item.description,
+                              );
+                            }
+                            if (serviceType == ServiceType.Workout) {
+                              return WorkoutItemWidget(
+                                id: item.id,
+                                title: item.title,
+                                image: item.image,
+                                amount: item.enrollmentFee,
+                                shortDescription: item.description,
+                                isFree: item.isPremium != true,
+                                time: item.duration,
+                                calorie: item.calories,
                               );
                             }
 

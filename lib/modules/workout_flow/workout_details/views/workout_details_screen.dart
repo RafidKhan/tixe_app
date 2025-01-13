@@ -11,7 +11,9 @@ import 'package:tixe_flutter_app/modules/workout_flow/workout_details/views/comp
 import 'package:tixe_flutter_app/modules/workout_flow/workout_details/views/components/workout_detail_header.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/workout_details/views/components/workout_gears_and_equipments.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/workout_details/views/components/workout_price_and_details.dart';
+import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
+import 'package:tixe_flutter_app/utils/navigation.dart';
 import '../../../../global/widget/global_divider.dart';
 import 'components/workout_detail_banners.dart';
 
@@ -46,6 +48,8 @@ class _WorkoutDetailsScreenState extends State<WorkoutDetailsScreen> {
     return Consumer(builder: (context, ref, child) {
       final state = ref.watch(workoutDetailsController);
 
+      final bool isPremium = state.workoutService?.isPremium == true;
+
       return TixeMainScaffold(
         hasAppBar: true,
         body: Column(
@@ -79,19 +83,32 @@ class _WorkoutDetailsScreenState extends State<WorkoutDetailsScreen> {
             )
           ],
         ),
-        bottomNavigationBar: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            GlobalButton(
-              margin: EdgeInsets.symmetric(
-                horizontal: 20.w,
-                vertical: 20.h,
-              ),
-              onPressed: () {},
-              buttonText: context.loc.add_to_workout_routine,
-            ),
-          ],
-        ),
+        bottomNavigationBar: state.workoutService != null
+            ? Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  GlobalButton(
+                    margin: EdgeInsets.symmetric(
+                      horizontal: 20.w,
+                      vertical: 20.h,
+                    ),
+                    onPressed: () {
+                      if (isPremium) {
+                        Navigation.push(
+                          appRoutes: AppRoutes.buyWorkout,
+                          arguments: state.workoutService,
+                        );
+                      } else {
+                        ///
+                      }
+                    },
+                    buttonText: isPremium
+                        ? context.loc.buy_workout
+                        : context.loc.add_to_workout_routine,
+                  ),
+                ],
+              )
+            : null,
       );
     });
   }

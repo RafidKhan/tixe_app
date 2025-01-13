@@ -1,3 +1,4 @@
+import 'package:tixe_flutter_app/modules/training_flow/confirm_training_enroll/model/discount_code_verify_response.dart';
 import 'package:tixe_flutter_app/modules/training_flow/confirm_training_enroll/model/time_schedule_request.dart';
 import 'package:tixe_flutter_app/modules/training_flow/confirm_training_enroll/repository/confirm_training_enroll_api.dart';
 
@@ -14,7 +15,8 @@ class ConfirmTrainingEnrollRepository
   @override
   Future<void> setTimeSchedule({
     required TimeScheduleRequest params,
-    required Function(SetTimeScheduleResponse? response, bool isSuccess) callback,
+    required Function(SetTimeScheduleResponse? response, bool isSuccess)
+        callback,
   }) async {
     await _api.setTimeSchedule(
       params: params.toJson(),
@@ -53,6 +55,25 @@ class ConfirmTrainingEnrollRepository
       callback: (response, success) {
         callback(
           success ? GlobalResponse.fromJson(response?.data) : null,
+          success,
+        );
+      },
+    );
+  }
+
+  @override
+  Future<void> verifyTrainingDiscountCode({
+    required String code,
+    required int trainingId,
+    required Function(DiscountCodeVerifyResponse? data, bool isSuccess)
+        callback,
+  }) async {
+    await _api.verifyTrainingDiscountCode(
+      code: code,
+      trainingId: trainingId,
+      callback: (response, success) {
+        callback(
+          success ? DiscountCodeVerifyResponse.fromJson(response?.data) : null,
           success,
         );
       },

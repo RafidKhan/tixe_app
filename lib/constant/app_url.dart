@@ -21,6 +21,7 @@ enum AppUrl {
   trainingsList,
   workouts,
   workoutDetails,
+  verifyTrainingDiscountCode,
 }
 
 extension AppUrlExtention on AppUrl {
@@ -89,6 +90,8 @@ extension AppUrlExtention on AppUrl {
         return "workout-services";
       case AppUrl.workoutDetails:
         return "workout-services/{ID}";
+      case AppUrl.verifyTrainingDiscountCode:
+        return "training-services/enrollment/discount-code-verify";
     }
   }
 }

@@ -280,12 +280,12 @@ extension FileExtention on String {
 
 extension ServiceTypeExtention on String {
   ServiceType serviceType() {
-    switch (this) {
-      case "Training":
+    switch (toLowerCase().trim()) {
+      case "training":
         return ServiceType.Training;
-      case "Workout":
+      case "workout":
         return ServiceType.Workout;
-      case "Fitness":
+      case "fitness":
         return ServiceType.Fitness;
       default:
         return ServiceType.Undefined;

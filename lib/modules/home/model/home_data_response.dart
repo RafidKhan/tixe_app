@@ -84,6 +84,9 @@ class HomeDataItem {
   String? image;
   String? enrollmentFee;
   String? scheduleType;
+  num? calories;
+  String? duration;
+  bool? isPremium;
 
   HomeDataItem({
     this.id,
@@ -93,6 +96,9 @@ class HomeDataItem {
     this.image,
     this.enrollmentFee,
     this.scheduleType,
+    this.calories,
+    this.duration,
+    this.isPremium,
   });
 
   factory HomeDataItem.fromJson(Map<String, dynamic> json) => HomeDataItem(
@@ -103,6 +109,9 @@ class HomeDataItem {
         image: json["image"],
         enrollmentFee: json["enrollment_fee"],
         scheduleType: json["schedule_type"],
+        calories: json["calories"],
+        duration: json["duration"],
+        isPremium: json["is_premium"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -113,5 +122,8 @@ class HomeDataItem {
         "image": image,
         "enrollment_fee": enrollmentFee,
         "schedule_type": scheduleType,
+        "calories": calories,
+        "duration": duration,
+        "is_premium": isPremium,
       };
 }

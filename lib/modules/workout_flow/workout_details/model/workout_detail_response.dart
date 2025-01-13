@@ -48,7 +48,7 @@ class Data {
 }
 
 class WorkoutReviewStatistics {
-  int? averageRating;
+  num? averageRating;
   int? totalReviews;
 
   WorkoutReviewStatistics({

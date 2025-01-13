@@ -44,4 +44,20 @@ class ConfirmTrainingEnrollApi {
       callback: callback,
     );
   }
+
+  Future<void> verifyTrainingDiscountCode({
+    required String code,
+    required int trainingId,
+    required Function(Response? data, bool isSuccess) callback,
+  }) async {
+    await _apiClient.request(
+      url: AppUrl.verifyTrainingDiscountCode.url,
+      params: {
+        "training_service_id": trainingId,
+        "discount_code": code,
+      },
+      method: Method.POST,
+      callback: callback,
+    );
+  }
 }
