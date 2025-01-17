@@ -1,4 +1,5 @@
 import 'package:tixe_flutter_app/modules/workout_flow/buy_workout/views/buy_workout_screen.dart';
+import 'package:tixe_flutter_app/modules/workout_flow/workout/views/components/my_workouts/my_workouts_screen.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/workout_details/model/workout_detail_response.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/workout_details/model/workout_details_nav_model.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/workout_details/views/workout_details_screen.dart';
@@ -45,6 +46,7 @@ enum AppRoutes {
   personalDetails,
   myTrainings,
   myTrainingDetails,
+  myWorkouts,
 }
 
 extension AppRoutesExtention on AppRoutes {
@@ -105,6 +107,8 @@ extension AppRoutesExtention on AppRoutes {
         return const MyTrainingsScreen();
       case AppRoutes.myTrainingDetails:
         return MyTrainingDetailsScreen(model: arguments as MyTrainingData);
+      case AppRoutes.myWorkouts:
+        return const MyWorkoutsScreen();
     }
   }
 }

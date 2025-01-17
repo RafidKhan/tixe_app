@@ -51,8 +51,8 @@ class Data {
 }
 
 class Pagination {
-  int? pageSize;
-  int? page;
+  String? pageSize;
+  String? page;
   int? totalPage;
   int? totalRecords;
 
@@ -95,6 +95,7 @@ class WorkoutData {
   List<String>? galleryVideos;
   String? preRequisitions;
   num? calories;
+  List<Notice>? notices;
   String? enrollmentFee;
   String? convenienceFee;
   dynamic discountCode;
@@ -116,6 +117,7 @@ class WorkoutData {
     this.galleryVideos,
     this.preRequisitions,
     this.calories,
+    this.notices,
     this.enrollmentFee,
     this.convenienceFee,
     this.discountCode,
@@ -142,6 +144,10 @@ class WorkoutData {
             : List<String>.from(json["gallery_videos"]!.map((x) => x)),
         preRequisitions: json["pre_requisitions"],
         calories: json["calories"],
+        notices: json["notices"] == null
+            ? []
+            : List<Notice>.from(
+                json["notices"]!.map((x) => Notice.fromJson(x))),
         enrollmentFee: json["enrollment_fee"],
         convenienceFee: json["convenience_fee"],
         discountCode: json["discount_code"],
@@ -168,8 +174,27 @@ class WorkoutData {
             : List<dynamic>.from(galleryVideos!.map((x) => x)),
         "pre_requisitions": preRequisitions,
         "calories": calories,
+        "notices": notices == null
+            ? []
+            : List<dynamic>.from(notices!.map((x) => x.toJson())),
         "enrollment_fee": enrollmentFee,
         "convenience_fee": convenienceFee,
         "discount_code": discountCode,
+      };
+}
+
+class Notice {
+  String? title;
+
+  Notice({
+    this.title,
+  });
+
+  factory Notice.fromJson(Map<String, dynamic> json) => Notice(
+        title: json["title"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "title": title,
       };
 }

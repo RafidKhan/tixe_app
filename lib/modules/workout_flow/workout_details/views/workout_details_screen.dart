@@ -47,6 +47,7 @@ class _WorkoutDetailsScreenState extends State<WorkoutDetailsScreen> {
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {
       final state = ref.watch(workoutDetailsController);
+      final controller = ref.read(workoutDetailsController.notifier);
 
       final bool isPremium = state.workoutService?.isPremium == true;
 
@@ -99,7 +100,7 @@ class _WorkoutDetailsScreenState extends State<WorkoutDetailsScreen> {
                           arguments: state.workoutService,
                         );
                       } else {
-                        ///
+                        controller.enrollmentFreeWorkout();
                       }
                     },
                     buttonText: isPremium

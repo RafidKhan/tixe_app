@@ -22,6 +22,7 @@ class WorkoutItemWidget extends StatelessWidget {
   final String? image;
   final String? time;
   final num? calorie;
+  final bool isAfterPurchase;
 
   const WorkoutItemWidget({
     super.key,
@@ -33,6 +34,7 @@ class WorkoutItemWidget extends StatelessWidget {
     required this.isFree,
     required this.time,
     required this.calorie,
+    required this.isAfterPurchase,
   });
 
   @override
@@ -43,12 +45,16 @@ class WorkoutItemWidget extends StatelessWidget {
       highlightColor: KColor.transparent.color,
       onTap: () {
         if (PrefHelper.getLoginStatus()) {
-          Navigation.push(
-            appRoutes: AppRoutes.workoutDetails,
-            arguments: WorkoutDetailsNavModel(
-              id: id,
-            ),
-          );
+          if (isAfterPurchase) {
+            ///
+          } else {
+            Navigation.push(
+              appRoutes: AppRoutes.workoutDetails,
+              arguments: WorkoutDetailsNavModel(
+                id: id,
+              ),
+            );
+          }
         } else {}
       },
       child: Container(
@@ -70,27 +76,30 @@ class WorkoutItemWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 20.w),
-              padding: EdgeInsets.symmetric(
-                horizontal: 10.w,
-                vertical: 3.h,
-              ),
-              decoration: BoxDecoration(
-                color: isFree ? KColor.transparent.color : KColor.white.color,
-                borderRadius: BorderRadius.circular(3.r),
-                border: Border.all(
-                  color: isFree ? KColor.white.color : KColor.transparent.color,
+            if (!isAfterPurchase) ...[
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 20.w),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 10.w,
+                  vertical: 3.h,
+                ),
+                decoration: BoxDecoration(
+                  color: isFree ? KColor.transparent.color : KColor.white.color,
+                  borderRadius: BorderRadius.circular(3.r),
+                  border: Border.all(
+                    color:
+                        isFree ? KColor.white.color : KColor.transparent.color,
+                  ),
+                ),
+                child: GlobalText(
+                  str: isFree ? context.loc.free : "\$$amount",
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                  color: isFree ? KColor.white.color : KColor.black.color,
                 ),
               ),
-              child: GlobalText(
-                str: isFree ? context.loc.free : "\$$amount",
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                color: isFree ? KColor.white.color : KColor.black.color,
-              ),
-            ),
-            SizedBox(height: 20.h),
+              SizedBox(height: 20.h),
+            ],
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: GlobalText(

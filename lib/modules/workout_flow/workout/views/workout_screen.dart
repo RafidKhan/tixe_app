@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_circular_loader.dart';
-import 'package:tixe_flutter_app/global/widget/global_no_data.dart';
 import 'package:tixe_flutter_app/global/widget/workout_components/workout_item_widget.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/workout/controller/workout_controller.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/workout/views/components/workout_header.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
+
+import 'components/my_workouts/my_workouts_horizontal.dart';
 
 class WorkoutScreen extends StatefulWidget {
   const WorkoutScreen({super.key});
@@ -34,29 +35,38 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: KColor.transparent.color,
-        body: Consumer(builder: (context, ref, child) {
-          final state = ref.watch(workoutController);
+        body: Stack(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: Column(
+                children: [
+                  const WorkoutHeader(),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      controller: controller.scrollController,
+                      child: Column(
+                        children: [
+                          const MyWorkoutsHorizontal(),
+                          Consumer(builder: (context, ref, child) {
+                            final state = ref.watch(workoutController);
+                            if (state.isLoading || state.isLoadingMyWorkouts) {
+                              return const SizedBox.shrink();
+                            }
 
-          return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: Column(
-              children: [
-                const WorkoutHeader(),
-                Expanded(
-                  child: state.isLoading
-                      ? const GlobalCircularLoader()
-                      : state.workoutDataList.isEmpty
-                          ? const GlobalNoData()
-                          : ListView.separated(
-                              controller: controller.scrollController,
+                            return ListView.separated(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
                               itemCount: state.workoutDataList.length,
-                              padding: EdgeInsets.only(top: 30.h),
+                              padding: EdgeInsets.only(
+                                top: 30.h,
+                                bottom: 30.h,
+                              ),
                               separatorBuilder: (context, index) {
                                 return SizedBox(height: 20.h);
                               },
                               itemBuilder: (context, index) {
                                 final item = state.workoutDataList[index];
-
                                 return WorkoutItemWidget(
                                   id: item.id,
                                   title: item.title,
@@ -66,20 +76,102 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                                   isFree: item.isPremium != true,
                                   time: item.duration,
                                   calorie: item.calories,
+                                  isAfterPurchase: false,
                                 );
                               },
-                            ),
-                ),
-                if (state.isLoadingMore)
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10.h),
-                    child: const GlobalCircularLoader(),
-                  )
-              ],
+                            );
+                          }),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          );
-        }),
+            Consumer(
+              builder: (context, ref, child) {
+                final state = ref.watch(workoutController);
+                if (state.isLoading ||
+                    state.isLoadingMyWorkouts ||
+                    state.isLoadingMore) {
+                  return const GlobalCircularLoader();
+                }
+                return const SizedBox.shrink();
+              },
+            ),
+          ],
+        ),
       ),
     );
+    // return SafeArea(
+    //   child: Scaffold(
+    //     backgroundColor: KColor.transparent.color,
+    //     body: Consumer(builder: (context, ref, child) {
+    //       final state = ref.watch(workoutController);
+    //
+    //       return Stack(
+    //         children: [
+    //           Padding(
+    //             padding: EdgeInsets.symmetric(horizontal: 20.w),
+    //             child: Column(
+    //               children: [
+    //                 const WorkoutHeader(),
+    //                 Expanded(
+    //                   child: SingleChildScrollView(
+    //                     child: Column(
+    //                       children: [
+    //                         const MyWorkoutsHorizontal(),
+    //                         Expanded(
+    //                           child: state.isLoading || state.isLoadingMyWorkouts
+    //                               ? const SizedBox.shrink()
+    //                               : state.workoutDataList.isEmpty
+    //                               ? const GlobalNoData()
+    //                               : ListView.separated(
+    //                             shrinkWrap: true,
+    //                             physics:
+    //                             const NeverScrollableScrollPhysics(),
+    //                             controller: controller.scrollController,
+    //                             itemCount: state.workoutDataList.length,
+    //                             padding: EdgeInsets.only(top: 30.h),
+    //                             separatorBuilder: (context, index) {
+    //                               return SizedBox(height: 20.h);
+    //                             },
+    //                             itemBuilder: (context, index) {
+    //                               final item =
+    //                               state.workoutDataList[index];
+    //
+    //                               return WorkoutItemWidget(
+    //                                 id: item.id,
+    //                                 title: item.title,
+    //                                 image: item.image,
+    //                                 amount: item.enrollmentFee,
+    //                                 shortDescription: item.description,
+    //                                 isFree: item.isPremium != true,
+    //                                 time: item.duration,
+    //                                 calorie: item.calories,
+    //                               );
+    //                             },
+    //                           ),
+    //                         ),
+    //                         if (state.isLoadingMore)
+    //                           Padding(
+    //                             padding: EdgeInsets.symmetric(vertical: 10.h),
+    //                             child: const GlobalCircularLoader(),
+    //                           )
+    //                       ],
+    //                     ),
+    //                   ),
+    //                 )
+    //               ],
+    //             ),
+    //           ),
+    //           state.isLoading || state.isLoadingMyWorkouts
+    //               ? const GlobalCircularLoader()
+    //               : const SizedBox.shrink(),
+    //         ],
+    //       );
+    //     }),
+    //   ),
+    // );
   }
 }

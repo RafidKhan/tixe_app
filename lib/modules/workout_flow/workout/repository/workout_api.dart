@@ -22,6 +22,21 @@ class WorkoutApi {
       callback: callback,
     );
   }
+
+  Future<void> getMyWorkouts({
+    required int page,
+    required Function(Response? response, bool isSuccess) callback,
+  }) async {
+    final url = AppUrl.myWorkouts.url.replaceAll(
+      "{PAGE}",
+      page.toString(),
+    );
+    await _apiClient.request(
+      url: url,
+      method: Method.GET,
+      callback: callback,
+    );
+  }
  
 }
 

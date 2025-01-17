@@ -80,6 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 isFree: item.isPremium != true,
                                 time: item.duration,
                                 calorie: item.calories,
+                                isAfterPurchase: false,
                               );
                             }
 

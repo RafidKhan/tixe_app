@@ -4,7 +4,11 @@ import 'package:tixe_flutter_app/modules/workout_flow/workout_details/repository
 import 'package:tixe_flutter_app/modules/workout_flow/workout_details/repository/workout_details_repository.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
+import 'package:tixe_flutter_app/utils/view_util.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
+import '../../../../utils/app_routes.dart';
+import '../../../../utils/navigation.dart';
+import '../model/workout_enrollment_request.dart';
 import 'state/workout_details_state.dart';
 
 final workoutDetailsController = StateNotifierProvider.autoDispose<
@@ -44,6 +48,31 @@ class WorkoutDetailsController extends StateNotifier<WorkoutDetailsState> {
           state = state.copyWith(
               videoThumbnail: await (state.workoutService?.video ?? "")
                   .getThumbnailFromVideo(maxHeight: 200));
+        }
+      },
+    );
+  }
+
+  Future<void> enrollmentFreeWorkout() async {
+    ViewUtil.showLoaderPage();
+    final params = WorkoutEnrollmentRequest(
+      workoutServiceId: state.id,
+      paymentId: null,
+      trainingFee: null,
+      conveiences: null,
+      discountAmount: null,
+      grandTotal: null,
+    );
+    await _workoutRepository.enrollFreeWorkout(
+      params: params,
+      callback: (response, isSuccess) async {
+        ViewUtil.hideLoader();
+        final message = response?.message;
+        if (message != null) {
+          ViewUtil.snackBar(message);
+        }
+        if (isSuccess) {
+          Navigation.pushAndRemoveUntil(appRoutes: AppRoutes.dashboard);
         }
       },
     );

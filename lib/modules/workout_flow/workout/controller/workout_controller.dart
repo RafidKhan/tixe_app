@@ -12,21 +12,28 @@ class WorkoutController extends StateNotifier<WorkoutState> {
   final IWorkoutRepository _workoutRepository = WorkoutRepository();
 
   final ScrollController scrollController = ScrollController();
+  final ScrollController scrollControllerMyWorkouts = ScrollController();
 
   WorkoutController()
       : super(
           const WorkoutState(
             isLoading: false,
             isLoadingMore: false,
+            isLoadingMoreMyWorkouts: false,
+            isLoadingMyWorkouts: false,
             workoutDataList: [],
+            myWorkouts: [],
             page: 1,
             totalDataSize: 0,
+            myWorkoutPage: 1,
+            totalMyWorkoutDataSize: 0,
           ),
         );
 
   Future<void> callApi() async {
     initialize();
-    await loadHomeData();
+    await loadWorkouts();
+    await getMyWorkouts();
     listenToPagination();
   }
 
@@ -41,6 +48,21 @@ class WorkoutController extends StateNotifier<WorkoutState> {
     });
   }
 
+  void listenToScrollMyWorkouts() {
+    scrollControllerMyWorkouts.addListener(() {
+      if (scrollControllerMyWorkouts.position.pixels ==
+          scrollControllerMyWorkouts.position.maxScrollExtent) {
+        if (state.myWorkouts.length < state.totalMyWorkoutDataSize) {
+          loadMoreMyWorkouts();
+        }
+      }
+    });
+  }
+
+  void removeScrollListenerMyWorkouts() {
+    scrollControllerMyWorkouts.removeListener(() {});
+  }
+
   void initialize() {
     state = state.copyWith(
       isLoading: false,
@@ -48,10 +70,12 @@ class WorkoutController extends StateNotifier<WorkoutState> {
       workoutDataList: [],
       page: 1,
       totalDataSize: 0,
+      myWorkoutPage: 1,
+      totalMyWorkoutDataSize: 0,
     );
   }
 
-  Future<void> loadHomeData() async {
+  Future<void> loadWorkouts() async {
     state = state.copyWith(isLoading: true);
     await _workoutRepository.getWorkouts(
       page: state.page,
@@ -80,6 +104,44 @@ class WorkoutController extends StateNotifier<WorkoutState> {
           workoutDataList: newList,
           page: state.page + 1,
         );
+      },
+    );
+  }
+
+  Future<void> getMyWorkouts() async {
+    state = state.copyWith(isLoadingMyWorkouts: true);
+    await _workoutRepository.getMyWorkouts(
+      page: state.myWorkoutPage,
+      callback: (response, isSuccess) {
+        state = state.copyWith(isLoadingMyWorkouts: false);
+
+        if (isSuccess) {
+          state = state.copyWith(
+            myWorkouts: response?.data?.services ?? [],
+            page: state.myWorkoutPage + 1,
+            totalMyWorkoutDataSize:
+                response?.data?.pagination?.totalRecords ?? 0,
+          );
+        }
+      },
+    );
+  }
+
+  Future<void> loadMoreMyWorkouts() async {
+    state = state.copyWith(isLoadingMoreMyWorkouts: true);
+    await _workoutRepository.getMyWorkouts(
+      page: state.myWorkoutPage,
+      callback: (response, isSuccess) {
+        if (isSuccess) {
+          final dataList = response?.data?.services ?? [];
+          final existingList = state.myWorkouts;
+          final newList = existingList + dataList;
+          state = state.copyWith(
+            isLoadingMoreMyWorkouts: false,
+            myWorkouts: newList,
+            myWorkoutPage: state.myWorkoutPage + 1,
+          );
+        }
       },
     );
   }
