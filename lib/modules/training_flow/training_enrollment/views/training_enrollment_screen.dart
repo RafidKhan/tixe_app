@@ -91,7 +91,6 @@ class _TrainingEnrollmentScreenState extends State<TrainingEnrollmentScreen> {
                                   reviewStatistics:
                                       state.model?.reviewStatistics,
                                   gearsFee: "0",
-                                  discountAmount: "0",
                                   totalFee: state.totalAmount,
                                   selectedDateBasedSlot:
                                       state.selectedDateBasedSlot,

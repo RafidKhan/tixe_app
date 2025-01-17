@@ -13,17 +13,20 @@ class ConfirmTrainingEnrollmentFees extends ConsumerWidget {
   const ConfirmTrainingEnrollmentFees({super.key});
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(confirmTrainingEnrollController);
+    final controller = ref.read(confirmTrainingEnrollController.notifier);
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          _buildRow(context.loc.training_fee, "\$${state.model?.trainingDetail?.enrollmentFee ?? "0"}"),
+          _buildRow(context.loc.training_fee,
+              "\$${state.model?.trainingDetail?.enrollmentFee ?? "0"}"),
           _buildRow(context.loc.gears_fee, "\$${state.model?.gearsFee ?? "0"}"),
-          _buildRow(context.loc.convenience, "\$${state.model?.trainingDetail?.conveiencesFee ?? "0"}"),
+          _buildRow(context.loc.convenience,
+              "\$${state.model?.trainingDetail?.conveiencesFee ?? "0"}"),
           GlobalText(
             str: context.loc.discount_code,
             fontSize: 14,
@@ -32,28 +35,33 @@ class ConfirmTrainingEnrollmentFees extends ConsumerWidget {
           ),
           SizedBox(height: 10.h),
           GlobalTextFormfield(
-            //textEditingController: controller.ageController,
+            textEditingController: controller.discountCode,
             suffixIcon: _applyCodeButton(
               context,
-              onTap: () {},
+              onTap: () {
+                controller.verifyTrainingDiscountCode();
+              },
             ),
           ),
           SizedBox(height: 10.h),
-          _buildRow(context.loc.discount, "-\$0"),
+          if (state.discountValue.trim().isNotEmpty)
+            _buildRow(context.loc.discount, "-${state.discountValue}"),
           const GlobalDivider(),
-          GlobalText(
-            str: context.loc.grand_total,
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-            color: KColor.white.color,
-          ),
-          SizedBox(height: 5.h),
-          GlobalText(
-            str: "\$${state.model?.totalFee ?? "0"}",
-            fontSize: 24,
-            fontWeight: FontWeight.w400,
-            color: KColor.white.color,
-          ),
+          if (state.totalValue.trim().isNotEmpty) ...[
+            GlobalText(
+              str: context.loc.grand_total,
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              color: KColor.white.color,
+            ),
+            SizedBox(height: 5.h),
+            GlobalText(
+              str: "\$${state.totalValue ?? "0"}",
+              fontSize: 24,
+              fontWeight: FontWeight.w400,
+              color: KColor.white.color,
+            ),
+          ],
         ],
       ),
     );
@@ -88,7 +96,7 @@ class ConfirmTrainingEnrollmentFees extends ConsumerWidget {
 
   Widget _applyCodeButton(
     BuildContext context, {
-    required VoidCallback onTap,
+    required VoidCallback? onTap,
   }) {
     return Row(
       mainAxisSize: MainAxisSize.min,

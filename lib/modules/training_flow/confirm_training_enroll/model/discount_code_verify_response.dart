@@ -25,7 +25,7 @@ class DiscountCodeVerifyResponse {
 
 class Data {
   int? userId;
-  String? trainingServiceId;
+  int? trainingServiceId;
   dynamic gearId;
   int? discountCodeId;
   String? discountCode;

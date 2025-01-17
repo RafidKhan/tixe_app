@@ -32,6 +32,8 @@ enum AppConstant {
   EN,
   BN,
   FONTFAMILY,
+  FLAT_DISCOUNT,
+  PERCENTAGE_DISCOUNT,
 }
 
 extension AppConstantExtention on AppConstant {
@@ -103,6 +105,10 @@ extension AppConstantExtention on AppConstant {
         return 'bn';
       case AppConstant.FONTFAMILY:
         return 'Arboria';
+      case AppConstant.FLAT_DISCOUNT:
+        return 'flat';
+      case AppConstant.PERCENTAGE_DISCOUNT:
+        return 'percentage';
 
       default:
         return "";

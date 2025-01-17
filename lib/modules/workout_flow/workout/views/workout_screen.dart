@@ -36,39 +36,39 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
         backgroundColor: KColor.transparent.color,
         body: Consumer(builder: (context, ref, child) {
           final state = ref.watch(workoutController);
-          if (state.isLoading) {
-            return const GlobalCircularLoader();
-          }
+
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Column(
               children: [
                 const WorkoutHeader(),
                 Expanded(
-                  child: state.workoutDataList.isEmpty
-                      ? const GlobalNoData()
-                      : ListView.separated(
-                          controller: controller.scrollController,
-                          itemCount: state.workoutDataList.length,
-                          padding: EdgeInsets.only(top: 30.h),
-                          separatorBuilder: (context, index) {
-                            return SizedBox(height: 20.h);
-                          },
-                          itemBuilder: (context, index) {
-                            final item = state.workoutDataList[index];
+                  child: state.isLoading
+                      ? const GlobalCircularLoader()
+                      : state.workoutDataList.isEmpty
+                          ? const GlobalNoData()
+                          : ListView.separated(
+                              controller: controller.scrollController,
+                              itemCount: state.workoutDataList.length,
+                              padding: EdgeInsets.only(top: 30.h),
+                              separatorBuilder: (context, index) {
+                                return SizedBox(height: 20.h);
+                              },
+                              itemBuilder: (context, index) {
+                                final item = state.workoutDataList[index];
 
-                            return WorkoutItemWidget(
-                              id: item.id,
-                              title: item.title,
-                              image: item.image,
-                              amount: item.enrollmentFee,
-                              shortDescription: item.description,
-                              isFree: item.isPremium != true,
-                              time: item.duration,
-                              calorie: item.calories,
-                            );
-                          },
-                        ),
+                                return WorkoutItemWidget(
+                                  id: item.id,
+                                  title: item.title,
+                                  image: item.image,
+                                  amount: item.enrollmentFee,
+                                  shortDescription: item.description,
+                                  isFree: item.isPremium != true,
+                                  time: item.duration,
+                                  calorie: item.calories,
+                                );
+                              },
+                            ),
                 ),
                 if (state.isLoadingMore)
                   Padding(

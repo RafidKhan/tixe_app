@@ -1,9 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tixe_flutter_app/constant/constant_key.dart';
 import 'package:tixe_flutter_app/modules/training_flow/confirm_training_enroll/controller/state/confirm_training_enroll_state.dart';
 import 'package:tixe_flutter_app/modules/training_flow/confirm_training_enroll/model/confirm_training_enrollment_request.dart';
 import 'package:tixe_flutter_app/modules/training_flow/confirm_training_enroll/model/time_schedule_request.dart';
 import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
+import 'package:tixe_flutter_app/utils/mixin/global_mixin.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 
@@ -19,19 +22,26 @@ final confirmTrainingEnrollController = StateNotifierProvider.autoDispose<
     ConfirmTrainingEnrollmentState>((ref) => ConfirmTrainingEnrollController());
 
 class ConfirmTrainingEnrollController
-    extends StateNotifier<ConfirmTrainingEnrollmentState> {
+    extends StateNotifier<ConfirmTrainingEnrollmentState> with GlobalMixin {
   final IConfirmTrainingEnrollRepository _confirmtrainingenrollRepository =
       ConfirmTrainingEnrollRepository();
+
+  final discountCode = TextEditingController();
 
   ConfirmTrainingEnrollController()
       : super(
           const ConfirmTrainingEnrollmentState(
             model: null,
+            totalValue: "0",
+            discountValue: "",
           ),
         );
 
   void setModel(ConfirmTrainingEnrollmentNavModel model) {
-    state = state.copyWith(model: model);
+    state = state.copyWith(
+      model: model,
+      totalValue: model.totalFee,
+    );
   }
 
   int enrollmentId = 0;
@@ -145,8 +155,8 @@ class ConfirmTrainingEnrollController
         trainingFee: num.tryParse(details?.enrollmentFee ?? "0"),
         gearsCost: num.tryParse(state.model?.gearsFee ?? "0"),
         conveiences: num.tryParse(details?.conveiencesFee ?? "0"),
-        discountAmount: num.tryParse(state.model?.discountAmount ?? "0"),
-        grandTotal: num.tryParse(state.model?.totalFee ?? "0"),
+        discountAmount: num.tryParse(state.discountValue),
+        grandTotal: num.tryParse(state.totalValue),
       ),
       callback: (response, isSuccess) {
         ViewUtil.hideLoader();
@@ -163,15 +173,32 @@ class ConfirmTrainingEnrollController
   }
 
   Future<void> verifyTrainingDiscountCode() async {
-    if (state.model?.trainingDetail?.id != null) {}
-
-    ViewUtil.showLoaderPage();
-    await _confirmtrainingenrollRepository.verifyTrainingDiscountCode(
-      code: "",
-      trainingId: state.model?.trainingDetail?.id ?? 0,
-      callback: (response, isSuccess) {
-        ViewUtil.hideLoader();
-      },
-    );
+    if (state.model?.trainingDetail?.id != null &&
+        discountCode.text.trim().isNotEmpty) {
+      ViewUtil.showLoaderPage();
+      await _confirmtrainingenrollRepository.verifyTrainingDiscountCode(
+        code: discountCode.text.trim(),
+        trainingId: state.model?.trainingDetail?.id ?? 0,
+        callback: (response, isSuccess) {
+          ViewUtil.hideLoader();
+          if (isSuccess) {
+            discountCode.clear();
+            final calculatedAmount = calculateDiscount(
+              mainAmount: state.totalValue,
+              discountType: response?.data?.discountType ?? "",
+              discountValue: response?.data?.discountAmount ?? "0",
+            );
+            String discountType = response?.data?.discountType ?? "";
+            String discountAmount = response?.data?.discountAmount ?? "";
+            state = state.copyWith(
+              totalValue: calculatedAmount,
+              discountValue: discountType == AppConstant.FLAT_DISCOUNT.key
+                  ? "\$$discountAmount"
+                  : "$discountAmount%",
+            );
+          }
+        },
+      );
+    }
   }
 }

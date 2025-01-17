@@ -6,7 +6,7 @@ import '../repository/training_interface.dart';
 import '../repository/training_repository.dart';
 
 final trainingController =
-    StateNotifierProvider.autoDispose<TrainingController, TrainingState>(
+    StateNotifierProvider<TrainingController, TrainingState>(
         (ref) => TrainingController());
 
 class TrainingController extends StateNotifier<TrainingState> {
