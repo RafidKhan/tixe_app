@@ -21,7 +21,7 @@ enum AppUrl {
   trainingsList,
   workouts,
   workoutDetails,
-  verifyTrainingDiscountCode,
+  verifyDiscountCode,
   freeWorkoutEnrollment,
   paidWorkoutEnrollment,
   myWorkouts,
@@ -94,8 +94,8 @@ extension AppUrlExtention on AppUrl {
         return "workout-services?page_size=15&page={PAGE}";
       case AppUrl.workoutDetails:
         return "workout-services/{ID}";
-      case AppUrl.verifyTrainingDiscountCode:
-        return "training-services/enrollment/discount-code-verify";
+      case AppUrl.verifyDiscountCode:
+        return "services/enrollment/discount-code-verify";
       case AppUrl.freeWorkoutEnrollment:
         return "workout-services/free-enrollment";
       case AppUrl.paidWorkoutEnrollment:

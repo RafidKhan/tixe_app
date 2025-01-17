@@ -29,7 +29,7 @@ class GlobalImageLoader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String defaultPlaceHolder =
-        placeHolder ?? KAssetName.errorPng.imagePath;
+        placeHolder ?? KAssetName.tixeLogoPng.imagePath;
     if (imageFor == ImageFor.network) {
       return CachedNetworkImage(
         imageUrl: imagePath,

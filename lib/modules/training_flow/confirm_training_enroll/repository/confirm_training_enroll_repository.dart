@@ -60,23 +60,4 @@ class ConfirmTrainingEnrollRepository
       },
     );
   }
-
-  @override
-  Future<void> verifyTrainingDiscountCode({
-    required String code,
-    required int trainingId,
-    required Function(DiscountCodeVerifyResponse? data, bool isSuccess)
-        callback,
-  }) async {
-    await _api.verifyTrainingDiscountCode(
-      code: code,
-      trainingId: trainingId,
-      callback: (response, success) {
-        callback(
-          success ? DiscountCodeVerifyResponse.fromJson(response?.data) : null,
-          success,
-        );
-      },
-    );
-  }
 }

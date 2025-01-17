@@ -2,25 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
-import 'package:tixe_flutter_app/modules/workout_flow/workout_details/controller/workout_details_controller.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 
-class WorkoutDetailBanners extends ConsumerWidget {
-  const WorkoutDetailBanners({super.key});
+import '../../controller/my_workout_detail_controller.dart';
+
+class MyWorkoutDetailBanners extends ConsumerWidget {
+  const MyWorkoutDetailBanners({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(workoutDetailsController);
+    final state = ref.watch(myWorkoutDetailController);
 
-    final workoutDetail = state.workoutService;
+    final workoutDetail = state.detail;
 
     final images = (workoutDetail!.galleryImages ?? []);
 
     return Column(
       children: [
-        if (state.workoutService?.image != null) ...[
+        if (workoutDetail.image != null) ...[
           SizedBox(
             height: 200.h,
             child: Stack(
@@ -33,7 +34,7 @@ class WorkoutDetailBanners extends ConsumerWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10.r),
                     child: GlobalImageLoader(
-                      imagePath: state.workoutService?.image ?? "",
+                      imagePath: workoutDetail.image ?? "",
                       height: 200.h,
                       width: context.width,
                     ),

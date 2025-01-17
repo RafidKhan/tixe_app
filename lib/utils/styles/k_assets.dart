@@ -8,7 +8,9 @@ enum KAssetName {
   dummyGearPng,
   homePng,
   tixeLogoPng,
+  icClockPng,
   applePng,
+  icFirePng,
   icVideoPng,
   errorPng,
   icHamburgerPng,
@@ -49,8 +51,12 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/home.png';
       case KAssetName.tixeLogoPng:
         return '$_imagesDir/tixe_logo.png';
+      case KAssetName.icClockPng:
+        return '$_imagesDir/icClock.png';
       case KAssetName.applePng:
         return '$_imagesDir/apple.png';
+      case KAssetName.icFirePng:
+        return '$_imagesDir/icFire.png';
       case KAssetName.icVideoPng:
         return '$_imagesDir/icVideo.png';
       case KAssetName.errorPng:

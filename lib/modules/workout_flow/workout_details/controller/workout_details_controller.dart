@@ -1,11 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/workout_details/repository/workout_details_interface.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/workout_details/repository/workout_details_repository.dart';
-import 'package:tixe_flutter_app/utils/enum.dart';
-import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
-import 'package:video_thumbnail/video_thumbnail.dart';
 import '../../../../utils/app_routes.dart';
 import '../../../../utils/navigation.dart';
 import '../model/workout_enrollment_request.dart';
@@ -26,7 +22,6 @@ class WorkoutDetailsController extends StateNotifier<WorkoutDetailsState> {
             id: -1,
             workoutService: null,
             reviewStatistics: null,
-            videoThumbnail: null,
           ),
         );
 
@@ -44,11 +39,6 @@ class WorkoutDetailsController extends StateNotifier<WorkoutDetailsState> {
           workoutService: response?.data?.workoutService,
           reviewStatistics: response?.data?.reviewStatistics,
         );
-        if (state.workoutService?.video != null) {
-          state = state.copyWith(
-              videoThumbnail: await (state.workoutService?.video ?? "")
-                  .getThumbnailFromVideo(maxHeight: 200));
-        }
       },
     );
   }

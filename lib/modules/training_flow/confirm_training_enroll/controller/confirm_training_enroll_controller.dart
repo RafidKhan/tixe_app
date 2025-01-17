@@ -10,6 +10,8 @@ import 'package:tixe_flutter_app/utils/mixin/global_mixin.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 
+import '../../../../global/global_module/global_interface.dart';
+import '../../../../global/global_module/global_respository.dart';
 import '../../../../utils/enum.dart';
 import '../../training_gears_checklist/model/custom_gear_data.dart';
 import '../model/confirm_training_enrollment_nav_model.dart';
@@ -25,6 +27,8 @@ class ConfirmTrainingEnrollController
     extends StateNotifier<ConfirmTrainingEnrollmentState> with GlobalMixin {
   final IConfirmTrainingEnrollRepository _confirmtrainingenrollRepository =
       ConfirmTrainingEnrollRepository();
+  final IGlobalRepository _globalRepository = GlobalRepository();
+
 
   final discountCode = TextEditingController();
 
@@ -176,9 +180,10 @@ class ConfirmTrainingEnrollController
     if (state.model?.trainingDetail?.id != null &&
         discountCode.text.trim().isNotEmpty) {
       ViewUtil.showLoaderPage();
-      await _confirmtrainingenrollRepository.verifyTrainingDiscountCode(
+      await _globalRepository.verifyDiscountCode(
         code: discountCode.text.trim(),
-        trainingId: state.model?.trainingDetail?.id ?? 0,
+        id: state.model?.trainingDetail?.id ?? 0,
+        type: ServiceType.Training,
         callback: (response, isSuccess) {
           ViewUtil.hideLoader();
           if (isSuccess) {

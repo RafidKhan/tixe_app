@@ -46,7 +46,10 @@ class WorkoutItemWidget extends StatelessWidget {
       onTap: () {
         if (PrefHelper.getLoginStatus()) {
           if (isAfterPurchase) {
-            ///
+            Navigation.push(
+              appRoutes: AppRoutes.myWorkoutDetail,
+              arguments: id,
+            );
           } else {
             Navigation.push(
               appRoutes: AppRoutes.workoutDetails,

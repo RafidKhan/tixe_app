@@ -56,7 +56,10 @@ class _TrainingScreenState extends State<TrainingScreen> {
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
                               itemCount: state.trainings.length,
-                              padding: EdgeInsets.only(top: 30.h),
+                              padding: EdgeInsets.only(
+                                top: 30.h,
+                                bottom: 30.h,
+                              ),
                               separatorBuilder: (context, index) {
                                 return SizedBox(height: 20.h);
                               },

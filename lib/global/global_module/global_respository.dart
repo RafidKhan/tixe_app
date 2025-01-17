@@ -1,6 +1,8 @@
 import 'package:tixe_flutter_app/global/global_module/global_api.dart';
 
 import '../../modules/auth/sign_in/model/sign_in_response.dart';
+import '../../modules/training_flow/confirm_training_enroll/model/discount_code_verify_response.dart';
+import '../../utils/enum.dart';
 import '../model/settings_response.dart';
 import 'global_interface.dart';
 
@@ -38,6 +40,27 @@ class GlobalRepository extends IGlobalRepository {
         callback(
           isSuccess ? SignInResponse.fromJson(response?.data) : null,
           isSuccess,
+        );
+      },
+    );
+  }
+
+  @override
+  Future<void> verifyDiscountCode({
+    required String code,
+    required int id,
+    required ServiceType type,
+    required Function(DiscountCodeVerifyResponse? data, bool isSuccess)
+        callback,
+  }) async {
+    await _api.verifyDiscountCode(
+      code: code,
+      id: id,
+      type: type,
+      callback: (response, success) {
+        callback(
+          success ? DiscountCodeVerifyResponse.fromJson(response?.data) : null,
+          success,
         );
       },
     );

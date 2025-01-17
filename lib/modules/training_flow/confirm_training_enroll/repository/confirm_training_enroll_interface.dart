@@ -11,7 +11,8 @@ import '../model/time_schedule_request.dart';
 abstract class IConfirmTrainingEnrollRepository {
   Future<void> setTimeSchedule({
     required TimeScheduleRequest params,
-    required Function(SetTimeScheduleResponse? response, bool isSuccess) callback,
+    required Function(SetTimeScheduleResponse? response, bool isSuccess)
+        callback,
   });
 
   Future<void> confirmEnrollment({
@@ -22,11 +23,5 @@ abstract class IConfirmTrainingEnrollRepository {
   Future<void> setTrainingGears({
     required SetTrainingGearsRequest params,
     required Function(GlobalResponse? response, bool isSuccess) callback,
-  });
-
-  Future<void> verifyTrainingDiscountCode({
-    required String code,
-    required int trainingId,
-    required Function(DiscountCodeVerifyResponse? data, bool isSuccess) callback,
   });
 }

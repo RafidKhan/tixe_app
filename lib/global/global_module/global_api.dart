@@ -35,4 +35,27 @@ class GlobalApi {
       callback: callback,
     );
   }
+
+  Future<void> verifyDiscountCode({
+    required String code,
+    required int id,
+    required ServiceType type,
+    required Function(Response? data, bool isSuccess) callback,
+  }) async {
+    final params = {
+      "discount_code": code,
+    };
+    if(type == ServiceType.Training){
+      params["training_service_id"] = id.toString();
+    }
+    if(type == ServiceType.Workout){
+      params["workout_service_id"] = id.toString();
+    }
+    await _apiClient.request(
+      url: AppUrl.verifyDiscountCode.url,
+      params: params,
+      method: Method.POST,
+      callback: callback,
+    );
+  }
 }

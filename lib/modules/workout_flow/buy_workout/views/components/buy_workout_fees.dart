@@ -13,16 +13,19 @@ class BuyWorkoutFees extends ConsumerWidget {
   const BuyWorkoutFees({super.key});
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(buyWorkoutController);
+    final controller = ref.read(buyWorkoutController.notifier);
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          _buildRow(context.loc.workout_course, "\$${state.model?.enrollmentFee ?? "0"}"),
-          _buildRow(context.loc.convenience, "\$${state.model?.convenienceFee ?? "0"}"),
+          _buildRow(context.loc.workout_course,
+              "\$${state.model?.enrollmentFee ?? "0"}"),
+          _buildRow(context.loc.convenience,
+              "\$${state.model?.convenienceFee ?? "0"}"),
           GlobalText(
             str: context.loc.discount_code,
             fontSize: 14,
@@ -31,28 +34,33 @@ class BuyWorkoutFees extends ConsumerWidget {
           ),
           SizedBox(height: 10.h),
           GlobalTextFormfield(
-            //textEditingController: controller.ageController,
+            textEditingController: controller.discountCode,
             suffixIcon: _applyCodeButton(
               context,
-              onTap: () {},
+              onTap: () {
+                controller.verifyWorkoutDiscountCode();
+              },
             ),
           ),
           SizedBox(height: 10.h),
-          _buildRow(context.loc.discount, "-\$0"),
+          if (state.discountValue.trim().isNotEmpty)
+            _buildRow(context.loc.discount, "-${state.discountValue}"),
           const GlobalDivider(),
-          GlobalText(
-            str: context.loc.grand_total,
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-            color: KColor.white.color,
-          ),
-          SizedBox(height: 5.h),
-          GlobalText(
-            str: "\$${state.totalFee ?? "0"}",
-            fontSize: 24,
-            fontWeight: FontWeight.w400,
-            color: KColor.white.color,
-          ),
+          if (state.totalFee.trim().isNotEmpty) ...[
+            GlobalText(
+              str: context.loc.grand_total,
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              color: KColor.white.color,
+            ),
+            SizedBox(height: 5.h),
+            GlobalText(
+              str: "\$${state.totalFee}",
+              fontSize: 24,
+              fontWeight: FontWeight.w400,
+              color: KColor.white.color,
+            ),
+          ],
         ],
       ),
     );

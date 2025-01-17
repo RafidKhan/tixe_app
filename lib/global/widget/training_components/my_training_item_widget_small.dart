@@ -41,10 +41,10 @@ class MyTrainingItemWidgetSmall extends StatelessWidget {
             );
           }
           if (type == ServiceType.Workout) {
-            // Navigation.push(
-            //   appRoutes: AppRoutes.myTrainingDetails,
-            //   arguments: id,
-            // );
+            Navigation.push(
+              appRoutes: AppRoutes.myWorkoutDetail,
+              arguments: id,
+            );
           }
         }
       },

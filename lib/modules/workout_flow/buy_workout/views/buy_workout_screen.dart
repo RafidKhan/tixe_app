@@ -35,6 +35,8 @@ class _BuyWorkoutScreenState extends State<BuyWorkoutScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final controller = context.read(buyWorkoutController.notifier);
+
     return TixeMainScaffold(
       hasAppBar: true,
       body: Column(
@@ -49,7 +51,9 @@ class _BuyWorkoutScreenState extends State<BuyWorkoutScreen> {
               horizontal: 20.w,
               vertical: 20.h,
             ),
-            onPressed: () {},
+            onPressed: () {
+              controller.enrollmentPaidWorkout();
+            },
             buttonText: context.loc.confirm_and_pay,
           ),
         ],
