@@ -1,5 +1,7 @@
 import 'package:tixe_flutter_app/modules/workout_flow/buy_workout/views/buy_workout_screen.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/my_workout_detail/views/components/history/all_workout_history.dart';
+import 'package:tixe_flutter_app/modules/workout_flow/my_workout_pdf/views/my_workout_pdf_screen.dart';
+import 'package:tixe_flutter_app/modules/workout_flow/my_workout_video/views/my_workout_video_screen.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/workout/views/components/my_workouts/my_workouts_screen.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/workout_details/model/workout_detail_response.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/workout_details/model/workout_details_nav_model.dart';
@@ -27,10 +29,15 @@ import '../modules/training_flow/training_details/views/training_details_screen.
 import '../modules/training_flow/training_enrollment/model/training_enrollment_nav_model.dart';
 import '../modules/training_flow/training_enrollment/views/training_enrollment_screen.dart';
 import '../modules/training_flow/training_gears_checklist/views/training_gears_checklist_screen.dart';
+import '../modules/workout_flow/my_workout_detail/model/my_enrolled_workout_detail_response.dart';
 import '../modules/workout_flow/my_workout_detail/views/my_workout_detail_screen.dart';
+import '../modules/workout_flow/my_workout_select_phase/views/my_workout_select_phase_screen.dart';
 
 enum AppRoutes {
   splash,
+  myWorkoutVideo,
+  myWorkoutPdf,
+  myWorkoutSelectPhase,
   myWorkoutDetail,
   buyWorkout,
   workoutDetails,
@@ -56,6 +63,16 @@ enum AppRoutes {
 extension AppRoutesExtention on AppRoutes {
   Widget buildWidget<T extends Object>({T? arguments}) {
     switch (this) {
+      case AppRoutes.myWorkoutVideo:
+        return const MyWorkoutVideoScreen();
+      case AppRoutes.myWorkoutPdf:
+        return MyWorkoutPdfScreen(
+          phase: arguments as WorkoutPhase,
+        );
+      case AppRoutes.myWorkoutSelectPhase:
+        return MyWorkoutSelectPhaseScreen(
+          model: arguments as MyWorkoutData,
+        );
       case AppRoutes.myWorkoutDetail:
         return MyWorkoutDetailScreen(
           id: arguments as int,

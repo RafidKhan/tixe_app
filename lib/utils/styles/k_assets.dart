@@ -18,6 +18,7 @@ enum KAssetName {
   fitnessPng,
   trainingPng,
   starPng,
+  pdfPlaceholderPng,
   unselectedRadioPng,
   demoTrainingPng,
   googlePng,
@@ -71,6 +72,8 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/training.png';
       case KAssetName.starPng:
         return '$_imagesDir/star.png';
+      case KAssetName.pdfPlaceholderPng:
+        return '$_imagesDir/pdfPlaceholder.png';
       case KAssetName.unselectedRadioPng:
         return '$_imagesDir/unselectedRadio.png';
       case KAssetName.demoTrainingPng:
