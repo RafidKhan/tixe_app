@@ -50,9 +50,7 @@ class _MyWorkoutVideoScreenState extends State<MyWorkoutVideoScreen> {
       setState(() {
         isLoading = true;
       });
-      //final fullUrl = '${AppUrl.baseStorage.url}${widget.phase.videoUrl}';
-      final fullUrl =
-          "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4";
+      final fullUrl = '${AppUrl.baseStorage.url}${widget.phase.videoUrl}';
       videoPlayerController =
           VideoPlayerController.networkUrl(Uri.parse(fullUrl));
 
