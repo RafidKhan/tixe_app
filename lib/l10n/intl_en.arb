@@ -94,5 +94,6 @@
   "start_now": "Start Now",
   "workout_history": "Workout History",
   "kcal": "kcal",
-  "start": "Start"
+  "start": "Start",
+  "complete": "Complete"
 }

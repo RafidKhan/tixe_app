@@ -2,7 +2,7 @@ import 'package:tixe_flutter_app/utils/enum.dart';
 
 enum AppUrl {
   base,
-  baseImage,
+  baseStorage,
   login,
   registration,
   verifyRegistrationCode,
@@ -26,23 +26,24 @@ enum AppUrl {
   paidWorkoutEnrollment,
   myWorkouts,
   myWorkoutDetails,
+  completeWorkoutPhase,
 }
 
 extension AppUrlExtention on AppUrl {
   static String _baseUrl = "";
-  static String _baseImageUrl = "";
+  static String _baseStorageUrl = "";
 
   static void setUrl(UrlLink urlLink) {
     switch (urlLink) {
       case UrlLink.isLive:
         _baseUrl = "";
-        _baseImageUrl = "";
+        _baseStorageUrl = "";
 
         break;
 
       case UrlLink.isDev:
         _baseUrl = "https://tixeapp.sagsio.com/api/";
-        _baseImageUrl = "";
+        _baseStorageUrl = "https://tixeapp.sagsio.com";
 
         break;
       case UrlLink.isLocalServer:
@@ -56,8 +57,8 @@ extension AppUrlExtention on AppUrl {
     switch (this) {
       case AppUrl.base:
         return _baseUrl;
-      case AppUrl.baseImage:
-        return _baseImageUrl;
+      case AppUrl.baseStorage:
+        return _baseStorageUrl;
       case AppUrl.login:
         return "login";
       case AppUrl.registration:
@@ -104,6 +105,8 @@ extension AppUrlExtention on AppUrl {
         return "enrollment/workout-services";
       case AppUrl.myWorkoutDetails:
         return "enrollment/workout-service/{ID}";
+      case AppUrl.completeWorkoutPhase:
+        return "workout-service/phase/{ID}/complete";
     }
   }
 }

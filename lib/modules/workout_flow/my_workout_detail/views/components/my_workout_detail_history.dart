@@ -53,7 +53,7 @@ class MyWorkoutDetailHistory extends ConsumerWidget {
             height: 20.h,
           ),
           ListView.separated(
-            itemCount: history.length,
+            itemCount: history.length >= 3 ? 3 : history.length,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             separatorBuilder: (context, index) {

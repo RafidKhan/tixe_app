@@ -25,6 +25,7 @@ enum KAssetName {
   facebookPng,
   tixeMainBgPng,
   workoutPng,
+  icCompletePng,
   splashBgPng,
 }
 
@@ -86,6 +87,8 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/tixe_main_bg.png';
       case KAssetName.workoutPng:
         return '$_imagesDir/workout.png';
+      case KAssetName.icCompletePng:
+        return '$_imagesDir/icComplete.png';
       case KAssetName.splashBgPng:
         return '$_imagesDir/splash_bg.png';
     }

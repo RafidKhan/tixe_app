@@ -1,14 +1,16 @@
 import 'dart:io';
 
 import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:tixe_flutter_app/constant/app_url.dart';
+import 'package:tixe_flutter_app/global/widget/global_bottom_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/my_workout_detail/model/my_enrolled_workout_detail_response.dart';
+import 'package:tixe_flutter_app/modules/workout_flow/my_workout_pdf/controller/my_workout_pdf_controller.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/mixin/global_mixin.dart';
+import 'package:tixe_flutter_app/utils/view_util.dart';
 
-import '/global/widget/global_appbar.dart';
-import '/global/widget/global_text.dart';
 import 'package:flutter/material.dart';
 
 class MyWorkoutPdfScreen extends StatefulWidget {
@@ -26,13 +28,23 @@ class MyWorkoutPdfScreen extends StatefulWidget {
 class _MyWorkoutPdfScreenState extends State<MyWorkoutPdfScreen>
     with GlobalMixin {
   final ValueNotifier<File?> pdfFile = ValueNotifier(null);
+  final controller = MyWorkoutPdfController();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     Future(() async {
-      pdfFile.value = await downloadFile(url: widget.phase.pdfUrl ?? "");
+      if (widget.phase.pdfUrl != null) {
+        final fullUrl = '${AppUrl.baseStorage.url}${widget.phase.pdfUrl}';
+        try {
+          ViewUtil.showLoaderPage();
+          pdfFile.value = await downloadFile(url: fullUrl);
+          ViewUtil.hideLoader();
+        } catch (e) {
+          ViewUtil.hideLoader();
+        }
+      }
     });
   }
 
@@ -62,6 +74,12 @@ class _MyWorkoutPdfScreenState extends State<MyWorkoutPdfScreen>
             )
           ]
         ],
+      ),
+      bottomNavigationBar: GlobalBottomButton(
+        onPressed: () {
+          controller.completeWorkoutPhase(phase: widget.phase);
+        },
+        buttonText: context.loc.complete,
       ),
     );
   }

@@ -40,6 +40,7 @@ class _MyWorkoutDetailScreenState extends State<MyWorkoutDetailScreen> {
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {
       final state = ref.watch(myWorkoutDetailController);
+      final controller = ref.read(myWorkoutDetailController.notifier);
       return TixeMainScaffold(
         hasAppBar: true,
         body: Column(
@@ -75,7 +76,11 @@ class _MyWorkoutDetailScreenState extends State<MyWorkoutDetailScreen> {
                       Navigation.push(
                         appRoutes: AppRoutes.myWorkoutSelectPhase,
                         arguments: state.detail,
-                      );
+                      ).then((result) {
+                        if (result == true) {
+                          controller.getMyWorkoutDetail(widget.id);
+                        }
+                      });
                     },
                     buttonText: context.loc.start_now,
                   ),

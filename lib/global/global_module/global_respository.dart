@@ -3,6 +3,7 @@ import 'package:tixe_flutter_app/global/global_module/global_api.dart';
 import '../../modules/auth/sign_in/model/sign_in_response.dart';
 import '../../modules/training_flow/confirm_training_enroll/model/discount_code_verify_response.dart';
 import '../../utils/enum.dart';
+import '../model/global_response.dart';
 import '../model/settings_response.dart';
 import 'global_interface.dart';
 
@@ -60,6 +61,22 @@ class GlobalRepository extends IGlobalRepository {
       callback: (response, success) {
         callback(
           success ? DiscountCodeVerifyResponse.fromJson(response?.data) : null,
+          success,
+        );
+      },
+    );
+  }
+
+  @override
+  Future<void> completeWorkoutPhase({
+    required String phaseId,
+    required Function(GlobalResponse? data, bool isSuccess) callback,
+  }) async {
+    await _api.completeWorkoutPhase(
+      phaseId: phaseId,
+      callback: (response, success) {
+        callback(
+          success ? GlobalResponse.fromJson(response?.data) : null,
           success,
         );
       },

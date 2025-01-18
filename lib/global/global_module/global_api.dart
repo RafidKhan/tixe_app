@@ -45,16 +45,29 @@ class GlobalApi {
     final params = {
       "discount_code": code,
     };
-    if(type == ServiceType.Training){
+    if (type == ServiceType.Training) {
       params["training_service_id"] = id.toString();
     }
-    if(type == ServiceType.Workout){
+    if (type == ServiceType.Workout) {
       params["workout_service_id"] = id.toString();
     }
     await _apiClient.request(
       url: AppUrl.verifyDiscountCode.url,
       params: params,
       method: Method.POST,
+      callback: callback,
+    );
+  }
+
+  Future<void> completeWorkoutPhase({
+    required String phaseId,
+    required Function(Response? data, bool isSuccess) callback,
+  }) async {
+    final url = AppUrl.completeWorkoutPhase.url.replaceAll("{ID}", phaseId);
+
+    await _apiClient.request(
+      url: url,
+      method: Method.GET,
       callback: callback,
     );
   }

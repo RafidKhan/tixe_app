@@ -120,17 +120,19 @@ class ViewUtil {
   }
 
   static bottomSheet({
-    required BuildContext context,
-    bool? isDismissable,
+    bool? isDismissible,
+    bool? isScrollControlled,
+    bool? enableDrag,
     required Widget content,
     BoxConstraints? boxConstraints,
   }) {
     return showModalBottomSheet(
       backgroundColor: Colors.transparent,
       constraints: boxConstraints,
-      isScrollControlled: true,
-      context: context,
-      isDismissible: isDismissable ?? true,
+      isScrollControlled: isScrollControlled??true,
+      context: Navigation.key.currentContext!,
+      isDismissible: isDismissible ?? true,
+      enableDrag: enableDrag ?? true,
       builder: (context) => Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
