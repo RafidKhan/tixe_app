@@ -63,52 +63,57 @@ class WorkoutHistoryItem extends StatelessWidget {
             ),
           ),
           SizedBox(width: 10.w),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              GlobalText(
-                str: title,
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-                color: KColor.white.color,
-              ),
-              Row(
-                children: [
-                  GlobalImageLoader(
-                    imagePath: KAssetName.icClockPng.imagePath,
-                    height: 10.h,
-                    width: 10.w,
-                  ),
-                  SizedBox(
-                    width: 6.w,
-                  ),
-                  GlobalText(
-                    str: "$duration ${context.loc.minute}",
-                    color: KColor.white.color,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  SizedBox(
-                    width: 12.w,
-                  ),
-                  GlobalImageLoader(
-                    imagePath: KAssetName.icFirePng.imagePath,
-                    height: 10.h,
-                    width: 10.w,
-                  ),
-                  SizedBox(
-                    width: 6.w,
-                  ),
-                  GlobalText(
-                    str: "$calorie ${context.loc.kcal}",
-                    color: KColor.white.color,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ],
-              )
-            ],
+          Flexible(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GlobalText(
+                  str: title,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: KColor.white.color,
+                ),
+                SizedBox(
+                  height: 6.h,
+                ),
+                Row(
+                  children: [
+                    GlobalImageLoader(
+                      imagePath: KAssetName.icClockPng.imagePath,
+                      height: 10.h,
+                      width: 10.w,
+                    ),
+                    SizedBox(
+                      width: 6.w,
+                    ),
+                    GlobalText(
+                      str: "$duration ${context.loc.minute}",
+                      color: KColor.white.color,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    SizedBox(
+                      width: 12.w,
+                    ),
+                    GlobalImageLoader(
+                      imagePath: KAssetName.icFirePng.imagePath,
+                      height: 10.h,
+                      width: 10.w,
+                    ),
+                    SizedBox(
+                      width: 6.w,
+                    ),
+                    GlobalText(
+                      str: "$calorie ${context.loc.kcal}",
+                      color: KColor.white.color,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
         ],
       ),

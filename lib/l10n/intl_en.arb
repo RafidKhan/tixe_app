@@ -95,5 +95,6 @@
   "workout_history": "Workout History",
   "kcal": "kcal",
   "start": "Start",
-  "complete": "Complete"
+  "complete": "Complete",
+  "phase_completed": "Phase Completed"
 }

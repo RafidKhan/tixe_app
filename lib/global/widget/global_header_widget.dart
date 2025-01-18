@@ -38,6 +38,8 @@ class GlobalHeaderWidget extends StatelessWidget {
               fontSize: 20,
               fontWeight: FontWeight.w600,
               color: KColor.white.color,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
         ],

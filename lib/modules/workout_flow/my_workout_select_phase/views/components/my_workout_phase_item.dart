@@ -7,6 +7,8 @@ import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
+import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
+import 'package:tixe_flutter_app/utils/view_util.dart';
 
 class MyWorkoutPhaseItem extends StatelessWidget {
   final WorkoutPhase phase;
@@ -17,7 +19,9 @@ class MyWorkoutPhaseItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        if (phase.isVideo == 1) {
+        if (phase.isCompleted == 1) {
+          ViewUtil.snackBar(context.loc.phase_completed);
+        } else if (phase.isVideo == 1) {
           Navigation.push(
             appRoutes: AppRoutes.myWorkoutVideo,
             arguments: phase,
@@ -38,6 +42,8 @@ class MyWorkoutPhaseItem extends StatelessWidget {
                   str: phase.title ?? "",
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
               SizedBox(
@@ -54,7 +60,22 @@ class MyWorkoutPhaseItem extends StatelessWidget {
                 str: "${(phase.durationTime ?? "0")} ${context.loc.minute}",
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
-              )
+              ),
+              if (phase.isCompleted == 1) ...[
+                Container(
+                  margin: EdgeInsets.only(left: 6.w),
+                  padding: EdgeInsets.all(2.r),
+                  decoration: BoxDecoration(
+                    color: KColor.green.color,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    Icons.done,
+                    color: KColor.white.color,
+                    size: 12.sp,
+                  ),
+                ),
+              ],
             ],
           ),
           SizedBox(

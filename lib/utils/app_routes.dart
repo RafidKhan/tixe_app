@@ -64,7 +64,9 @@ extension AppRoutesExtention on AppRoutes {
   Widget buildWidget<T extends Object>({T? arguments}) {
     switch (this) {
       case AppRoutes.myWorkoutVideo:
-        return const MyWorkoutVideoScreen();
+        return MyWorkoutVideoScreen(
+          phase: arguments as WorkoutPhase,
+        );
       case AppRoutes.myWorkoutPdf:
         return MyWorkoutPdfScreen(
           phase: arguments as WorkoutPhase,
