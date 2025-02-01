@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tixe_flutter_app/data_provider/pref_helper.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training/controller/state/training_state.dart';
 
 import '../repository/training_interface.dart';
@@ -59,17 +60,20 @@ class TrainingController extends StateNotifier<TrainingState> {
   }
 
   Future<void> getMyTrainings() async {
-    state = state.copyWith(isLoadingMyTrainings: true);
-    await _trainingRepository.getMyTrainings(
-      callback: (response, isSuccess) {
-        state = state.copyWith(
-          isLoadingMyTrainings: false,
-          myTrainings: (response?.data?.services ?? []),
-          page: state.page + 1,
-          totalDataSize: response?.data?.pagination?.totalRecords ?? 0,
-        );
-      },
-    );
+    if(PrefHelper.getLoginStatus()){
+      state = state.copyWith(isLoadingMyTrainings: true);
+      await _trainingRepository.getMyTrainings(
+        callback: (response, isSuccess) {
+          state = state.copyWith(
+            isLoadingMyTrainings: false,
+            myTrainings: (response?.data?.services ?? []),
+            page: state.page + 1,
+            totalDataSize: response?.data?.pagination?.totalRecords ?? 0,
+          );
+        },
+      );
+    }
+
   }
 
   Future<void> getTrainings() async {

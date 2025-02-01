@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tixe_flutter_app/data_provider/pref_helper.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/workout/repository/workout_interface.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/workout/repository/workout_repository.dart';
 import 'state/workout_state.dart';
@@ -109,22 +110,24 @@ class WorkoutController extends StateNotifier<WorkoutState> {
   }
 
   Future<void> getMyWorkouts() async {
-    state = state.copyWith(isLoadingMyWorkouts: true);
-    await _workoutRepository.getMyWorkouts(
-      page: state.myWorkoutPage,
-      callback: (response, isSuccess) {
-        state = state.copyWith(isLoadingMyWorkouts: false);
+    if (PrefHelper.getLoginStatus()) {
+      state = state.copyWith(isLoadingMyWorkouts: true);
+      await _workoutRepository.getMyWorkouts(
+        page: state.myWorkoutPage,
+        callback: (response, isSuccess) {
+          state = state.copyWith(isLoadingMyWorkouts: false);
 
-        if (isSuccess) {
-          state = state.copyWith(
-            myWorkouts: response?.data?.services ?? [],
-            page: state.myWorkoutPage + 1,
-            totalMyWorkoutDataSize:
-                response?.data?.pagination?.totalRecords ?? 0,
-          );
-        }
-      },
-    );
+          if (isSuccess) {
+            state = state.copyWith(
+              myWorkouts: response?.data?.services ?? [],
+              page: state.myWorkoutPage + 1,
+              totalMyWorkoutDataSize:
+                  response?.data?.pagination?.totalRecords ?? 0,
+            );
+          }
+        },
+      );
+    }
   }
 
   Future<void> loadMoreMyWorkouts() async {
