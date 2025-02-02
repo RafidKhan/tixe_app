@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/workout_details/repository/workout_details_interface.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/workout_details/repository/workout_details_repository.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
+
 import '../../../../utils/app_routes.dart';
 import '../../../../utils/navigation.dart';
 import '../model/workout_enrollment_request.dart';

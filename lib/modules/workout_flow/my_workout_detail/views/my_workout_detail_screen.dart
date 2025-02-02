@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
@@ -5,8 +6,8 @@ import 'package:tixe_flutter_app/modules/workout_flow/my_workout_detail/controll
 import 'package:tixe_flutter_app/modules/workout_flow/my_workout_detail/views/components/my_workout_detail_history.dart';
 import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
-import 'package:flutter/material.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
+
 import '../../../../global/widget/global_button.dart';
 import '../../../../global/widget/global_no_data.dart';
 import 'components/my_workout_detail_banners.dart';

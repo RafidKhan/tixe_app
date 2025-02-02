@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tixe_flutter_app/data_provider/pref_helper.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/workout/repository/workout_interface.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/workout/repository/workout_repository.dart';
+
 import 'state/workout_state.dart';
 
 final workoutController =

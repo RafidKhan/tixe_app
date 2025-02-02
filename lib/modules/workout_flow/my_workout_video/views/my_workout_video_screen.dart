@@ -1,16 +1,18 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:video_player/video_player.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottom_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_circular_loader.dart';
 import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
-import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
-import 'package:tixe_flutter_app/utils/extension.dart';
-import '../../../../constant/app_url.dart';
-import 'package:tixe_flutter_app/modules/workout_flow/my_workout_video/controller/my_workout_video_controller.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/my_workout_detail/model/my_enrolled_workout_detail_response.dart';
+import 'package:tixe_flutter_app/modules/workout_flow/my_workout_video/controller/my_workout_video_controller.dart';
+import 'package:tixe_flutter_app/utils/extension.dart';
+import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
+import 'package:video_player/video_player.dart';
+
+import '../../../../constant/app_url.dart';
 
 class MyWorkoutVideoScreen extends StatefulWidget {
   final WorkoutPhase phase;

@@ -6,6 +6,7 @@ import 'package:tixe_flutter_app/global/widget/global_text.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/my_workout_detail/controller/my_workout_detail_controller.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
+
 import '../../../../../utils/styles/k_colors.dart';
 
 class MyWorkoutPriceAndDetails extends ConsumerWidget {

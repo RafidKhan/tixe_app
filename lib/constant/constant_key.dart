@@ -34,6 +34,7 @@ enum AppConstant {
   FONTFAMILY,
   FLAT_DISCOUNT,
   PERCENTAGE_DISCOUNT,
+  SYNCED_WITH_HEALTH_TRACKER,
 }
 
 extension AppConstantExtention on AppConstant {
@@ -109,6 +110,8 @@ extension AppConstantExtention on AppConstant {
         return 'flat';
       case AppConstant.PERCENTAGE_DISCOUNT:
         return 'percentage';
+      case AppConstant.SYNCED_WITH_HEALTH_TRACKER:
+        return 'SYNCED_WITH_HEALTH_TRACKER';
 
       default:
         return "";

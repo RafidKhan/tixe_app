@@ -14,6 +14,7 @@ import 'package:tixe_flutter_app/modules/workout_flow/workout_details/views/comp
 import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
+
 import '../../../../global/widget/global_divider.dart';
 import 'components/workout_detail_banners.dart';
 

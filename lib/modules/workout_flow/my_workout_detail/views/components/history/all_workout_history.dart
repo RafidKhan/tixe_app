@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/my_workout_detail/controller/my_workout_detail_controller.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
+
 import '../../../../../../global/widget/scaffold/tixe_main_scaffold.dart';
 import '../workout_history_item.dart';
 import 'all_workout_header.dart';

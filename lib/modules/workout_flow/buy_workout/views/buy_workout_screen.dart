@@ -1,12 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/buy_workout/controller/buy_workout_controller.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/buy_workout/views/components/buy_workout_header.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/workout_details/model/workout_detail_response.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
-import '../../../../global/widget/global_button.dart';
-import 'package:flutter/material.dart';
 
+import '../../../../global/widget/global_button.dart';
 import 'components/buy_workout_fees.dart';
 import 'components/buy_workout_payment_methods.dart';
 

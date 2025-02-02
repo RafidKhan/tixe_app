@@ -1,14 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_divider.dart';
-import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/my_workout_select_phase/controller/my_workout_select_phase_controller.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/my_workout_select_phase/views/components/my_workout_phase_item.dart';
-import 'package:tixe_flutter_app/utils/extension.dart';
-import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
-
-import '/global/widget/global_text.dart';
-import 'package:flutter/material.dart';
 
 class MyWorkoutPhases extends ConsumerWidget {
   const MyWorkoutPhases({

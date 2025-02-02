@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:tixe_flutter_app/constant/app_url.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottom_button.dart';
@@ -10,8 +11,6 @@ import 'package:tixe_flutter_app/modules/workout_flow/my_workout_pdf/controller/
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/mixin/global_mixin.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
-
-import 'package:flutter/material.dart';
 
 class MyWorkoutPdfScreen extends StatefulWidget {
   final WorkoutPhase phase;

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/my_workout_detail/controller/state/my_workout_detail_state.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';

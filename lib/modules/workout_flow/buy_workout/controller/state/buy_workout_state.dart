@@ -1,4 +1,3 @@
-import 'package:tixe_flutter_app/modules/workout_flow/workout/controller/state/workout_state.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/workout_details/model/workout_detail_response.dart';
 
 class BuyWorkoutState {

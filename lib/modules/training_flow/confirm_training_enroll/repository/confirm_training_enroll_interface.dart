@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tixe_flutter_app/modules/training_flow/confirm_training_enroll/model/confirm_training_enrollment_request.dart';
-import 'package:tixe_flutter_app/modules/training_flow/confirm_training_enroll/model/discount_code_verify_response.dart';
 
 import '../../../../global/model/global_response.dart';
 import '../model/confirm_training_gears_request.dart';

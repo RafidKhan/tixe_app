@@ -1,4 +1,3 @@
-import 'package:tixe_flutter_app/modules/training_flow/confirm_training_enroll/model/discount_code_verify_response.dart';
 import 'package:tixe_flutter_app/modules/training_flow/confirm_training_enroll/model/time_schedule_request.dart';
 import 'package:tixe_flutter_app/modules/training_flow/confirm_training_enroll/repository/confirm_training_enroll_api.dart';
 

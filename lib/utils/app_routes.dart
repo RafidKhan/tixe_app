@@ -1,16 +1,9 @@
-import 'package:tixe_flutter_app/modules/workout_flow/buy_workout/views/buy_workout_screen.dart';
-import 'package:tixe_flutter_app/modules/workout_flow/my_workout_detail/views/components/history/all_workout_history.dart';
-import 'package:tixe_flutter_app/modules/workout_flow/my_workout_pdf/views/my_workout_pdf_screen.dart';
-import 'package:tixe_flutter_app/modules/workout_flow/my_workout_video/views/my_workout_video_screen.dart';
-import 'package:tixe_flutter_app/modules/workout_flow/workout/views/components/my_workouts/my_workouts_screen.dart';
-import 'package:tixe_flutter_app/modules/workout_flow/workout_details/model/workout_detail_response.dart';
-import 'package:tixe_flutter_app/modules/workout_flow/workout_details/model/workout_details_nav_model.dart';
-import 'package:tixe_flutter_app/modules/workout_flow/workout_details/views/workout_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/views/personal_details_screen.dart';
 import 'package:tixe_flutter_app/modules/auth/sign_in/views/sign_in_screen.dart';
 import 'package:tixe_flutter_app/modules/auth/sign_up/views/sign_up_screen.dart';
 import 'package:tixe_flutter_app/modules/auth/verify_email/views/verify_email_screen.dart';
+import 'package:tixe_flutter_app/modules/fitness_flow/fitness/views/fitness_screen.dart';
 import 'package:tixe_flutter_app/modules/splash/views/splash_screen.dart';
 import 'package:tixe_flutter_app/modules/training_flow/confirm_training_enroll/model/confirm_training_enrollment_nav_model.dart';
 import 'package:tixe_flutter_app/modules/training_flow/my_training_details/views/my_training_details_screen.dart';
@@ -18,7 +11,15 @@ import 'package:tixe_flutter_app/modules/training_flow/training/model/my_trainin
 import 'package:tixe_flutter_app/modules/training_flow/training/views/components/my_trainings/my_trainings_screen.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training_details/model/training_details_nav_model.dart';
 import 'package:tixe_flutter_app/modules/training_flow/training_gears_checklist/model/training_gears_checklist_nav_model.dart';
+import 'package:tixe_flutter_app/modules/workout_flow/buy_workout/views/buy_workout_screen.dart';
+import 'package:tixe_flutter_app/modules/workout_flow/my_workout_detail/views/components/history/all_workout_history.dart';
+import 'package:tixe_flutter_app/modules/workout_flow/my_workout_pdf/views/my_workout_pdf_screen.dart';
+import 'package:tixe_flutter_app/modules/workout_flow/my_workout_video/views/my_workout_video_screen.dart';
+import 'package:tixe_flutter_app/modules/workout_flow/workout/views/components/my_workouts/my_workouts_screen.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/workout/views/workout_screen.dart';
+import 'package:tixe_flutter_app/modules/workout_flow/workout_details/model/workout_detail_response.dart';
+import 'package:tixe_flutter_app/modules/workout_flow/workout_details/model/workout_details_nav_model.dart';
+import 'package:tixe_flutter_app/modules/workout_flow/workout_details/views/workout_details_screen.dart';
 
 import '../modules/auth/fitness_details/views/fitness_details_screen.dart';
 import '../modules/dashboard/views/dashboard_screen.dart';
@@ -58,6 +59,7 @@ enum AppRoutes {
   myTrainingDetails,
   myWorkouts,
   allWorkoutHistory,
+  fitness,
 }
 
 extension AppRoutesExtention on AppRoutes {
@@ -138,6 +140,8 @@ extension AppRoutesExtention on AppRoutes {
         return const MyWorkoutsScreen();
       case AppRoutes.allWorkoutHistory:
         return const AllWorkoutHistory();
+      case AppRoutes.fitness:
+        return const FitnessScreen();
     }
   }
 }

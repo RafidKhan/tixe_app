@@ -96,5 +96,7 @@
   "kcal": "kcal",
   "start": "Start",
   "complete": "Complete",
-  "phase_completed": "Phase Completed"
+  "phase_completed": "Phase Completed",
+  "connect_to_health_1": "Apple Health/Google Fit isn’t connected. ",
+  "connect_to_health_2": "Tap here to connect"
 }

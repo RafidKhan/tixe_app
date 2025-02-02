@@ -2,7 +2,6 @@ import 'package:tixe_flutter_app/global/global_module/global_interface.dart';
 import 'package:tixe_flutter_app/global/global_module/global_respository.dart';
 import 'package:tixe_flutter_app/global/widget/phase_complete_widget.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/my_workout_detail/model/my_enrolled_workout_detail_response.dart';
-import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 
 class MyWorkoutPdfController {

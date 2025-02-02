@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tixe_flutter_app/utils/user_activity_tracker_services/user_activity_tracker_services.dart';
 
 import '/constant/constant_key.dart';
 
@@ -66,6 +69,10 @@ class PrefHelper {
     _prefsInstance?.clear();
     _prefsInstance?.setInt(AppConstant.LANGUAGE.key, languageValue);
     _prefsInstance?.remove(AppConstant.TOKEN.key);
+
+    if (!Platform.isIOS) {
+      UserActivityTrack.removeAccessIfSynced();
+    }
   }
 
   static bool getLoginStatus() {

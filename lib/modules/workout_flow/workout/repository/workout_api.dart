@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 
-import '../../../../constant/app_url.dart';
 import '/data_provider/api_client.dart';
+import '../../../../constant/app_url.dart';
 class WorkoutApi {
   final ApiClient _apiClient = ApiClient();
 

@@ -15,11 +15,11 @@ import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/network_connection.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
+import 'package:tixe_flutter_app/utils/user_activity_tracker_services/user_activity_tracker_services.dart';
 
 import 'firebase_options.dart';
 
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -50,6 +50,7 @@ initServices() async {
 
   await PrefHelper.init();
   await AppVersion.getVersion();
+  UserActivityTrack.init();
   // if (Platform.isAndroid) {
   //   AppUrlExtention.setAndroidPackageName();
   // }

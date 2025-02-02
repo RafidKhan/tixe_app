@@ -38,11 +38,17 @@ dependencies:
   flutter_pdfview: ^1.3.0
   video_player: ^2.9.2
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  health:
+    git:
+      url: https://RafidKhan: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@github.com/RafidKhan/health_connect.git
+      ref: main  # Use the correct branch name
+
 
 
   flutter_lints: ^4.0.0

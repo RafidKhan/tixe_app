@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 
+import '/data_provider/api_client.dart';
 import '../../../../constant/app_url.dart';
 import '../../../../utils/enum.dart';
-import '/data_provider/api_client.dart';
 class MyWorkoutDetailApi {
   final ApiClient _apiClient = ApiClient();
 
