@@ -128,6 +128,8 @@ class WorkoutController extends StateNotifier<WorkoutState> {
           }
         },
       );
+    } else {
+      state = state.copyWith(myWorkouts: []);
     }
   }
 

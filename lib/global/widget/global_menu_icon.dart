@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tixe_flutter_app/data_provider/pref_helper.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
@@ -11,17 +12,20 @@ class GlobalMenuIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigation.push(
-          appRoutes: AppRoutes.profile,
-        );
-      },
-      child: GlobalImageLoader(
-        imagePath: KAssetName.icHamburgerPng.imagePath,
-        height: 17.h,
-        width: 22.w,
-      ),
-    );
+    if (PrefHelper.getLoginStatus()) {
+      return InkWell(
+        onTap: () {
+          Navigation.push(
+            appRoutes: AppRoutes.profile,
+          );
+        },
+        child: GlobalImageLoader(
+          imagePath: KAssetName.icHamburgerPng.imagePath,
+          height: 17.h,
+          width: 22.w,
+        ),
+      );
+    }
+    return const SizedBox.shrink();
   }
 }

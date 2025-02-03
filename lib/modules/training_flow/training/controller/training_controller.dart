@@ -72,6 +72,13 @@ class TrainingController extends StateNotifier<TrainingState> {
           );
         },
       );
+    }else{
+      state = state.copyWith(
+        isLoadingMyTrainings: false,
+        myTrainings: [],
+        page: 1,
+        totalDataSize: 0,
+      );
     }
 
   }
