@@ -7,6 +7,8 @@ import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
+import '../../../../../global/widget/global_menu_icon.dart';
+
 class WorkoutHeader extends StatelessWidget {
   const WorkoutHeader({super.key});
 
@@ -24,11 +26,7 @@ class WorkoutHeader extends StatelessWidget {
             ),
           ),
         ),
-        GlobalImageLoader(
-          imagePath: KAssetName.icHamburgerPng.imagePath,
-          height: 17.h,
-          width: 22.w,
-        ),
+        const GlobalMenuIcon(),
       ],
     );
   }

@@ -16,33 +16,54 @@ class Navigation {
     required AppRoutes appRoutes,
     String? routeName,
     T? arguments,
-  }) {
-    return Navigator.push(
+  }) async {
+    return await Navigator.push(
       Navigation.key.currentContext!,
-      MaterialPageRoute(
+      PageRouteBuilder(
         settings: RouteSettings(name: routeName),
-        builder: (context) => appRoutes.buildWidget(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            appRoutes.buildWidget(
           arguments: arguments,
         ),
+        transitionsBuilder: slideTransition,
       ),
+    );
+  }
+
+  static SlideTransition slideTransition(
+      BuildContext context,
+      Animation<double> animation,
+      Animation<double> secondaryAnimation,
+      Widget child) {
+    const begin = Offset(1.0, 0.0); // Start from the right
+    const end = Offset.zero; // End at center (no offset)
+    const curve = Curves.easeInOut;
+
+    var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+    // Apply SlideTransition using the tween animation
+    return SlideTransition(
+      position: animation.drive(tween),
+      child: child,
     );
   }
 
   //it will pop all the screen  and take you to the new screen
   //E:g : when you will goto the login to home page then you will use this
-  static Future pushAndRemoveUntil<T extends Object>(
-    {
+  static Future pushAndRemoveUntil<T extends Object>({
     required AppRoutes appRoutes,
     String? routeName,
     T? arguments,
-  }) {
-    return Navigator.pushAndRemoveUntil(
+  }) async {
+    return await Navigator.pushAndRemoveUntil(
       Navigation.key.currentContext!,
-      MaterialPageRoute(
+      PageRouteBuilder(
         settings: RouteSettings(name: routeName),
-        builder: (context) => appRoutes.buildWidget(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            appRoutes.buildWidget(
           arguments: arguments,
         ),
+        transitionsBuilder: slideTransition,
       ),
       (route) => false,
     );
@@ -50,45 +71,47 @@ class Navigation {
 
   //It will replace the screen with current screen
   //E:g :  screen A
-  //  GestureDetector(
+  //  GlobalInkWell(
   // onTap: (){
   //   ScreenB().pushReplacement
   // },
   // it means screen B replace in screen A .
   //if you pressed back then you will not find screen A. it remove from stack
 
-  static Future pushReplacement<T extends Object>(
-     {
+  static Future pushReplacement<T extends Object>({
     required AppRoutes appRoutes,
     String? routeName,
     T? arguments,
-  }) {
-    return Navigator.pushReplacement(
+  }) async {
+    return await Navigator.pushReplacement(
       Navigation.key.currentContext!,
-      MaterialPageRoute(
+      PageRouteBuilder(
         settings: RouteSettings(name: routeName),
-        builder: (BuildContext context) => appRoutes.buildWidget(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            appRoutes.buildWidget(
           arguments: arguments,
         ),
+        transitionsBuilder: slideTransition,
       ),
     );
   }
 
   //it will pop all the screen and take you to the first screen of the stack
   //that means you will go to the Home page
-  static Future pushAndRemoveSpecificScreen<T extends Object>(
-    {
+  static Future pushAndRemoveSpecificScreen<T extends Object>({
     required AppRoutes appRoutes,
     String? routeName,
     T? arguments,
-  }) {
-    return Navigator.pushAndRemoveUntil(
+  }) async {
+    return await Navigator.pushAndRemoveUntil(
       Navigation.key.currentContext!,
-      MaterialPageRoute(
+      PageRouteBuilder(
         settings: RouteSettings(name: routeName),
-        builder: (context) => appRoutes.buildWidget(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            appRoutes.buildWidget(
           arguments: arguments,
         ),
+        transitionsBuilder: slideTransition,
       ),
       (route) => route.isFirst,
     );
@@ -104,8 +127,7 @@ class Navigation {
   }
 
   //Remove single page from stack
-  static void pop({Object? result}) {
-    return Navigator.pop(Navigation.key.currentContext!,result);
+  static void pop<T extends Object?>({Object? result}) {
+    return Navigator.pop(Navigation.key.currentContext!, result);
   }
 }
-

@@ -6,6 +6,8 @@ import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 class TixeMainScaffold extends StatelessWidget {
   final Widget? body;
   final Widget? bottomNavigationBar;
+  final Widget? floatingActionButton;
+  final FloatingActionButtonLocation? floatingActionButtonLocation;
   final bool? extendBody;
   final bool hasAppBar;
 
@@ -14,6 +16,8 @@ class TixeMainScaffold extends StatelessWidget {
     this.body,
     this.bottomNavigationBar,
     this.extendBody,
+    this.floatingActionButton,
+    this.floatingActionButtonLocation,
     this.hasAppBar = false,
   });
 
@@ -38,6 +42,8 @@ class TixeMainScaffold extends StatelessWidget {
         child: body,
       ),
       bottomNavigationBar: bottomNavigationBar,
+      floatingActionButton: floatingActionButton,
+      floatingActionButtonLocation: floatingActionButtonLocation,
     );
   }
 }

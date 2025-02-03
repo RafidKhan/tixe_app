@@ -98,5 +98,13 @@
   "complete": "Complete",
   "phase_completed": "Phase Completed",
   "connect_to_health_1": "Apple Health/Google Fit isn’t connected. ",
-  "connect_to_health_2": "Tap here to connect"
+  "connect_to_health_2": "Tap here to connect",
+  "view_profile": "View Profile",
+  "arm_store": "Arm Store",
+  "buy_amazing_gears": "Buy amazing combat gears at amazing price",
+  "list_items_and_services": "List Items & Services",
+  "wallet": "Wallet",
+  "payment_options": "Payment Options",
+  "preferences": "Preferences",
+  "logout": "Logout"
 }

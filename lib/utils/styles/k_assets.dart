@@ -3,6 +3,8 @@ enum KAssetName {
   warJpg,
   dummyMapLocationPng,
   icInstructionPng,
+  icWalletPng,
+  dummyUserPng,
   icCheckboxPng,
   selectedRadioPng,
   dummyGearPng,
@@ -12,10 +14,12 @@ enum KAssetName {
   applePng,
   icFirePng,
   icVideoPng,
+  icArmStorePng,
   errorPng,
   icHamburgerPng,
   icVideoPlayPng,
   fitnessPng,
+  icClosePng,
   trainingPng,
   starPng,
   pdfPlaceholderPng,
@@ -24,6 +28,7 @@ enum KAssetName {
   googlePng,
   facebookPng,
   tixeMainBgPng,
+  icPreferencePng,
   workoutPng,
   icCompletePng,
   splashBgPng,
@@ -43,6 +48,10 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/dummy_map_location.png';
       case KAssetName.icInstructionPng:
         return '$_imagesDir/icInstruction.png';
+      case KAssetName.icWalletPng:
+        return '$_imagesDir/icWallet.png';
+      case KAssetName.dummyUserPng:
+        return '$_imagesDir/dummy_user.png';
       case KAssetName.icCheckboxPng:
         return '$_imagesDir/icCheckbox.png';
       case KAssetName.selectedRadioPng:
@@ -61,6 +70,8 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/icFire.png';
       case KAssetName.icVideoPng:
         return '$_imagesDir/icVideo.png';
+      case KAssetName.icArmStorePng:
+        return '$_imagesDir/icArmStore.png';
       case KAssetName.errorPng:
         return '$_imagesDir/error.png';
       case KAssetName.icHamburgerPng:
@@ -69,6 +80,8 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/icVideoPlay.png';
       case KAssetName.fitnessPng:
         return '$_imagesDir/fitness.png';
+      case KAssetName.icClosePng:
+        return '$_imagesDir/icClose.png';
       case KAssetName.trainingPng:
         return '$_imagesDir/training.png';
       case KAssetName.starPng:
@@ -85,6 +98,8 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/facebook.png';
       case KAssetName.tixeMainBgPng:
         return '$_imagesDir/tixe_main_bg.png';
+      case KAssetName.icPreferencePng:
+        return '$_imagesDir/icPreference.png';
       case KAssetName.workoutPng:
         return '$_imagesDir/workout.png';
       case KAssetName.icCompletePng:

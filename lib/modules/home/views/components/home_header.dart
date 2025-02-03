@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
+import 'package:tixe_flutter_app/global/widget/global_menu_icon.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
@@ -24,11 +25,7 @@ class HomeHeader extends StatelessWidget {
             ),
           ),
         ),
-        GlobalImageLoader(
-          imagePath: KAssetName.icHamburgerPng.imagePath,
-          height: 17.h,
-          width: 22.w,
-        ),
+        const GlobalMenuIcon(),
       ],
     );
   }
