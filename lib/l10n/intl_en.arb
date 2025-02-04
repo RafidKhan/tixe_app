@@ -106,5 +106,8 @@
   "wallet": "Wallet",
   "payment_options": "Payment Options",
   "preferences": "Preferences",
-  "logout": "Logout"
+  "logout": "Logout",
+  "play": "Play",
+  "pause": "Pause",
+  "resume": "Resume"
 }

@@ -41,3 +41,11 @@ enum ScheduleType {
   DurationBased,
   Undefined,
 }
+
+enum TimerType {
+  NOT_STARTED,
+  PLAY,
+  PAUSE,
+  STOP,
+  COMPLETE,
+}

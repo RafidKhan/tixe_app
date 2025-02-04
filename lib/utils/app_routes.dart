@@ -1,4 +1,3 @@
-import '../modules/profile_flow/profile/views/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/views/personal_details_screen.dart';
 import 'package:tixe_flutter_app/modules/auth/sign_in/views/sign_in_screen.dart';
@@ -25,6 +24,7 @@ import 'package:tixe_flutter_app/modules/workout_flow/workout_details/views/work
 import '../modules/auth/fitness_details/views/fitness_details_screen.dart';
 import '../modules/dashboard/views/dashboard_screen.dart';
 import '../modules/home/views/home_screen.dart';
+import '../modules/profile_flow/profile/views/profile_screen.dart';
 import '../modules/training_flow/confirm_training_enroll/views/confirm_training_enroll_screen.dart';
 import '../modules/training_flow/training/views/training_screen.dart';
 import '../modules/training_flow/training_details/views/training_details_screen.dart';

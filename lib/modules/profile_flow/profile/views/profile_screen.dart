@@ -1,7 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/data_provider/pref_helper.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
-import 'package:tixe_flutter_app/global/widget/scaffold/tixe_scaffold.dart';
 import 'package:tixe_flutter_app/modules/profile_flow/profile/views/components/profile_common_item.dart';
 import 'package:tixe_flutter_app/modules/profile_flow/profile/views/components/profile_header.dart';
 import 'package:tixe_flutter_app/utils/app_routes.dart';
@@ -10,10 +10,7 @@ import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
-import '/global/widget/global_appbar.dart';
 import '/global/widget/global_text.dart';
-import 'package:flutter/material.dart';
-
 import 'components/profile_arm_store.dart';
 import 'components/profile_info.dart';
 

@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:tixe_flutter_app/constant/constant_key.dart';
-import 'package:tixe_flutter_app/utils/extension.dart';
 
 mixin GlobalMixin {
   String calculateDiscount({
