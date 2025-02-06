@@ -30,7 +30,7 @@ class SignUpController extends StateNotifier<SignUpState> {
     passwordController.addListener(checkButtonStatus);
     confirmPasswordController.addListener(checkButtonStatus);
     if (kDebugMode) {
-      emailOrPhoneController.text = "rafid@gmail.com";
+      emailOrPhoneController.text = "rafid4@gmail.com";
       passwordController.text = "12345678";
       confirmPasswordController.text = "12345678";
     }

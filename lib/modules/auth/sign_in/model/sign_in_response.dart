@@ -87,10 +87,10 @@ class ProfileDetails {
   final String? phone;
   final String? address;
   final String? weightUnit;
-  final int? weight;
+  final String? weight;
   final String? heightUnit;
-  final int? height;
-  final int? age;
+  final String? height;
+  final String? age;
   final String? country;
   final String? city;
   final String? nid;
@@ -119,10 +119,10 @@ class ProfileDetails {
       phone: json['phone'] as String?,
       address: json['address'] as String?,
       weightUnit: json['weight_unit'] as String?,
-      weight: json['weight'] as int?,
+      weight: json['weight'].toString(),
       heightUnit: json['height_unit'] as String?,
-      height: json['height'] as int?,
-      age: json['age'] as int?,
+      height: json['height'].toString(),
+      age: json['age'].toString(),
       country: json['country'] as String?,
       city: json['city'] as String?,
       nid: json['nid'] as String?,
