@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tixe_flutter_app/data_provider/pref_helper.dart';
 import 'package:tixe_flutter_app/global/global_module/shared/shared_controller.dart';
 import 'package:tixe_flutter_app/modules/fitness_flow/fitness/views/components/fitness_header.dart';
+import 'package:tixe_flutter_app/modules/fitness_flow/fitness/views/components/fitness_middle_info.dart';
 import 'package:tixe_flutter_app/modules/fitness_flow/fitness/views/components/fitness_sync.dart';
 import 'package:tixe_flutter_app/modules/fitness_flow/fitness/views/components/fitness_top_info.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
@@ -45,8 +46,6 @@ class _FitnessScreenState extends State<FitnessScreen> {
               vertical: 16.h,
             ),
             child: Column(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const FitnessHeader(),
                 SizedBox(height: 20.h),
@@ -56,6 +55,8 @@ class _FitnessScreenState extends State<FitnessScreen> {
                       children: [
                         const FitnessSync(),
                         const FitnessTopInfo(),
+                        SizedBox(height: 20.h,),
+                        const FitnessMiddleInfo(),
                       ],
                     ),
                   ),

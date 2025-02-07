@@ -22,6 +22,9 @@ enum KColor {
   green,
   red,
   workoutColor,
+  stepsColor,
+  calorieColor,
+  exerciseColor,
 }
 
 extension KColorExtention on KColor {
@@ -69,6 +72,12 @@ extension KColorExtention on KColor {
         return Colors.red;
       case KColor.workoutColor:
         return const Color(0xffD8FFBA);
+      case KColor.stepsColor:
+        return const Color(0xff7593FE);
+      case KColor.calorieColor:
+        return const Color(0xffFFAB48);
+      case KColor.exerciseColor:
+        return const Color(0xff10CB71);
     }
   }
 }
