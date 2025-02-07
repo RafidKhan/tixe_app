@@ -1,19 +1,24 @@
 enum KAssetName {
   tixeAppIconPng,
   warJpg,
+  icHeartRatePng,
   dummyMapLocationPng,
+  icStepsPng,
   icInstructionPng,
   icWalletPng,
   dummyUserPng,
   icCheckboxPng,
   selectedRadioPng,
+  icHeartRateGraphPng,
   dummyGearPng,
+  icCaloriesPng,
   homePng,
   tixeLogoPng,
   icClockPng,
   applePng,
   icFirePng,
   icVideoPng,
+  icExcercisePng,
   icArmStorePng,
   errorPng,
   icHamburgerPng,
@@ -23,6 +28,7 @@ enum KAssetName {
   trainingPng,
   starPng,
   pdfPlaceholderPng,
+  treadMillPng,
   unselectedRadioPng,
   demoTrainingPng,
   googlePng,
@@ -44,8 +50,12 @@ extension AssetsExtension on KAssetName {
         return '$_app_iconDir/tixe_app_icon.png';
       case KAssetName.warJpg:
         return '$_imagesDir/war.jpg';
+      case KAssetName.icHeartRatePng:
+        return '$_imagesDir/icHeartRate.png';
       case KAssetName.dummyMapLocationPng:
         return '$_imagesDir/dummy_map_location.png';
+      case KAssetName.icStepsPng:
+        return '$_imagesDir/icSteps.png';
       case KAssetName.icInstructionPng:
         return '$_imagesDir/icInstruction.png';
       case KAssetName.icWalletPng:
@@ -56,8 +66,12 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/icCheckbox.png';
       case KAssetName.selectedRadioPng:
         return '$_imagesDir/selectedRadio.png';
+      case KAssetName.icHeartRateGraphPng:
+        return '$_imagesDir/icHeartRateGraph.png';
       case KAssetName.dummyGearPng:
         return '$_imagesDir/dummy_gear.png';
+      case KAssetName.icCaloriesPng:
+        return '$_imagesDir/icCalories.png';
       case KAssetName.homePng:
         return '$_imagesDir/home.png';
       case KAssetName.tixeLogoPng:
@@ -70,6 +84,8 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/icFire.png';
       case KAssetName.icVideoPng:
         return '$_imagesDir/icVideo.png';
+      case KAssetName.icExcercisePng:
+        return '$_imagesDir/icExcercise.png';
       case KAssetName.icArmStorePng:
         return '$_imagesDir/icArmStore.png';
       case KAssetName.errorPng:
@@ -88,6 +104,8 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/star.png';
       case KAssetName.pdfPlaceholderPng:
         return '$_imagesDir/pdfPlaceholder.png';
+      case KAssetName.treadMillPng:
+        return '$_imagesDir/treadMill.png';
       case KAssetName.unselectedRadioPng:
         return '$_imagesDir/unselectedRadio.png';
       case KAssetName.demoTrainingPng:
