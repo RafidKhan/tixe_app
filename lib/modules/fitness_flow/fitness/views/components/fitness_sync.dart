@@ -17,47 +17,52 @@ class FitnessSync extends ConsumerWidget {
     final sharedCon = ref.read(sharedController.notifier);
     if (PrefHelper.getLoginStatus()) {
       if (!sharedState.isHealthConnectSynced){
-        return InkWell(
-          onTap: () async {
-            if (!sharedState.isHealthConnectSynced) {
-              await UserActivityTrack.authorize();
-            }
+        return Column(
+          children: [
+            InkWell(
+              onTap: () async {
+                if (!sharedState.isHealthConnectSynced) {
+                  await UserActivityTrack.authorize();
+                }
 
-            sharedCon.checkIsHealthConnectSynced();
-          },
-          child: Container(
-            width: context.width,
-            padding: EdgeInsets.symmetric(
-              horizontal: 10.w,
-              vertical: 6.h,
-            ),
-            decoration: BoxDecoration(
-              color: KColor.shadeGradient1.color,
-              borderRadius: BorderRadius.circular(10.r),
-            ),
-            child: Text.rich(
-              TextSpan(children: [
-                TextSpan(
-                  text: context.loc.connect_to_health_1,
-                  style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w400,
-                        color: KColor.white.color,
-                      )),
+                sharedCon.checkIsHealthConnectSynced();
+              },
+              child: Container(
+                width: context.width,
+                padding: EdgeInsets.symmetric(
+                  horizontal: 10.w,
+                  vertical: 6.h,
                 ),
-                TextSpan(
-                  text: context.loc.connect_to_health_2,
-                  style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w400,
-                        color: KColor.btnGradient1.color,
-                      )),
+                decoration: BoxDecoration(
+                  color: KColor.shadeGradient1.color,
+                  borderRadius: BorderRadius.circular(10.r),
                 ),
-              ]),
+                child: Text.rich(
+                  TextSpan(children: [
+                    TextSpan(
+                      text: context.loc.connect_to_health_1,
+                      style: GoogleFonts.poppins(
+                          textStyle: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w400,
+                            color: KColor.white.color,
+                          )),
+                    ),
+                    TextSpan(
+                      text: context.loc.connect_to_health_2,
+                      style: GoogleFonts.poppins(
+                          textStyle: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w400,
+                            color: KColor.btnGradient1.color,
+                          )),
+                    ),
+                  ]),
+                ),
+              ),
             ),
-          ),
+            SizedBox(height: 20.h),
+          ],
         );
       }
     }
