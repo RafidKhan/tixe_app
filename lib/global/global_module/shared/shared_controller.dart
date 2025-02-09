@@ -19,4 +19,8 @@ class SharedController extends StateNotifier<SharedState> {
       isHealthConnectSynced: UserActivityTrack.isSyncedWithTracker(),
     );
   }
+
+  Future<void> fetchFitnessData() async{
+    await UserActivityTrack.fetchAllData();
+  }
 }

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tixe_flutter_app/data_provider/pref_helper.dart';
 import 'package:tixe_flutter_app/global/global_module/shared/shared_controller.dart';
+import 'package:tixe_flutter_app/global/widget/global_button.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 import 'package:tixe_flutter_app/utils/user_activity_tracker_services/user_activity_tracker_services.dart';
@@ -12,11 +13,11 @@ class FitnessSync extends ConsumerWidget {
   const FitnessSync({super.key});
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final sharedState = ref.watch(sharedController);
     final sharedCon = ref.read(sharedController.notifier);
     if (PrefHelper.getLoginStatus()) {
-      if (!sharedState.isHealthConnectSynced){
+      if (!sharedState.isHealthConnectSynced) {
         return Column(
           children: [
             InkWell(
@@ -43,19 +44,19 @@ class FitnessSync extends ConsumerWidget {
                       text: context.loc.connect_to_health_1,
                       style: GoogleFonts.poppins(
                           textStyle: TextStyle(
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w400,
-                            color: KColor.white.color,
-                          )),
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w400,
+                        color: KColor.white.color,
+                      )),
                     ),
                     TextSpan(
                       text: context.loc.connect_to_health_2,
                       style: GoogleFonts.poppins(
                           textStyle: TextStyle(
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w400,
-                            color: KColor.btnGradient1.color,
-                          )),
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w400,
+                        color: KColor.btnGradient1.color,
+                      )),
                     ),
                   ]),
                 ),
@@ -65,9 +66,14 @@ class FitnessSync extends ConsumerWidget {
           ],
         );
       }
+
+      return GlobalButton(
+          onPressed: () {
+            sharedCon.fetchFitnessData();
+          },
+          buttonText: "Fetch Data");
     }
 
     return const SizedBox.shrink();
-
   }
 }
