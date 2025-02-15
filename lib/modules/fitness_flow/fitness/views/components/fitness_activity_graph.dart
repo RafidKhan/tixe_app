@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tixe_flutter_app/global/global_module/shared/shared_controller.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
@@ -44,38 +46,41 @@ class FitnessActivityGraph extends StatelessWidget {
   }
 
   Widget _progressIndicator() {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        // Outer Circle
-        _circleProgress(
-          80,
-          color: KColor.stepsColor.color,
-        ),
-        // Middle Circle
-        _circleProgress(
-          50,
-          color: KColor.calorieColor.color,
-        ),
-        // Inner Circle
-        _circleProgress(
-          20,
-          color: KColor.exerciseColor.color,
-        ),
-      ],
-    );
+    return Consumer(builder: (context, ref, child) {
+      final state = ref.watch(sharedController);
+      return Stack(
+        alignment: Alignment.center,
+        children: [
+          // Outer Circle
+          _circleProgress(80,
+              color: KColor.stepsColor.color, value: state.totalSteps),
+          // Middle Circle
+          _circleProgress(
+            50,
+            color: KColor.calorieColor.color,
+            value: state.burntCalories,
+          ),
+          // Inner Circle
+          _circleProgress(
+            20,
+            color: KColor.exerciseColor.color,
+            value: state.exerciseTime,
+          ),
+        ],
+      );
+    });
   }
 
   Widget _circleProgress(
     double size, {
     required Color color,
+    required String value,
   }) {
     return SizedBox(
       height: size.h,
       width: size.w,
       child: CircularProgressIndicator(
-        value: 0.25,
-        // 25% progress
+        value: (double.tryParse(value) ?? 0)/100,
         strokeWidth: 8,
         valueColor: AlwaysStoppedAnimation<Color>(color),
         backgroundColor: color.withOpacity(0.3),

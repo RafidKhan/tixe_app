@@ -49,3 +49,10 @@ enum TimerType {
   STOP,
   COMPLETE,
 }
+
+
+enum HeartRateStatus {
+  low,    // Heart rate is below normal range
+  normal, // Heart rate is within normal range
+  high,   // Heart rate is above normal range
+}

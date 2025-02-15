@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tixe_flutter_app/global/widget/global_menu_icon.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
-import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
 class FitnessHeader extends StatelessWidget {

@@ -1,4 +1,5 @@
 enum KAssetName {
+  appIconPng,
   tixeAppIconPng,
   warJpg,
   icHeartRatePng,
@@ -9,6 +10,7 @@ enum KAssetName {
   dummyUserPng,
   icCheckboxPng,
   selectedRadioPng,
+  icWalkingPng,
   icHeartRateGraphPng,
   dummyGearPng,
   icCaloriesPng,
@@ -46,6 +48,8 @@ extension AssetsExtension on KAssetName {
   const String _app_iconDir = '$_rootPath/app_icon';
   const String _imagesDir = '$_rootPath/images';
     switch (this) {
+      case KAssetName.appIconPng:
+        return '$_app_iconDir/app_icon.png';
       case KAssetName.tixeAppIconPng:
         return '$_app_iconDir/tixe_app_icon.png';
       case KAssetName.warJpg:
@@ -66,6 +70,8 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/icCheckbox.png';
       case KAssetName.selectedRadioPng:
         return '$_imagesDir/selectedRadio.png';
+      case KAssetName.icWalkingPng:
+        return '$_imagesDir/icWalking.png';
       case KAssetName.icHeartRateGraphPng:
         return '$_imagesDir/icHeartRateGraph.png';
       case KAssetName.dummyGearPng:

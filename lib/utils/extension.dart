@@ -304,3 +304,26 @@ extension DateExtention on String {
     }
   }
 }
+
+extension HeartRateStatusExtension on HeartRateStatus {
+  String get label {
+    switch (this) {
+      case HeartRateStatus.low:
+        return "Low";
+      case HeartRateStatus.normal:
+        return "Normal";
+      case HeartRateStatus.high:
+        return "High";
+    }
+  }
+
+  static HeartRateStatus fromValue(num bpm) {
+    if (bpm < 60) {
+      return HeartRateStatus.low;
+    } else if (bpm >= 60 && bpm <= 100) {
+      return HeartRateStatus.normal;
+    } else {
+      return HeartRateStatus.high;
+    }
+  }
+}

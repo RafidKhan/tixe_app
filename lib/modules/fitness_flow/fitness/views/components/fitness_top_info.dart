@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tixe_flutter_app/global/global_module/shared/shared_controller.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
-class FitnessTopInfo extends StatelessWidget {
+class FitnessTopInfo extends ConsumerWidget {
   const FitnessTopInfo({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(sharedController);
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: 20.w,
@@ -40,17 +43,17 @@ class FitnessTopInfo extends StatelessWidget {
                 _buildRow(
                   KAssetName.icStepsPng.imagePath,
                   "Steps",
-                  "1000",
+                  state.totalSteps.toString(),
                 ),
                 _buildRow(
                   KAssetName.icCaloriesPng.imagePath,
-                  "Calories",
-                  "1000",
+                  "Kilo Calories",
+                  state.burntCalories.toString(),
                 ),
                 _buildRow(
                   KAssetName.icExcercisePng.imagePath,
                   "Exercise",
-                  "20 min",
+                  "${state.exerciseTime} min",
                 ),
               ],
             ),

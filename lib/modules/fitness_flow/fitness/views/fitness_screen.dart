@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:tixe_flutter_app/data_provider/pref_helper.dart';
 import 'package:tixe_flutter_app/global/global_module/shared/shared_controller.dart';
 import 'package:tixe_flutter_app/modules/fitness_flow/fitness/views/components/fitness_header.dart';
 import 'package:tixe_flutter_app/modules/fitness_flow/fitness/views/components/fitness_middle_info.dart';
@@ -10,7 +8,8 @@ import 'package:tixe_flutter_app/modules/fitness_flow/fitness/views/components/f
 import 'package:tixe_flutter_app/modules/fitness_flow/fitness/views/components/fitness_top_info.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
-import 'package:tixe_flutter_app/utils/user_activity_tracker_services/user_activity_tracker_services.dart';
+
+import 'components/fitness_exercise_info.dart';
 
 class FitnessScreen extends StatefulWidget {
   const FitnessScreen({Key? key}) : super(key: key);
@@ -27,6 +26,7 @@ class _FitnessScreenState extends State<FitnessScreen> {
     final sharedCon = context.read(sharedController.notifier);
 
     Future(() {
+      sharedCon.clearData();
       sharedCon.checkIsHealthConnectSynced();
     });
   }
@@ -55,8 +55,14 @@ class _FitnessScreenState extends State<FitnessScreen> {
                       children: [
                         const FitnessSync(),
                         const FitnessTopInfo(),
-                        SizedBox(height: 20.h,),
+                        SizedBox(
+                          height: 20.h,
+                        ),
                         const FitnessMiddleInfo(),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        const FitnessExerciseInfo(),
                       ],
                     ),
                   ),

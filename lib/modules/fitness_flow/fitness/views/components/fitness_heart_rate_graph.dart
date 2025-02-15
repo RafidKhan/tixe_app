@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tixe_flutter_app/global/global_module/shared/shared_controller.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
+import 'package:tixe_flutter_app/utils/enum.dart';
+import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 
 import '../../../../../utils/styles/k_colors.dart';
 
-class FitnessHeartRateGraph extends StatelessWidget {
+class FitnessHeartRateGraph extends ConsumerWidget {
   const FitnessHeartRateGraph({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+    final state = ref.watch(sharedController);
+    final HeartRateStatus status = HeartRateStatusExtension.fromValue((num.tryParse(state.heartRate)??0));
     return Expanded(
       child: Container(
         height: 170.h,
@@ -52,7 +58,7 @@ class FitnessHeartRateGraph extends StatelessWidget {
                     width: 4.w,
                   ),
                   GlobalText(
-                    str: "30 bpm",
+                    str: "${state.heartRate} bpm",
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                     color: KColor.white.color,
@@ -69,7 +75,7 @@ class FitnessHeartRateGraph extends StatelessWidget {
                   ),
                 ),
                 GlobalText(
-                  str: "Normal",
+                  str: status.label,
                 ),
               ],
             )

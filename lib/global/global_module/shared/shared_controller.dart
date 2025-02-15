@@ -11,16 +11,52 @@ class SharedController extends StateNotifier<SharedState> {
       : super(
           const SharedState(
             isHealthConnectSynced: false,
+            totalSteps: "",
+            burntCalories: "",
+            exerciseTime: "",
+            heartRate: "",
+            exerciseList: [],
           ),
         );
+
+  void clearData() {
+    state = const SharedState(
+      isHealthConnectSynced: false,
+      totalSteps: "",
+      burntCalories: "",
+      exerciseTime: "",
+      heartRate: "",
+      exerciseList: [],
+    );
+  }
 
   Future<void> checkIsHealthConnectSynced() async {
     state = state.copyWith(
       isHealthConnectSynced: UserActivityTrack.isSyncedWithTracker(),
     );
+
+    if (state.isHealthConnectSynced) {
+      await fetchFitnessData();
+    }
   }
 
-  Future<void> fetchFitnessData() async{
-    await UserActivityTrack.fetchAllData();
+  Future<void> fetchFitnessData() async {
+    await UserActivityTrack.fetchAllData(
+      caloriesResult: (calories) {
+        state = state.copyWith(burntCalories: calories.toStringAsFixed(2));
+      },
+      stepsResult: (steps) {
+        state = state.copyWith(totalSteps: steps.round().toString());
+      },
+      exerciseTimeResult: (time) {
+        state = state.copyWith(exerciseTime: time.round().toString());
+      },
+      heartRateResult: (heartRate) {
+        state = state.copyWith(heartRate: heartRate.round().toString());
+      },
+      exerciseListResult: (exerciseList) {
+        state = state.copyWith(exerciseList: exerciseList);
+      },
+    );
   }
 }

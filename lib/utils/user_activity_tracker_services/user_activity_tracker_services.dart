@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:health/health.dart';
@@ -157,39 +156,20 @@ class UserActivityTrack {
   static Future<dynamic> fetchAllData({
     DateTime? startDateTimeValue,
     DateTime? endDateTimeValue,
+    required Function(num value) stepsResult,
+    required Function(num value) caloriesResult,
+    required Function(num value) exerciseTimeResult,
+    required Function(num value) heartRateResult,
+    required Function(List<HealthDataPoint> exerciseList) exerciseListResult,
   }) async {
     if (isSyncedWithTracker() == true) {
-      // String fetchedMap = PrefHelper.getString(
-      //   AppConstant.LAST_SYNCED_TIMES.key,
-      // );
-      // final jsonMap = json.decode(fetchedMap);
-      //
-      // Map<int, DateTime> resultMap = {
-      //   for (var key in jsonMap.keys)
-      //     int.parse(key): DateTime.parse(jsonMap[key]!)
-      // };
-      //
-      // print("decoded map is : $resultMap");
-
-      // int selectedPatientId =
-      //     await PrefHelper.getInt(AppConstant.PATIENT_ID.key);
-
-      // if (resultMap.containsKey(selectedPatientId)) {
-      //   // Retrieve the DateTime for the patient ID
-      //   startTimeValue = resultMap[selectedPatientId];
-      // }
-
-      "fetch all health data called".log();
       List<HealthDataPoint> healthDataList = [];
-      final List<HealthDataPoint> healthDataListActivity = [];
-      final List<HealthDataPoint> healthDataListWorkout = [];
       final endTime = endDateTimeValue ?? DateTime.now();
       final startTime = (startDateTimeValue != null &&
               startDateTimeValue.compareTo(DateTime.now()) < 0)
           ? startDateTimeValue
           : DateTime(endTime.year, endTime.month, endTime.day);
 
-      "starttime is : $startTime".log();
       try {
         healthDataList = await _health.getHealthDataFromTypes(
           startTime,
@@ -199,37 +179,49 @@ class UserActivityTrack {
 
         healthDataList = HealthFactory.removeDuplicates(healthDataList);
 
-        double tempValue = 0.0;
+        num caloriesBurnt = 0.0;
+        num steps = 0;
+        num totalExerciseTime = 0;
+
         healthDataList.forEach((element) {
-          log("""From date is : ${element.dateFrom} & End date is : ${element.dateTo} """);
+          num _calorie = 0;
+          if (element.value.toJson()['numericValue'] != null) {
+            _calorie = num.tryParse(
+                    element.value.toJson()['numericValue'].toString()) ??
+                0;
+          } else if (element.value.toJson()['totalEnergyBurned'] != null) {
+            _calorie = num.tryParse(
+                    element.value.toJson()['totalEnergyBurned'].toString()) ??
+                0;
+          }
+
+          caloriesBurnt = caloriesBurnt + _calorie;
+
           if (element.type == HealthDataType.WORKOUT) {
-            healthDataListWorkout.add(element);
-          } else {
-            if (element.type == HealthDataType.ACTIVE_ENERGY_BURNED) {
-              tempValue = tempValue + double.parse(element.value.toString());
-            }
-            healthDataListActivity.add(element);
+            final duration = element.dateTo.difference(element.dateFrom);
+            totalExerciseTime += duration.inMinutes;
+          }
+
+          if (element.type == HealthDataType.STEPS) {
+            final num _steps = num.tryParse(element.value.toString()) ?? 0;
+
+            steps = steps + _steps;
           }
         });
 
-        // final HealthStoreModel healthStoreModel = HealthStoreModel(
-        //   patientId: PrefHelper.getInt(AppConstant.PATIENT_ID.key).toString(),
-        // );
-
-        List<Map<String, dynamic>> mapListActivity = [];
-        healthDataListActivity.forEach((element) {
-          mapListActivity.add(element.toJson());
-        });
-
-        List<Map<String, dynamic>> mapListWorkout = [];
-        healthDataListWorkout.forEach((element) {
-          mapListWorkout.add(element.toJson());
-        });
-        // healthStoreModel.payload = PayloadData();
-        // healthStoreModel.payload?.activity = mapListActivity;
-        // healthStoreModel.payload?.workout = mapListWorkout;
-
-        print("calories are : $tempValue");
+        final lastHeartInfo = healthDataList
+            .where((e) => e.type == HealthDataType.HEART_RATE)
+            .lastOrNull;
+        final num heartRate = lastHeartInfo == null
+            ? 0
+            : num.tryParse(lastHeartInfo.value.toString()) ?? 0;
+        caloriesResult(caloriesBurnt);
+        stepsResult(steps);
+        exerciseTimeResult(totalExerciseTime);
+        heartRateResult(heartRate);
+        exerciseListResult(healthDataList
+            .where((e) => e.type == HealthDataType.WORKOUT)
+            .toList());
 
         // 'here is:DATA: ${jsonEncode(healthStoreModel.payload?.toMap())} ****'
         //     .log();
