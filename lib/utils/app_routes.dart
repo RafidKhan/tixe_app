@@ -3,6 +3,7 @@ import 'package:tixe_flutter_app/modules/auth/personal_details/views/personal_de
 import 'package:tixe_flutter_app/modules/auth/sign_in/views/sign_in_screen.dart';
 import 'package:tixe_flutter_app/modules/auth/sign_up/views/sign_up_screen.dart';
 import 'package:tixe_flutter_app/modules/auth/verify_email/views/verify_email_screen.dart';
+import 'package:tixe_flutter_app/modules/fitness_flow/exercise_detail/views/exercise_detail_screen.dart';
 import 'package:tixe_flutter_app/modules/fitness_flow/fitness/views/fitness_screen.dart';
 import 'package:tixe_flutter_app/modules/splash/views/splash_screen.dart';
 import 'package:tixe_flutter_app/modules/training_flow/confirm_training_enroll/model/confirm_training_enrollment_nav_model.dart';
@@ -37,6 +38,7 @@ import '../modules/workout_flow/my_workout_select_phase/views/my_workout_select_
 
 enum AppRoutes {
   splash,
+  exerciseDetail,
   profile,
   myWorkoutVideo,
   myWorkoutPdf,
@@ -67,7 +69,10 @@ enum AppRoutes {
 extension AppRoutesExtention on AppRoutes {
   Widget buildWidget<T extends Object>({T? arguments}) {
     switch (this) {
-      case AppRoutes.profile:
+
+      case AppRoutes.exerciseDetail:
+        return const ExerciseDetailScreen();
+     case AppRoutes.profile:
         return const ProfileScreen();
       case AppRoutes.myWorkoutVideo:
         return MyWorkoutVideoScreen(

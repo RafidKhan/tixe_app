@@ -9,24 +9,32 @@ final sharedController = StateNotifierProvider<SharedController, SharedState>(
 class SharedController extends StateNotifier<SharedState> {
   SharedController()
       : super(
-          const SharedState(
+          SharedState(
             isHealthConnectSynced: false,
             totalSteps: "",
             burntCalories: "",
             exerciseTime: "",
             heartRate: "",
             exerciseList: [],
+            pastExerciseList: [],
+            pastDateTime: DateTime.now().subtract(
+              const Duration(days: 1),
+            ),
           ),
         );
 
   void clearData() {
-    state = const SharedState(
+    state = SharedState(
       isHealthConnectSynced: false,
       totalSteps: "",
       burntCalories: "",
       exerciseTime: "",
       heartRate: "",
       exerciseList: [],
+      pastExerciseList: [],
+      pastDateTime: DateTime.now().subtract(
+        const Duration(days: 1),
+      ),
     );
   }
 
@@ -58,5 +66,53 @@ class SharedController extends StateNotifier<SharedState> {
         state = state.copyWith(exerciseList: exerciseList);
       },
     );
+  }
+
+  Future<void> fetchFitnessDataByDate() async {
+    final fromDate = DateTime(state.pastDateTime.year, state.pastDateTime.month,
+        state.pastDateTime.day, 0, 0, 0 // 12:00 AM
+        );
+
+    final toDate = DateTime(state.pastDateTime.year, state.pastDateTime.month,
+        state.pastDateTime.day, 23, 59, 59 // 11:59 PM
+        );
+    await UserActivityTrack.fetchAllData(
+      startDateTimeValue: fromDate,
+      endDateTimeValue: toDate,
+      caloriesResult: (calories) {
+        //
+      },
+      stepsResult: (steps) {
+        //
+      },
+      exerciseTimeResult: (time) {
+        //
+      },
+      heartRateResult: (heartRate) {
+        //
+      },
+      exerciseListResult: (exerciseList) {
+        state = state.copyWith(pastExerciseList: exerciseList);
+      },
+    );
+  }
+
+  void getPastDayData() {
+    state = state.copyWith(
+      pastDateTime: state.pastDateTime.subtract(const Duration(days: 1)),
+    );
+    fetchFitnessDataByDate();
+  }
+
+  void getNextDayData() {
+    state = state.copyWith(
+      pastDateTime: state.pastDateTime.add(const Duration(days: 1)),
+    );
+    fetchFitnessDataByDate();
+  }
+
+  void setDate(DateTime date) {
+    state = state.copyWith(pastDateTime: date);
+    fetchFitnessDataByDate();
   }
 }

@@ -12,6 +12,7 @@ enum KAssetName {
   selectedRadioPng,
   icWalkingPng,
   icHeartRateGraphPng,
+  icForwardFilledPng,
   dummyGearPng,
   icCaloriesPng,
   homePng,
@@ -23,6 +24,7 @@ enum KAssetName {
   icExcercisePng,
   icArmStorePng,
   errorPng,
+  icCalenderYellowPng,
   icHamburgerPng,
   icVideoPlayPng,
   fitnessPng,
@@ -36,6 +38,7 @@ enum KAssetName {
   googlePng,
   facebookPng,
   tixeMainBgPng,
+  icBackFilledPng,
   icPreferencePng,
   workoutPng,
   icCompletePng,
@@ -74,6 +77,8 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/icWalking.png';
       case KAssetName.icHeartRateGraphPng:
         return '$_imagesDir/icHeartRateGraph.png';
+      case KAssetName.icForwardFilledPng:
+        return '$_imagesDir/icForwardFilled.png';
       case KAssetName.dummyGearPng:
         return '$_imagesDir/dummy_gear.png';
       case KAssetName.icCaloriesPng:
@@ -96,6 +101,8 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/icArmStore.png';
       case KAssetName.errorPng:
         return '$_imagesDir/error.png';
+      case KAssetName.icCalenderYellowPng:
+        return '$_imagesDir/icCalenderYellow.png';
       case KAssetName.icHamburgerPng:
         return '$_imagesDir/icHamburger.png';
       case KAssetName.icVideoPlayPng:
@@ -122,6 +129,8 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/facebook.png';
       case KAssetName.tixeMainBgPng:
         return '$_imagesDir/tixe_main_bg.png';
+      case KAssetName.icBackFilledPng:
+        return '$_imagesDir/icBackFilled.png';
       case KAssetName.icPreferencePng:
         return '$_imagesDir/icPreference.png';
       case KAssetName.workoutPng:

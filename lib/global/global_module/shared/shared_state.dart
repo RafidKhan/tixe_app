@@ -7,6 +7,8 @@ class SharedState {
   final String exerciseTime;
   final String heartRate;
   final List<HealthDataPoint> exerciseList;
+  final List<HealthDataPoint> pastExerciseList;
+  final DateTime pastDateTime;
 
   const SharedState({
     required this.isHealthConnectSynced,
@@ -15,6 +17,8 @@ class SharedState {
     required this.exerciseTime,
     required this.heartRate,
     required this.exerciseList,
+    required this.pastExerciseList,
+    required this.pastDateTime,
   });
 
   SharedState copyWith({
@@ -24,6 +28,8 @@ class SharedState {
     String? exerciseTime,
     String? heartRate,
     List<HealthDataPoint>? exerciseList,
+    List<HealthDataPoint>? pastExerciseList,
+    DateTime? pastDateTime,
   }) {
     return SharedState(
       isHealthConnectSynced:
@@ -33,6 +39,8 @@ class SharedState {
       exerciseTime: exerciseTime ?? this.exerciseTime,
       heartRate: heartRate ?? this.heartRate,
       exerciseList: exerciseList ?? this.exerciseList,
+      pastExerciseList: pastExerciseList ?? this.pastExerciseList,
+      pastDateTime: pastDateTime ?? this.pastDateTime,
     );
   }
 }

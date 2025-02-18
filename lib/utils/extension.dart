@@ -290,7 +290,7 @@ extension SubstringExtension on String {
 extension DateExtention on String {
   String get dayNumber {
     try {
-      return DateTime.parse(this).weekday.toString();
+      return DateTime.parse(this).day.toString();
     } catch (e) {
       return "";
     }
@@ -304,6 +304,7 @@ extension DateExtention on String {
     }
   }
 }
+
 
 extension HeartRateStatusExtension on HeartRateStatus {
   String get label {
