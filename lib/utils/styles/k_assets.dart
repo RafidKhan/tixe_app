@@ -21,10 +21,12 @@ enum KAssetName {
   applePng,
   icFirePng,
   icVideoPng,
+  icBedtimePng,
   icExcercisePng,
   icArmStorePng,
   errorPng,
   icCalenderYellowPng,
+  icSunrisePng,
   icHamburgerPng,
   icVideoPlayPng,
   fitnessPng,
@@ -95,6 +97,8 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/icFire.png';
       case KAssetName.icVideoPng:
         return '$_imagesDir/icVideo.png';
+      case KAssetName.icBedtimePng:
+        return '$_imagesDir/icBedtime.png';
       case KAssetName.icExcercisePng:
         return '$_imagesDir/icExcercise.png';
       case KAssetName.icArmStorePng:
@@ -103,6 +107,8 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/error.png';
       case KAssetName.icCalenderYellowPng:
         return '$_imagesDir/icCalenderYellow.png';
+      case KAssetName.icSunrisePng:
+        return '$_imagesDir/icSunrise.png';
       case KAssetName.icHamburgerPng:
         return '$_imagesDir/icHamburger.png';
       case KAssetName.icVideoPlayPng:

@@ -6,6 +6,7 @@ class SharedState {
   final String burntCalories;
   final String exerciseTime;
   final String heartRate;
+  final String sleepTime;
   final List<HealthDataPoint> exerciseList;
   final List<HealthDataPoint> pastExerciseList;
   final DateTime pastDateTime;
@@ -16,6 +17,7 @@ class SharedState {
     required this.burntCalories,
     required this.exerciseTime,
     required this.heartRate,
+    required this.sleepTime,
     required this.exerciseList,
     required this.pastExerciseList,
     required this.pastDateTime,
@@ -27,6 +29,7 @@ class SharedState {
     String? burntCalories,
     String? exerciseTime,
     String? heartRate,
+    String? sleepTime,
     List<HealthDataPoint>? exerciseList,
     List<HealthDataPoint>? pastExerciseList,
     DateTime? pastDateTime,
@@ -38,6 +41,7 @@ class SharedState {
       burntCalories: burntCalories ?? this.burntCalories,
       exerciseTime: exerciseTime ?? this.exerciseTime,
       heartRate: heartRate ?? this.heartRate,
+      sleepTime: sleepTime ?? this.sleepTime,
       exerciseList: exerciseList ?? this.exerciseList,
       pastExerciseList: pastExerciseList ?? this.pastExerciseList,
       pastDateTime: pastDateTime ?? this.pastDateTime,

@@ -160,6 +160,7 @@ class UserActivityTrack {
     required Function(num value) caloriesResult,
     required Function(num value) exerciseTimeResult,
     required Function(num value) heartRateResult,
+    required Function(num value) sleepResult,
     required Function(List<HealthDataPoint> exerciseList) exerciseListResult,
   }) async {
     if (isSyncedWithTracker() == true) {
@@ -182,6 +183,7 @@ class UserActivityTrack {
         num caloriesBurnt = 0.0;
         num steps = 0;
         num totalExerciseTime = 0;
+        num totalSleepTime = 0;
 
         healthDataList.forEach((element) {
           num _calorie = 0;
@@ -207,6 +209,11 @@ class UserActivityTrack {
 
             steps = steps + _steps;
           }
+
+          if (element.type == HealthDataType.SLEEP_ASLEEP || element.type == HealthDataType.SLEEP_IN_BED || element.type == HealthDataType.SLEEP_DEEP || element.type == HealthDataType.SLEEP_LIGHT || element.type == HealthDataType.SLEEP_REM || element.type == HealthDataType.SLEEP_SESSION || element.type == HealthDataType.SLEEP_OUT_OF_BED) {
+            final duration = element.dateTo.difference(element.dateFrom);
+            totalSleepTime += duration.inHours;
+          }
         });
 
         final lastHeartInfo = healthDataList
@@ -222,6 +229,7 @@ class UserActivityTrack {
         exerciseListResult(healthDataList
             .where((e) => e.type == HealthDataType.WORKOUT)
             .toList());
+        sleepResult(totalSleepTime);
 
         // 'here is:DATA: ${jsonEncode(healthStoreModel.payload?.toMap())} ****'
         //     .log();

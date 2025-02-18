@@ -15,6 +15,7 @@ class SharedController extends StateNotifier<SharedState> {
             burntCalories: "",
             exerciseTime: "",
             heartRate: "",
+            sleepTime: "",
             exerciseList: [],
             pastExerciseList: [],
             pastDateTime: DateTime.now().subtract(
@@ -30,6 +31,7 @@ class SharedController extends StateNotifier<SharedState> {
       burntCalories: "",
       exerciseTime: "",
       heartRate: "",
+      sleepTime: "",
       exerciseList: [],
       pastExerciseList: [],
       pastDateTime: DateTime.now().subtract(
@@ -65,6 +67,9 @@ class SharedController extends StateNotifier<SharedState> {
       exerciseListResult: (exerciseList) {
         state = state.copyWith(exerciseList: exerciseList);
       },
+      sleepResult: (sleepTime) {
+        state = state.copyWith(sleepTime: sleepTime.toString());
+      },
     );
   }
 
@@ -93,6 +98,9 @@ class SharedController extends StateNotifier<SharedState> {
       },
       exerciseListResult: (exerciseList) {
         state = state.copyWith(pastExerciseList: exerciseList);
+      },
+      sleepResult: (sleepTime) {
+        //
       },
     );
   }
