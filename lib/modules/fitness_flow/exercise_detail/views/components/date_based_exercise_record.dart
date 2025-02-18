@@ -26,7 +26,7 @@ class _DateBasedExerciseRecordState extends State<DateBasedExerciseRecord> {
     super.initState();
     Future(() {
       final sharedCon = context.read(sharedController.notifier);
-      sharedCon.fetchFitnessDataByDate();
+      sharedCon.setDate(DateTime.now().subtract(const Duration(days: 1)));
     });
   }
 
@@ -123,7 +123,7 @@ class _DateBasedExerciseRecordState extends State<DateBasedExerciseRecord> {
                   },
                 ),
               ),
-              if (state.pastDateTime.day != DateTime.now().day) ...[
+              if (state.pastDateTime.day != DateTime.now().day-1) ...[
                 SizedBox(width: 60.w),
                 Expanded(
                   child: _bottomButton(
