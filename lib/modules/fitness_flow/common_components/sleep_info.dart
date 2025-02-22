@@ -8,7 +8,9 @@ import 'package:intl/intl.dart';
 import 'package:tixe_flutter_app/global/global_module/shared/shared_controller.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
+import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
+import 'package:tixe_flutter_app/utils/navigation.dart';
 
 import '../../../utils/styles/styles.dart';
 
@@ -114,7 +116,11 @@ class _SleepInfoState extends State<SleepInfo> {
                 ),
                 const Spacer(),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigation.push(
+                      appRoutes: AppRoutes.sleepAndAlarm,
+                    );
+                  },
                   child: Container(
                     padding: EdgeInsets.symmetric(
                       horizontal: 6.w,

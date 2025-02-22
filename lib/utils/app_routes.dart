@@ -1,3 +1,4 @@
+import '../modules/fitness_flow/sleep_and_alarm/views/sleep_and_alarm_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/views/personal_details_screen.dart';
 import 'package:tixe_flutter_app/modules/auth/sign_in/views/sign_in_screen.dart';
@@ -38,6 +39,7 @@ import '../modules/workout_flow/my_workout_select_phase/views/my_workout_select_
 
 enum AppRoutes {
   splash,
+  sleepAndAlarm,
   exerciseDetail,
   profile,
   myWorkoutVideo,
@@ -70,7 +72,10 @@ extension AppRoutesExtention on AppRoutes {
   Widget buildWidget<T extends Object>({T? arguments}) {
     switch (this) {
 
-      case AppRoutes.exerciseDetail:
+
+      case AppRoutes.sleepAndAlarm:
+        return const SleepAndAlarmScreen();
+     case AppRoutes.exerciseDetail:
         return const ExerciseDetailScreen();
      case AppRoutes.profile:
         return const ProfileScreen();
