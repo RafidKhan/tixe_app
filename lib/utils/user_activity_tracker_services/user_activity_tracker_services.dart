@@ -210,7 +210,13 @@ class UserActivityTrack {
             steps = steps + _steps;
           }
 
-          if (element.type == HealthDataType.SLEEP_ASLEEP || element.type == HealthDataType.SLEEP_IN_BED || element.type == HealthDataType.SLEEP_DEEP || element.type == HealthDataType.SLEEP_LIGHT || element.type == HealthDataType.SLEEP_REM || element.type == HealthDataType.SLEEP_SESSION || element.type == HealthDataType.SLEEP_OUT_OF_BED) {
+          if (element.type == HealthDataType.SLEEP_ASLEEP ||
+              element.type == HealthDataType.SLEEP_IN_BED ||
+              element.type == HealthDataType.SLEEP_DEEP ||
+              element.type == HealthDataType.SLEEP_LIGHT ||
+              element.type == HealthDataType.SLEEP_REM ||
+              element.type == HealthDataType.SLEEP_SESSION ||
+              element.type == HealthDataType.SLEEP_OUT_OF_BED) {
             final duration = element.dateTo.difference(element.dateFrom);
             totalSleepTime += duration.inHours;
           }
@@ -230,23 +236,48 @@ class UserActivityTrack {
             .where((e) => e.type == HealthDataType.WORKOUT)
             .toList());
         sleepResult(totalSleepTime);
+      } catch (error) {
+        healthDataList = [];
+      }
+    }
+  }
 
-        // 'here is:DATA: ${jsonEncode(healthStoreModel.payload?.toMap())} ****'
-        //     .log();
+  static Future<dynamic> fetchSleepData({
+    required DateTime dateTime,
+    required Function(num value) result,
+  }) async {
+    if (isSyncedWithTracker() == true) {
+      List<HealthDataPoint> healthDataList = [];
+      final startTime =
+          DateTime(dateTime.year, dateTime.month, dateTime.day, 0, 0, 0);
+      final endTime =
+          DateTime(dateTime.year, dateTime.month, dateTime.day, 23, 59, 59);
 
-        //return healthStoreModel;
-        // if (resultMap.containsKey(selectedPatientId)) {
-        //   // Retrieve the DateTime for the patient ID
-        //   resultMap[selectedPatientId] = endTime;
-        // }
+      try {
+        healthDataList = await _health.getHealthDataFromTypes(
+          startTime,
+          endTime,
+          Platform.isAndroid ? dataTypesAndroid : dataTypesIOS,
+        );
 
-        // "Now resultmap is : $resultMap".log();
-        //
-        // Map<String, String> convertedResultMap = resultMap.map(
-        //     (key, value) => MapEntry(key.toString(), value.toIso8601String()));
-        //
-        // String encodedMap = json.encode(convertedResultMap);
-        // PrefHelper.setString(AppConstant.LAST_SYNCED_TIMES.key, encodedMap);
+        healthDataList = HealthFactory.removeDuplicates(healthDataList);
+
+        num sleepTime = 0;
+
+        healthDataList.forEach((element) {
+          if (element.type == HealthDataType.SLEEP_ASLEEP ||
+              element.type == HealthDataType.SLEEP_IN_BED ||
+              element.type == HealthDataType.SLEEP_DEEP ||
+              element.type == HealthDataType.SLEEP_LIGHT ||
+              element.type == HealthDataType.SLEEP_REM ||
+              element.type == HealthDataType.SLEEP_SESSION ||
+              element.type == HealthDataType.SLEEP_OUT_OF_BED) {
+            sleepTime =
+                sleepTime + (num.tryParse(element.value.toString()) ?? 0);
+          }
+        });
+
+        result(sleepTime);
       } catch (error) {
         healthDataList = [];
       }
@@ -310,4 +341,14 @@ class UserActivityTrack {
       return 0;
     }
   }
+}
+
+class WeeklySleepResult {
+  final DateTime dateTime;
+  final num timeInHours;
+
+  const WeeklySleepResult({
+    required this.dateTime,
+    required this.timeInHours,
+  });
 }

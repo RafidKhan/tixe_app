@@ -45,15 +45,15 @@ class _SleepInfoState extends State<SleepInfo> {
     final bool isNightTime =
         DateTime.now().hour > 20 || DateTime.now().hour < 6;
 
-    final List<double> sleepData = [
-      6.5,
-      7,
-      8,
-      6,
-      5.5,
-      7.5,
-      8.2
-    ]; // Example sleep data (Sun-Sat)
+    // final List<double> sleepData = [
+    //   6.5,
+    //   7,
+    //   8,
+    //   6,
+    //   5.5,
+    //   7.5,
+    //   8.2
+    // ]; // Example sleep data (Sun-Sat)
 
     return Consumer(builder: (context, ref, child) {
       final state = ref.watch(sharedController);
@@ -61,6 +61,7 @@ class _SleepInfoState extends State<SleepInfo> {
       final int hours = sleepHours.floor(); // Whole hours
       final int minutes =
           ((sleepHours - hours) * 60).round(); // Remaining minutes
+      final sleepData = state.weeklySleep;
       return Container(
         width: context.width,
         padding: EdgeInsets.symmetric(
@@ -296,7 +297,7 @@ class _SleepInfoState extends State<SleepInfo> {
                             x: entry.key,
                             barRods: [
                               BarChartRodData(
-                                toY: entry.value,
+                                toY: entry.value.toDouble(),
                                 color: KColor.btnGradient2.color,
                                 width: 10,
                                 borderRadius: BorderRadius.circular(4),

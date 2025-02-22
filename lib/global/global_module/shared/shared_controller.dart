@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tixe_flutter_app/global/global_module/shared/shared_state.dart';
+import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/user_activity_tracker_services/user_activity_tracker_services.dart';
 
 final sharedController = StateNotifierProvider<SharedController, SharedState>(
@@ -18,6 +19,7 @@ class SharedController extends StateNotifier<SharedState> {
             sleepTime: "",
             exerciseList: [],
             pastExerciseList: [],
+            weeklySleep: [],
             pastDateTime: DateTime.now().subtract(
               const Duration(days: 1),
             ),
@@ -34,6 +36,7 @@ class SharedController extends StateNotifier<SharedState> {
       sleepTime: "",
       exerciseList: [],
       pastExerciseList: [],
+      weeklySleep: [],
       pastDateTime: DateTime.now().subtract(
         const Duration(days: 1),
       ),
@@ -47,7 +50,25 @@ class SharedController extends StateNotifier<SharedState> {
 
     if (state.isHealthConnectSynced) {
       await fetchFitnessData();
+      await fetchWeeklySleepData();
     }
+  }
+
+  Future<void> fetchWeeklySleepData() async {
+    final List<num> weeklySleep = [];
+    List<DateTime> lastSevenDays = List.generate(7, (index) {
+      return DateTime.now().subtract(Duration(days: 6 - index));
+    });
+    lastSevenDays.forEach((e) async {
+      await UserActivityTrack.fetchSleepData(
+          dateTime: e,
+          result: (value) {
+            weeklySleep.add(value/60);
+          });
+      if (weeklySleep.length == 7) {
+        state = state.copyWith(weeklySleep: weeklySleep);
+      }
+    });
   }
 
   Future<void> fetchFitnessData() async {
