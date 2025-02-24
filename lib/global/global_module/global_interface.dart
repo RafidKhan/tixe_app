@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+import 'package:tixe_flutter_app/global/model/alarm_list_response.dart';
 import 'package:tixe_flutter_app/global/model/global_response.dart';
 import 'package:tixe_flutter_app/global/model/settings_response.dart';
 import 'package:tixe_flutter_app/modules/auth/sign_in/model/sign_in_response.dart';
@@ -29,5 +31,9 @@ abstract class IGlobalRepository {
   Future<void> completeWorkoutPhase({
     required String phaseId,
     required Function(GlobalResponse? data, bool isSuccess) callback,
+  });
+
+  Future<void> fetchAlarms({
+    required Function(AlarmListResponse? data, bool isSuccess) callback,
   });
 }

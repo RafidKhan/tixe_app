@@ -1,0 +1,53 @@
+
+
+class AlarmListResponse {
+  int? code;
+  String? message;
+  List<AlarmData>? data;
+
+  AlarmListResponse({
+    this.code,
+    this.message,
+    this.data,
+  });
+
+  factory AlarmListResponse.fromJson(Map<String, dynamic> json) => AlarmListResponse(
+    code: json["code"],
+    message: json["message"],
+    data: json["data"] == null ? [] : List<AlarmData>.from(json["data"]!.map((x) => AlarmData.fromJson(x))),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "code": code,
+    "message": message,
+    "data": data == null ? [] : List<dynamic>.from(data!.map((x) => x.toJson())),
+  };
+}
+
+class AlarmData {
+  int? id;
+  String? type;
+  String? time;
+  String? date;
+
+  AlarmData({
+    this.id,
+    this.type,
+    this.time,
+    this.date,
+  });
+
+  factory AlarmData.fromJson(Map<String, dynamic> json) => AlarmData(
+    id: json["id"],
+    type: json["type"],
+    time: json["time"],
+    date: json["date"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "type": type,
+    "time": time,
+    "date": date,
+  };
+}

@@ -71,4 +71,15 @@ class GlobalApi {
       callback: callback,
     );
   }
+
+  Future<void> fetchAlarms({
+    required Function(Response? data, bool isSuccess) callback,
+  }) async {
+    final url = AppUrl.alarmList.url;
+    await _apiClient.request(
+      url: url,
+      method: Method.GET,
+      callback: callback,
+    );
+  }
 }

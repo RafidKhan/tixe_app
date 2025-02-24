@@ -9,12 +9,18 @@ class GlobalButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final String buttonText;
   final EdgeInsets? margin;
+  final Color? activeColor;
+  final Color? borderColor;
+  final Color? textColor;
 
   const GlobalButton({
     super.key,
     required this.onPressed,
     required this.buttonText,
     this.margin,
+    this.activeColor,
+    this.borderColor,
+    this.textColor,
   });
 
   @override
@@ -35,14 +41,18 @@ class GlobalButton extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.r),
+          border: Border.all(
+            color: borderColor ?? KColor.transparent.color,
+            width: 0.5.w,
+          ),
           color: isButtonEnabled ? null : KColor.disabledBtnColor.color,
           gradient: isButtonEnabled
               ? LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    KColor.btnGradient1.color,
-                    KColor.btnGradient2.color,
+                    activeColor ?? KColor.btnGradient1.color,
+                    activeColor ?? KColor.btnGradient2.color,
                   ],
                 )
               : null,
@@ -54,7 +64,7 @@ class GlobalButton extends StatelessWidget {
             style: GoogleFonts.squadaOne(
               fontSize: 20,
               fontWeight: FontWeight.w400,
-              color: KColor.black.color,
+              color: textColor??KColor.black.color,
             ),
           ),
         ),

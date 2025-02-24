@@ -1,4 +1,6 @@
+import 'package:dio/dio.dart';
 import 'package:tixe_flutter_app/global/global_module/global_api.dart';
+import 'package:tixe_flutter_app/global/model/alarm_list_response.dart';
 
 import '../../modules/auth/sign_in/model/sign_in_response.dart';
 import '../../modules/training_flow/confirm_training_enroll/model/discount_code_verify_response.dart';
@@ -78,6 +80,20 @@ class GlobalRepository extends IGlobalRepository {
         callback(
           success ? GlobalResponse.fromJson(response?.data) : null,
           success,
+        );
+      },
+    );
+  }
+
+  @override
+  Future<void> fetchAlarms({
+    required Function(AlarmListResponse? data, bool isSuccess) callback,
+  }) async {
+    await _api.fetchAlarms(
+      callback: (response, isSuccess) {
+        callback(
+          isSuccess ? AlarmListResponse.fromJson(response?.data) : null,
+          isSuccess,
         );
       },
     );

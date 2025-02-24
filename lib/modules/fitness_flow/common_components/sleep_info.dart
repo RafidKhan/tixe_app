@@ -15,7 +15,14 @@ import 'package:tixe_flutter_app/utils/navigation.dart';
 import '../../../utils/styles/styles.dart';
 
 class SleepInfo extends StatefulWidget {
-  const SleepInfo({super.key});
+  final bool showEdit;
+  final bool showAlarm;
+
+  const SleepInfo({
+    super.key,
+    required this.showEdit,
+    required this.showAlarm,
+  });
 
   @override
   State<SleepInfo> createState() => _SleepInfoState();
@@ -30,9 +37,11 @@ class _SleepInfoState extends State<SleepInfo> {
     // TODO: implement initState
     super.initState();
     Future(() {
-      timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-        dateTime.value = DateTime.now();
-      });
+      if (widget.showAlarm) {
+        timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+          dateTime.value = DateTime.now();
+        });
+      }
     });
   }
 
@@ -46,16 +55,6 @@ class _SleepInfoState extends State<SleepInfo> {
   Widget build(BuildContext context) {
     final bool isNightTime =
         DateTime.now().hour > 20 || DateTime.now().hour < 6;
-
-    // final List<double> sleepData = [
-    //   6.5,
-    //   7,
-    //   8,
-    //   6,
-    //   5.5,
-    //   7.5,
-    //   8.2
-    // ]; // Example sleep data (Sun-Sat)
 
     return Consumer(builder: (context, ref, child) {
       final state = ref.watch(sharedController);
@@ -84,63 +83,66 @@ class _SleepInfoState extends State<SleepInfo> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                GlobalImageLoader(
-                  imagePath: isNightTime
-                      ? KAssetName.icBedtimePng.imagePath
-                      : KAssetName.icSunrisePng.imagePath,
-                  height: 42.h,
-                  width: 42.w,
-                ),
-                SizedBox(width: 10.w),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ValueListenableBuilder(
-                      valueListenable: dateTime,
-                      builder: (context, date, child) {
-                        return GlobalText(
-                          str: DateFormat('hh:mm:ss').format(date),
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
+            if (widget.showAlarm) ...[
+              Row(
+                children: [
+                  GlobalImageLoader(
+                    imagePath: isNightTime
+                        ? KAssetName.icBedtimePng.imagePath
+                        : KAssetName.icSunrisePng.imagePath,
+                    height: 42.h,
+                    width: 42.w,
+                  ),
+                  SizedBox(width: 10.w),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ValueListenableBuilder(
+                        valueListenable: dateTime,
+                        builder: (context, date, child) {
+                          return GlobalText(
+                            str: DateFormat('hh:mm:ss').format(date),
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                          );
+                        },
+                      ),
+                      const GlobalText(
+                        str: "Bedtime 11:30 PM",
+                        fontSize: 9,
+                        fontWeight: FontWeight.w400,
+                      )
+                    ],
+                  ),
+                  const Spacer(),
+                  if (widget.showEdit)
+                    InkWell(
+                      onTap: () {
+                        Navigation.push(
+                          appRoutes: AppRoutes.sleepAndAlarm,
                         );
                       },
-                    ),
-                    const GlobalText(
-                      str: "Bedtime 11:30 PM",
-                      fontSize: 9,
-                      fontWeight: FontWeight.w400,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 6.w,
+                          vertical: 6.h,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(3.r),
+                          border: Border.all(color: KColor.white.color),
+                        ),
+                        child: GlobalText(
+                          str: 'Edit Alarm',
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          color: KColor.white.color,
+                        ),
+                      ),
                     )
-                  ],
-                ),
-                const Spacer(),
-                InkWell(
-                  onTap: () {
-                    Navigation.push(
-                      appRoutes: AppRoutes.sleepAndAlarm,
-                    );
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 6.w,
-                      vertical: 6.h,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(3.r),
-                      border: Border.all(color: KColor.white.color),
-                    ),
-                    child: GlobalText(
-                      str: 'Edit Alarm',
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: KColor.white.color,
-                    ),
-                  ),
-                )
-              ],
-            ),
-            SizedBox(height: 30.h),
+                ],
+              ),
+              SizedBox(height: 30.h),
+            ],
             const GlobalText(
               str: "Sleeping Record",
               fontSize: 14,

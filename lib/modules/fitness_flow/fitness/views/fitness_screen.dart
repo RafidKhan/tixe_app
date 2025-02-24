@@ -75,7 +75,10 @@ class _FitnessScreenState extends State<FitnessScreen> {
                               SizedBox(
                                 height: 20.h,
                               ),
-                              const SleepInfo(),
+                              const SleepInfo(
+                                showEdit: true,
+                                showAlarm: true,
+                              ),
                               SizedBox(
                                 height: 40.h,
                               ),

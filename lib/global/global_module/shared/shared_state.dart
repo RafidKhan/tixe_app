@@ -1,4 +1,5 @@
 import 'package:health/health.dart';
+import 'package:tixe_flutter_app/global/model/alarm_list_response.dart';
 
 class SharedState {
   final bool isHealthConnectSynced;
@@ -10,7 +11,11 @@ class SharedState {
   final List<HealthDataPoint> exerciseList;
   final List<HealthDataPoint> pastExerciseList;
   final List<num> weeklySleep;
+  final List<AlarmData> alarms;
+  final AlarmData? morningAlarm;
+  final AlarmData? nightAlarm;
   final DateTime pastDateTime;
+  final bool loadingAlarms;
 
   const SharedState({
     required this.isHealthConnectSynced,
@@ -23,6 +28,10 @@ class SharedState {
     required this.pastExerciseList,
     required this.pastDateTime,
     required this.weeklySleep,
+    required this.loadingAlarms,
+    required this.alarms,
+    required this.morningAlarm,
+    required this.nightAlarm,
   });
 
   SharedState copyWith({
@@ -36,6 +45,10 @@ class SharedState {
     List<HealthDataPoint>? pastExerciseList,
     DateTime? pastDateTime,
     List<num>? weeklySleep,
+    bool? loadingAlarms,
+    List<AlarmData>? alarms,
+    AlarmData? morningAlarm,
+    AlarmData? nightAlarm,
   }) {
     return SharedState(
       isHealthConnectSynced:
@@ -49,6 +62,10 @@ class SharedState {
       pastExerciseList: pastExerciseList ?? this.pastExerciseList,
       pastDateTime: pastDateTime ?? this.pastDateTime,
       weeklySleep: weeklySleep ?? this.weeklySleep,
+      loadingAlarms: loadingAlarms ?? this.loadingAlarms,
+      alarms: alarms ?? this.alarms,
+      morningAlarm: morningAlarm ?? this.morningAlarm,
+      nightAlarm: nightAlarm ?? this.nightAlarm,
     );
   }
 }

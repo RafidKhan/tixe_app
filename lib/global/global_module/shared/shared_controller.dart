@@ -1,16 +1,24 @@
+import 'dart:convert';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tixe_flutter_app/global/global_module/shared/shared_state.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/user_activity_tracker_services/user_activity_tracker_services.dart';
+
+import '../global_interface.dart';
+import '../global_respository.dart';
 
 final sharedController = StateNotifierProvider<SharedController, SharedState>(
   (ref) => SharedController(),
 );
 
 class SharedController extends StateNotifier<SharedState> {
+  final IGlobalRepository _globalRepository = GlobalRepository();
+
   SharedController()
       : super(
           SharedState(
+            loadingAlarms: false,
             isHealthConnectSynced: false,
             totalSteps: "",
             burntCalories: "",
@@ -20,6 +28,9 @@ class SharedController extends StateNotifier<SharedState> {
             exerciseList: [],
             pastExerciseList: [],
             weeklySleep: [],
+            alarms: [],
+            morningAlarm: null,
+            nightAlarm: null,
             pastDateTime: DateTime.now().subtract(
               const Duration(days: 1),
             ),
@@ -28,6 +39,7 @@ class SharedController extends StateNotifier<SharedState> {
 
   void clearData() {
     state = SharedState(
+      loadingAlarms: false,
       isHealthConnectSynced: false,
       totalSteps: "",
       burntCalories: "",
@@ -37,6 +49,9 @@ class SharedController extends StateNotifier<SharedState> {
       exerciseList: [],
       pastExerciseList: [],
       weeklySleep: [],
+      alarms: [],
+      morningAlarm: null,
+      nightAlarm: null,
       pastDateTime: DateTime.now().subtract(
         const Duration(days: 1),
       ),
@@ -51,6 +66,7 @@ class SharedController extends StateNotifier<SharedState> {
     if (state.isHealthConnectSynced) {
       await fetchFitnessData();
       await fetchWeeklySleepData();
+      await fetchAlarms();
     }
   }
 
@@ -63,7 +79,7 @@ class SharedController extends StateNotifier<SharedState> {
       await UserActivityTrack.fetchSleepData(
           dateTime: e,
           result: (value) {
-            weeklySleep.add(value/60);
+            weeklySleep.add(value / 60);
           });
       if (weeklySleep.length == 7) {
         state = state.copyWith(weeklySleep: weeklySleep);
@@ -143,5 +159,20 @@ class SharedController extends StateNotifier<SharedState> {
   void setDate(DateTime date) {
     state = state.copyWith(pastDateTime: date);
     fetchFitnessDataByDate();
+  }
+
+  Future<void> fetchAlarms() async {
+    state = state.copyWith(loadingAlarms: true);
+    await _globalRepository.fetchAlarms(
+      callback: (response, success) {
+        state = state.copyWith(
+          loadingAlarms: false,
+          alarms: (response?.data??[]).where((e)=>e.type =="custom").toList(),
+          morningAlarm: (response?.data??[]).where((e)=>e.type =="morning").toList().firstOrNull,
+          nightAlarm: (response?.data??[]).where((e)=>e.type =="night").toList().firstOrNull,
+
+        );
+      },
+    );
   }
 }
