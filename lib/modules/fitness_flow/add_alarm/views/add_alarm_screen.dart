@@ -135,35 +135,36 @@ class _AddAlarmScreenState extends State<AddAlarmScreen> {
               final state = ref.watch(addAlarmController);
               return Row(
                 children: [
-                  if (state.model?.canEdit != false) ...[
-                    Expanded(
-                      child: GlobalButton(
-                        onPressed: () {
-                          if (state.isUpdateAlarm) {
-                            //
-                          } else {
-                            controller.addAlarm();
-                          }
-                        },
-                        buttonText:
-                            state.isUpdateAlarm ? "Update Alarm" : "Save Alarm",
-                      ),
+                  Expanded(
+                    child: GlobalButton(
+                      onPressed: () {
+                        if (state.isUpdateAlarm) {
+                          //
+                        } else {
+                          controller.addAlarm();
+                        }
+                      },
+                      buttonText:
+                          state.isUpdateAlarm ? "Update Alarm" : "Save Alarm",
                     ),
+                  ),
+                  if(state.model?.alarmData?.type == "custom")...[
                     SizedBox(
                       width: 20.w,
                     ),
+                    Expanded(
+                      child: GlobalButton(
+                        borderColor: KColor.btnGradient1.color,
+                        activeColor: KColor.shadeGradient2.color,
+                        textColor: KColor.btnGradient1.color,
+                        onPressed: () {},
+                        buttonText: state.isUpdateAlarm
+                            ? "Delete Alarm"
+                            : "Disable Alarm",
+                      ),
+                    )
                   ],
-                  Expanded(
-                    child: GlobalButton(
-                      borderColor: KColor.btnGradient1.color,
-                      activeColor: KColor.shadeGradient2.color,
-                      textColor: KColor.btnGradient1.color,
-                      onPressed: () {},
-                      buttonText:
-                      state.isUpdateAlarm?"Delete Alarm":
-                      "Disable Alarm",
-                    ),
-                  )
+
                 ],
               );
             }),

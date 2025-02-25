@@ -102,13 +102,7 @@ class SleepAndAlarmScreen extends StatelessWidget {
 
   Widget _alarmInfo(AlarmData alarm) {
     String? icon;
-    DateTime? dateTime;
-    final time = alarm.time?.split(":");
-    if (time?.length == 3) {
-      final now = DateTime.now();
-      dateTime = DateTime(now.year, now.month, now.day, int.parse(time![0]),
-          int.parse(time[1]), int.parse(time[2]));
-    }
+    DateTime? dateTime = alarm.time?.getDateTime();
     bool canEdit = alarm.type == "custom";
 
     if (alarm.type == "morning") {
@@ -122,8 +116,7 @@ class SleepAndAlarmScreen extends StatelessWidget {
         Navigation.push(
           appRoutes: AppRoutes.addAlarm,
           arguments: AddAlarmNavModel(
-            dateTime: dateTime,
-            canEdit: canEdit,
+            alarmData: alarm,
           ),
         );
       },

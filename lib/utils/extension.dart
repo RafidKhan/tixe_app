@@ -305,7 +305,6 @@ extension DateExtention on String {
   }
 }
 
-
 extension HeartRateStatusExtension on HeartRateStatus {
   String get label {
     switch (this) {
@@ -326,5 +325,18 @@ extension HeartRateStatusExtension on HeartRateStatus {
     } else {
       return HeartRateStatus.high;
     }
+  }
+}
+
+extension StringToDateTime on String {
+  DateTime? getDateTime() {
+    DateTime? dateTime;
+    final time = split(":");
+    if (time.length == 3) {
+      final now = DateTime.now();
+      dateTime = DateTime(now.year, now.month, now.day, int.parse(time![0]),
+          int.parse(time[1]), int.parse(time[2]));
+    }
+    return dateTime;
   }
 }

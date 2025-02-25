@@ -32,11 +32,14 @@ class AddAlarmController extends StateNotifier<AddAlarmState> {
 
   void setModel(AddAlarmNavModel? model) {
     state = state.copyWith(model: model);
-    if(state.model != null){
+    if (state.model != null) {
       state = state.copyWith(isUpdateAlarm: true);
     }
-    if (state.model?.dateTime != null) {
-      setDateTime(state.model!.dateTime!);
+    if (state.model?.alarmData?.time != null) {
+      final DateTime? dateTime = state.model!.alarmData!.time!.getDateTime();
+      if (dateTime != null) {
+        setDateTime(dateTime);
+      }
     }
   }
 

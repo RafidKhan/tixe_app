@@ -1,9 +1,9 @@
+import 'package:tixe_flutter_app/global/model/alarm_list_response.dart';
+
 class AddAlarmNavModel {
-  final DateTime? dateTime;
-  final bool? canEdit;
+  final AlarmData? alarmData;
 
   const AddAlarmNavModel({
-    required this.dateTime,
-    required this.canEdit,
+    required this.alarmData,
   });
 }

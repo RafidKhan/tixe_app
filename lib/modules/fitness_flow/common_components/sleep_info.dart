@@ -63,6 +63,12 @@ class _SleepInfoState extends State<SleepInfo> {
       final int minutes =
           ((sleepHours - hours) * 60).round(); // Remaining minutes
       final sleepData = state.weeklySleep;
+      final sleepInfo = isNightTime ? state.nightAlarm : state.morningAlarm;
+      final DateTime? sleepInfoTime = sleepInfo?.time?.getDateTime();
+      String? sleepInfoTimeStr;
+      if(sleepInfoTime != null){
+        sleepInfoTimeStr = DateFormat('hh:mm a').format(sleepInfoTime);
+      }
       return Container(
         width: context.width,
         padding: EdgeInsets.symmetric(
@@ -107,8 +113,10 @@ class _SleepInfoState extends State<SleepInfo> {
                           );
                         },
                       ),
-                      const GlobalText(
-                        str: "Bedtime 11:30 PM",
+                      GlobalText(
+                        str: isNightTime
+                            ? "Bedtime $sleepInfoTimeStr"
+                            : "Sunrise $sleepInfoTimeStr",
                         fontSize: 9,
                         fontWeight: FontWeight.w400,
                       )
