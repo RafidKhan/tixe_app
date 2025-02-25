@@ -64,7 +64,9 @@ class _DateBasedExerciseRecordState extends State<DateBasedExerciseRecord> {
               ),
               InkWell(
                 onTap: () {
-                  DateUtil.showDatePickerDialog().then((dateTime) {
+                  DateUtil.showDatePickerDialog(
+                    lastDate: DateTime.now().subtract(const Duration(days: 1)),
+                  ).then((dateTime) {
                     if (dateTime != null) {
                       sharedCon.setDate(dateTime);
                     }
@@ -123,7 +125,7 @@ class _DateBasedExerciseRecordState extends State<DateBasedExerciseRecord> {
                   },
                 ),
               ),
-              if (state.pastDateTime.day != DateTime.now().day-1) ...[
+              if (state.pastDateTime.day != DateTime.now().day - 1) ...[
                 SizedBox(width: 60.w),
                 Expanded(
                   child: _bottomButton(
