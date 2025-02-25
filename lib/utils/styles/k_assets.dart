@@ -14,7 +14,11 @@ enum KAssetName {
   icHeartRateGraphPng,
   icForwardFilledPng,
   dummyGearPng,
+  icLocationPng,
   icCaloriesPng,
+  icCurrentLocationPng,
+  icPersonPng,
+  icEditPng,
   homePng,
   tixeLogoPng,
   icClockPng,
@@ -29,6 +33,8 @@ enum KAssetName {
   icSunrisePng,
   icHamburgerPng,
   icVideoPlayPng,
+  icHeight2Png,
+  icWeight2Png,
   fitnessPng,
   icClosePng,
   trainingPng,
@@ -83,8 +89,16 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/icForwardFilled.png';
       case KAssetName.dummyGearPng:
         return '$_imagesDir/dummy_gear.png';
+      case KAssetName.icLocationPng:
+        return '$_imagesDir/icLocation.png';
       case KAssetName.icCaloriesPng:
         return '$_imagesDir/icCalories.png';
+      case KAssetName.icCurrentLocationPng:
+        return '$_imagesDir/icCurrentLocation.png';
+      case KAssetName.icPersonPng:
+        return '$_imagesDir/icPerson.png';
+      case KAssetName.icEditPng:
+        return '$_imagesDir/icEdit.png';
       case KAssetName.homePng:
         return '$_imagesDir/home.png';
       case KAssetName.tixeLogoPng:
@@ -113,6 +127,10 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/icHamburger.png';
       case KAssetName.icVideoPlayPng:
         return '$_imagesDir/icVideoPlay.png';
+      case KAssetName.icHeight2Png:
+        return '$_imagesDir/icHeight2.png';
+      case KAssetName.icWeight2Png:
+        return '$_imagesDir/icWeight2.png';
       case KAssetName.fitnessPng:
         return '$_imagesDir/fitness.png';
       case KAssetName.icClosePng:

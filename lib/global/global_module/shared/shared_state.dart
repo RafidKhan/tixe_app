@@ -1,6 +1,8 @@
 import 'package:health/health.dart';
 import 'package:tixe_flutter_app/global/model/alarm_list_response.dart';
 
+import '../../model/profile_response.dart';
+
 class SharedState {
   final bool isHealthConnectSynced;
   final String totalSteps;
@@ -16,6 +18,7 @@ class SharedState {
   final AlarmData? nightAlarm;
   final DateTime pastDateTime;
   final bool loadingAlarms;
+  final ProfileResponse? profileData;
 
   const SharedState({
     required this.isHealthConnectSynced,
@@ -32,6 +35,7 @@ class SharedState {
     required this.alarms,
     required this.morningAlarm,
     required this.nightAlarm,
+    required this.profileData,
   });
 
   SharedState copyWith({
@@ -49,6 +53,7 @@ class SharedState {
     List<AlarmData>? alarms,
     AlarmData? morningAlarm,
     AlarmData? nightAlarm,
+    ProfileResponse? profileData,
   }) {
     return SharedState(
       isHealthConnectSynced:
@@ -66,6 +71,49 @@ class SharedState {
       alarms: alarms ?? this.alarms,
       morningAlarm: morningAlarm ?? this.morningAlarm,
       nightAlarm: nightAlarm ?? this.nightAlarm,
+      profileData: profileData ?? this.profileData,
+    );
+  }
+
+  SharedState removeFitnessData() {
+    return SharedState(
+      loadingAlarms: false,
+      isHealthConnectSynced: false,
+      totalSteps: "",
+      burntCalories: "",
+      exerciseTime: "",
+      heartRate: "",
+      sleepTime: "",
+      exerciseList: [],
+      pastExerciseList: [],
+      weeklySleep: [],
+      alarms: [],
+      morningAlarm: null,
+      nightAlarm: null,
+      pastDateTime: DateTime.now().subtract(
+        const Duration(days: 1),
+      ),
+      profileData: profileData,
+    );
+  }
+
+  SharedState removeProfileData() {
+    return SharedState(
+      loadingAlarms: loadingAlarms,
+      isHealthConnectSynced: isHealthConnectSynced,
+      totalSteps: totalSteps,
+      burntCalories: burntCalories,
+      exerciseTime: exerciseTime,
+      heartRate: heartRate,
+      sleepTime: sleepTime,
+      exerciseList: exerciseList,
+      pastExerciseList: pastExerciseList,
+      weeklySleep: weeklySleep,
+      alarms: alarms,
+      morningAlarm: morningAlarm,
+      nightAlarm: nightAlarm,
+      pastDateTime: pastDateTime,
+      profileData: null,
     );
   }
 }

@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:tixe_flutter_app/global/global_module/global_api.dart';
 import 'package:tixe_flutter_app/global/model/alarm_list_response.dart';
 
@@ -6,6 +5,7 @@ import '../../modules/auth/sign_in/model/sign_in_response.dart';
 import '../../modules/training_flow/confirm_training_enroll/model/discount_code_verify_response.dart';
 import '../../utils/enum.dart';
 import '../model/global_response.dart';
+import '../model/profile_response.dart';
 import '../model/settings_response.dart';
 import 'global_interface.dart';
 
@@ -95,6 +95,17 @@ class GlobalRepository extends IGlobalRepository {
           isSuccess ? AlarmListResponse.fromJson(response?.data) : null,
           isSuccess,
         );
+      },
+    );
+  }
+
+  @override
+  Future<void> getProfileData({
+    required Function(ProfileResponse? data, bool isSuccess) callback,
+  }) async {
+    await _api.getProfileData(
+      callback: (response, isSuccess) {
+        callback(isSuccess?ProfileResponse.fromJson(response?.data):null, isSuccess);
       },
     );
   }

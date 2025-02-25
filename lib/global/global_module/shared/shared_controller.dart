@@ -34,28 +34,12 @@ class SharedController extends StateNotifier<SharedState> {
             pastDateTime: DateTime.now().subtract(
               const Duration(days: 1),
             ),
+            profileData: null,
           ),
         );
 
   void clearData() {
-    state = SharedState(
-      loadingAlarms: false,
-      isHealthConnectSynced: false,
-      totalSteps: "",
-      burntCalories: "",
-      exerciseTime: "",
-      heartRate: "",
-      sleepTime: "",
-      exerciseList: [],
-      pastExerciseList: [],
-      weeklySleep: [],
-      alarms: [],
-      morningAlarm: null,
-      nightAlarm: null,
-      pastDateTime: DateTime.now().subtract(
-        const Duration(days: 1),
-      ),
-    );
+    state = state.removeFitnessData();
   }
 
   Future<void> checkIsHealthConnectSynced() async {
@@ -173,6 +157,15 @@ class SharedController extends StateNotifier<SharedState> {
 
         );
       },
+    );
+  }
+
+  Future<void> getProfileData() async{
+    state = state.removeProfileData();
+    await _globalRepository.getProfileData(
+      callback: (response, success) {
+        state = state.copyWith(profileData: response);
+      }
     );
   }
 }

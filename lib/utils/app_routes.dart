@@ -1,3 +1,4 @@
+import '../modules/profile_flow/profile_details/views/profile_details_screen.dart';
 import 'package:tixe_flutter_app/modules/fitness_flow/add_alarm/model/add_alarm_nav_model.dart';
 
 import '../modules/fitness_flow/add_alarm/views/add_alarm_screen.dart';
@@ -42,6 +43,7 @@ import '../modules/workout_flow/my_workout_select_phase/views/my_workout_select_
 
 enum AppRoutes {
   splash,
+  profileDetails,
   addAlarm,
   sleepAndAlarm,
   exerciseDetail,
@@ -76,6 +78,8 @@ extension AppRoutesExtention on AppRoutes {
   Widget buildWidget<T extends Object>({T? arguments}) {
     switch (this) {
 
+      case AppRoutes.profileDetails:
+        return const ProfileDetailsScreen();
       case AppRoutes.addAlarm:
         return  AddAlarmScreen(model: arguments as AddAlarmNavModel?,);
 

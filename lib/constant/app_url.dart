@@ -29,6 +29,7 @@ enum AppUrl {
   completeWorkoutPhase,
   alarmList,
   alarmStore,
+  myProfile,
 }
 
 extension AppUrlExtention on AppUrl {
@@ -113,6 +114,8 @@ extension AppUrlExtention on AppUrl {
         return "alarms";
       case AppUrl.alarmStore:
         return "alarms/store";
+      case AppUrl.myProfile:
+        return "me";
     }
   }
 }

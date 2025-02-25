@@ -82,4 +82,15 @@ class GlobalApi {
       callback: callback,
     );
   }
+
+  Future<void> getProfileData({
+    required Function(Response? data, bool isSuccess) callback,
+  }) async {
+    final url = AppUrl.myProfile.url;
+    await _apiClient.request(
+      url: url,
+      method: Method.GET,
+      callback: callback,
+    );
+  }
 }

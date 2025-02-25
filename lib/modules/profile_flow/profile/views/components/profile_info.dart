@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tixe_flutter_app/global/global_module/shared/shared_controller.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
+import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
+import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
-class ProfileInfo extends StatelessWidget {
+class ProfileInfo extends ConsumerWidget {
   const ProfileInfo({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(sharedController);
     return Container(
       width: context.width,
       margin: EdgeInsets.only(bottom: 20.h),
@@ -46,7 +51,7 @@ class ProfileInfo extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 GlobalText(
-                  str: "John Doe",
+                  str: state.profileData?.data?.name ?? "",
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
                   color: KColor.white.color,
@@ -56,11 +61,18 @@ class ProfileInfo extends StatelessWidget {
                 SizedBox(
                   height: 6.h,
                 ),
-                GlobalText(
-                  str: context.loc.view_profile,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: KColor.btnGradient1.color,
+                InkWell(
+                  onTap: () {
+                    Navigation.push(
+                      appRoutes: AppRoutes.profileDetails,
+                    );
+                  },
+                  child: GlobalText(
+                    str: context.loc.view_profile,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: KColor.btnGradient1.color,
+                  ),
                 ),
               ],
             ),

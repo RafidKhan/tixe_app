@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tixe_flutter_app/global/global_module/shared/shared_controller.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
 import 'package:tixe_flutter_app/modules/dashboard/controller/dashboard_controller.dart';
 import 'package:tixe_flutter_app/modules/fitness_flow/fitness/views/fitness_screen.dart';
@@ -23,8 +24,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
     // TODO: implement initState
     super.initState();
     final controller = context.read(dashboardController.notifier);
+    final sharedCon = context.read(sharedController.notifier);
     Future(() {
       controller.setSelectedIndex(0);
+      sharedCon.getProfileData();
     });
   }
 

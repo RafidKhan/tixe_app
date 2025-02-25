@@ -1,6 +1,6 @@
-import 'package:dio/dio.dart';
 import 'package:tixe_flutter_app/global/model/alarm_list_response.dart';
 import 'package:tixe_flutter_app/global/model/global_response.dart';
+import 'package:tixe_flutter_app/global/model/profile_response.dart';
 import 'package:tixe_flutter_app/global/model/settings_response.dart';
 import 'package:tixe_flutter_app/modules/auth/sign_in/model/sign_in_response.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
@@ -35,5 +35,9 @@ abstract class IGlobalRepository {
 
   Future<void> fetchAlarms({
     required Function(AlarmListResponse? data, bool isSuccess) callback,
+  });
+
+  Future<void> getProfileData({
+    required Function(ProfileResponse? data, bool isSuccess) callback,
   });
 }
