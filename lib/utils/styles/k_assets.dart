@@ -1,6 +1,7 @@
 enum KAssetName {
   appIconPng,
   tixeAppIconPng,
+  icCategoriesPng,
   warJpg,
   icHeartRatePng,
   dummyMapLocationPng,
@@ -21,6 +22,7 @@ enum KAssetName {
   icEditPng,
   homePng,
   tixeLogoPng,
+  icCartPng,
   icClockPng,
   applePng,
   icFirePng,
@@ -63,6 +65,8 @@ extension AssetsExtension on KAssetName {
         return '$_app_iconDir/app_icon.png';
       case KAssetName.tixeAppIconPng:
         return '$_app_iconDir/tixe_app_icon.png';
+      case KAssetName.icCategoriesPng:
+        return '$_imagesDir/icCategories.png';
       case KAssetName.warJpg:
         return '$_imagesDir/war.jpg';
       case KAssetName.icHeartRatePng:
@@ -103,6 +107,8 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/home.png';
       case KAssetName.tixeLogoPng:
         return '$_imagesDir/tixe_logo.png';
+      case KAssetName.icCartPng:
+        return '$_imagesDir/icCart.png';
       case KAssetName.icClockPng:
         return '$_imagesDir/icClock.png';
       case KAssetName.applePng:
