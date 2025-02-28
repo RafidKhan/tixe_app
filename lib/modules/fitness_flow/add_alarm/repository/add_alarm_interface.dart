@@ -26,6 +26,7 @@ abstract class IAddAlarmRepository {
     required String alarmTime,
     required String date,
     required String type,
+    required int isEnabled,
     required Function(GlobalResponse? data, bool isSuccess) callback,
   });
 }

@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tixe_flutter_app/data_provider/pref_helper.dart';
 import 'package:tixe_flutter_app/global/widget/global_button.dart';
-import 'package:tixe_flutter_app/global/widget/global_divider.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
-import 'package:tixe_flutter_app/modules/training_flow/training_details/model/training_details_nav_model.dart';
-import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
-import 'package:tixe_flutter_app/utils/navigation.dart';
-import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
 class FeaturedArmItem extends StatelessWidget {

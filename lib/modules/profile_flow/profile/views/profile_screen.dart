@@ -47,7 +47,11 @@ class ProfileScreen extends StatelessWidget {
             ProfileCommonItem(
               image: KAssetName.icPreferencePng.imagePath,
               title: context.loc.preferences,
-              onTap: () {},
+              onTap: () {
+                Navigation.push(
+                  appRoutes: AppRoutes.preferences,
+                );
+              },
             ),
           ],
         ),

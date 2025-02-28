@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
@@ -13,10 +14,9 @@ import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
+
 import '../../add_alarm/model/add_alarm_nav_model.dart';
 import '../../common_components/sleep_info.dart';
-import 'package:flutter/material.dart';
-
 import 'components/sleep_and_alarm_header.dart';
 
 class SleepAndAlarmScreen extends StatelessWidget {

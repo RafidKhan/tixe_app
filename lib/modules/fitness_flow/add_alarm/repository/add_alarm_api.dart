@@ -63,6 +63,7 @@ class AddAlarmApi {
     required String alarmTime,
     required String date,
     required String type,
+    required int isEnabled,
     required Function(Response? data, bool isSuccess) callback,
   }) async {
     await _apiClient.request(
@@ -72,7 +73,7 @@ class AddAlarmApi {
         "type": type,
         "time": alarmTime,
         "date": date,
-        "isEnable": 0,
+        "isEnable": isEnabled,
       },
       callback: callback,
     );

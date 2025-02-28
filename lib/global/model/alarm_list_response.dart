@@ -1,6 +1,5 @@
 
 
-import 'package:tixe_flutter_app/data_provider/api_client.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 

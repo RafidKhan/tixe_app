@@ -67,6 +67,7 @@ class AddAlarmRepository implements IAddAlarmRepository {
     required String alarmTime,
     required String date,
     required String type,
+    required int isEnabled,
     required Function(GlobalResponse? data, bool isSuccess) callback,
   }) async{
     await _api.disableAlarm(
@@ -74,6 +75,7 @@ class AddAlarmRepository implements IAddAlarmRepository {
       alarmTime: alarmTime,
       type: type,
       date: date,
+      isEnabled: isEnabled,
       callback: (response, isSuccess) {
         callback(
           isSuccess ? GlobalResponse.fromJson(response?.data) : null,

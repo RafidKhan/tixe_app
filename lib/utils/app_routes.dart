@@ -1,14 +1,9 @@
-import '../modules/arm_store/views/arm_store_screen.dart';
-import '../modules/profile_flow/profile_details/views/profile_details_screen.dart';
-import 'package:tixe_flutter_app/modules/fitness_flow/add_alarm/model/add_alarm_nav_model.dart';
-
-import '../modules/fitness_flow/add_alarm/views/add_alarm_screen.dart';
-import '../modules/fitness_flow/sleep_and_alarm/views/sleep_and_alarm_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/views/personal_details_screen.dart';
 import 'package:tixe_flutter_app/modules/auth/sign_in/views/sign_in_screen.dart';
 import 'package:tixe_flutter_app/modules/auth/sign_up/views/sign_up_screen.dart';
 import 'package:tixe_flutter_app/modules/auth/verify_email/views/verify_email_screen.dart';
+import 'package:tixe_flutter_app/modules/fitness_flow/add_alarm/model/add_alarm_nav_model.dart';
 import 'package:tixe_flutter_app/modules/fitness_flow/exercise_detail/views/exercise_detail_screen.dart';
 import 'package:tixe_flutter_app/modules/fitness_flow/fitness/views/fitness_screen.dart';
 import 'package:tixe_flutter_app/modules/splash/views/splash_screen.dart';
@@ -28,10 +23,15 @@ import 'package:tixe_flutter_app/modules/workout_flow/workout_details/model/work
 import 'package:tixe_flutter_app/modules/workout_flow/workout_details/model/workout_details_nav_model.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/workout_details/views/workout_details_screen.dart';
 
+import '../modules/arm_store/views/arm_store_screen.dart';
 import '../modules/auth/fitness_details/views/fitness_details_screen.dart';
 import '../modules/dashboard/views/dashboard_screen.dart';
+import '../modules/fitness_flow/add_alarm/views/add_alarm_screen.dart';
+import '../modules/fitness_flow/sleep_and_alarm/views/sleep_and_alarm_screen.dart';
 import '../modules/home/views/home_screen.dart';
+import '../modules/profile_flow/preferences/views/preferences_screen.dart';
 import '../modules/profile_flow/profile/views/profile_screen.dart';
+import '../modules/profile_flow/profile_details/views/profile_details_screen.dart';
 import '../modules/training_flow/confirm_training_enroll/views/confirm_training_enroll_screen.dart';
 import '../modules/training_flow/training/views/training_screen.dart';
 import '../modules/training_flow/training_details/views/training_details_screen.dart';
@@ -44,6 +44,7 @@ import '../modules/workout_flow/my_workout_select_phase/views/my_workout_select_
 
 enum AppRoutes {
   splash,
+  preferences,
   armStore,
   profileDetails,
   addAlarm,
@@ -79,6 +80,8 @@ enum AppRoutes {
 extension AppRoutesExtention on AppRoutes {
   Widget buildWidget<T extends Object>({T? arguments}) {
     switch (this) {
+      case AppRoutes.preferences:
+        return const PreferencesScreen();
 
       case AppRoutes.armStore:
         return const ArmStoreScreen();

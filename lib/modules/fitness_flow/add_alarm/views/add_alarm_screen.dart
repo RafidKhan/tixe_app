@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
@@ -9,11 +10,8 @@ import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
-import '../model/add_alarm_nav_model.dart';
-import '/global/widget/global_appbar.dart';
 import '/global/widget/global_text.dart';
-import 'package:flutter/material.dart';
-
+import '../model/add_alarm_nav_model.dart';
 import 'components/alarm_time_picker.dart';
 
 class AddAlarmScreen extends StatefulWidget {
@@ -163,7 +161,9 @@ class _AddAlarmScreenState extends State<AddAlarmScreen> {
                         buttonText: state.model?.alarmData?.alarmType ==
                                 AlarmType.CUSTOM
                             ? "Delete Alarm"
-                            : "Disable Alarm",
+                            : state.model?.alarmData?.isEnabled == 1
+                                ? "Disable Alarm"
+                                : "Enable Alarm",
                       ),
                     )
                   ],

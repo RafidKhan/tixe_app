@@ -83,8 +83,8 @@ class AddAlarmController extends StateNotifier<AddAlarmState> {
     await _addalarmRepository.updateAlarm(
       id: (state.model?.alarmData?.id).toString(),
       alarmTime: DateFormat("HH:mm:ss").format(state.dateTime),
-      type: state.model?.alarmData?.type??'',
-      date: state.model?.alarmData?.date??'',
+      type: state.model?.alarmData?.type ?? '',
+      date: state.model?.alarmData?.date ?? '',
       callback: (response, isSuccess) {
         Navigation.key.currentContext!
             .read(sharedController.notifier)
@@ -104,9 +104,10 @@ class AddAlarmController extends StateNotifier<AddAlarmState> {
     ViewUtil.showLoaderPage();
     await _addalarmRepository.disableAlarm(
       id: (state.model?.alarmData?.id).toString(),
-      alarmTime: state.model?.alarmData?.time??'',
-      type: state.model?.alarmData?.type??'',
-      date: state.model?.alarmData?.date??'',
+      alarmTime: state.model?.alarmData?.time ?? '',
+      type: state.model?.alarmData?.type ?? '',
+      date: state.model?.alarmData?.date ?? '',
+      isEnabled: state.model?.alarmData?.isEnabled == 1 ? 0 : 1,
       callback: (response, isSuccess) {
         Navigation.key.currentContext!
             .read(sharedController.notifier)
