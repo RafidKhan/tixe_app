@@ -37,4 +37,44 @@ class AddAlarmApi {
       callback: callback,
     );
   }
+
+  Future<void> updateAlarm({
+    required String id,
+    required String alarmTime,
+    required String date,
+    required String type,
+    required Function(Response? data, bool isSuccess) callback,
+  }) async {
+    await _apiClient.request(
+      url: AppUrl.updateAlarm.url.replaceAll("{ID}", id),
+      method: Method.POST,
+      params: {
+        "type": type,
+        "time": alarmTime,
+        "date": date,
+        "isEnable": 1,
+      },
+      callback: callback,
+    );
+  }
+
+  Future<void> disableAlarm({
+    required String id,
+    required String alarmTime,
+    required String date,
+    required String type,
+    required Function(Response? data, bool isSuccess) callback,
+  }) async {
+    await _apiClient.request(
+      url: AppUrl.updateAlarm.url.replaceAll("{ID}", id),
+      method: Method.POST,
+      params: {
+        "type": type,
+        "time": alarmTime,
+        "date": date,
+        "isEnable": 0,
+      },
+      callback: callback,
+    );
+  }
 }

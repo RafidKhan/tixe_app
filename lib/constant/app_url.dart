@@ -31,6 +31,7 @@ enum AppUrl {
   alarmStore,
   myProfile,
   deleteAlarm,
+  updateAlarm,
 }
 
 extension AppUrlExtention on AppUrl {
@@ -119,6 +120,8 @@ extension AppUrlExtention on AppUrl {
         return "me";
       case AppUrl.deleteAlarm:
         return "alarms/delete/{ID}";
+      case AppUrl.updateAlarm:
+        return "alarms/update/{ID}";
     }
   }
 }

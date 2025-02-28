@@ -38,4 +38,48 @@ class AddAlarmRepository implements IAddAlarmRepository {
       },
     );
   }
+
+  @override
+  Future<void> updateAlarm({
+    required String id,
+    required String alarmTime,
+    required String date,
+    required String type,
+    required Function(GlobalResponse? data, bool isSuccess) callback,
+  }) async {
+    await _api.updateAlarm(
+      id: id,
+      alarmTime: alarmTime,
+      type: type,
+      date: date,
+      callback: (response, isSuccess) {
+        callback(
+          isSuccess ? GlobalResponse.fromJson(response?.data) : null,
+          isSuccess,
+        );
+      },
+    );
+  }
+
+  @override
+  Future<void> disableAlarm({
+    required String id,
+    required String alarmTime,
+    required String date,
+    required String type,
+    required Function(GlobalResponse? data, bool isSuccess) callback,
+  }) async{
+    await _api.disableAlarm(
+      id: id,
+      alarmTime: alarmTime,
+      type: type,
+      date: date,
+      callback: (response, isSuccess) {
+        callback(
+          isSuccess ? GlobalResponse.fromJson(response?.data) : null,
+          isSuccess,
+        );
+      },
+    );
+  }
 }

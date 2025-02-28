@@ -77,4 +77,48 @@ class AddAlarmController extends StateNotifier<AddAlarmState> {
       },
     );
   }
+
+  Future<void> updateAlarm() async {
+    ViewUtil.showLoaderPage();
+    await _addalarmRepository.updateAlarm(
+      id: (state.model?.alarmData?.id).toString(),
+      alarmTime: DateFormat("HH:mm:ss").format(state.dateTime),
+      type: state.model?.alarmData?.type??'',
+      date: state.model?.alarmData?.date??'',
+      callback: (response, isSuccess) {
+        Navigation.key.currentContext!
+            .read(sharedController.notifier)
+            .fetchAlarms()
+            .then((value) {
+          ViewUtil.hideLoader();
+          Navigation.pop();
+          if ((response?.message ?? "").trim().isNotEmpty) {
+            ViewUtil.snackBar(response?.message ?? "");
+          }
+        });
+      },
+    );
+  }
+
+  Future<void> disableAlarm() async {
+    ViewUtil.showLoaderPage();
+    await _addalarmRepository.disableAlarm(
+      id: (state.model?.alarmData?.id).toString(),
+      alarmTime: state.model?.alarmData?.time??'',
+      type: state.model?.alarmData?.type??'',
+      date: state.model?.alarmData?.date??'',
+      callback: (response, isSuccess) {
+        Navigation.key.currentContext!
+            .read(sharedController.notifier)
+            .fetchAlarms()
+            .then((value) {
+          ViewUtil.hideLoader();
+          Navigation.pop();
+          if ((response?.message ?? "").trim().isNotEmpty) {
+            ViewUtil.snackBar(response?.message ?? "");
+          }
+        });
+      },
+    );
+  }
 }

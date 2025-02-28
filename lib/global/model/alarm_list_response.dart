@@ -30,7 +30,7 @@ class AlarmListResponse {
 
 class AlarmData {
   int? id;
-  //String? type;
+  String? type;
   String? time;
   String? date;
   int? isEnabled;
@@ -38,7 +38,7 @@ class AlarmData {
 
   AlarmData({
     this.id,
-    //this.type,
+    this.type,
     this.time,
     this.date,
     this.alarmType,
@@ -47,7 +47,7 @@ class AlarmData {
 
   factory AlarmData.fromJson(Map<String, dynamic> json) => AlarmData(
     id: json["id"],
-    //type: json["type"],
+    type: json["type"],
     time: json["time"],
     date: json["date"],
     isEnabled: json["isEnable"],
@@ -56,7 +56,7 @@ class AlarmData {
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    //"type": type,
+    "type": type,
     "time": time,
     "date": date,
     "isEnable": isEnabled,

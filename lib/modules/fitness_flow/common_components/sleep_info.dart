@@ -53,8 +53,8 @@ class _SleepInfoState extends State<SleepInfo> {
 
   @override
   Widget build(BuildContext context) {
-    final bool isNightTime =
-        DateTime.now().hour > 20 || DateTime.now().hour < 6;
+    final now = DateTime.now();
+    final bool isNightTime = now.hour >= 20 || now.hour < 6;
 
     return Consumer(builder: (context, ref, child) {
       final state = ref.watch(sharedController);
@@ -66,7 +66,7 @@ class _SleepInfoState extends State<SleepInfo> {
       final sleepInfo = isNightTime ? state.nightAlarm : state.morningAlarm;
       final DateTime? sleepInfoTime = sleepInfo?.time?.getDateTime();
       String? sleepInfoTimeStr;
-      if (sleepInfoTime != null) {
+      if (sleepInfo?.isEnabled == 1 && sleepInfoTime != null) {
         sleepInfoTimeStr = DateFormat('hh:mm a').format(sleepInfoTime);
       }
       return Container(
