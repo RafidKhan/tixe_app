@@ -154,24 +154,31 @@ class SleepAndAlarmScreen extends StatelessWidget {
                     width: 10.w,
                   ),
                 ],
-                GlobalText(
-                  str: dateTime == null
-                      ? ""
-                      : DateFormat('hh:mm a').format(dateTime),
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
+                Column(
+                  children: [
+                    GlobalText(
+                      str: dateTime == null
+                          ? ""
+                          : DateFormat('hh:mm a').format(dateTime),
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: alarm.isEnabled==1? KColor.white.color : KColor.liteGrey.color,
+                    ),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    GlobalText(
+                      str:
+                      "Alarm will ring ${(alarm.time ?? '').getAlarmTimeDifference()} from now",
+                      fontSize: 9,
+                      fontWeight: FontWeight.w400,
+                      color: alarm.isEnabled==1? KColor.white.color : KColor.liteGrey.color,
+                    )
+                  ],
                 ),
               ],
             ),
-            SizedBox(
-              height: 8.h,
-            ),
-            GlobalText(
-              str:
-                  "Alarm will ring ${(alarm.time ?? '').getAlarmTimeDifference()} from now",
-              fontSize: 9,
-              fontWeight: FontWeight.w400,
-            )
+
           ],
         ),
       ),

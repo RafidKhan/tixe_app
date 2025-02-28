@@ -1,11 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tixe_flutter_app/global/global_module/shared/shared_state.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/user_activity_tracker_services/user_activity_tracker_services.dart';
 
+import '../../model/sleep_data_model.dart';
 import '../global_interface.dart';
 import '../global_respository.dart';
 
@@ -56,17 +55,23 @@ class SharedController extends StateNotifier<SharedState> {
   }
 
   Future<void> fetchWeeklySleepData() async {
-    final List<num> weeklySleep = [];
+    final List<SleepDataModel> weeklySleep = [];
     List<DateTime> lastSevenDays = List.generate(7, (index) {
       return DateTime.now().subtract(Duration(days: 6 - index));
+    });
+    lastSevenDays.forEach((e) {
+      'here is: ${e.toString().dayName}'.log();
     });
     lastSevenDays.forEach((e) async {
       await UserActivityTrack.fetchSleepData(
           dateTime: e,
           result: (value) {
-            weeklySleep.add(value / 60);
+            weeklySleep.add(
+              SleepDataModel(value: value / 60, dateTime: e)
+            );
           });
       if (weeklySleep.length == 7) {
+        weeklySleep.sort((a, b) => a.dateTime.compareTo(b.dateTime));
         state = state.copyWith(weeklySleep: weeklySleep);
       }
     });

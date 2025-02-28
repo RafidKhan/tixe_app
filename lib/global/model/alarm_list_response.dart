@@ -33,6 +33,7 @@ class AlarmData {
   //String? type;
   String? time;
   String? date;
+  int? isEnabled;
   AlarmType? alarmType;
 
   AlarmData({
@@ -41,6 +42,7 @@ class AlarmData {
     this.time,
     this.date,
     this.alarmType,
+    this.isEnabled,
   });
 
   factory AlarmData.fromJson(Map<String, dynamic> json) => AlarmData(
@@ -48,6 +50,7 @@ class AlarmData {
     //type: json["type"],
     time: json["time"],
     date: json["date"],
+    isEnabled: json["isEnable"],
     alarmType: (json["type"]??'').toString().getAlarmType(),
   );
 
@@ -56,5 +59,6 @@ class AlarmData {
     //"type": type,
     "time": time,
     "date": date,
+    "isEnable": isEnabled,
   };
 }

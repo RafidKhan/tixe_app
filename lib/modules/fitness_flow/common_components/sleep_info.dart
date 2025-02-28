@@ -243,33 +243,9 @@ class _SleepInfoState extends State<SleepInfo> {
                       sideTitles: SideTitles(
                         showTitles: true,
                         getTitlesWidget: (double value, TitleMeta meta) {
-                          String text;
-                          switch (value.toInt()) {
-                            case 0:
-                              text = 'Mon';
-                              break;
-                            case 1:
-                              text = 'Tue';
-                              break;
-                            case 2:
-                              text = 'Wed';
-                              break;
-                            case 3:
-                              text = 'Thu';
-                              break;
-                            case 4:
-                              text = 'Fri';
-                              break;
-                            case 5:
-                              text = 'Sat';
-                              break;
-                            case 6:
-                              text = 'Sun';
-                              break;
-                            default:
-                              text = '';
-                              break;
-                          }
+                          String text = (sleepData[value.toInt()].dateTime)
+                              .toString()
+                              .dayName;
                           return SideTitleWidget(
                             axisSide: meta.axisSide,
                             space: 4,
@@ -314,7 +290,7 @@ class _SleepInfoState extends State<SleepInfo> {
                             x: entry.key,
                             barRods: [
                               BarChartRodData(
-                                toY: entry.value.toDouble(),
+                                toY: entry.value.value.toDouble(),
                                 color: KColor.btnGradient2.color,
                                 width: 10,
                                 borderRadius: BorderRadius.circular(4),

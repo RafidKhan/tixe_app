@@ -2,6 +2,7 @@ import 'package:health/health.dart';
 import 'package:tixe_flutter_app/global/model/alarm_list_response.dart';
 
 import '../../model/profile_response.dart';
+import '../../model/sleep_data_model.dart';
 
 class SharedState {
   final bool isHealthConnectSynced;
@@ -12,7 +13,7 @@ class SharedState {
   final String sleepTime;
   final List<HealthDataPoint> exerciseList;
   final List<HealthDataPoint> pastExerciseList;
-  final List<num> weeklySleep;
+  final List<SleepDataModel> weeklySleep;
   final List<AlarmData> alarms;
   final AlarmData? morningAlarm;
   final AlarmData? nightAlarm;
@@ -48,7 +49,7 @@ class SharedState {
     List<HealthDataPoint>? exerciseList,
     List<HealthDataPoint>? pastExerciseList,
     DateTime? pastDateTime,
-    List<num>? weeklySleep,
+    List<SleepDataModel>? weeklySleep,
     bool? loadingAlarms,
     List<AlarmData>? alarms,
     AlarmData? morningAlarm,
