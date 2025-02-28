@@ -124,7 +124,7 @@ extension NumGenericExtensions<T extends String> on T {
 
   String parseToString() {
     try {
-      return this.toString();
+      return toString();
     } catch (e) {
       e.log();
 
@@ -334,9 +334,57 @@ extension StringToDateTime on String {
     final time = split(":");
     if (time.length == 3) {
       final now = DateTime.now();
-      dateTime = DateTime(now.year, now.month, now.day, int.parse(time![0]),
+      dateTime = DateTime(now.year, now.month, now.day, int.parse(time[0]),
           int.parse(time[1]), int.parse(time[2]));
     }
     return dateTime;
+  }
+}
+
+extension AlarmExt on String {
+  AlarmType? getAlarmType() {
+    switch (this) {
+      case "morning":
+        return AlarmType.MORNING;
+      case "night":
+        return AlarmType.NIGHT;
+      case "custom":
+        return AlarmType.CUSTOM;
+      default:
+        return null;
+    }
+  }
+}
+
+extension AlarmTimeExtension on String {
+  String getAlarmTimeDifference() {
+    try {
+      DateTime now = DateTime.now();
+      // DateTime alarmTime = DateTime(now.year, now.month, now.day, hour, minute, second);
+      DateTime? alarmTime = getDateTime();
+
+      if (alarmTime == null) {
+        return "";
+      }
+
+      // If alarm time is earlier or equal to current time, schedule for next day
+      if (alarmTime.isBefore(now) || alarmTime.isAtSameMomentAs(now)) {
+        alarmTime = alarmTime.add(Duration(days: 1));
+      }
+
+      // Get the difference
+      Duration diff = alarmTime.difference(now);
+
+      int diffMinutes = diff.inMinutes;
+      int diffHours = diff.inHours;
+
+      if (diffMinutes > 60) {
+        return "$diffHours hr";
+      } else {
+        return "$diffMinutes mins";
+      }
+    } catch (e) {
+      return "";
+    }
   }
 }

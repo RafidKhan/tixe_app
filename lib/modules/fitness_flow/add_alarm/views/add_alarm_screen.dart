@@ -5,6 +5,7 @@ import 'package:tixe_flutter_app/global/widget/global_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
 import 'package:tixe_flutter_app/modules/fitness_flow/add_alarm/controller/add_alarm_controller.dart';
+import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
@@ -63,14 +64,6 @@ class _AddAlarmScreenState extends State<AddAlarmScreen> {
                     ),
                     Consumer(builder: (context, ref, child) {
                       final state = ref.watch(addAlarmController);
-                      // String timeLeft = "";
-                      // final difference =
-                      //     state.dateTime.difference(DateTime.now().subtract(Duration(days: 1)));
-                      // if (difference.inMinutes <= 60) {
-                      //   timeLeft = "${difference.inMinutes}min";
-                      // } else {
-                      //   timeLeft = "${difference.inHours}hr";
-                      // }
 
                       return Container(
                         width: context.width,
@@ -107,11 +100,12 @@ class _AddAlarmScreenState extends State<AddAlarmScreen> {
                                 ),
                               ],
                             ),
-                            // GlobalText(
-                            //   str: "Alarm will ring $timeLeft from now",
-                            //   fontSize: 9,
-                            //   fontWeight: FontWeight.w400,
-                            // ),
+                            GlobalText(
+                              str:
+                                  "Alarm will ring ${DateFormat('HH:mm:ss').format(state.dateTime).getAlarmTimeDifference()} from now",
+                              fontSize: 9,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ],
                         ),
                       );
@@ -138,17 +132,12 @@ class _AddAlarmScreenState extends State<AddAlarmScreen> {
                   Expanded(
                     child: GlobalButton(
                       onPressed: () {
-                        if (state.isUpdateAlarm) {
-                          //
-                        } else {
-                          controller.addAlarm();
-                        }
+                        controller.addAlarm();
                       },
-                      buttonText:
-                          state.isUpdateAlarm ? "Update Alarm" : "Save Alarm",
+                      buttonText: "Save Alarm",
                     ),
                   ),
-                  if(state.model?.alarmData?.type == "custom")...[
+                  if (state.model?.alarmData?.alarmType != null) ...[
                     SizedBox(
                       width: 20.w,
                     ),
@@ -157,14 +146,19 @@ class _AddAlarmScreenState extends State<AddAlarmScreen> {
                         borderColor: KColor.btnGradient1.color,
                         activeColor: KColor.shadeGradient2.color,
                         textColor: KColor.btnGradient1.color,
-                        onPressed: () {},
-                        buttonText: state.isUpdateAlarm
+                        onPressed: () {
+                          if (state.model?.alarmData?.alarmType ==
+                              AlarmType.CUSTOM) {
+                            controller.deleteAlarm();
+                          }
+                        },
+                        buttonText: state.model?.alarmData?.alarmType ==
+                                AlarmType.CUSTOM
                             ? "Delete Alarm"
                             : "Disable Alarm",
                       ),
                     )
                   ],
-
                 ],
               );
             }),

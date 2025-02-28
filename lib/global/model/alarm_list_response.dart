@@ -1,5 +1,9 @@
 
 
+import 'package:tixe_flutter_app/data_provider/api_client.dart';
+import 'package:tixe_flutter_app/utils/enum.dart';
+import 'package:tixe_flutter_app/utils/extension.dart';
+
 class AlarmListResponse {
   int? code;
   String? message;
@@ -26,27 +30,30 @@ class AlarmListResponse {
 
 class AlarmData {
   int? id;
-  String? type;
+  //String? type;
   String? time;
   String? date;
+  AlarmType? alarmType;
 
   AlarmData({
     this.id,
-    this.type,
+    //this.type,
     this.time,
     this.date,
+    this.alarmType,
   });
 
   factory AlarmData.fromJson(Map<String, dynamic> json) => AlarmData(
     id: json["id"],
-    type: json["type"],
+    //type: json["type"],
     time: json["time"],
     date: json["date"],
+    alarmType: (json["type"]??'').toString().getAlarmType(),
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "type": type,
+    //"type": type,
     "time": time,
     "date": date,
   };

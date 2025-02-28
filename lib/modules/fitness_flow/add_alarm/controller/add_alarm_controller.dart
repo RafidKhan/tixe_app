@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:tixe_flutter_app/global/global_module/shared/shared_controller.dart';
 import 'package:tixe_flutter_app/modules/fitness_flow/add_alarm/controller/state/add_alarm_state.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
@@ -21,7 +22,6 @@ class AddAlarmController extends StateNotifier<AddAlarmState> {
           AddAlarmState(
             dateTime: DateTime.now(),
             model: null,
-            isUpdateAlarm: false,
           ),
         );
 
@@ -32,9 +32,6 @@ class AddAlarmController extends StateNotifier<AddAlarmState> {
 
   void setModel(AddAlarmNavModel? model) {
     state = state.copyWith(model: model);
-    if (state.model != null) {
-      state = state.copyWith(isUpdateAlarm: true);
-    }
     if (state.model?.alarmData?.time != null) {
       final DateTime? dateTime = state.model!.alarmData!.time!.getDateTime();
       if (dateTime != null) {
@@ -46,14 +43,37 @@ class AddAlarmController extends StateNotifier<AddAlarmState> {
   Future<void> addAlarm() async {
     ViewUtil.showLoaderPage();
     await _addalarmRepository.addAlarm(
-      alarmTime: DateFormat("hh:mm:ss").format(state.dateTime),
-      type: 'custom',
+      alarmTime: DateFormat("HH:mm:ss").format(state.dateTime),
       callback: (response, isSuccess) {
-        ViewUtil.hideLoader();
-        Navigation.pop();
-        if ((response?.message ?? "").trim().isNotEmpty) {
-          ViewUtil.snackBar(response?.message ?? "");
-        }
+        Navigation.key.currentContext!
+            .read(sharedController.notifier)
+            .fetchAlarms()
+            .then((value) {
+          ViewUtil.hideLoader();
+          Navigation.pop();
+          if ((response?.message ?? "").trim().isNotEmpty) {
+            ViewUtil.snackBar(response?.message ?? "");
+          }
+        });
+      },
+    );
+  }
+
+  Future<void> deleteAlarm() async {
+    ViewUtil.showLoaderPage();
+    await _addalarmRepository.deleteAlarm(
+      id: (state.model?.alarmData?.id).toString(),
+      callback: (response, isSuccess) {
+        Navigation.key.currentContext!
+            .read(sharedController.notifier)
+            .fetchAlarms()
+            .then((value) {
+          ViewUtil.hideLoader();
+          Navigation.pop();
+          if ((response?.message ?? "").trim().isNotEmpty) {
+            ViewUtil.snackBar(response?.message ?? "");
+          }
+        });
       },
     );
   }

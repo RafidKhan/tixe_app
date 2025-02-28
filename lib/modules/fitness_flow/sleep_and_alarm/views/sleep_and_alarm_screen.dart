@@ -8,6 +8,7 @@ import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
 import 'package:tixe_flutter_app/utils/app_routes.dart';
+import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
@@ -103,11 +104,10 @@ class SleepAndAlarmScreen extends StatelessWidget {
   Widget _alarmInfo(AlarmData alarm) {
     String? icon;
     DateTime? dateTime = alarm.time?.getDateTime();
-    bool canEdit = alarm.type == "custom";
 
-    if (alarm.type == "morning") {
+    if (alarm.alarmType == AlarmType.MORNING) {
       icon = KAssetName.icSunrisePng.imagePath;
-    } else if (alarm.type == "night") {
+    } else if (alarm.alarmType == AlarmType.NIGHT) {
       icon = KAssetName.icBedtimePng.imagePath;
     }
     final context = Navigation.key.currentContext!;
@@ -137,28 +137,41 @@ class SleepAndAlarmScreen extends StatelessWidget {
             ],
           ),
         ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Column(
           children: [
-            if (icon != null) ...[
-              GlobalImageLoader(
-                imagePath: icon,
-                height: 42.h,
-                width: 42.w,
-              ),
-              SizedBox(
-                width: 10.w,
-              ),
-            ],
-            GlobalText(
-              str: dateTime == null
-                  ? ""
-                  : DateFormat('hh:mm a').format(dateTime!),
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (icon != null) ...[
+                  GlobalImageLoader(
+                    imagePath: icon,
+                    height: 42.h,
+                    width: 42.w,
+                  ),
+                  SizedBox(
+                    width: 10.w,
+                  ),
+                ],
+                GlobalText(
+                  str: dateTime == null
+                      ? ""
+                      : DateFormat('hh:mm a').format(dateTime),
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
+              ],
             ),
+            SizedBox(
+              height: 8.h,
+            ),
+            GlobalText(
+              str:
+                  "Alarm will ring ${(alarm.time ?? '').getAlarmTimeDifference()} from now",
+              fontSize: 9,
+              fontWeight: FontWeight.w400,
+            )
           ],
         ),
       ),

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tixe_flutter_app/global/global_module/shared/shared_state.dart';
+import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/user_activity_tracker_services/user_activity_tracker_services.dart';
 
@@ -151,21 +152,26 @@ class SharedController extends StateNotifier<SharedState> {
       callback: (response, success) {
         state = state.copyWith(
           loadingAlarms: false,
-          alarms: (response?.data??[]).where((e)=>e.type =="custom").toList(),
-          morningAlarm: (response?.data??[]).where((e)=>e.type =="morning").toList().firstOrNull,
-          nightAlarm: (response?.data??[]).where((e)=>e.type =="night").toList().firstOrNull,
-
+          alarms: (response?.data ?? [])
+              .where((e) => e.alarmType == AlarmType.CUSTOM)
+              .toList(),
+          morningAlarm: (response?.data ?? [])
+              .where((e) => e.alarmType == AlarmType.MORNING)
+              .toList()
+              .firstOrNull,
+          nightAlarm: (response?.data ?? [])
+              .where((e) => e.alarmType == AlarmType.NIGHT)
+              .toList()
+              .firstOrNull,
         );
       },
     );
   }
 
-  Future<void> getProfileData() async{
+  Future<void> getProfileData() async {
     state = state.removeProfileData();
-    await _globalRepository.getProfileData(
-      callback: (response, success) {
-        state = state.copyWith(profileData: response);
-      }
-    );
+    await _globalRepository.getProfileData(callback: (response, success) {
+      state = state.copyWith(profileData: response);
+    });
   }
 }

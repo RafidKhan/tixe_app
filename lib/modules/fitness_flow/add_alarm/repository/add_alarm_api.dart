@@ -12,17 +12,28 @@ class AddAlarmApi {
 
   Future<void> addAlarm({
     required String alarmTime,
-    required String type,
     required Function(Response? data, bool isSuccess) callback,
   }) async {
     await _apiClient.request(
       url: AppUrl.alarmStore.url,
       method: Method.POST,
       params: {
-        "type": type,
+        "type": "custom",
         "time": alarmTime,
         "date": DateFormat('dd/M/yyyy').format(DateTime.now()),
+        "isEnable": 1,
       },
+      callback: callback,
+    );
+  }
+
+  Future<void> deleteAlarm({
+    required String id,
+    required Function(Response? data, bool isSuccess) callback,
+  }) async {
+    await _apiClient.request(
+      url: AppUrl.deleteAlarm.url.replaceAll("{ID}", id),
+      method: Method.GET,
       callback: callback,
     );
   }
