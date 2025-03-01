@@ -13,11 +13,13 @@ class GlobalTextFormfield extends StatelessWidget {
   final Widget? suffixIcon;
   final String? hintText;
   final TextInputType? keyboardType;
+  final int? maxLines;
   final List<TextInputFormatter>? inputFormatters;
 
   const GlobalTextFormfield({
     super.key,
     this.textEditingController,
+    this.maxLines,
     this.onChanged,
     this.validator,
     this.readOnly = false,
@@ -36,6 +38,7 @@ class GlobalTextFormfield extends StatelessWidget {
       color: KColor.black.color,
     );
     return TextFormField(
+      maxLines: maxLines,
       controller: textEditingController,
       onChanged: onChanged,
       validator: validator,

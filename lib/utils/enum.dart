@@ -61,3 +61,9 @@ enum AlarmType {
   NIGHT,
   CUSTOM,
 }
+
+
+enum ActionType{
+  Registration,
+  Update,
+}

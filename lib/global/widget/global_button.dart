@@ -12,6 +12,8 @@ class GlobalButton extends StatelessWidget {
   final Color? activeColor;
   final Color? borderColor;
   final Color? textColor;
+  final double? fontSize;
+  final EdgeInsets? contentPadding;
 
   const GlobalButton({
     super.key,
@@ -21,6 +23,8 @@ class GlobalButton extends StatelessWidget {
     this.activeColor,
     this.borderColor,
     this.textColor,
+    this.fontSize,
+    this.contentPadding,
   });
 
   @override
@@ -35,7 +39,7 @@ class GlobalButton extends StatelessWidget {
             },
       child: Container(
         margin: margin,
-        padding: EdgeInsets.symmetric(
+        padding: contentPadding??EdgeInsets.symmetric(
           horizontal: 30.w,
           vertical: 16.h,
         ),
@@ -62,7 +66,7 @@ class GlobalButton extends StatelessWidget {
             str: buttonText,
             textAlign: TextAlign.center,
             style: GoogleFonts.squadaOne(
-              fontSize: 20,
+              fontSize: fontSize??20.sp,
               fontWeight: FontWeight.w400,
               color: textColor??KColor.black.color,
             ),

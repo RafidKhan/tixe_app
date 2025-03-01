@@ -6,10 +6,12 @@ import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
 class GlobalHeaderWidget extends StatelessWidget {
   final String title;
+  final bool showBackButton;
 
   const GlobalHeaderWidget({
     super.key,
     required this.title,
+    this.showBackButton=true,
   });
 
   @override
@@ -19,19 +21,22 @@ class GlobalHeaderWidget extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsets.only(top: 4.h),
-            child: InkWell(
-              onTap: ()=>Navigation.pop(),
-              child: Icon(
-                Icons.arrow_back_ios,
-                color: KColor.white.color,
+          if(showBackButton)...[
+            Padding(
+              padding: EdgeInsets.only(top: 4.h),
+              child: InkWell(
+                onTap: () => Navigation.pop(),
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  color: KColor.white.color,
+                ),
               ),
             ),
-          ),
-          SizedBox(
-            width: 8.w,
-          ),
+            SizedBox(
+              width: 8.w,
+            ),
+          ],
+
           Flexible(
             child: GlobalText(
               str: title,

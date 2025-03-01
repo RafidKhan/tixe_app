@@ -5,12 +5,14 @@ enum KAssetName {
   warJpg,
   icHeartRatePng,
   dummyMapLocationPng,
+  icStarUnchekedPng,
   icStepsPng,
   icInstructionPng,
   icWalletPng,
   dummyUserPng,
   icCheckboxPng,
   selectedRadioPng,
+  updateImagePng,
   icWalkingPng,
   icHeartRateGraphPng,
   icNotificationPng,
@@ -75,6 +77,8 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/icHeartRate.png';
       case KAssetName.dummyMapLocationPng:
         return '$_imagesDir/dummy_map_location.png';
+      case KAssetName.icStarUnchekedPng:
+        return '$_imagesDir/icStarUncheked.png';
       case KAssetName.icStepsPng:
         return '$_imagesDir/icSteps.png';
       case KAssetName.icInstructionPng:
@@ -87,6 +91,8 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/icCheckbox.png';
       case KAssetName.selectedRadioPng:
         return '$_imagesDir/selectedRadio.png';
+      case KAssetName.updateImagePng:
+        return '$_imagesDir/update_image.png';
       case KAssetName.icWalkingPng:
         return '$_imagesDir/icWalking.png';
       case KAssetName.icHeartRateGraphPng:

@@ -29,7 +29,6 @@ class ConfirmTrainingEnrollController
       ConfirmTrainingEnrollRepository();
   final IGlobalRepository _globalRepository = GlobalRepository();
 
-
   final discountCode = TextEditingController();
 
   ConfirmTrainingEnrollController()

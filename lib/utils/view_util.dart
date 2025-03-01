@@ -17,27 +17,27 @@ class ViewUtil {
     String? btnName,
     void Function()? onPressed,
   }) {
-    /**
-     * Using ScaffoldMessenger we can easily access
-     * this snackbar from anywhere
-     */
-
-    return ScaffoldMessenger.of(Navigation.key.currentContext!).showSnackBar(
-      SnackBar(
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: KColor.btnGradient1.color,
-        content: GlobalText(
-          str: msg,
-          fontWeight: FontWeight.w500,
-          color: KColor.black.color,
+    try {
+      return ScaffoldMessenger.of(Navigation.key.currentContext!).showSnackBar(
+        SnackBar(
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: KColor.btnGradient1.color,
+          content: GlobalText(
+            str: msg,
+            fontWeight: FontWeight.w500,
+            color: KColor.black.color,
+          ),
+          action: SnackBarAction(
+            label: btnName ?? "",
+            textColor:
+                btnName == null ? Colors.transparent : KColor.white.color,
+            onPressed: onPressed ?? () {},
+          ),
         ),
-        action: SnackBarAction(
-          label: btnName ?? "",
-          textColor: btnName == null ? Colors.transparent : KColor.white.color,
-          onPressed: onPressed ?? () {},
-        ),
-      ),
-    );
+      );
+    } catch (e) {
+      //
+    }
   }
 
   // this varialble is for internet connection check.
@@ -129,7 +129,7 @@ class ViewUtil {
     return showModalBottomSheet(
       backgroundColor: Colors.transparent,
       constraints: boxConstraints,
-      isScrollControlled: isScrollControlled??true,
+      isScrollControlled: isScrollControlled ?? true,
       context: Navigation.key.currentContext!,
       isDismissible: isDismissible ?? true,
       enableDrag: enableDrag ?? true,

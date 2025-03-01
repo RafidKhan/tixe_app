@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:tixe_flutter_app/modules/auth/personal_details/model/personal_detail_nav_model.dart';
 
 import '../../../../../global/model/global_option_item.dart';
 
 @immutable
 class FitnessDetailsState {
-  final String email;
+  final PersonalDetailsNavModel? model;
   final bool isButtonEnabled;
   final GlobalOptionData? heightUnit;
   final GlobalOptionData? weightUnit;
@@ -12,7 +13,7 @@ class FitnessDetailsState {
   final List<GlobalOptionData> weightUnits;
 
   const FitnessDetailsState({
-    required this.email,
+    required this.model,
     required this.isButtonEnabled,
     required this.heightUnit,
     required this.weightUnit,
@@ -21,7 +22,7 @@ class FitnessDetailsState {
   });
 
   FitnessDetailsState copyWith({
-    String? email,
+    PersonalDetailsNavModel? model,
     bool? isButtonEnabled,
     GlobalOptionData? heightUnit,
     GlobalOptionData? weightUnit,
@@ -29,7 +30,7 @@ class FitnessDetailsState {
     List<GlobalOptionData>? weightUnits,
   }) {
     return FitnessDetailsState(
-      email: email ?? this.email,
+      model: model ?? this.model,
       isButtonEnabled: isButtonEnabled ?? this.isButtonEnabled,
       heightUnit: heightUnit ?? this.heightUnit,
       weightUnit: weightUnit ?? this.weightUnit,

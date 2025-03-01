@@ -4,7 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_chip_widget.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
+import 'package:tixe_flutter_app/modules/review_flow/review/model/review_nav_model.dart';
+import 'package:tixe_flutter_app/utils/app_routes.dart';
+import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
+import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 
 import '../../../../../utils/styles/k_colors.dart';
@@ -66,26 +70,39 @@ class TrainingPriceAndDetails extends ConsumerWidget {
                   ],
                 ),
                 SizedBox(height: 10.h),
-                Row(
-                  children: [
-                    GlobalImageLoader(
-                      imagePath: KAssetName.starPng.imagePath,
-                      height: 11.h,
-                      width: 11.w,
-                    ),
-                    SizedBox(
-                      width: 4.w,
-                    ),
-                    Flexible(
-                      child: GlobalText(
-                        str:
-                            "${state.reviewStatistics?.averageRating ?? 0} (${state.reviewStatistics?.totalReviews ?? 0} ${context.loc.reviews})",
-                        color: KColor.white.color,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
+                InkWell(
+                  onTap: () {
+                    Navigation.push(
+                      appRoutes: AppRoutes.review,
+                      arguments: ReviewNavModel(
+                        id: state.trainingId,
+                        averageRating: state.reviewStatistics?.averageRating ?? 0,
+                        totalRatings: state.reviewStatistics?.totalReviews ?? 0,
+                        serviceType: ServiceType.Training,
                       ),
-                    ),
-                  ],
+                    );
+                  },
+                  child: Row(
+                    children: [
+                      GlobalImageLoader(
+                        imagePath: KAssetName.starPng.imagePath,
+                        height: 11.h,
+                        width: 11.w,
+                      ),
+                      SizedBox(
+                        width: 4.w,
+                      ),
+                      Flexible(
+                        child: GlobalText(
+                          str:
+                              "${state.reviewStatistics?.averageRating ?? 0} (${state.reviewStatistics?.totalReviews ?? 0} ${context.loc.reviews})",
+                          color: KColor.white.color,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

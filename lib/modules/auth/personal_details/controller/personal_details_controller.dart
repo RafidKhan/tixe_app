@@ -2,10 +2,12 @@ import 'package:country_state_city/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:tixe_flutter_app/global/model/global_option_item.dart';
+import 'package:tixe_flutter_app/modules/auth/personal_details/model/personal_detail_nav_model.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/model/personal_details_request_model.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/repository/personal_details_interface.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/repository/personal_details_repository.dart';
 import 'package:tixe_flutter_app/utils/app_routes.dart';
+import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
@@ -30,9 +32,10 @@ class PersonalDetailsController extends StateNotifier<PersonalDetailsState> {
   PersonalDetailsController()
       : super(
           const PersonalDetailsState(
-            email: "",
+            model: null,
             isButtonEnabled: false,
             armsLicense: null,
+            profileImage: null,
             countries: [],
             states: [],
             cities: [],
@@ -46,13 +49,22 @@ class PersonalDetailsController extends StateNotifier<PersonalDetailsState> {
   }
 
   void checkButtonStatus() {
-    state = state.copyWith(
-        isButtonEnabled: nameController.text.trim().isNotEmpty &&
-            stateController.text.trim().isNotEmpty &&
-            cityController.text.trim().isNotEmpty &&
-            addressController.text.trim().isNotEmpty &&
-            countryController.text.trim().isNotEmpty &&
-            state.armsLicense != null);
+    if (state.model?.actionType == ActionType.Registration) {
+      state = state.copyWith(
+          isButtonEnabled: nameController.text.trim().isNotEmpty &&
+              stateController.text.trim().isNotEmpty &&
+              cityController.text.trim().isNotEmpty &&
+              addressController.text.trim().isNotEmpty &&
+              countryController.text.trim().isNotEmpty &&
+              state.armsLicense != null);
+    } else if (state.model?.actionType == ActionType.Update) {
+      state = state.copyWith(
+          isButtonEnabled: nameController.text.trim().isNotEmpty &&
+              stateController.text.trim().isNotEmpty &&
+              cityController.text.trim().isNotEmpty &&
+              addressController.text.trim().isNotEmpty &&
+              countryController.text.trim().isNotEmpty);
+    }
   }
 
   void setArmsLicense() {
@@ -72,18 +84,25 @@ class PersonalDetailsController extends StateNotifier<PersonalDetailsState> {
     cityController.text = option.value;
   }
 
-  void setCountryData(GlobalOptionData option) async {
+  Future<void> setCountryData(
+    GlobalOptionData option, {
+    bool clearData = true,
+  }) async {
     final country = state.countries
         .where(
           (element) => element.name == option.value,
         )
         .firstOrNull;
+
+    'here is: $country'.log();
     if (country != null) {
       await loadAllStatesByCountryCode(country.isoCode);
       await loadCityStatesByCountryCode(country.isoCode);
     }
-    cityController.clear();
-    stateController.clear();
+    if (clearData == true) {
+      cityController.clear();
+      stateController.clear();
+    }
     countryController.text = option.value;
   }
 
@@ -122,7 +141,7 @@ class PersonalDetailsController extends StateNotifier<PersonalDetailsState> {
   Future<void> updateRegistrationPersonalInfo() async {
     ViewUtil.showLoaderPage();
     final params = PersonalDetailsRequestModel(
-      email: state.email,
+      email: state.model?.email ?? "",
       name: nameController.text.trim(),
       state: stateController.text.trim(),
       city: cityController.text.trim(),
@@ -131,20 +150,68 @@ class PersonalDetailsController extends StateNotifier<PersonalDetailsState> {
     );
     await _personalDetailsRepository.updateRegistrationPersonalInfo(
       params: params,
-      armsLicense: state.armsLicense!,
+      armsLicense: state.armsLicense,
       callBack: (response, isSuccess) {
         ViewUtil.hideLoader();
         if (isSuccess) {
-          Navigation.pushAndRemoveUntil(
-            appRoutes: AppRoutes.fitnessDetails,
-            arguments: state.email,
-          );
+          if (state.model?.actionType == ActionType.Registration) {
+            Navigation.pushAndRemoveUntil(
+              appRoutes: AppRoutes.fitnessDetails,
+              arguments: PersonalDetailsNavModel(
+                email: state.model?.email ?? "",
+                actionType: ActionType.Registration,
+              ),
+            );
+          } else {
+            Navigation.pushAndRemoveUntil(
+              appRoutes: AppRoutes.fitnessDetails,
+              arguments: PersonalDetailsNavModel(
+                email: state.model?.email ?? "",
+                actionType: ActionType.Update,
+                profileResponse: state.model?.profileResponse,
+              ),
+            );
+          }
         }
       },
     );
   }
 
-  void setEmail(String email) {
-    state = state.copyWith(email: email);
+  void setModel(PersonalDetailsNavModel model) {
+    state = state.copyWith(model: model);
+    if (state.model?.actionType == ActionType.Update &&
+        state.model?.profileResponse != null) {
+      setProfileData();
+    }
+  }
+
+  Future<void> setProfileData() async {
+    final profileData = state.model?.profileResponse?.data;
+    nameController.text = profileData?.name ?? "";
+    countryController.text = profileData?.profileDetails?.country ?? "";
+    stateController.text = profileData?.profileDetails?.state ?? "";
+    cityController.text = profileData?.profileDetails?.city ?? "";
+    addressController.text = profileData?.profileDetails?.address ?? "";
+    if (countryController.text.trim().isNotEmpty) {
+      final option = GlobalOptionData(
+        id: 0,
+        value: countryController.text.trim(),
+      );
+      await setCountryData(option, clearData: false);
+    }
+  }
+
+  void pickProfileImage() async {
+    CustomFilePicker.pickSingleFile(
+      extensions: [
+        'jpg',
+        'jpeg',
+        'png',
+      ],
+      onSuccess: (file) {
+        state = state.copyWith(profileImage: file);
+        checkButtonStatus();
+      },
+    );
   }
 }

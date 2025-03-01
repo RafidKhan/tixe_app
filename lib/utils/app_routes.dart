@@ -1,3 +1,8 @@
+import 'package:tixe_flutter_app/modules/auth/personal_details/model/personal_detail_nav_model.dart';
+
+import '../modules/review_flow/review/model/review_nav_model.dart';
+import '../modules/review_flow/submit_review/views/submit_review_screen.dart';
+import '../modules/review_flow/review/views/review_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/views/personal_details_screen.dart';
 import 'package:tixe_flutter_app/modules/auth/sign_in/views/sign_in_screen.dart';
@@ -44,6 +49,8 @@ import '../modules/workout_flow/my_workout_select_phase/views/my_workout_select_
 
 enum AppRoutes {
   splash,
+  submitReview,
+  review,
   preferences,
   armStore,
   profileDetails,
@@ -80,6 +87,11 @@ enum AppRoutes {
 extension AppRoutesExtention on AppRoutes {
   Widget buildWidget<T extends Object>({T? arguments}) {
     switch (this) {
+
+      case AppRoutes.submitReview:
+        return const SubmitReviewScreen();
+     case AppRoutes.review:
+        return  ReviewScreen(navModel: arguments as ReviewNavModel,);
       case AppRoutes.preferences:
         return const PreferencesScreen();
 
@@ -147,7 +159,7 @@ extension AppRoutesExtention on AppRoutes {
 
       case AppRoutes.fitnessDetails:
         return FitnessDetailsScreen(
-          email: arguments as String,
+          model: arguments as PersonalDetailsNavModel,
         );
       case AppRoutes.dashboard:
         return const DashboardScreen();
@@ -161,7 +173,7 @@ extension AppRoutesExtention on AppRoutes {
         );
       case AppRoutes.personalDetails:
         return PersonalDetailsScreen(
-          email: arguments as String,
+          model: arguments as PersonalDetailsNavModel,
         );
       case AppRoutes.myTrainings:
         return const MyTrainingsScreen();

@@ -12,7 +12,7 @@ class PersonalDetailsRepository implements IPersonalDetailsRepository {
   @override
   Future<void> updateRegistrationPersonalInfo({
     required PersonalDetailsRequestModel params,
-    required File armsLicense,
+    required File? armsLicense,
     required Function(GlobalResponse? response, bool isSuccess) callBack,
   }) async {
     await _api.updateRegistrationPersonalInfo(

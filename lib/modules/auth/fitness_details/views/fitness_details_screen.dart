@@ -4,21 +4,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottom_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottomsheet_textformfield.dart';
+import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
 import 'package:tixe_flutter_app/global/widget/global_textformfield.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_scaffold.dart';
 import 'package:tixe_flutter_app/modules/auth/fitness_details/controller/fitness_details_controller.dart';
+import 'package:tixe_flutter_app/modules/auth/personal_details/model/personal_detail_nav_model.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 
+import '../../../../utils/enum.dart';
 import '/global/widget/global_text.dart';
 
 class FitnessDetailsScreen extends StatefulWidget {
-  final String email;
+  final PersonalDetailsNavModel model;
 
   const FitnessDetailsScreen({
     super.key,
-    required this.email,
+    required this.model,
   });
 
   @override
@@ -32,8 +35,9 @@ class _FitnessDetailsScreenState extends State<FitnessDetailsScreen> {
     super.initState();
     final controller = context.read(fitnessDetailsController.notifier);
     Future(() {
-      controller.setEmail(widget.email);
-      controller.loadUnitData();
+      controller.loadUnitData().then((value) {
+        controller.setModel(widget.model);
+      });
     });
   }
 
@@ -41,103 +45,111 @@ class _FitnessDetailsScreenState extends State<FitnessDetailsScreen> {
   Widget build(BuildContext context) {
     final controller = context.read(fitnessDetailsController.notifier);
     return TixeScaffold(
-      body: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 20.w,
-          vertical: 20.h,
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              GlobalText(
-                str: context.loc.fitness_details,
-                fontSize: 24,
-                fontWeight: FontWeight.w600,
-                color: KColor.white.color,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Consumer(builder: (context, ref, child) {
+              final state = ref.watch(fitnessDetailsController);
+              return GlobalHeaderWidget(
+                title: context.loc.fitness_details,
+                showBackButton:
+                    state.model?.actionType == ActionType.Registration
+                        ? false
+                        : true,
+              );
+            }),
+            SizedBox(height: 30.h),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 20.w,
               ),
-              SizedBox(height: 30.h),
-
-              ////your age
-              _titleWidget(context.loc.your_age),
-              SizedBox(height: 10.h),
-              GlobalTextFormfield(
-                textEditingController: controller.ageController,
-                keyboardType: const TextInputType.numberWithOptions(),
-                inputFormatters: [
-                  FilteringTextInputFormatter.digitsOnly,
-                ],
-              ),
-              SizedBox(height: 20.h),
-              ////your height
-              _titleWidget(context.loc.your_height),
-              SizedBox(height: 10.h),
-              Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    flex: 2,
-                    child: GlobalTextFormfield(
-                      textEditingController: controller.heightController,
-                      keyboardType: const TextInputType.numberWithOptions(),
-                    ),
+                  ////your age
+                  _titleWidget(context.loc.your_age),
+                  SizedBox(height: 10.h),
+                  GlobalTextFormfield(
+                    textEditingController: controller.ageController,
+                    keyboardType: const TextInputType.numberWithOptions(),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                    ],
                   ),
-                  SizedBox(width: 10.w),
-                  Expanded(
-                    child: Consumer(
-                      builder: (context, ref, child) {
-                        final state = ref.watch(fitnessDetailsController);
+                  SizedBox(height: 20.h),
+                  ////your height
+                  _titleWidget(context.loc.your_height),
+                  SizedBox(height: 10.h),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: GlobalTextFormfield(
+                          textEditingController: controller.heightController,
+                          keyboardType: const TextInputType.numberWithOptions(),
+                        ),
+                      ),
+                      SizedBox(width: 10.w),
+                      Expanded(
+                        child: Consumer(
+                          builder: (context, ref, child) {
+                            final state = ref.watch(fitnessDetailsController);
 
-                        return GlobalBottomSheetTextFormField(
-                          textEditingController:
-                              controller.heightUnitController,
-                          onTap: () {
-                            ViewUtil.showOptionPickerBottomSheet(
-                              options: state.heightUnits,
-                              onSelect: (option) {
-                                controller.setHeightUnit(option);
+                            return GlobalBottomSheetTextFormField(
+                              textEditingController:
+                                  controller.heightUnitController,
+                              onTap: () {
+                                ViewUtil.showOptionPickerBottomSheet(
+                                  options: state.heightUnits,
+                                  onSelect: (option) {
+                                    controller.setHeightUnit(option);
+                                  },
+                                );
                               },
                             );
                           },
-                        );
-                      },
-                    ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              SizedBox(height: 20.h),
-              ////your weight
-              _titleWidget(context.loc.your_weight),
-              SizedBox(height: 10.h),
-              Row(
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: GlobalTextFormfield(
-                      textEditingController: controller.weightController,
-                      keyboardType: const TextInputType.numberWithOptions(),
-                    ),
-                  ),
-                  SizedBox(width: 10.w),
-                  Expanded(
-                    child: Consumer(builder: (context, ref, child) {
-                      final state = ref.watch(fitnessDetailsController);
-                      return GlobalBottomSheetTextFormField(
-                        textEditingController: controller.weightUnitController,
-                        onTap: () {
-                          ViewUtil.showOptionPickerBottomSheet(
-                            options: state.weightUnits,
-                            onSelect: (option) {
-                              controller.setWeightUnit(option);
+                  SizedBox(height: 20.h),
+                  ////your weight
+                  _titleWidget(context.loc.your_weight),
+                  SizedBox(height: 10.h),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: GlobalTextFormfield(
+                          textEditingController: controller.weightController,
+                          keyboardType: const TextInputType.numberWithOptions(),
+                        ),
+                      ),
+                      SizedBox(width: 10.w),
+                      Expanded(
+                        child: Consumer(builder: (context, ref, child) {
+                          final state = ref.watch(fitnessDetailsController);
+                          return GlobalBottomSheetTextFormField(
+                            textEditingController:
+                                controller.weightUnitController,
+                            onTap: () {
+                              ViewUtil.showOptionPickerBottomSheet(
+                                options: state.weightUnits,
+                                onSelect: (option) {
+                                  controller.setWeightUnit(option);
+                                },
+                              );
                             },
                           );
-                        },
-                      );
-                    }),
+                        }),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
-          ),
+            )
+          ],
         ),
       ),
       bottomNavigationBar: Consumer(builder: (context, ref, child) {

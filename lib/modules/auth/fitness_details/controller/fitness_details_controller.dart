@@ -4,10 +4,13 @@ import 'package:tixe_flutter_app/global/global_module/global_interface.dart';
 import 'package:tixe_flutter_app/global/global_module/global_respository.dart';
 import 'package:tixe_flutter_app/global/model/global_option_item.dart';
 import 'package:tixe_flutter_app/modules/auth/fitness_details/controller/state/fitness_details_state.dart';
+import 'package:tixe_flutter_app/utils/enum.dart';
+import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 
 import '../../../../utils/app_routes.dart';
 import '../../../../utils/navigation.dart';
+import '../../personal_details/model/personal_detail_nav_model.dart';
 import '../model/fitness_details_request.dart';
 import '../repository/fitness_details_interface.dart';
 import '../repository/fitness_details_repository.dart';
@@ -30,7 +33,7 @@ class FitnessDetailsController extends StateNotifier<FitnessDetailsState> {
   FitnessDetailsController()
       : super(
           const FitnessDetailsState(
-            email: "",
+            model: null,
             isButtonEnabled: false,
             heightUnit: null,
             weightUnit: null,
@@ -64,8 +67,21 @@ class FitnessDetailsController extends StateNotifier<FitnessDetailsState> {
     weightUnitController.text = option.value;
   }
 
-  void setEmail(String email) {
-    state = state.copyWith(email: email);
+  void setModel(PersonalDetailsNavModel model) {
+    state = state.copyWith(model: model);
+    if (state.model?.actionType == ActionType.Update &&
+        state.model?.profileResponse != null) {
+      setProfileData();
+    }
+  }
+
+  void setProfileData() {
+    final profileData = state.model?.profileResponse?.data;
+    ageController.text = (profileData?.profileDetails?.age ?? "").toString();
+    heightController.text = profileData?.profileDetails?.height ?? "";
+    weightController.text = profileData?.profileDetails?.weight ?? "";
+    heightUnitController.text = profileData?.profileDetails?.heightUnit ?? "";
+    weightUnitController.text = profileData?.profileDetails?.weightUnit ?? "";
   }
 
   Future<void> loadUnitData() async {
@@ -111,7 +127,7 @@ class FitnessDetailsController extends StateNotifier<FitnessDetailsState> {
 
     await _fitnessdetailsRepository.updateRegistrationFitnessDetails(
       params: FitnessDetailsRequest(
-        email: state.email,
+        email: state.model?.email ?? "",
         age: ageController.text.trim(),
         height: heightController.text.trim(),
         heightUnit: heightUnitController.text.trim(),
@@ -120,10 +136,16 @@ class FitnessDetailsController extends StateNotifier<FitnessDetailsState> {
       ),
       callback: (response, isSuccess) {
         ViewUtil.hideLoader();
-        if(isSuccess){
-          Navigation.pushAndRemoveUntil(
-            appRoutes: AppRoutes.signIn,
-          );
+        if (isSuccess) {
+          if (state.model?.actionType == ActionType.Registration) {
+            Navigation.pushAndRemoveUntil(
+              appRoutes: AppRoutes.signIn,
+            );
+          } else {
+            Navigation.pushAndRemoveUntil(
+              appRoutes: AppRoutes.dashboard,
+            );
+          }
         }
       },
     );

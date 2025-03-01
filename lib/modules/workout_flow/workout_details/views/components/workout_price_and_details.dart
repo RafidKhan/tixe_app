@@ -4,10 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/workout_details/controller/workout_details_controller.dart';
+import 'package:tixe_flutter_app/utils/app_routes.dart';
+import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 
+import '../../../../../utils/navigation.dart';
 import '../../../../../utils/styles/k_colors.dart';
+import '../../../../review_flow/review/model/review_nav_model.dart';
 
 class WorkoutPriceAndDetails extends ConsumerWidget {
   const WorkoutPriceAndDetails({super.key});
@@ -101,27 +105,40 @@ class WorkoutPriceAndDetails extends ConsumerWidget {
                   ),
                 ),
                 SizedBox(height: 10.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    GlobalImageLoader(
-                      imagePath: KAssetName.starPng.imagePath,
-                      height: 11.h,
-                      width: 11.w,
-                    ),
-                    SizedBox(
-                      width: 4.w,
-                    ),
-                    GlobalText(
-                      str:
-                          "${state.reviewStatistics?.averageRating ?? 0} (${state.reviewStatistics?.totalReviews ?? 0} ${context.loc.reviews})",
-                      color: KColor.white.color,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      textAlign: TextAlign.end,
-                    ),
-                  ],
+                InkWell(
+                  onTap: (){
+                    Navigation.push(
+                      appRoutes: AppRoutes.review,
+                      arguments: ReviewNavModel(
+                        id: state.workoutId,
+                        averageRating: state.reviewStatistics?.averageRating ?? 0,
+                        totalRatings: state.reviewStatistics?.totalReviews ?? 0,
+                        serviceType: ServiceType.Workout,
+                      ),
+                    );
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      GlobalImageLoader(
+                        imagePath: KAssetName.starPng.imagePath,
+                        height: 11.h,
+                        width: 11.w,
+                      ),
+                      SizedBox(
+                        width: 4.w,
+                      ),
+                      GlobalText(
+                        str:
+                            "${state.reviewStatistics?.averageRating ?? 0} (${state.reviewStatistics?.totalReviews ?? 0} ${context.loc.reviews})",
+                        color: KColor.white.color,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        textAlign: TextAlign.end,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

@@ -6,18 +6,21 @@ class CustomFilePicker {
   /// Predefined allowed file extensions
   static const List<String> _allowedExtensions = [
     'jpg',
+    'jpeg',
     'png',
     'pdf',
     'doc',
     'docx'
   ];
 
-  static Future<void> pickSingleFile(
-      {required Function(File file) onSuccess}) async {
+  static Future<void> pickSingleFile({
+    required Function(File file) onSuccess,
+    List<String>? extensions,
+  }) async {
     try {
       final result = await FilePicker.platform.pickFiles(
         type: FileType.custom,
-        allowedExtensions: _allowedExtensions,
+        allowedExtensions: extensions ?? _allowedExtensions,
       );
 
       if (result != null && result.files.single.path != null) {

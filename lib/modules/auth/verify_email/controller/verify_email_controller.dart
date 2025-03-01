@@ -3,11 +3,13 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:riverpod/riverpod.dart';
+import 'package:tixe_flutter_app/modules/auth/personal_details/model/personal_detail_nav_model.dart';
 import 'package:tixe_flutter_app/modules/auth/verify_email/repository/verify_email_interface.dart';
 import 'package:tixe_flutter_app/modules/auth/verify_email/repository/verify_email_repository.dart';
 import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 
+import '../../../../utils/enum.dart';
 import '../../../../utils/navigation.dart';
 import 'state/verify_email_state.dart';
 
@@ -76,7 +78,10 @@ class VerifyEmailController extends StateNotifier<VerifyEmailState> {
         if (isSuccess) {
           Navigation.pushAndRemoveUntil(
             appRoutes: AppRoutes.personalDetails,
-            arguments: state.email,
+            arguments: PersonalDetailsNavModel(
+              email: state.email,
+              actionType: ActionType.Registration,
+            ),
           );
         }
       },

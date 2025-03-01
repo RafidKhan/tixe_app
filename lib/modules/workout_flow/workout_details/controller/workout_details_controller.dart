@@ -20,20 +20,20 @@ class WorkoutDetailsController extends StateNotifier<WorkoutDetailsState> {
       : super(
           const WorkoutDetailsState(
             isLoading: false,
-            id: -1,
+            workoutId: -1,
             workoutService: null,
             reviewStatistics: null,
           ),
         );
 
   void setWorkoutId(int id) {
-    state = state.copyWith(id: id);
+    state = state.copyWith(workoutId: id);
   }
 
   Future<void> loadWorkoutDetails() async {
     state = state.copyWith(isLoading: true);
     await _workoutRepository.workoutDetails(
-      id: state.id,
+      id: state.workoutId,
       callback: (response, isSuccess) async {
         state = state.copyWith(
           isLoading: false,
@@ -47,7 +47,7 @@ class WorkoutDetailsController extends StateNotifier<WorkoutDetailsState> {
   Future<void> enrollmentFreeWorkout() async {
     ViewUtil.showLoaderPage();
     final params = WorkoutEnrollmentRequest(
-      workoutServiceId: state.id,
+      workoutServiceId: state.workoutId,
       paymentId: null,
       trainingFee: null,
       conveiences: null,
