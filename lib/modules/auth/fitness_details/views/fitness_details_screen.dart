@@ -13,6 +13,7 @@ import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 
+import '../../../../global/widget/action_consent_confirm_dialog.dart';
 import '../../../../utils/enum.dart';
 import '/global/widget/global_text.dart';
 
@@ -157,7 +158,18 @@ class _FitnessDetailsScreenState extends State<FitnessDetailsScreen> {
 
         return GlobalBottomButton(
           onPressed: state.isButtonEnabled
-              ? () {
+              ? () async {
+                  if (state.model?.actionType == ActionType.Update) {
+                    final result = await showDialog(
+                      context: context,
+                      builder: (context) {
+                        return const ActionConsentConfirmDialog();
+                      },
+                    );
+                    if (result != true) {
+                      return;
+                    }
+                  }
                   controller.updateRegistrationFitnessDetails();
                 }
               : null,

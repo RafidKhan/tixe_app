@@ -41,7 +41,7 @@ class GlobalButton extends StatelessWidget {
         margin: margin,
         padding: contentPadding??EdgeInsets.symmetric(
           horizontal: 30.w,
-          vertical: 16.h,
+          vertical: 10.h,
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.r),

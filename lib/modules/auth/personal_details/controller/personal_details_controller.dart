@@ -163,7 +163,7 @@ class PersonalDetailsController extends StateNotifier<PersonalDetailsState> {
               ),
             );
           } else {
-            Navigation.pushAndRemoveUntil(
+            Navigation.push(
               appRoutes: AppRoutes.fitnessDetails,
               arguments: PersonalDetailsNavModel(
                 email: state.model?.email ?? "",

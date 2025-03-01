@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/model/global_option_item.dart';
+import 'package:tixe_flutter_app/global/widget/action_consent_confirm_dialog.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottom_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottomsheet_textformfield.dart';
 import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
@@ -81,8 +82,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                     } else if (state.model?.profileResponse?.data
                             ?.profileDetails?.profilePhoto !=
                         null) {
-                      profileImage = "${AppUrl.baseStorage.url}${state.model?.profileResponse?.data
-                          ?.profileDetails?.profilePhoto??""}";
+                      profileImage =
+                          "${AppUrl.baseStorage.url}${state.model?.profileResponse?.data?.profileDetails?.profilePhoto ?? ""}";
                       imageFor = ImageFor.network;
                     }
 
@@ -282,7 +283,18 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
 
         return GlobalBottomButton(
           onPressed: state.isButtonEnabled
-              ? () {
+              ? () async {
+                  if (state.model?.actionType == ActionType.Update) {
+                    final result = await showDialog(
+                      context: context,
+                      builder: (context) {
+                        return const ActionConsentConfirmDialog();
+                      },
+                    );
+                    if (result != true) {
+                      return;
+                    }
+                  }
                   controller.updateRegistrationPersonalInfo();
                 }
               : null,
