@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tixe_flutter_app/global/global_module/global_interface.dart';
 import 'package:tixe_flutter_app/global/global_module/global_respository.dart';
+import 'package:tixe_flutter_app/global/global_module/shared/shared_controller.dart';
 import 'package:tixe_flutter_app/global/model/global_option_item.dart';
 import 'package:tixe_flutter_app/modules/auth/fitness_details/controller/state/fitness_details_state.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
@@ -142,9 +143,14 @@ class FitnessDetailsController extends StateNotifier<FitnessDetailsState> {
               appRoutes: AppRoutes.signIn,
             );
           } else {
-            Navigation.pushAndRemoveUntil(
-              appRoutes: AppRoutes.dashboard,
-            );
+            Navigation.key.currentContext!
+                .read(sharedController.notifier)
+                .getProfileData(showLoader: true)
+                .then((value) {
+              Navigation.pushAndRemoveUntil(
+                appRoutes: AppRoutes.dashboard,
+              );
+            });
           }
         }
       },

@@ -4,6 +4,7 @@ import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/user_activity_tracker_services/user_activity_tracker_services.dart';
 
+import '../../../utils/view_util.dart';
 import '../../model/sleep_data_model.dart';
 import '../global_interface.dart';
 import '../global_respository.dart';
@@ -173,9 +174,15 @@ class SharedController extends StateNotifier<SharedState> {
     );
   }
 
-  Future<void> getProfileData() async {
+  Future<void> getProfileData({bool showLoader = false}) async {
+    if(showLoader){
+      ViewUtil.showLoaderPage();
+    }
     state = state.removeProfileData();
     await _globalRepository.getProfileData(callback: (response, success) {
+      if(showLoader){
+        ViewUtil.hideLoader();
+      }
       state = state.copyWith(profileData: response);
     });
   }
