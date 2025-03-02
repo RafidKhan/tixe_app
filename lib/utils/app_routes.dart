@@ -1,4 +1,5 @@
 import 'package:tixe_flutter_app/modules/auth/personal_details/model/personal_detail_nav_model.dart';
+import 'package:tixe_flutter_app/modules/review_flow/submit_review/model/submit_review_nav_model.dart';
 
 import '../modules/review_flow/review/model/review_nav_model.dart';
 import '../modules/review_flow/submit_review/views/submit_review_screen.dart';
@@ -89,7 +90,7 @@ extension AppRoutesExtention on AppRoutes {
     switch (this) {
 
       case AppRoutes.submitReview:
-        return const SubmitReviewScreen();
+        return  SubmitReviewScreen(navModel: arguments as SubmitReviewNavModel,);
      case AppRoutes.review:
         return  ReviewScreen(navModel: arguments as ReviewNavModel,);
       case AppRoutes.preferences:

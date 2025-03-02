@@ -19,6 +19,7 @@ class WorkoutPriceAndDetails extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(workoutDetailsController);
+    final controller = ref.read(workoutDetailsController.notifier);
     final workoutDetail = state.workoutService;
     final bool isFree = (workoutDetail?.isPremium != true);
     return Padding(
@@ -106,16 +107,20 @@ class WorkoutPriceAndDetails extends ConsumerWidget {
                 ),
                 SizedBox(height: 10.h),
                 InkWell(
-                  onTap: (){
-                    Navigation.push(
+                  onTap: () async {
+                    final result = await Navigation.push(
                       appRoutes: AppRoutes.review,
                       arguments: ReviewNavModel(
                         id: state.workoutId,
-                        averageRating: state.reviewStatistics?.averageRating ?? 0,
+                        averageRating:
+                            state.reviewStatistics?.averageRating ?? 0,
                         totalRatings: state.reviewStatistics?.totalReviews ?? 0,
                         serviceType: ServiceType.Workout,
                       ),
                     );
+                    if (result == true) {
+                      controller.loadWorkoutDetails();
+                    }
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,

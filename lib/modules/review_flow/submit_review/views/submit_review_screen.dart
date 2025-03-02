@@ -4,19 +4,41 @@ import 'package:tixe_flutter_app/data_provider/api_client.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottom_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
+import 'package:tixe_flutter_app/global/widget/global_text.dart';
 import 'package:tixe_flutter_app/global/widget/global_textformfield.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
+import 'package:tixe_flutter_app/modules/review_flow/submit_review/model/submit_review_nav_model.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
 import '../controller/submit_review_controller.dart';
 import '/global/widget/global_appbar.dart';
-import '/global/widget/global_text.dart';
 import 'package:flutter/material.dart';
 
-class SubmitReviewScreen extends StatelessWidget {
-  const SubmitReviewScreen({super.key});
+class SubmitReviewScreen extends StatefulWidget {
+  final SubmitReviewNavModel navModel;
+
+  const SubmitReviewScreen({
+    super.key,
+    required this.navModel,
+  });
+
+  @override
+  State<SubmitReviewScreen> createState() => _SubmitReviewScreenState();
+}
+
+class _SubmitReviewScreenState extends State<SubmitReviewScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    final controller = context.read(submitReviewController.notifier);
+    Future(() {
+      controller.setModel(widget.navModel);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +106,11 @@ class SubmitReviewScreen extends StatelessWidget {
           ],
         ),
         bottomNavigationBar: GlobalBottomButton(
-          onPressed: state.isButtonEnabled ? () {} : null,
+          onPressed: state.isButtonEnabled
+              ? () {
+                  controller.submitReview();
+                }
+              : null,
           buttonText: "Submit Review",
         ),
       );

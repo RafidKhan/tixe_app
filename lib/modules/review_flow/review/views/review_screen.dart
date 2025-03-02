@@ -5,6 +5,7 @@ import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
 import 'package:tixe_flutter_app/modules/review_flow/review/model/review_nav_model.dart';
+import 'package:tixe_flutter_app/modules/review_flow/submit_review/model/submit_review_nav_model.dart';
 import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
@@ -57,6 +58,10 @@ class _ReviewScreenState extends State<ReviewScreen> {
                     onPressed: () {
                       Navigation.push(
                         appRoutes: AppRoutes.submitReview,
+                        arguments: SubmitReviewNavModel(
+                          serviceType: state.model!.serviceType,
+                          serviceId: state.model!.id!,
+                        ),
                       );
                     },
                     fontSize: 14,

@@ -32,6 +32,8 @@ enum AppUrl {
   myProfile,
   deleteAlarm,
   updateAlarm,
+  createReview,
+  updateReview,
 }
 
 extension AppUrlExtention on AppUrl {
@@ -122,6 +124,10 @@ extension AppUrlExtention on AppUrl {
         return "alarms/delete/{ID}";
       case AppUrl.updateAlarm:
         return "alarms/update/{ID}";
+      case AppUrl.createReview:
+        return "review/store";
+      case AppUrl.updateReview:
+        return "review/update/{ID}";
     }
   }
 }
