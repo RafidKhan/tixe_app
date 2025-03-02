@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tixe_flutter_app/constant/app_url.dart';
+import 'package:tixe_flutter_app/global/global_module/shared/shared_controller.dart';
 import 'package:tixe_flutter_app/global/widget/global_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
@@ -11,6 +13,7 @@ import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
+import '../../../../global/model/review_model.dart';
 import '../controller/review_controller.dart';
 import '/global/widget/global_text.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +46,8 @@ class _ReviewScreenState extends State<ReviewScreen> {
     return Consumer(
       builder: (context, ref, child) {
         final state = ref.watch(reviewController);
+        final sharedState = ref.watch(sharedController);
+        final reviews = (state.model?.reviews ?? []);
         return TixeMainScaffold(
           hasAppBar: true,
           body: Column(
@@ -61,6 +66,8 @@ class _ReviewScreenState extends State<ReviewScreen> {
                         arguments: SubmitReviewNavModel(
                           serviceType: state.model!.serviceType,
                           serviceId: state.model!.id!,
+                          isUpdate: false,
+                          review: null,
                         ),
                       );
                     },
@@ -106,7 +113,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
               ),
               Expanded(
                 child: ListView.separated(
-                  itemCount: 20,
+                  itemCount: reviews.length,
                   padding: EdgeInsets.only(
                     left: 20.w,
                     right: 20.w,
@@ -116,7 +123,23 @@ class _ReviewScreenState extends State<ReviewScreen> {
                     return SizedBox(height: 20.h);
                   },
                   itemBuilder: (context, index) {
-                    return _reviewItem();
+                    final review = reviews[index];
+                    return _reviewItem(
+                      review,
+                      onTap: sharedState.profileData?.data?.id == review.userId
+                          ? () {
+                              Navigation.push(
+                                appRoutes: AppRoutes.submitReview,
+                                arguments: SubmitReviewNavModel(
+                                  serviceType: state.model!.serviceType,
+                                  serviceId: state.model!.id!,
+                                  isUpdate: true,
+                                  review: review,
+                                ),
+                              );
+                            }
+                          : null,
+                    );
                   },
                 ),
               ),
@@ -127,61 +150,67 @@ class _ReviewScreenState extends State<ReviewScreen> {
     );
   }
 
-  Widget _reviewItem() {
-    return Column(
-      children: [
-        Row(
-          children: [
-            ClipOval(
-              child: GlobalImageLoader(
-                imagePath: KAssetName.dummyUserPng.imagePath,
-                height: 48.h,
-                width: 48.w,
-              ),
-            ),
-            SizedBox(
-              width: 8.w,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                GlobalText(
-                  str: 'Ryan Drofts',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
+  Widget _reviewItem(ReviewModel review, {required VoidCallback? onTap}) {
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Row(
+            children: [
+              ClipOval(
+                child: GlobalImageLoader(
+                  imagePath: "${AppUrl.baseStorage.url}${review.userImage}",
+                  height: 48.h,
+                  width: 48.w,
+                  placeHolder: KAssetName.dummyUserPng.imagePath,
                 ),
-                Row(
-                  children: [
-                    GlobalImageLoader(
-                      imagePath: KAssetName.starPng.imagePath,
-                      height: 12.h,
-                      width: 12.w,
-                    ),
-                    SizedBox(
-                      width: 4.w,
-                    ),
-                    GlobalText(
-                      str: '4.5',
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                    )
-                  ],
-                )
-              ],
-            )
-          ],
-        ),
-        SizedBox(
-          height: 5.h,
-        ),
-        GlobalText(
-          str:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id nisi convallis, porta dui id, ullamcorper quam. Pellentesque enim magna",
-          fontSize: 12,
-          fontWeight: FontWeight.w300,
-          color: KColor.grey.color,
-        )
-      ],
+              ),
+              SizedBox(
+                width: 8.w,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  GlobalText(
+                    str: review.userName,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  Row(
+                    children: [
+                      GlobalImageLoader(
+                        imagePath: KAssetName.starPng.imagePath,
+                        height: 12.h,
+                        width: 12.w,
+                      ),
+                      SizedBox(
+                        width: 4.w,
+                      ),
+                      GlobalText(
+                        str: '${review.rating}',
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                      )
+                    ],
+                  )
+                ],
+              )
+            ],
+          ),
+          SizedBox(
+            height: 5.h,
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: GlobalText(
+              str: review.comment,
+              fontSize: 12,
+              fontWeight: FontWeight.w300,
+              color: KColor.grey.color,
+            ),
+          )
+        ],
+      ),
     );
   }
 }

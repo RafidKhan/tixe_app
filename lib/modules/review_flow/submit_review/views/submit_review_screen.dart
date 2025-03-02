@@ -29,7 +29,6 @@ class SubmitReviewScreen extends StatefulWidget {
 }
 
 class _SubmitReviewScreenState extends State<SubmitReviewScreen> {
-
   @override
   void initState() {
     // TODO: implement initState
@@ -108,10 +107,15 @@ class _SubmitReviewScreenState extends State<SubmitReviewScreen> {
         bottomNavigationBar: GlobalBottomButton(
           onPressed: state.isButtonEnabled
               ? () {
-                  controller.submitReview();
+                  if (state.model?.isUpdate == true) {
+                    controller.updateReview();
+                  } else {
+                    controller.submitReview();
+                  }
                 }
               : null,
-          buttonText: "Submit Review",
+          buttonText:
+              state.model?.isUpdate == true ? "Update Review" : "Submit Review",
         ),
       );
     });

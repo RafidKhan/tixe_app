@@ -23,6 +23,7 @@ class WorkoutDetailsController extends StateNotifier<WorkoutDetailsState> {
             workoutId: -1,
             workoutService: null,
             reviewStatistics: null,
+            reviewList: [],
           ),
         );
 
@@ -39,6 +40,7 @@ class WorkoutDetailsController extends StateNotifier<WorkoutDetailsState> {
           isLoading: false,
           workoutService: response?.data?.workoutService,
           reviewStatistics: response?.data?.reviewStatistics,
+          reviewList: response?.data?.reviewList ?? [],
         );
       },
     );

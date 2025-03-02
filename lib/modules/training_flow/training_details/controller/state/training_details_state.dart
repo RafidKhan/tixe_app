@@ -7,6 +7,7 @@ class TrainingDetailsState {
   final int trainingId;
   final TrainingDetail? trainingDetail;
   final ReviewStatistics? reviewStatistics;
+  final List<TrainingReviewList> reviewList;
   final ScheduleType scheduleType;
   final DateBased? selectedDateBasedSlot;
   final DurationBased? selectedDurationBasedSlot;
@@ -19,6 +20,7 @@ class TrainingDetailsState {
     required this.selectedDateBasedSlot,
     required this.selectedDurationBasedSlot,
     required this.reviewStatistics,
+    required this.reviewList,
   });
 
   TrainingDetailsState copyWith({
@@ -29,6 +31,7 @@ class TrainingDetailsState {
     DateBased? selectedDateBasedSlot,
     DurationBased? selectedDurationBasedSlot,
     ReviewStatistics? reviewStatistics,
+    List<TrainingReviewList>? reviewList,
   }) {
     return TrainingDetailsState(
       isLoading: isLoading ?? this.isLoading,
@@ -40,6 +43,7 @@ class TrainingDetailsState {
       selectedDurationBasedSlot:
           selectedDurationBasedSlot ?? this.selectedDurationBasedSlot,
       reviewStatistics: reviewStatistics ?? this.reviewStatistics,
+      reviewList: reviewList ?? this.reviewList,
     );
   }
 }

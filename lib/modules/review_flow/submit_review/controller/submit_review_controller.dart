@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tixe_flutter_app/data_provider/api_client.dart';
@@ -33,6 +35,16 @@ class SubmitReviewController extends StateNotifier<SubmitReviewState> {
 
   void setModel(SubmitReviewNavModel model) {
     state = state.copyWith(model: model);
+    if (state.model?.isUpdate == true) {
+      final rating = state.model!.review?.rating ?? 0;
+      final comment = state.model!.review?.comment ?? "";
+      if ((rating) > 0) {
+        updateRating((rating - 1).toInt());
+      }
+      if (comment.trim().isNotEmpty) {
+        detailController.text = comment;
+      }
+    }
   }
 
   void checkButtonStatus() {
@@ -80,7 +92,7 @@ class SubmitReviewController extends StateNotifier<SubmitReviewState> {
   Future<void> updateReview() async {
     ViewUtil.showLoaderPage();
     await _submitreviewRepository.updateReview(
-      id: state.model!.serviceId,
+      id: state.model!.review!.reviewId!,
       params: getParams(),
       callback: (response, isSuccess) async {
         ViewUtil.hideLoader();
@@ -109,6 +121,7 @@ class SubmitReviewController extends StateNotifier<SubmitReviewState> {
       comment: detailController.text,
       serviceId: state.model!.serviceId,
     );
+    'here is: ${jsonEncode(params.toJson())}'.log();
     return params;
   }
 }

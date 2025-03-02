@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tixe_flutter_app/global/model/review_model.dart';
 import 'package:tixe_flutter_app/global/widget/global_chip_widget.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
@@ -20,6 +21,7 @@ class TrainingPriceAndDetails extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(trainingDetailsController);
+    final controller = ref.read(trainingDetailsController.notifier);
     final trainingDetail = state.trainingDetail;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -71,16 +73,30 @@ class TrainingPriceAndDetails extends ConsumerWidget {
                 ),
                 SizedBox(height: 10.h),
                 InkWell(
-                  onTap: () {
-                    Navigation.push(
+                  onTap: () async {
+                    final result = await Navigation.push(
                       appRoutes: AppRoutes.review,
                       arguments: ReviewNavModel(
                         id: state.trainingId,
                         averageRating: state.reviewStatistics?.averageRating ?? 0,
                         totalRatings: state.reviewStatistics?.totalReviews ?? 0,
                         serviceType: ServiceType.Training,
+                        reviews: state.reviewList.map((e) {
+                          return ReviewModel(
+                            userId: e.user?.id,
+                            userImage:
+                            e.user?.profileDetails?.profilePhoto ?? '',
+                            userName: e.user?.name ?? '',
+                            comment: e.comment ?? '',
+                            rating: e.rating ?? 0,
+                            reviewId: e.id,
+                          );
+                        }).toList(),
                       ),
                     );
+                    if (result == true) {
+                      controller.loadTrainingDetails();
+                    }
                   },
                   child: Row(
                     children: [

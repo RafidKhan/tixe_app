@@ -25,6 +25,7 @@ class TrainingDetailsController extends StateNotifier<TrainingDetailsState> {
             selectedDateBasedSlot: null,
             selectedDurationBasedSlot: null,
             scheduleType: ScheduleType.Undefined,
+            reviewList: [],
           ),
         );
 
@@ -47,6 +48,7 @@ class TrainingDetailsController extends StateNotifier<TrainingDetailsState> {
           isLoading: false,
           trainingDetail: response?.data?.trainingService,
           reviewStatistics: response?.data?.reviewStatistics,
+          reviewList: response?.data?.reviewList??[],
         );
         setScheduleType();
       },

@@ -24,10 +24,12 @@ class TrainingDetailResponse {
 class Data {
   TrainingDetail? trainingService;
   ReviewStatistics? reviewStatistics;
+  List<TrainingReviewList>? reviewList;
 
   Data({
     this.trainingService,
     this.reviewStatistics,
+    this.reviewList,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
@@ -37,11 +39,18 @@ class Data {
         reviewStatistics: json["review_statistics"] == null
             ? null
             : ReviewStatistics.fromJson(json["review_statistics"]),
+        reviewList: json["review_list"] == null
+            ? []
+            : List<TrainingReviewList>.from(
+                json["review_list"]!.map((x) => TrainingReviewList.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "training_service": trainingService?.toJson(),
         "review_statistics": reviewStatistics?.toJson(),
+        "review_list": reviewList == null
+            ? []
+            : List<dynamic>.from(reviewList!.map((x) => x.toJson())),
       };
 }
 
@@ -300,4 +309,133 @@ class GearsEquipment {
   Map<String, dynamic> toJson() => {
         "title": title,
       };
+}
+
+class TrainingReviewList {
+  int? id;
+  int? trainingServiceId;
+  int? rating;
+  String? comment;
+  User? user;
+  String? date;
+
+  TrainingReviewList({
+    this.id,
+    this.trainingServiceId,
+    this.rating,
+    this.comment,
+    this.user,
+    this.date,
+  });
+
+  factory TrainingReviewList.fromJson(Map<String, dynamic> json) => TrainingReviewList(
+    id: json["id"],
+    trainingServiceId: json["training_service_id"],
+    rating: json["rating"],
+    comment: json["comment"],
+    user: json["user"] == null ? null : User.fromJson(json["user"]),
+    date: json["date"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "training_service_id": trainingServiceId,
+    "rating": rating,
+    "comment": comment,
+    "user": user?.toJson(),
+    "date": date,
+  };
+}
+
+class User {
+  int? id;
+  String? email;
+  String? name;
+  ProfileDetails? profileDetails;
+
+  User({
+    this.id,
+    this.email,
+    this.name,
+    this.profileDetails,
+  });
+
+  factory User.fromJson(Map<String, dynamic> json) => User(
+    id: json["id"],
+    email: json["email"],
+    name: json["name"],
+    profileDetails: json["profile_details"] == null ? null : ProfileDetails.fromJson(json["profile_details"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "email": email,
+    "name": name,
+    "profile_details": profileDetails?.toJson(),
+  };
+}
+
+
+class ProfileDetails {
+  String? state;
+  dynamic birthDate;
+  String? profilePhoto;
+  dynamic phone;
+  String? address;
+  dynamic weightUnit;
+  String? weight;
+  dynamic heightUnit;
+  String? height;
+  int? age;
+  String? country;
+  String? city;
+  dynamic nid;
+
+  ProfileDetails({
+    this.state,
+    this.birthDate,
+    this.profilePhoto,
+    this.phone,
+    this.address,
+    this.weightUnit,
+    this.weight,
+    this.heightUnit,
+    this.height,
+    this.age,
+    this.country,
+    this.city,
+    this.nid,
+  });
+
+  factory ProfileDetails.fromJson(Map<String, dynamic> json) => ProfileDetails(
+    state: json["state"],
+    birthDate: json["birth_date"],
+    profilePhoto: json["profile_photo"],
+    phone: json["phone"],
+    address: json["address"],
+    weightUnit: json["weight_unit"],
+    weight: json["weight"],
+    heightUnit: json["height_unit"],
+    height: json["height"],
+    age: json["age"],
+    country: json["country"],
+    city: json["city"],
+    nid: json["nid"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "state": state,
+    "birth_date": birthDate,
+    "profile_photo": profilePhoto,
+    "phone": phone,
+    "address": address,
+    "weight_unit": weightUnit,
+    "weight": weight,
+    "height_unit": heightUnit,
+    "height": height,
+    "age": age,
+    "country": country,
+    "city": city,
+    "nid": nid,
+  };
 }

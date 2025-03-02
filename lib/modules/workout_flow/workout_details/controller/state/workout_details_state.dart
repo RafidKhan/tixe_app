@@ -6,12 +6,14 @@ class WorkoutDetailsState {
   final int workoutId;
   final WorkoutService? workoutService;
   final WorkoutReviewStatistics? reviewStatistics;
+  final List<ReviewList> reviewList;
 
   const WorkoutDetailsState({
     required this.isLoading,
     required this.workoutId,
     required this.workoutService,
     required this.reviewStatistics,
+    required this.reviewList,
   });
 
   WorkoutDetailsState copyWith({
@@ -19,12 +21,14 @@ class WorkoutDetailsState {
     int? workoutId,
     WorkoutService? workoutService,
     WorkoutReviewStatistics? reviewStatistics,
+    List<ReviewList>? reviewList,
   }) {
     return WorkoutDetailsState(
       isLoading: isLoading ?? this.isLoading,
       workoutId: workoutId ?? this.workoutId,
       workoutService: workoutService ?? this.workoutService,
       reviewStatistics: reviewStatistics ?? this.reviewStatistics,
+      reviewList: reviewList ?? this.reviewList,
     );
   }
 }

@@ -9,6 +9,7 @@ import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 
+import '../../../../../global/model/review_model.dart';
 import '../../../../../utils/navigation.dart';
 import '../../../../../utils/styles/k_colors.dart';
 import '../../../../review_flow/review/model/review_nav_model.dart';
@@ -116,6 +117,17 @@ class WorkoutPriceAndDetails extends ConsumerWidget {
                             state.reviewStatistics?.averageRating ?? 0,
                         totalRatings: state.reviewStatistics?.totalReviews ?? 0,
                         serviceType: ServiceType.Workout,
+                        reviews: state.reviewList.map((e) {
+                          return ReviewModel(
+                            userId: e.user?.id,
+                            userImage:
+                                e.user?.profileDetails?.profilePhoto ?? '',
+                            userName: e.user?.name ?? '',
+                            comment: e.comment ?? '',
+                            rating: e.rating ?? 0,
+                            reviewId: e.id,
+                          );
+                        }).toList(),
                       ),
                     );
                     if (result == true) {
