@@ -116,25 +116,27 @@ class FitnessExerciseInfo extends ConsumerWidget {
           SizedBox(
             height: 10.h,
           ),
-          if (!showAll) ...[
-            const GlobalText(
-              str: "All Activity",
-              fontSize: 9,
-              fontWeight: FontWeight.w400,
+          if (listData.isNotEmpty) ...[
+            if (!showAll) ...[
+              const GlobalText(
+                str: "All Activity",
+                fontSize: 9,
+                fontWeight: FontWeight.w400,
+              ),
+            ],
+            SizedBox(
+              height: 10.h,
             ),
-          ],
-          SizedBox(
-            height: 10.h,
-          ),
-          ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: listData.length,
-            itemBuilder: (context, index) {
-              final exercise = listData[index];
-              return ExerciseRecordTile(exercise:exercise);
-            },
-          )
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: listData.length,
+              itemBuilder: (context, index) {
+                final exercise = listData[index];
+                return ExerciseRecordTile(exercise: exercise);
+              },
+            ),
+          ]
         ],
       ),
     );

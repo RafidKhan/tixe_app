@@ -100,14 +100,20 @@ class _FitnessDetailsScreenState extends State<FitnessDetailsScreen> {
                             return GlobalBottomSheetTextFormField(
                               textEditingController:
                                   controller.heightUnitController,
-                              onTap: () {
-                                ViewUtil.showOptionPickerBottomSheet(
-                                  options: state.heightUnits,
-                                  onSelect: (option) {
-                                    controller.setHeightUnit(option);
-                                  },
-                                );
-                              },
+                              onTap:
+                                  state.model?.actionType == ActionType.Update
+                                      ? () {
+                                          ViewUtil.snackBar(
+                                              "Update height unit from Preferences");
+                                        }
+                                      : () {
+                                          ViewUtil.showOptionPickerBottomSheet(
+                                            options: state.heightUnits,
+                                            onSelect: (option) {
+                                              controller.setHeightUnit(option);
+                                            },
+                                          );
+                                        },
                             );
                           },
                         ),
@@ -134,14 +140,19 @@ class _FitnessDetailsScreenState extends State<FitnessDetailsScreen> {
                           return GlobalBottomSheetTextFormField(
                             textEditingController:
                                 controller.weightUnitController,
-                            onTap: () {
-                              ViewUtil.showOptionPickerBottomSheet(
-                                options: state.weightUnits,
-                                onSelect: (option) {
-                                  controller.setWeightUnit(option);
-                                },
-                              );
-                            },
+                            onTap: state.model?.actionType == ActionType.Update
+                                ? () {
+                                    ViewUtil.snackBar(
+                                        "Update weight unit from Preferences");
+                                  }
+                                : () {
+                                    ViewUtil.showOptionPickerBottomSheet(
+                                      options: state.weightUnits,
+                                      onSelect: (option) {
+                                        controller.setWeightUnit(option);
+                                      },
+                                    );
+                                  },
                           );
                         }),
                       ),

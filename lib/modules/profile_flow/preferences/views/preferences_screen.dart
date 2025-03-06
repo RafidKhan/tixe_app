@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tixe_flutter_app/global/global_module/shared/shared_controller.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottom_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
@@ -23,7 +25,15 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
     super.initState();
     final controller = context.read(preferencesController.notifier);
     Future(() {
-      controller.loadUnitData();
+      controller.loadUnitData().then((value) {
+        final sharedCon = context.read(sharedController.notifier);
+        final notificationStatus = sharedCon
+            .getProfileDataFromState()
+            ?.data
+            ?.profileDetails
+            ?.notificationEnabled;
+        controller.setNotificationStatus(currentStatus: notificationStatus);
+      });
     });
   }
 
@@ -59,12 +69,17 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
           )
         ],
       ),
-      bottomNavigationBar: GlobalBottomButton(
-        onPressed: () {
-          //controller.updateRegistrationFitnessDetails();
-        },
-        buttonText: "Save Changes",
-      ),
+      bottomNavigationBar: Consumer(builder: (context, ref, child) {
+        final state = ref.watch(preferencesController);
+        return GlobalBottomButton(
+          onPressed: state.isButtonEnabled
+              ? () {
+                  controller.savePreference();
+                }
+              : null,
+          buttonText: "Save Changes",
+        );
+      }),
     );
   }
 }

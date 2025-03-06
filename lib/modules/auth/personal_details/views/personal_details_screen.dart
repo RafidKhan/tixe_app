@@ -83,7 +83,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                             ?.profileDetails?.profilePhoto !=
                         null) {
                       profileImage =
-                          "${AppUrl.baseStorage.url}${state.model?.profileResponse?.data?.profileDetails?.profilePhoto ?? ""}";
+                          state.model?.profileResponse?.data?.profileDetails?.profilePhoto ?? "";
                       imageFor = ImageFor.network;
                     }
 
@@ -262,7 +262,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                           ),
                           child: GlobalImageLoader(
                             imagePath:
-                                "${AppUrl.baseStorage.url}${state.model?.profileResponse?.data?.armsLicense ?? ""}",
+                                state.model?.profileResponse?.data?.armsLicense ?? "",
                             imageFor: ImageFor.network,
                             height: 128.h,
                           ),

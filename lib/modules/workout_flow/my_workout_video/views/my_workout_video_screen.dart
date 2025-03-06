@@ -85,7 +85,7 @@ class _MyWorkoutVideoScreenState extends State<MyWorkoutVideoScreen> {
       setState(() {
         isLoading = true;
       });
-      final fullUrl = '${AppUrl.baseStorage.url}${widget.phase.videoUrl}';
+      final fullUrl = widget.phase.videoUrl!;
       videoPlayerController =
           VideoPlayerController.networkUrl(Uri.parse(fullUrl));
 

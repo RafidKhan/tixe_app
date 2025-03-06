@@ -45,16 +45,20 @@ class AddAlarmController extends StateNotifier<AddAlarmState> {
     await _addalarmRepository.addAlarm(
       alarmTime: DateFormat("HH:mm:ss").format(state.dateTime),
       callback: (response, isSuccess) {
-        Navigation.key.currentContext!
-            .read(sharedController.notifier)
-            .fetchAlarms()
-            .then((value) {
+        if (isSuccess) {
+          Navigation.key.currentContext!
+              .read(sharedController.notifier)
+              .fetchAlarms()
+              .then((value) {
+            ViewUtil.hideLoader();
+            Navigation.pop();
+            if ((response?.message ?? "").trim().isNotEmpty) {
+              ViewUtil.snackBar(response?.message ?? "");
+            }
+          });
+        } else {
           ViewUtil.hideLoader();
-          Navigation.pop();
-          if ((response?.message ?? "").trim().isNotEmpty) {
-            ViewUtil.snackBar(response?.message ?? "");
-          }
-        });
+        }
       },
     );
   }
@@ -64,16 +68,20 @@ class AddAlarmController extends StateNotifier<AddAlarmState> {
     await _addalarmRepository.deleteAlarm(
       id: (state.model?.alarmData?.id).toString(),
       callback: (response, isSuccess) {
-        Navigation.key.currentContext!
-            .read(sharedController.notifier)
-            .fetchAlarms()
-            .then((value) {
+        if (isSuccess) {
+          Navigation.key.currentContext!
+              .read(sharedController.notifier)
+              .fetchAlarms()
+              .then((value) {
+            ViewUtil.hideLoader();
+            Navigation.pop();
+            if ((response?.message ?? "").trim().isNotEmpty) {
+              ViewUtil.snackBar(response?.message ?? "");
+            }
+          });
+        } else {
           ViewUtil.hideLoader();
-          Navigation.pop();
-          if ((response?.message ?? "").trim().isNotEmpty) {
-            ViewUtil.snackBar(response?.message ?? "");
-          }
-        });
+        }
       },
     );
   }
@@ -86,16 +94,20 @@ class AddAlarmController extends StateNotifier<AddAlarmState> {
       type: state.model?.alarmData?.type ?? '',
       date: state.model?.alarmData?.date ?? '',
       callback: (response, isSuccess) {
-        Navigation.key.currentContext!
-            .read(sharedController.notifier)
-            .fetchAlarms()
-            .then((value) {
+        if (isSuccess) {
+          Navigation.key.currentContext!
+              .read(sharedController.notifier)
+              .fetchAlarms()
+              .then((value) {
+            ViewUtil.hideLoader();
+            Navigation.pop();
+            if ((response?.message ?? "").trim().isNotEmpty) {
+              ViewUtil.snackBar(response?.message ?? "");
+            }
+          });
+        } else {
           ViewUtil.hideLoader();
-          Navigation.pop();
-          if ((response?.message ?? "").trim().isNotEmpty) {
-            ViewUtil.snackBar(response?.message ?? "");
-          }
-        });
+        }
       },
     );
   }
@@ -109,16 +121,20 @@ class AddAlarmController extends StateNotifier<AddAlarmState> {
       date: state.model?.alarmData?.date ?? '',
       isEnabled: state.model?.alarmData?.isEnabled == 1 ? 0 : 1,
       callback: (response, isSuccess) {
-        Navigation.key.currentContext!
-            .read(sharedController.notifier)
-            .fetchAlarms()
-            .then((value) {
+        if (isSuccess) {
+          Navigation.key.currentContext!
+              .read(sharedController.notifier)
+              .fetchAlarms()
+              .then((value) {
+            ViewUtil.hideLoader();
+            Navigation.pop();
+            if ((response?.message ?? "").trim().isNotEmpty) {
+              ViewUtil.snackBar(response?.message ?? "");
+            }
+          });
+        } else {
           ViewUtil.hideLoader();
-          Navigation.pop();
-          if ((response?.message ?? "").trim().isNotEmpty) {
-            ViewUtil.snackBar(response?.message ?? "");
-          }
-        });
+        }
       },
     );
   }

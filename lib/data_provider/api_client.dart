@@ -155,6 +155,39 @@ class ApiClient {
     }
   }
 
+  Future requestFormDataMultipleFile({
+    required String url,
+    String? contentType,
+    required Method method,
+     Map<String, dynamic>? params,
+    String? token,
+    Options? options,
+    void Function(int, int)? onReceiveProgress,
+    String? savePath,
+    Map<String, String>? extraHeaders,
+    required Function(Response? response, bool isSuccess) callback,
+  }) async {
+    //use this for extra header
+
+    if (NetworkConnection.instance.isInternet) {
+      // Handle and check all the status.
+      _initDio(
+        extraHeader: extraHeaders,
+        contentType: contentType,
+      );
+      // checkProxy();
+      return clientHandle(
+        url,
+        method,
+        options: options,
+        savePath: savePath,
+        data: params==null?null: FormData.fromMap(params),
+        onReceiveProgress: onReceiveProgress,
+        callback: callback,
+      );
+    }
+  }
+
 // Handle all the method and error.
   Future clientHandle(
     String url,

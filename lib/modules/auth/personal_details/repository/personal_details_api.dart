@@ -14,15 +14,16 @@ class PersonalDetailsApi {
 
   Future<void> updateRegistrationPersonalInfo({
     required PersonalDetailsRequestModel params,
-    required File? armsLicense,
+    // required File? armsLicense,
+    // required File? profilePhoto,
     required Function(Response? response, bool isSuccess) callBack,
   }) async {
-    final data = params.toJson();
-    await _apiClient.requestFormData(
+    final data = await params.toJson();
+    await _apiClient.requestFormDataMultipleFile(
       url: AppUrl.registrationPersonalDetails.url,
       params: data,
-      fileKeyName: armsLicense == null ? null : 'arms_license',
-      files: armsLicense == null ? null : [armsLicense],
+      // fileKeyName: armsLicense == null ? null : 'arms_license',
+      // files: armsLicense == null ? null : [armsLicense],
       callback: callBack,
       method: Method.POST,
     );

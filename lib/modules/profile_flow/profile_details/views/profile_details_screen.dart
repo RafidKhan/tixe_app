@@ -37,13 +37,21 @@ class ProfileDetailsScreen extends StatelessWidget {
                     SizedBox(
                       height: 30.h,
                     ),
-                    ClipOval(
-                      child: GlobalImageLoader(
-                        imagePath: KAssetName.dummyUserPng.imagePath,
-                        height: 112.h,
-                        width: 112.w,
-                      ),
-                    ),
+                    Consumer(builder: (context, ref, child) {
+                      final state = ref.watch(sharedController);
+
+                      return ClipOval(
+                        child: GlobalImageLoader(
+                          imagePath: state.profileData?.data?.profileDetails
+                                  ?.profilePhoto ??
+                              "",
+                          placeHolder: KAssetName.dummyUserPng.imagePath,
+                          height: 112.h,
+                          width: 112.w,
+                          imageFor: ImageFor.network,
+                        ),
+                      );
+                    }),
                     SizedBox(
                       height: 30.h,
                     ),

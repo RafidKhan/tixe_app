@@ -5,14 +5,13 @@ import 'package:tixe_flutter_app/global/widget/global_divider.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
+import 'package:tixe_flutter_app/utils/mixin/unit_conversion_mixin.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
-
-import '../../../../../constant/app_url.dart';
 import '../../../../../global/global_module/shared/shared_controller.dart';
 import '../../../../../global/widget/global_text.dart';
 import '../../../../../utils/styles/k_colors.dart';
 
-class ProfileDetailInfo extends ConsumerWidget {
+class ProfileDetailInfo extends ConsumerWidget with UniConversionMixin{
   const ProfileDetailInfo({super.key});
 
   @override
@@ -40,12 +39,12 @@ class ProfileDetailInfo extends ConsumerWidget {
             padding: EdgeInsets.symmetric(vertical: 10.h),
           ),
           _buildInfoRow(KAssetName.icHeight2Png.imagePath,
-              "Height: ${state.profileData?.data?.profileDetails?.height} ${state.profileData?.data?.profileDetails?.heightUnit ?? ""}"),
+              "Height: ${convertHeightToPreferredUnit(state.profileData?.data?.profileDetails?.height??"", state.profileData?.data?.profileDetails?.heightUnit ?? "")} ${state.profileData?.data?.profileDetails?.heightUnit ?? ""}"),
           GlobalDivider(
             padding: EdgeInsets.symmetric(vertical: 10.h),
           ),
           _buildInfoRow(KAssetName.icWeight2Png.imagePath,
-              "Weight: ${state.profileData?.data?.profileDetails?.weight} ${state.profileData?.data?.profileDetails?.weightUnit ?? ""}"),
+              "Weight: ${convertWeightToPreferredUnit(state.profileData?.data?.profileDetails?.weight??"", state.profileData?.data?.profileDetails?.weightUnit ?? "")} ${state.profileData?.data?.profileDetails?.weightUnit ?? ""}"),
           GlobalDivider(
             padding: EdgeInsets.symmetric(vertical: 10.h),
           ),
@@ -81,7 +80,7 @@ class ProfileDetailInfo extends ConsumerWidget {
               color: KColor.shadeGradient1.color,
             ),
             child: GlobalImageLoader(
-              imagePath: "${AppUrl.baseStorage.url}${state.profileData?.data?.armsLicense ?? ""}",
+              imagePath: state.profileData?.data?.armsLicense ?? "",
               imageFor: ImageFor.network,
               height: 128.h,
             ),

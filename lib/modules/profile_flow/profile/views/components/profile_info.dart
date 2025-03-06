@@ -5,6 +5,7 @@ import 'package:tixe_flutter_app/global/global_module/shared/shared_controller.d
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
 import 'package:tixe_flutter_app/utils/app_routes.dart';
+import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
@@ -38,9 +39,11 @@ class ProfileInfo extends ConsumerWidget {
         children: [
           ClipOval(
             child: GlobalImageLoader(
-              imagePath: KAssetName.dummyUserPng.imagePath,
+              imagePath: state.profileData?.data?.profileDetails?.profilePhoto ?? "",
+              placeHolder: KAssetName.dummyUserPng.imagePath,
               height: 72.h,
               width: 72.w,
+              imageFor: ImageFor.network,
             ),
           ),
           SizedBox(

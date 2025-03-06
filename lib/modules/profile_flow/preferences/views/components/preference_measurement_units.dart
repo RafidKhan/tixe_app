@@ -30,14 +30,14 @@ class PreferenceMeasurementUnits extends ConsumerWidget {
             SizedBox(
               width: 4.w,
             ),
-            GlobalText(
+            const GlobalText(
               str: "Measurement Units",
             )
           ],
         ),
         SizedBox(height: 20.h),
         GlobalText(
-          str: "Height/Length/Distance",
+          str: "Height",
           fontSize: 14,
           fontWeight: FontWeight.w400,
           color: KColor.grey.color,
@@ -72,7 +72,27 @@ class PreferenceMeasurementUnits extends ConsumerWidget {
               },
             );
           },
-        )
+        ),
+
+        SizedBox(height: 20.h),
+        GlobalText(
+          str: "Distance",
+          fontSize: 14,
+          fontWeight: FontWeight.w400,
+          color: KColor.grey.color,
+        ),
+        SizedBox(height: 10.h),
+        GlobalBottomSheetTextFormField(
+          textEditingController: controller.distanceUnitController,
+          onTap: () {
+            ViewUtil.showOptionPickerBottomSheet(
+              options: state.distanceUnits,
+              onSelect: (option) {
+                controller.setDistanceUnit(option);
+              },
+            );
+          },
+        ),
       ],
     );
   }

@@ -7,6 +7,7 @@ import 'package:tixe_flutter_app/global/model/global_option_item.dart';
 import 'package:tixe_flutter_app/modules/auth/fitness_details/controller/state/fitness_details_state.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
+import 'package:tixe_flutter_app/utils/mixin/unit_conversion_mixin.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 
 import '../../../../utils/app_routes.dart';
@@ -20,7 +21,8 @@ final fitnessDetailsController = StateNotifierProvider.autoDispose<
     FitnessDetailsController,
     FitnessDetailsState>((ref) => FitnessDetailsController());
 
-class FitnessDetailsController extends StateNotifier<FitnessDetailsState> {
+class FitnessDetailsController extends StateNotifier<FitnessDetailsState>
+    with UniConversionMixin {
   final IFitnessDetailsRepository _fitnessdetailsRepository =
       FitnessDetailsRepository();
   final IGlobalRepository _globalRepository = GlobalRepository();
@@ -79,8 +81,12 @@ class FitnessDetailsController extends StateNotifier<FitnessDetailsState> {
   void setProfileData() {
     final profileData = state.model?.profileResponse?.data;
     ageController.text = (profileData?.profileDetails?.age ?? "").toString();
-    heightController.text = profileData?.profileDetails?.height ?? "";
-    weightController.text = profileData?.profileDetails?.weight ?? "";
+    heightController.text = convertHeightToPreferredUnit(
+        profileData?.profileDetails?.height ?? "",
+        profileData?.profileDetails?.heightUnit ?? "");
+    weightController.text = convertWeightToPreferredUnit(
+        profileData?.profileDetails?.weight ?? "",
+        profileData?.profileDetails?.weightUnit ?? "");
     heightUnitController.text = profileData?.profileDetails?.heightUnit ?? "";
     weightUnitController.text = profileData?.profileDetails?.weightUnit ?? "";
   }
@@ -126,15 +132,18 @@ class FitnessDetailsController extends StateNotifier<FitnessDetailsState> {
   Future<void> updateRegistrationFitnessDetails() async {
     ViewUtil.showLoaderPage();
 
+    final params = FitnessDetailsRequest(
+      email: state.model?.email ?? "",
+      age: ageController.text.trim(),
+      height: convertToCm(
+          heightController.text.trim(), heightUnitController.text.trim()),
+      heightUnit: heightUnitController.text.trim(),
+      weight: convertToKg(
+          weightController.text.trim(), weightUnitController.text.trim()),
+      weightUnit: weightUnitController.text.trim(),
+    );
     await _fitnessdetailsRepository.updateRegistrationFitnessDetails(
-      params: FitnessDetailsRequest(
-        email: state.model?.email ?? "",
-        age: ageController.text.trim(),
-        height: heightController.text.trim(),
-        heightUnit: heightUnitController.text.trim(),
-        weight: weightController.text.trim(),
-        weightUnit: weightUnitController.text.trim(),
-      ),
+      params: params,
       callback: (response, isSuccess) {
         ViewUtil.hideLoader();
         if (isSuccess) {

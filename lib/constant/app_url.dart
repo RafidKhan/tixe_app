@@ -2,7 +2,7 @@ import 'package:tixe_flutter_app/utils/enum.dart';
 
 enum AppUrl {
   base,
-  baseStorage,
+  //baseStorage,
   login,
   registration,
   verifyRegistrationCode,
@@ -34,23 +34,24 @@ enum AppUrl {
   updateAlarm,
   createReview,
   updateReview,
+  savePreference,
 }
 
 extension AppUrlExtention on AppUrl {
   static String _baseUrl = "";
-  static String _baseStorageUrl = "";
+  //static String _baseStorageUrl = "";
 
   static void setUrl(UrlLink urlLink) {
     switch (urlLink) {
       case UrlLink.isLive:
         _baseUrl = "";
-        _baseStorageUrl = "";
+        //_baseStorageUrl = "";
 
         break;
 
       case UrlLink.isDev:
         _baseUrl = "https://tixeapp.sagsio.com/api/";
-        _baseStorageUrl = "https://tixeapp.sagsio.com";
+        //_baseStorageUrl = "https://tixeapp.sagsio.com";
 
         break;
       case UrlLink.isLocalServer:
@@ -64,8 +65,8 @@ extension AppUrlExtention on AppUrl {
     switch (this) {
       case AppUrl.base:
         return _baseUrl;
-      case AppUrl.baseStorage:
-        return _baseStorageUrl;
+      // case AppUrl.baseStorage:
+      //   return _baseStorageUrl;
       case AppUrl.login:
         return "login";
       case AppUrl.registration:
@@ -128,6 +129,8 @@ extension AppUrlExtention on AppUrl {
         return "review/store";
       case AppUrl.updateReview:
         return "review/update/{ID}";
+      case AppUrl.savePreference:
+        return "user/preference/update";
     }
   }
 }

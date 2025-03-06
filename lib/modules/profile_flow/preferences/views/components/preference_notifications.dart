@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 
+import '../../../../../global/global_module/shared/shared_controller.dart';
 import '/global/widget/global_text.dart';
 import '../../../../../global/widget/global_bottomsheet_textformfield.dart';
 import '../../../../../utils/styles/k_colors.dart';
@@ -16,7 +17,10 @@ class PreferenceNotifications extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(preferencesController);
+
     final controller = ref.read(preferencesController.notifier);
+    final notificationEnabled = state.notificationEnabled;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -30,7 +34,7 @@ class PreferenceNotifications extends ConsumerWidget {
             SizedBox(
               width: 4.w,
             ),
-            GlobalText(
+            const GlobalText(
               str: "Notification",
             )
           ],
@@ -44,9 +48,9 @@ class PreferenceNotifications extends ConsumerWidget {
               ),
             ),
             Switch(
-              value: state.notificationEnabled,
+              value: notificationEnabled,
               activeColor: KColor.btnGradient1.color,
-              onChanged: (value) => controller.toggleNotification(),
+              onChanged: (value) => controller.toggleNotification()
             )
           ],
         ),
@@ -59,12 +63,12 @@ class PreferenceNotifications extends ConsumerWidget {
         ),
         SizedBox(height: 10.h),
         Opacity(
-          opacity: state.notificationEnabled ? 0.5 : 1.0,
+          opacity: notificationEnabled ? 0.5 : 1.0,
           // Reduce opacity when ignoring
           child: GlobalBottomSheetTextFormField(
             textEditingController: controller.notificationEndController,
             onTap: () {
-              if (state.notificationEnabled) {
+              if (notificationEnabled) {
                 ViewUtil.snackBar(
                     "Notification is enabled. Turn it off first.");
               } else {

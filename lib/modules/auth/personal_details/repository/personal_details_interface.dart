@@ -8,7 +8,8 @@ import 'package:tixe_flutter_app/modules/auth/personal_details/model/personal_de
 abstract class IPersonalDetailsRepository {
   Future<void> updateRegistrationPersonalInfo({
     required PersonalDetailsRequestModel params,
-    required File? armsLicense,
+    // required File? armsLicense,
+    // required File? profilePhoto,
     required Function(GlobalResponse? response, bool isSuccess) callBack,
   });
 }

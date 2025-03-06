@@ -1,6 +1,6 @@
 import 'package:country_state_city/utils/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:riverpod/riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tixe_flutter_app/global/global_module/shared/shared_controller.dart';
 import 'package:tixe_flutter_app/global/model/global_option_item.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/model/personal_detail_nav_model.dart';
@@ -148,10 +148,13 @@ class PersonalDetailsController extends StateNotifier<PersonalDetailsState> {
       city: cityController.text.trim(),
       country: countryController.text.trim(),
       address: addressController.text.trim(),
+      armsLicense: state.armsLicense,
+      profilePhoto: state.profileImage,
     );
     await _personalDetailsRepository.updateRegistrationPersonalInfo(
       params: params,
-      armsLicense: state.armsLicense,
+      // armsLicense: state.armsLicense,
+      // profilePhoto: state.profileImage,
       callBack: (response, isSuccess) {
         ViewUtil.hideLoader();
         if (isSuccess) {

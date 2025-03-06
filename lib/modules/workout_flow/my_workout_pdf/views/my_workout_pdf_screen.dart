@@ -35,7 +35,7 @@ class _MyWorkoutPdfScreenState extends State<MyWorkoutPdfScreen>
     super.initState();
     Future(() async {
       if (widget.phase.pdfUrl != null) {
-        final fullUrl = '${AppUrl.baseStorage.url}${widget.phase.pdfUrl}';
+        final fullUrl = widget.phase.pdfUrl!;
         try {
           ViewUtil.showLoaderPage();
           pdfFile.value = await downloadFile(url: fullUrl);

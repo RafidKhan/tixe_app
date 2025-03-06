@@ -1,5 +1,9 @@
 
 
+import 'dart:io';
+
+import 'package:dio/dio.dart';
+
 class PersonalDetailsRequestModel {
   final String email;
   final String name;
@@ -7,6 +11,8 @@ class PersonalDetailsRequestModel {
   final String state;
   final String city;
   final String address;
+  final File? profilePhoto;
+  final File? armsLicense;
 
   PersonalDetailsRequestModel({
     required this.email,
@@ -15,21 +21,13 @@ class PersonalDetailsRequestModel {
     required this.state,
     required this.city,
     required this.address,
+    required this.profilePhoto,
+    required this.armsLicense,
   });
 
-  factory PersonalDetailsRequestModel.fromJson(Map<String, dynamic> json) {
-    return PersonalDetailsRequestModel(
-      state: json['state'] as String,
-      city: json['city'] as String,
-      country: json['country'] as String,
-      email: json['email'] as String,
-      address: json['address'] as String,
-      name: json['name'] as String,
-    );
-  }
 
-  Map<String, dynamic> toJson() {
-    return {
+  Future<Map<String, dynamic>> toJson() async{
+    final Map<String, dynamic> map ={
       'state': state,
       'city': city,
       'country': country,
@@ -37,5 +35,12 @@ class PersonalDetailsRequestModel {
       'address': address,
       'name': name,
     };
+    if(profilePhoto != null){
+      map['profile_photo'] = await MultipartFile.fromFile(profilePhoto!.path);
+    }
+    if(armsLicense != null){
+      map['arms_license'] = await MultipartFile.fromFile(armsLicense!.path);
+    }
+    return map;
   }
 }

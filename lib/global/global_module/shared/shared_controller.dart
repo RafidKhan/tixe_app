@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tixe_flutter_app/global/global_module/shared/shared_state.dart';
+import 'package:tixe_flutter_app/global/model/profile_response.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/user_activity_tracker_services/user_activity_tracker_services.dart';
@@ -185,5 +186,9 @@ class SharedController extends StateNotifier<SharedState> {
       }
       state = state.copyWith(profileData: response);
     });
+  }
+
+  ProfileResponse? getProfileDataFromState() {
+    return state.profileData;
   }
 }

@@ -20,9 +20,9 @@ class FitnessDetailsRequest {
     return {
       'age': age,
       'height': height,
-      'heightUnit': heightUnit,
+      'height_unit': heightUnit,
       'weight': weight,
-      'weightUnit': weightUnit,
+      'weight_unit': weightUnit,
       'email': email,
     };
   }

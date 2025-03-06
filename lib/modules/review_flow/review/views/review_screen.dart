@@ -159,7 +159,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
             children: [
               ClipOval(
                 child: GlobalImageLoader(
-                  imagePath: "${AppUrl.baseStorage.url}${review.userImage}",
+                  imagePath: review.userImage,
                   height: 48.h,
                   width: 48.w,
                   placeHolder: KAssetName.dummyUserPng.imagePath,
