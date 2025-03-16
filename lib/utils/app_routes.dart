@@ -1,3 +1,4 @@
+import '../modules/list_arms/views/list_arms_screen.dart';
 import '../modules/listing_selection/views/listing_selection_screen.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/model/personal_detail_nav_model.dart';
 import 'package:tixe_flutter_app/modules/review_flow/submit_review/model/submit_review_nav_model.dart';
@@ -51,6 +52,7 @@ import '../modules/workout_flow/my_workout_select_phase/views/my_workout_select_
 
 enum AppRoutes {
   splash,
+  listArms,
   listingSelection,
   submitReview,
   review,
@@ -91,6 +93,8 @@ extension AppRoutesExtention on AppRoutes {
   Widget buildWidget<T extends Object>({T? arguments}) {
     switch (this) {
 
+      case AppRoutes.listArms:
+        return const ListArmsScreen();
       case AppRoutes.listingSelection:
         return const ListingSelectionScreen();
       case AppRoutes.submitReview:

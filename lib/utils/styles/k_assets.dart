@@ -60,6 +60,7 @@ enum KAssetName {
   listTrainingPng,
   icCompletePng,
   splashBgPng,
+  noArmsPng,
 }
 
 extension AssetsExtension on KAssetName {
@@ -190,6 +191,8 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/icComplete.png';
       case KAssetName.splashBgPng:
         return '$_imagesDir/splash_bg.png';
+      case KAssetName.noArmsPng:
+        return '$_imagesDir/no_arms.png';
     }
   }
 }
