@@ -2,6 +2,8 @@ import 'package:tixe_flutter_app/global/widget/global_bottom_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
 import 'package:tixe_flutter_app/modules/list_arms/views/components/list_arms.dart';
+import 'package:tixe_flutter_app/utils/app_routes.dart';
+import 'package:tixe_flutter_app/utils/navigation.dart';
 
 import '/global/widget/global_appbar.dart';
 import '/global/widget/global_text.dart';
@@ -29,7 +31,11 @@ class ListArmsScreen extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: GlobalBottomButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigation.push(
+            appRoutes: AppRoutes.listArmsForm,
+          );
+        },
         buttonText: "List Arms",
       ),
     );

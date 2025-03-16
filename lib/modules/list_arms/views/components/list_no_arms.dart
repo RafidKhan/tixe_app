@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
+import 'package:tixe_flutter_app/utils/app_routes.dart';
+import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 
 class ListNoArms extends StatelessWidget {
@@ -32,7 +34,9 @@ class ListNoArms extends StatelessWidget {
           ),
           SizedBox(height: 20.h),
           GlobalButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigation.push(appRoutes: AppRoutes.listArmsForm);
+            },
             buttonText: "List Arms",
           )
         ],

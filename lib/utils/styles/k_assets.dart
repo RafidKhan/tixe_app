@@ -52,11 +52,13 @@ enum KAssetName {
   listWorkoutsPng,
   googlePng,
   facebookPng,
+  addPhoto2Png,
   tixeMainBgPng,
   icUnitsPng,
   icBackFilledPng,
   icPreferencePng,
   workoutPng,
+  addPhoto1Png,
   listTrainingPng,
   icCompletePng,
   splashBgPng,
@@ -175,6 +177,8 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/google.png';
       case KAssetName.facebookPng:
         return '$_imagesDir/facebook.png';
+      case KAssetName.addPhoto2Png:
+        return '$_imagesDir/addPhoto2.png';
       case KAssetName.tixeMainBgPng:
         return '$_imagesDir/tixe_main_bg.png';
       case KAssetName.icUnitsPng:
@@ -185,6 +189,8 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/icPreference.png';
       case KAssetName.workoutPng:
         return '$_imagesDir/workout.png';
+      case KAssetName.addPhoto1Png:
+        return '$_imagesDir/addPhoto1.png';
       case KAssetName.listTrainingPng:
         return '$_imagesDir/list_training.png';
       case KAssetName.icCompletePng:
