@@ -32,7 +32,11 @@ class ProfileScreen extends StatelessWidget {
             ProfileCommonItem(
               image: KAssetName.icWalletPng.imagePath,
               title: context.loc.list_items_and_services,
-              onTap: () {},
+              onTap: () {
+                Navigation.push(
+                  appRoutes: AppRoutes.listingSelection,
+                );
+              },
             ),
             ProfileCommonItem(
               image: KAssetName.icWalletPng.imagePath,
