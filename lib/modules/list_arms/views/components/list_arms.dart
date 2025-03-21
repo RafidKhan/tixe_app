@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tixe_flutter_app/global/widget/global_bottom_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_divider.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
@@ -11,6 +10,7 @@ import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
+import '../../../../global/widget/global_button.dart';
 import '../../controller/list_arms_controller.dart';
 
 class ListArms extends ConsumerWidget {
@@ -19,30 +19,38 @@ class ListArms extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(listArmsControllerProvider);
-    return Column(
-      children: [
-        GlobalBottomButton(
-          onPressed: () {
-            Navigation.push(
-              appRoutes: AppRoutes.listArmsForm,
-            );
-          },
-          buttonText: "List New Arms",
+    return Expanded(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            GlobalButton(
+              margin: EdgeInsets.symmetric(
+                horizontal: 20.w,
+                vertical: 16.h,
+              ),
+              onPressed: () {
+                Navigation.push(
+                  appRoutes: AppRoutes.listArmsForm,
+                );
+              },
+              buttonText: "List New Arms",
+            ),
+            ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: state.arms.length,
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              separatorBuilder: (context, index) {
+                return SizedBox(height: 20.h);
+              },
+              itemBuilder: (context, index) {
+                final arm = state.arms[index];
+                return armItem(arm);
+              },
+            ),
+          ],
         ),
-        Expanded(
-          child: ListView.separated(
-            itemCount: state.arms.length,
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            separatorBuilder: (context, index) {
-              return SizedBox(height: 20.h);
-            },
-            itemBuilder: (context, index) {
-              final arm = state.arms[index];
-              return armItem(arm);
-            },
-          ),
-        ),
-      ],
+      ),
     );
   }
 

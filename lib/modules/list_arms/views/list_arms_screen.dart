@@ -39,13 +39,13 @@ class _ListArmsScreenState extends State<ListArmsScreen> {
               const GlobalHeaderWidget(
                 title: "Listing Arms",
               ),
-              Expanded(
-                child: Center(
-                  child: state.arms.isNotEmpty
-                      ? const ListArms()
-                      : const ListNoArms(),
-                ),
-              ),
+              state.arms.isEmpty
+                  ? const Expanded(
+                      child: Center(
+                        child: ListNoArms(),
+                      ),
+                    )
+                  : const ListArms(),
             ],
           ),
         );
