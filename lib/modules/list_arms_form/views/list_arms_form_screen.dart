@@ -8,9 +8,13 @@ import 'package:tixe_flutter_app/global/widget/global_textformfield.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
 import 'package:tixe_flutter_app/modules/list_arms_form/controller/list_arms_form_controller.dart';
 import 'package:tixe_flutter_app/modules/list_arms_form/views/components/list_arms_form_photo.dart';
+import 'package:tixe_flutter_app/modules/listing_payment/model/listing_payment_nav_model.dart';
+import 'package:tixe_flutter_app/utils/app_routes.dart';
+import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 
+import '../../../utils/enum.dart';
 import '/global/widget/global_appbar.dart';
 import '/global/widget/global_text.dart';
 import 'package:flutter/material.dart';
@@ -128,7 +132,15 @@ class ListArmsFormScreen extends StatelessWidget {
           ],
         ),
         bottomNavigationBar: GlobalBottomButton(
-          onPressed: state.isButtonEnabled ? () {} : null,
+          //onPressed: state.isButtonEnabled ? () {} : null,
+          onPressed: () {
+            Navigation.push(
+              appRoutes: AppRoutes.listingPayment,
+              arguments: const ListingPaymentNavModel(
+                type: ListingType.Arms,
+              ),
+            );
+          },
           buttonText: "Proceed to Next Steps",
         ),
       );

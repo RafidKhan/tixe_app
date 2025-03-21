@@ -3,6 +3,7 @@ enum KAssetName {
   tixeAppIconPng,
   icCategoriesPng,
   warJpg,
+  paymentCompletePng,
   icHeartRatePng,
   dummyMapLocationPng,
   icStarUnchekedPng,
@@ -79,6 +80,8 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/icCategories.png';
       case KAssetName.warJpg:
         return '$_imagesDir/war.jpg';
+      case KAssetName.paymentCompletePng:
+        return '$_imagesDir/payment_complete.png';
       case KAssetName.icHeartRatePng:
         return '$_imagesDir/icHeartRate.png';
       case KAssetName.dummyMapLocationPng:

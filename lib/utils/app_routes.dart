@@ -1,3 +1,7 @@
+import '../modules/payment_success/views/payment_success_screen.dart';
+import 'package:tixe_flutter_app/modules/listing_payment/model/listing_payment_nav_model.dart';
+
+import '../modules/listing_payment/views/listing_payment_screen.dart';
 import '../modules/list_arms_form/views/list_arms_form_screen.dart';
 import '../modules/list_arms/views/list_arms_screen.dart';
 import '../modules/listing_selection/views/listing_selection_screen.dart';
@@ -53,6 +57,8 @@ import '../modules/workout_flow/my_workout_select_phase/views/my_workout_select_
 
 enum AppRoutes {
   splash,
+  paymentSuccess,
+  listingPayment,
   listArmsForm,
   listArms,
   listingSelection,
@@ -94,18 +100,29 @@ enum AppRoutes {
 extension AppRoutesExtention on AppRoutes {
   Widget buildWidget<T extends Object>({T? arguments}) {
     switch (this) {
-
+      case AppRoutes.paymentSuccess:
+        return PaymentSuccessScreen(
+          model: arguments as ListingPaymentNavModel,
+        );
+      case AppRoutes.listingPayment:
+        return ListingPaymentScreen(
+          model: arguments as ListingPaymentNavModel,
+        );
 
       case AppRoutes.listArmsForm:
         return const ListArmsFormScreen();
-     case AppRoutes.listArms:
+      case AppRoutes.listArms:
         return const ListArmsScreen();
       case AppRoutes.listingSelection:
         return const ListingSelectionScreen();
       case AppRoutes.submitReview:
-        return  SubmitReviewScreen(navModel: arguments as SubmitReviewNavModel,);
-     case AppRoutes.review:
-        return  ReviewScreen(navModel: arguments as ReviewNavModel,);
+        return SubmitReviewScreen(
+          navModel: arguments as SubmitReviewNavModel,
+        );
+      case AppRoutes.review:
+        return ReviewScreen(
+          navModel: arguments as ReviewNavModel,
+        );
       case AppRoutes.preferences:
         return const PreferencesScreen();
 
@@ -114,13 +131,15 @@ extension AppRoutesExtention on AppRoutes {
       case AppRoutes.profileDetails:
         return const ProfileDetailsScreen();
       case AppRoutes.addAlarm:
-        return  AddAlarmScreen(model: arguments as AddAlarmNavModel?,);
+        return AddAlarmScreen(
+          model: arguments as AddAlarmNavModel?,
+        );
 
       case AppRoutes.sleepAndAlarm:
         return const SleepAndAlarmScreen();
-     case AppRoutes.exerciseDetail:
+      case AppRoutes.exerciseDetail:
         return const ExerciseDetailScreen();
-     case AppRoutes.profile:
+      case AppRoutes.profile:
         return const ProfileScreen();
       case AppRoutes.myWorkoutVideo:
         return MyWorkoutVideoScreen(

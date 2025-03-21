@@ -62,8 +62,13 @@ enum AlarmType {
   CUSTOM,
 }
 
-
-enum ActionType{
+enum ActionType {
   Registration,
   Update,
+}
+
+enum ListingType {
+  Training,
+  Workout,
+  Arms,
 }
