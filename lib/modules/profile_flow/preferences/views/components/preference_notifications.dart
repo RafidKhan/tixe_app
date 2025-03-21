@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 
-import '../../../../../global/global_module/shared/shared_controller.dart';
 import '/global/widget/global_text.dart';
 import '../../../../../global/widget/global_bottomsheet_textformfield.dart';
 import '../../../../../utils/styles/k_colors.dart';

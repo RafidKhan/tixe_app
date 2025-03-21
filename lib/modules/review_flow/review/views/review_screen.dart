@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tixe_flutter_app/constant/app_url.dart';
 import 'package:tixe_flutter_app/global/global_module/shared/shared_controller.dart';
 import 'package:tixe_flutter_app/global/widget/global_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
@@ -13,10 +13,10 @@ import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
+
+import '/global/widget/global_text.dart';
 import '../../../../global/model/review_model.dart';
 import '../controller/review_controller.dart';
-import '/global/widget/global_text.dart';
-import 'package:flutter/material.dart';
 
 class ReviewScreen extends StatefulWidget {
   final ReviewNavModel navModel;

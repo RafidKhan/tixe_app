@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:tixe_flutter_app/modules/fitness_flow/add_alarm/repository/add_alarm_api.dart';
 
 import '../../../../global/model/global_response.dart';

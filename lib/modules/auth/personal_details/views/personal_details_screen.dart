@@ -16,9 +16,8 @@ import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 
-import '../../../../constant/app_url.dart';
-import '../../../../utils/enum.dart';
 import '/global/widget/global_text.dart';
+import '../../../../utils/enum.dart';
 
 class PersonalDetailsScreen extends StatefulWidget {
   final PersonalDetailsNavModel model;

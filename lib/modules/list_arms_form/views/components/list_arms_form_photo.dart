@@ -1,11 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/modules/list_arms_form/controller/list_arms_form_controller.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
+
 import '../../../../utils/enum.dart';
-import 'package:flutter/material.dart';
 
 class ListArmsFormPhoto extends ConsumerWidget {
   const ListArmsFormPhoto({super.key});

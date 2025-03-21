@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tixe_flutter_app/data_provider/api_client.dart';
 import 'package:tixe_flutter_app/global/model/create_review_model.dart';
 import 'package:tixe_flutter_app/modules/review_flow/submit_review/controller/state/submit_review_state.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';

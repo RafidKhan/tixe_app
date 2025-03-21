@@ -1,17 +1,5 @@
-import '../modules/payment_success/views/payment_success_screen.dart';
-import 'package:tixe_flutter_app/modules/listing_payment/model/listing_payment_nav_model.dart';
-
-import '../modules/listing_payment/views/listing_payment_screen.dart';
-import '../modules/list_arms_form/views/list_arms_form_screen.dart';
-import '../modules/list_arms/views/list_arms_screen.dart';
-import '../modules/listing_selection/views/listing_selection_screen.dart';
-import 'package:tixe_flutter_app/modules/auth/personal_details/model/personal_detail_nav_model.dart';
-import 'package:tixe_flutter_app/modules/review_flow/submit_review/model/submit_review_nav_model.dart';
-
-import '../modules/review_flow/review/model/review_nav_model.dart';
-import '../modules/review_flow/submit_review/views/submit_review_screen.dart';
-import '../modules/review_flow/review/views/review_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:tixe_flutter_app/modules/auth/personal_details/model/personal_detail_nav_model.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/views/personal_details_screen.dart';
 import 'package:tixe_flutter_app/modules/auth/sign_in/views/sign_in_screen.dart';
 import 'package:tixe_flutter_app/modules/auth/sign_up/views/sign_up_screen.dart';
@@ -19,6 +7,8 @@ import 'package:tixe_flutter_app/modules/auth/verify_email/views/verify_email_sc
 import 'package:tixe_flutter_app/modules/fitness_flow/add_alarm/model/add_alarm_nav_model.dart';
 import 'package:tixe_flutter_app/modules/fitness_flow/exercise_detail/views/exercise_detail_screen.dart';
 import 'package:tixe_flutter_app/modules/fitness_flow/fitness/views/fitness_screen.dart';
+import 'package:tixe_flutter_app/modules/listing_payment/model/listing_payment_nav_model.dart';
+import 'package:tixe_flutter_app/modules/review_flow/submit_review/model/submit_review_nav_model.dart';
 import 'package:tixe_flutter_app/modules/splash/views/splash_screen.dart';
 import 'package:tixe_flutter_app/modules/training_flow/confirm_training_enroll/model/confirm_training_enrollment_nav_model.dart';
 import 'package:tixe_flutter_app/modules/training_flow/my_training_details/views/my_training_details_screen.dart';
@@ -42,9 +32,17 @@ import '../modules/dashboard/views/dashboard_screen.dart';
 import '../modules/fitness_flow/add_alarm/views/add_alarm_screen.dart';
 import '../modules/fitness_flow/sleep_and_alarm/views/sleep_and_alarm_screen.dart';
 import '../modules/home/views/home_screen.dart';
+import '../modules/list_arms/views/list_arms_screen.dart';
+import '../modules/list_arms_form/views/list_arms_form_screen.dart';
+import '../modules/listing_payment/views/listing_payment_screen.dart';
+import '../modules/listing_selection/views/listing_selection_screen.dart';
+import '../modules/payment_success/views/payment_success_screen.dart';
 import '../modules/profile_flow/preferences/views/preferences_screen.dart';
 import '../modules/profile_flow/profile/views/profile_screen.dart';
 import '../modules/profile_flow/profile_details/views/profile_details_screen.dart';
+import '../modules/review_flow/review/model/review_nav_model.dart';
+import '../modules/review_flow/review/views/review_screen.dart';
+import '../modules/review_flow/submit_review/views/submit_review_screen.dart';
 import '../modules/training_flow/confirm_training_enroll/views/confirm_training_enroll_screen.dart';
 import '../modules/training_flow/training/views/training_screen.dart';
 import '../modules/training_flow/training_details/views/training_details_screen.dart';

@@ -14,8 +14,6 @@ import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 import 'package:video_player/video_player.dart';
 
-import '../../../../constant/app_url.dart';
-
 class MyWorkoutVideoScreen extends StatefulWidget {
   final WorkoutPhase phase;
 

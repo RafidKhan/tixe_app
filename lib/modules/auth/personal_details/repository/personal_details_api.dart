@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:tixe_flutter_app/constant/app_url.dart';
 import 'package:tixe_flutter_app/data_provider/api_client.dart';

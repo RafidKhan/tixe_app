@@ -5,15 +5,14 @@ import 'package:tixe_flutter_app/global/global_module/shared/shared_controller.d
 import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
-import 'package:tixe_flutter_app/modules/dashboard/controller/dashboard_controller.dart';
 import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
-import '../../../auth/personal_details/model/personal_detail_nav_model.dart';
 import '/global/widget/global_text.dart';
+import '../../../auth/personal_details/model/personal_detail_nav_model.dart';
 import 'components/profile_detail_info.dart';
 
 class ProfileDetailsScreen extends StatelessWidget {

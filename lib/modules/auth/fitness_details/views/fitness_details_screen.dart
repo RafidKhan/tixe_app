@@ -13,9 +13,9 @@ import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 
+import '/global/widget/global_text.dart';
 import '../../../../global/widget/action_consent_confirm_dialog.dart';
 import '../../../../utils/enum.dart';
-import '/global/widget/global_text.dart';
 
 class FitnessDetailsScreen extends StatefulWidget {
   final PersonalDetailsNavModel model;

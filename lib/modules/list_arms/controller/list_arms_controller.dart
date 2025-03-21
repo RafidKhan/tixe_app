@@ -1,6 +1,44 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tixe_flutter_app/modules/list_arms/controller/state/list_arms_state.dart';
+import 'package:tixe_flutter_app/modules/list_arms/model/my_listed_arms_model.dart';
+import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
+
 import '../repository/list_arms_interface.dart';
 import '../repository/list_arms_repository.dart';
-class ListArmsController  {
+
+final listArmsControllerProvider =
+    StateNotifierProvider.autoDispose<ListArmsController, ListArmsState>((ref) {
+  return ListArmsController();
+});
+
+class ListArmsController extends StateNotifier<ListArmsState> {
   final IListArmsRepository _listarmsRepository = ListArmsRepository();
-  
+
+  ListArmsController()
+      : super(
+          const ListArmsState(
+            arms: [],
+          ),
+        );
+
+  Future<void> getArms() async {
+    state = state.copyWith(
+      arms: [
+        MyListedArm(
+          title: "Pistol 24M",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus mi non egestas efficitur. Etiam molestie lectus et rutrum finibus.",
+          price: "125.00",
+          renting: true,
+          image: KAssetName.dummyGearPng.imagePath,
+        ),
+        MyListedArm(
+          title: "AK 47",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus mi non egestas efficitur. Etiam molestie lectus et rutrum finibus.",
+          price: "500.00",
+          renting: false,
+          image: KAssetName.dummyGearPng.imagePath,
+        ),
+      ],
+    );
   }
+}

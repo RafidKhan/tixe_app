@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tixe_flutter_app/data_provider/api_client.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottom_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
@@ -13,8 +13,6 @@ import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
 import '../controller/submit_review_controller.dart';
-import '/global/widget/global_appbar.dart';
-import 'package:flutter/material.dart';
 
 class SubmitReviewScreen extends StatefulWidget {
   final SubmitReviewNavModel navModel;

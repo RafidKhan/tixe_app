@@ -7,6 +7,7 @@ import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/mixin/unit_conversion_mixin.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
+
 import '../../../../../global/global_module/shared/shared_controller.dart';
 import '../../../../../global/widget/global_text.dart';
 import '../../../../../utils/styles/k_colors.dart';

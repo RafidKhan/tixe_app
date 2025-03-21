@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tixe_flutter_app/global/widget/global_button.dart';
@@ -10,10 +11,10 @@ import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
+
+import '/global/widget/global_text.dart';
 import '../../../global/widget/global_textformfield.dart';
 import '../../../utils/enum.dart';
-import '/global/widget/global_text.dart';
-import 'package:flutter/material.dart';
 
 class ListingPaymentScreen extends StatelessWidget {
   final ListingPaymentNavModel model;
