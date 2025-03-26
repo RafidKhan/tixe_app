@@ -6,6 +6,7 @@ enum KAssetName {
   paymentCompletePng,
   icHeartRatePng,
   dummyMapLocationPng,
+  unSelectedCheckboxPng,
   icStarUnchekedPng,
   icStepsPng,
   icInstructionPng,
@@ -32,6 +33,7 @@ enum KAssetName {
   applePng,
   icFirePng,
   icVideoPng,
+  selectedCheckBoxPng,
   icBedtimePng,
   icExcercisePng,
   icArmStorePng,
@@ -86,6 +88,8 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/icHeartRate.png';
       case KAssetName.dummyMapLocationPng:
         return '$_imagesDir/dummy_map_location.png';
+      case KAssetName.unSelectedCheckboxPng:
+        return '$_imagesDir/unSelectedCheckbox.png';
       case KAssetName.icStarUnchekedPng:
         return '$_imagesDir/icStarUncheked.png';
       case KAssetName.icStepsPng:
@@ -138,6 +142,8 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/icFire.png';
       case KAssetName.icVideoPng:
         return '$_imagesDir/icVideo.png';
+      case KAssetName.selectedCheckBoxPng:
+        return '$_imagesDir/selectedCheckBox.png';
       case KAssetName.icBedtimePng:
         return '$_imagesDir/icBedtime.png';
       case KAssetName.icExcercisePng:

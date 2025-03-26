@@ -4,7 +4,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:tixe_flutter_app/global/widget/global_circular_loader.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
-import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 
 class GlobalImageLoader extends StatelessWidget {
@@ -32,7 +31,6 @@ class GlobalImageLoader extends StatelessWidget {
     final String defaultPlaceHolder =
         placeHolder ?? KAssetName.tixeLogoPng.imagePath;
     if (imageFor == ImageFor.network) {
-      'imagePath: $imagePath'.log();
       return CachedNetworkImage(
         imageUrl: imagePath,
         height: height,

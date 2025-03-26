@@ -1,18 +1,22 @@
 import 'dart:io';
 
-import 'package:tixe_flutter_app/global/model/global_option_item.dart';
+import '../../model/arms_category_response.dart';
 
 class ListArmFormState {
   final File? featuredImage;
   final List<File> images;
-  final GlobalOptionData? category;
+  final List<ArmCategory> armsCategories;
+  final List<ArmCategory> selectedCategories;
+  final bool isLoadingCategories;
   final bool isButtonEnabled;
   final bool isRentalEnabled;
 
   ListArmFormState({
     required this.featuredImage,
     required this.images,
-    required this.category,
+    required this.selectedCategories,
+    required this.armsCategories,
+    required this.isLoadingCategories,
     required this.isButtonEnabled,
     required this.isRentalEnabled,
   });
@@ -20,14 +24,18 @@ class ListArmFormState {
   ListArmFormState copyWith({
     File? featuredImage,
     List<File>? images,
-    GlobalOptionData? category,
+    List<ArmCategory>? armsCategories,
+    List<ArmCategory>? selectedCategories,
+    bool? isLoadingCategories,
     bool? isButtonEnabled,
     bool? isRentalEnabled,
   }) {
     return ListArmFormState(
       featuredImage: featuredImage ?? this.featuredImage,
       images: images ?? this.images,
-      category: category ?? this.category,
+      armsCategories: armsCategories ?? this.armsCategories,
+      selectedCategories: selectedCategories ?? this.selectedCategories,
+      isLoadingCategories: isLoadingCategories ?? this.isLoadingCategories,
       isButtonEnabled: isButtonEnabled ?? this.isButtonEnabled,
       isRentalEnabled: isRentalEnabled ?? this.isRentalEnabled,
     );
@@ -37,7 +45,9 @@ class ListArmFormState {
     return ListArmFormState(
       featuredImage: null,
       images: images,
-      category: category,
+      selectedCategories: selectedCategories,
+      armsCategories: armsCategories,
+      isLoadingCategories: isLoadingCategories,
       isButtonEnabled: isButtonEnabled,
       isRentalEnabled: isRentalEnabled,
     );

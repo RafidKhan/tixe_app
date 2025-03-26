@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tixe_flutter_app/global/model/global_option_item.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottom_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottomsheet_textformfield.dart';
 import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
 import 'package:tixe_flutter_app/global/widget/global_textformfield.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
 import 'package:tixe_flutter_app/modules/list_arms_form/controller/list_arms_form_controller.dart';
+import 'package:tixe_flutter_app/modules/list_arms_form/views/components/list_arms_categories.dart';
 import 'package:tixe_flutter_app/modules/list_arms_form/views/components/list_arms_form_photo.dart';
-import 'package:tixe_flutter_app/modules/listing_payment/model/listing_payment_nav_model.dart';
-import 'package:tixe_flutter_app/utils/app_routes.dart';
-import 'package:tixe_flutter_app/utils/navigation.dart';
-import 'package:tixe_flutter_app/utils/view_util.dart';
 
 import '/global/widget/global_text.dart';
-import '../../../utils/enum.dart';
 
 class ListArmsFormScreen extends StatelessWidget {
   const ListArmsFormScreen({super.key});
@@ -55,17 +50,21 @@ class ListArmsFormScreen extends StatelessWidget {
                       GlobalBottomSheetTextFormField(
                         textEditingController: controller.categoryController,
                         onTap: () {
-                          ViewUtil.showOptionPickerBottomSheet(
-                            options: List.generate(
-                              10,
-                              (index) => GlobalOptionData(
-                                id: index,
-                                value: "Category $index",
-                              ),
-                            ),
-                            onSelect: (option) {
-                              controller.setCategory(option);
-                            },
+                          // ViewUtil.showOptionPickerBottomSheet(
+                          //   options: List.generate(
+                          //     10,
+                          //     (index) => GlobalOptionData(
+                          //       id: index,
+                          //       value: "Category $index",
+                          //     ),
+                          //   ),
+                          //   onSelect: (option) {
+                          //     controller.setCategory(option);
+                          //   },
+                          // );
+                          showDialog(
+                            context: context,
+                            builder: (context) => const ListArmsCategories(),
                           );
                         },
                       ),
@@ -130,15 +129,19 @@ class ListArmsFormScreen extends StatelessWidget {
           ],
         ),
         bottomNavigationBar: GlobalBottomButton(
-          //onPressed: state.isButtonEnabled ? () {} : null,
-          onPressed: () {
-            Navigation.push(
-              appRoutes: AppRoutes.listingPayment,
-              arguments: const ListingPaymentNavModel(
-                type: ListingType.Arms,
-              ),
-            );
-          },
+          onPressed: state.isButtonEnabled
+              ? () {
+                  controller.saveArmsForm();
+                }
+              : null,
+          // onPressed: () {
+          //   Navigation.push(
+          //     appRoutes: AppRoutes.listingPayment,
+          //     arguments: const ListingPaymentNavModel(
+          //       type: ListingType.Arms,
+          //     ),
+          //   );
+          // },
           buttonText: "Proceed to Next Steps",
         ),
       );

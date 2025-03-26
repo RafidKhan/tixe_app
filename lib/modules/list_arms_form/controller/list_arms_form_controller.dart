@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tixe_flutter_app/global/model/global_option_item.dart';
 import 'package:tixe_flutter_app/modules/list_arms_form/controller/state/list_arms_form_state.dart';
 import 'package:tixe_flutter_app/utils/custom_file_picker.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
@@ -30,7 +29,9 @@ class ListArmsFormController extends StateNotifier<ListArmFormState> {
           ListArmFormState(
             featuredImage: null,
             images: [],
-            category: null,
+            armsCategories: [],
+            selectedCategories: [],
+            isLoadingCategories: false,
             isButtonEnabled: false,
             isRentalEnabled: false,
           ),
@@ -41,6 +42,21 @@ class ListArmsFormController extends StateNotifier<ListArmFormState> {
     descriptionController.addListener(checkButtonStatus);
     quantityAvailableController.addListener(checkButtonStatus);
     dailyRentalPriceController.addListener(checkButtonStatus);
+  }
+
+  Future<void> getArmsCategories() async {
+    state = state.copyWith(
+      armsCategories: [],
+      isLoadingCategories: true,
+    );
+    await _listarmsformRepository.getArmsCategories(
+      callback: (response, isSuccess) {
+        state = state.copyWith(
+          armsCategories: response?.data ?? [],
+          isLoadingCategories: false,
+        );
+      },
+    );
   }
 
   Future<void> selectFeaturedImage() async {
@@ -101,7 +117,7 @@ class ListArmsFormController extends StateNotifier<ListArmFormState> {
       state = state.copyWith(
           isButtonEnabled: titleController.text.trim().isNotEmpty &&
               categoryController.text.trim().isNotEmpty &&
-              state.category != null &&
+              state.selectedCategories.isNotEmpty &&
               sellingPriceController.text.trim().isNotEmpty &&
               descriptionController.text.trim().isNotEmpty &&
               quantityAvailableController.text.trim().isNotEmpty &&
@@ -112,7 +128,7 @@ class ListArmsFormController extends StateNotifier<ListArmFormState> {
       state = state.copyWith(
           isButtonEnabled: titleController.text.trim().isNotEmpty &&
               categoryController.text.trim().isNotEmpty &&
-              state.category != null &&
+              state.selectedCategories.isNotEmpty &&
               sellingPriceController.text.trim().isNotEmpty &&
               descriptionController.text.trim().isNotEmpty &&
               quantityAvailableController.text.trim().isNotEmpty &&
@@ -121,8 +137,10 @@ class ListArmsFormController extends StateNotifier<ListArmFormState> {
     }
   }
 
-  void setCategory(GlobalOptionData option) {
-    state = state.copyWith(category: option);
-    categoryController.text = option.value;
+  void setCategory() {
+    state = state.copyWith(selectedCategories: state.armsCategories.where((e)=>e.isSelected).toList());
+    categoryController.text = state.selectedCategories.map((e) => e.name).join(", ");
   }
+
+  Future<void> saveArmsForm() async {}
 }
