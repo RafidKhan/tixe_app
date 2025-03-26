@@ -6,6 +6,7 @@ import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
 import 'package:tixe_flutter_app/modules/list_arms/model/my_listed_arms_model.dart';
 import 'package:tixe_flutter_app/utils/app_routes.dart';
+import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
@@ -164,6 +165,7 @@ class ListArms extends ConsumerWidget {
                     height: 130.h,
                     width: context.width,
                     fit: BoxFit.fitWidth,
+                    imageFor: ImageFor.network,
                     //imageFor: ImageFor.network,
                   ),
                 ),

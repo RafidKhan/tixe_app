@@ -35,6 +35,7 @@ enum AppUrl {
   createReview,
   updateReview,
   savePreference,
+  myGears,
 }
 
 extension AppUrlExtention on AppUrl {
@@ -131,6 +132,8 @@ extension AppUrlExtention on AppUrl {
         return "review/update/{ID}";
       case AppUrl.savePreference:
         return "user/preference/update";
+      case AppUrl.myGears:
+        return "gears";
     }
   }
 }

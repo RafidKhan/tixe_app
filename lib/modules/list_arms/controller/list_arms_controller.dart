@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tixe_flutter_app/modules/list_arms/controller/state/list_arms_state.dart';
 import 'package:tixe_flutter_app/modules/list_arms/model/my_listed_arms_model.dart';
-import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
+import 'package:tixe_flutter_app/utils/view_util.dart';
 
 import '../repository/list_arms_interface.dart';
 import '../repository/list_arms_repository.dart';
@@ -22,23 +22,46 @@ class ListArmsController extends StateNotifier<ListArmsState> {
         );
 
   Future<void> getArms() async {
-    state = state.copyWith(
-      arms: [
-        MyListedArm(
-          title: "Pistol 24M",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus mi non egestas efficitur. Etiam molestie lectus et rutrum finibus.",
-          price: "125.00",
-          renting: true,
-          image: KAssetName.dummyGearPng.imagePath,
-        ),
-        MyListedArm(
-          title: "AK 47",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus mi non egestas efficitur. Etiam molestie lectus et rutrum finibus.",
-          price: "500.00",
-          renting: false,
-          image: KAssetName.dummyGearPng.imagePath,
-        ),
-      ],
+    ViewUtil.showLoaderPage();
+    await _listarmsRepository.getMyArms(
+      callback: (response, isSuccess) {
+        ViewUtil.hideLoader();
+        if (isSuccess) {
+          final arms = response?.data ?? [];
+          state = state.copyWith(
+            arms: arms.map((e) {
+              return MyListedArm(
+                title: e.name ?? "",
+                description: e.description ?? "",
+                price: e.price ?? "",
+                renting: false,
+                image: e.image ?? "",
+              );
+            }).toList(),
+          );
+        }
+      },
     );
+
+    // state = state.copyWith(
+    //   arms: [
+    //     MyListedArm(
+    //       title: "Pistol 24M",
+    //       description:
+    //           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus mi non egestas efficitur. Etiam molestie lectus et rutrum finibus.",
+    //       price: "125.00",
+    //       renting: true,
+    //       image: KAssetName.dummyGearPng.imagePath,
+    //     ),
+    //     MyListedArm(
+    //       title: "AK 47",
+    //       description:
+    //           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus mi non egestas efficitur. Etiam molestie lectus et rutrum finibus.",
+    //       price: "500.00",
+    //       renting: false,
+    //       image: KAssetName.dummyGearPng.imagePath,
+    //     ),
+    //   ],
+    // );
   }
 }
