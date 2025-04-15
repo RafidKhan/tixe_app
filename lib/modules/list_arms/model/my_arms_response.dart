@@ -3,7 +3,7 @@
 class MyArmsResponse {
   int? code;
   String? message;
-  List<Datum>? data;
+  List<ListArmData>? data;
 
   MyArmsResponse({
     this.code,
@@ -14,7 +14,7 @@ class MyArmsResponse {
   factory MyArmsResponse.fromJson(Map<String, dynamic> json) => MyArmsResponse(
     code: json["code"],
     message: json["message"],
-    data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
+    data: json["data"] == null ? [] : List<ListArmData>.from(json["data"]!.map((x) => ListArmData.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -24,58 +24,57 @@ class MyArmsResponse {
   };
 }
 
-class Datum {
+
+
+class ListArmData {
   int? id;
-  String? name;
+  String? title;
   String? description;
-  String? image;
-  List<String>? galleryImages;
-  String? license;
+  String? featureImage;
+  List<String>? featureImages;
   String? price;
-  num? quantity;
-  String? rentPrice;
-  String? whatForGear;
+  int? quantityAvailable;
+  String? dailyRentalPrice;
+  dynamic rentalOption;
   List<dynamic>? categories;
 
-  Datum({
+  ListArmData({
     this.id,
-    this.name,
+    this.title,
     this.description,
-    this.image,
-    this.galleryImages,
-    this.license,
+    this.featureImage,
+    this.featureImages,
     this.price,
-    this.quantity,
-    this.rentPrice,
-    this.whatForGear,
+    this.quantityAvailable,
+    this.dailyRentalPrice,
+    this.rentalOption,
     this.categories,
   });
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory ListArmData.fromJson(Map<String, dynamic> json) => ListArmData(
     id: json["id"],
-    name: json["name"],
+    title: json["title"],
     description: json["description"],
-    image: json["image"],
-    galleryImages: json["gallery_images"] == null ? [] : List<String>.from(json["gallery_images"]!.map((x) => x)),
-    license: json["license"],
+    featureImage: json["feature_image"],
+    featureImages: json["feature_images"] == null ? [] : List<String>.from(json["feature_images"]!.map((x) => x)),
     price: json["price"],
-    quantity: json["quantity"],
-    rentPrice: json["rent_price"],
-    whatForGear: json["what_for_gear"],
+    quantityAvailable: json["quantity_available"],
+    dailyRentalPrice: json["daily_rental_price"],
+    rentalOption: json["rental_option"],
     categories: json["categories"] == null ? [] : List<dynamic>.from(json["categories"]!.map((x) => x)),
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "name": name,
+    "title": title,
     "description": description,
-    "image": image,
-    "gallery_images": galleryImages == null ? [] : List<dynamic>.from(galleryImages!.map((x) => x)),
-    "license": license,
+    "feature_image": featureImage,
+    "feature_images": featureImages == null ? [] : List<dynamic>.from(featureImages!.map((x) => x)),
     "price": price,
-    "quantity": quantity,
-    "rent_price": rentPrice,
-    "what_for_gear": whatForGear,
+    "quantity_available": quantityAvailable,
+    "daily_rental_price": dailyRentalPrice,
+    "rental_option": rentalOption,
     "categories": categories == null ? [] : List<dynamic>.from(categories!.map((x) => x)),
   };
 }
+

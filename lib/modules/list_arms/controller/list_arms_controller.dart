@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tixe_flutter_app/modules/list_arms/controller/state/list_arms_state.dart';
 import 'package:tixe_flutter_app/modules/list_arms/model/my_listed_arms_model.dart';
+import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 
 import '../repository/list_arms_interface.dart';
@@ -30,12 +31,13 @@ class ListArmsController extends StateNotifier<ListArmsState> {
           final arms = response?.data ?? [];
           state = state.copyWith(
             arms: arms.map((e) {
+              e.toJson().log();
               return MyListedArm(
-                title: e.name ?? "",
+                title: e.title ?? "",
                 description: e.description ?? "",
                 price: e.price ?? "",
                 renting: false,
-                image: e.image ?? "",
+                image: e.featureImage ?? "",
               );
             }).toList(),
           );
