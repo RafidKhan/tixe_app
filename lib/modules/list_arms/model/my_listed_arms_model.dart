@@ -7,7 +7,7 @@ class MyListedArm {
   String image;
 
   MyListedArm({
-    this.id,
+    required this.id,
     required this.title,
     required this.description,
     required this.renting,

@@ -31,7 +31,8 @@ class ListArms extends ConsumerWidget {
                 vertical: 16.h,
               ),
               onPressed: () {
-                Navigation.push(appRoutes: AppRoutes.listArmsForm).then((value){
+                Navigation.push(appRoutes: AppRoutes.listArmsForm)
+                    .then((value) {
                   controller.getArms();
                 });
               },
@@ -62,7 +63,12 @@ class ListArms extends ConsumerWidget {
       splashColor: KColor.transparent.color,
       focusColor: KColor.transparent.color,
       highlightColor: KColor.transparent.color,
-      onTap: () {},
+      onTap: () {
+        Navigation.push(
+          appRoutes: AppRoutes.myArmDetail,
+          arguments: arm.id,
+        );
+      },
       child: Container(
         padding: EdgeInsets.symmetric(
           vertical: 20.h,

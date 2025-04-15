@@ -33,6 +33,7 @@ class ListArmsController extends StateNotifier<ListArmsState> {
             arms: arms.map((e) {
               e.toJson().log();
               return MyListedArm(
+                id: e.id,
                 title: e.title ?? "",
                 description: e.description ?? "",
                 price: e.price ?? "",

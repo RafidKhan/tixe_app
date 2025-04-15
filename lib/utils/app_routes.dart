@@ -1,3 +1,4 @@
+import '../modules/my_arm_detail/views/my_arm_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/model/personal_detail_nav_model.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/views/personal_details_screen.dart';
@@ -55,6 +56,7 @@ import '../modules/workout_flow/my_workout_select_phase/views/my_workout_select_
 
 enum AppRoutes {
   splash,
+  myArmDetail,
   paymentSuccess,
   listingPayment,
   listArmsForm,
@@ -98,7 +100,10 @@ enum AppRoutes {
 extension AppRoutesExtention on AppRoutes {
   Widget buildWidget<T extends Object>({T? arguments}) {
     switch (this) {
-      case AppRoutes.paymentSuccess:
+ 
+      case AppRoutes.myArmDetail:
+        return  MyArmDetailScreen(id: arguments as int,);
+    case AppRoutes.paymentSuccess:
         return PaymentSuccessScreen(
           model: arguments as ListingPaymentNavModel,
         );
