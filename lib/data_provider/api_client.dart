@@ -89,7 +89,7 @@ class ApiClient {
   Future requestFormData({
     required String url,
     required Method method,
-    Map<String, dynamic>? params,
+    dynamic params,
     Options? options,
     void Function(int, int)? onReceiveProgress,
     String? savePath,

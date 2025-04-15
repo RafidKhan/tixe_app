@@ -36,7 +36,7 @@ class ListArmsController extends StateNotifier<ListArmsState> {
                 title: e.title ?? "",
                 description: e.description ?? "",
                 price: e.price ?? "",
-                renting: false,
+                renting: e.rentalOption == "1",
                 image: e.featureImage ?? "",
               );
             }).toList(),

@@ -35,7 +35,7 @@ class ListArmData {
   String? price;
   int? quantityAvailable;
   String? dailyRentalPrice;
-  dynamic rentalOption;
+  String? rentalOption;
   List<dynamic>? categories;
 
   ListArmData({
@@ -60,7 +60,7 @@ class ListArmData {
     price: json["price"],
     quantityAvailable: json["quantity_available"],
     dailyRentalPrice: json["daily_rental_price"],
-    rentalOption: json["rental_option"],
+    rentalOption: json["rental_option"]?.toString(),
     categories: json["categories"] == null ? [] : List<dynamic>.from(json["categories"]!.map((x) => x)),
   );
 
@@ -73,7 +73,7 @@ class ListArmData {
     "price": price,
     "quantity_available": quantityAvailable,
     "daily_rental_price": dailyRentalPrice,
-    "rental_option": rentalOption,
+    "rental_option": rentalOption?.toString(),
     "categories": categories == null ? [] : List<dynamic>.from(categories!.map((x) => x)),
   };
 }

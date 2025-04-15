@@ -24,6 +24,7 @@ class ArmsCategoryResponse {
 }
 
 class ArmCategory {
+  int? id;
   String? name;
   String? image;
   String? slug;
@@ -31,6 +32,7 @@ class ArmCategory {
   bool isSelected;
 
   ArmCategory({
+    this.id,
     this.name,
     this.image,
     this.slug,
@@ -39,6 +41,7 @@ class ArmCategory {
   });
 
   factory ArmCategory.fromJson(Map<String, dynamic> json) => ArmCategory(
+    id: json["id"],
     name: json["name"],
     image: json["image"],
     slug: json["slug"],
@@ -46,7 +49,8 @@ class ArmCategory {
   );
 
   Map<String, dynamic> toJson() => {
-    "name": name,
+    "id": name,
+    "name": id,
     "image": image,
     "slug": slug,
     "description": description,

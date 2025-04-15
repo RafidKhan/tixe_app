@@ -20,6 +20,7 @@ class ListArms extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(listArmsControllerProvider);
+    final controller = ref.read(listArmsControllerProvider.notifier);
     return Expanded(
       child: SingleChildScrollView(
         child: Column(
@@ -30,9 +31,9 @@ class ListArms extends ConsumerWidget {
                 vertical: 16.h,
               ),
               onPressed: () {
-                Navigation.push(
-                  appRoutes: AppRoutes.listArmsForm,
-                );
+                Navigation.push(appRoutes: AppRoutes.listArmsForm).then((value){
+                  controller.getArms();
+                });
               },
               buttonText: "List New Arms",
             ),

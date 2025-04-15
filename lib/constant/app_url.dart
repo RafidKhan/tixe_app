@@ -37,6 +37,7 @@ enum AppUrl {
   savePreference,
   myArms,
   armsCategories,
+  createArm,
 
 }
 
@@ -138,6 +139,8 @@ extension AppUrlExtention on AppUrl {
         return "gears";
       case AppUrl.armsCategories:
         return "categories";
+      case AppUrl.createArm:
+        return "gears/store";
     }
   }
 }
