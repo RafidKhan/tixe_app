@@ -38,6 +38,7 @@ enum AppUrl {
   myArms,
   armsCategories,
   createArm,
+  myListedArmDetail,
 
 }
 
@@ -141,6 +142,8 @@ extension AppUrlExtention on AppUrl {
         return "categories";
       case AppUrl.createArm:
         return "gears/store";
+      case AppUrl.myListedArmDetail:
+        return "gears/{ID}";
     }
   }
 }
