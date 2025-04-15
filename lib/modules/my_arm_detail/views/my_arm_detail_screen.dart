@@ -86,33 +86,36 @@ class _MyArmDetailScreenState extends State<MyArmDetailScreen> {
                             imageFor: ImageFor.network,
                           ),
                         ),
-                        SizedBox(
-                          height: 20.h,
-                        ),
-                        SizedBox(
-                          height: 100.h,
-                          child: ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: (detail.featureImages ?? []).length,
-                            itemBuilder: (context, index) {
-                              final image = (detail.featureImages ?? [])[index];
-                              return ClipRRect(
-                                borderRadius: BorderRadius.circular(4.r),
-                                child: GlobalImageLoader(
-                                  imagePath: image,
-                                  height: 100.h,
-                                  width: 100.w,
-                                  imageFor: ImageFor.network,
-                                ),
-                              );
-                            },
-                            separatorBuilder: (context, index) {
-                              return SizedBox(
-                                width: 10.w,
-                              );
-                            },
+                        if ((detail.featureImages ?? []).isNotEmpty) ...[
+                          SizedBox(
+                            height: 20.h,
                           ),
-                        ),
+                          SizedBox(
+                            height: 100.h,
+                            child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: (detail.featureImages ?? []).length,
+                              itemBuilder: (context, index) {
+                                final image =
+                                    (detail.featureImages ?? [])[index];
+                                return ClipRRect(
+                                  borderRadius: BorderRadius.circular(4.r),
+                                  child: GlobalImageLoader(
+                                    imagePath: image,
+                                    height: 100.h,
+                                    width: 100.w,
+                                    imageFor: ImageFor.network,
+                                  ),
+                                );
+                              },
+                              separatorBuilder: (context, index) {
+                                return SizedBox(
+                                  width: 10.w,
+                                );
+                              },
+                            ),
+                          ),
+                        ],
                         SizedBox(height: 10.h),
                         GlobalText(
                           str: detail.title ?? "",
@@ -190,7 +193,7 @@ class _MyArmDetailScreenState extends State<MyArmDetailScreen> {
         ],
       ),
       bottomNavigationBar: GlobalBottomButton(
-        onPressed: (){},
+        onPressed: () {},
         buttonText: "Edit",
       ),
     );
