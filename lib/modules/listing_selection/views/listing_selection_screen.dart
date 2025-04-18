@@ -34,7 +34,11 @@ class ListingSelectionScreen extends StatelessWidget {
                       KAssetName.listTrainingPng.imagePath,
                       "List Trainings",
                       "List your training sessions that you will held. Users can enrol in your trainings",
-                      onTap: () {},
+                      onTap: () {
+                        Navigation.push(
+                          appRoutes: AppRoutes.listTraining,
+                        );
+                      },
                     ),
                     SizedBox(
                       height: 20.h,

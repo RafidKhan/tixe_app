@@ -4,6 +4,7 @@ enum KAssetName {
   icCategoriesPng,
   warJpg,
   paymentCompletePng,
+  noTrainingPng,
   icHeartRatePng,
   dummyMapLocationPng,
   unSelectedCheckboxPng,
@@ -84,6 +85,8 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/war.jpg';
       case KAssetName.paymentCompletePng:
         return '$_imagesDir/payment_complete.png';
+      case KAssetName.noTrainingPng:
+        return '$_imagesDir/noTraining.png';
       case KAssetName.icHeartRatePng:
         return '$_imagesDir/icHeartRate.png';
       case KAssetName.dummyMapLocationPng:

@@ -1,3 +1,5 @@
+import '../modules/list_training_form/views/list_training_form_screen.dart';
+import '../modules/list_training/views/list_training_screen.dart';
 import '../modules/my_arm_detail/views/my_arm_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/model/personal_detail_nav_model.dart';
@@ -56,6 +58,8 @@ import '../modules/workout_flow/my_workout_select_phase/views/my_workout_select_
 
 enum AppRoutes {
   splash,
+  listTrainingForm,
+  listTraining,
   myArmDetail,
   paymentSuccess,
   listingPayment,
@@ -100,7 +104,13 @@ enum AppRoutes {
 extension AppRoutesExtention on AppRoutes {
   Widget buildWidget<T extends Object>({T? arguments}) {
     switch (this) {
- 
+
+
+      case AppRoutes.listTrainingForm:
+        return const ListTrainingFormScreen();
+     case AppRoutes.listTraining:
+        return const ListTrainingScreen();
+
       case AppRoutes.myArmDetail:
         return  MyArmDetailScreen(id: arguments as int,);
     case AppRoutes.paymentSuccess:
