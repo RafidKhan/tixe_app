@@ -7,7 +7,9 @@ import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
 import 'package:tixe_flutter_app/modules/my_arm_detail/model/my_arm_details_response.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
+import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
+import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 import '/global/widget/global_text.dart';
@@ -66,7 +68,7 @@ class _MyArmDetailScreenState extends State<MyArmDetailScreen> {
           ValueListenableBuilder(
             valueListenable: myArmDetailResponse,
             builder: (context, data, child) {
-              if (data?.data == null) {
+              if (myArmDetailResponse.value?.data == null) {
                 return const SizedBox.shrink();
               }
               final detail = myArmDetailResponse.value!.data!;
@@ -80,13 +82,13 @@ class _MyArmDetailScreenState extends State<MyArmDetailScreen> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(4.r),
                           child: GlobalImageLoader(
-                            imagePath: detail.featureImage ?? "",
+                            imagePath: detail.gear?.featureImage ?? "",
                             height: 200.h,
                             width: double.infinity,
                             imageFor: ImageFor.network,
                           ),
                         ),
-                        if ((detail.featureImages ?? []).isNotEmpty) ...[
+                        if ((detail.gear?.featureImages ?? []).isNotEmpty) ...[
                           SizedBox(
                             height: 20.h,
                           ),
@@ -94,10 +96,10 @@ class _MyArmDetailScreenState extends State<MyArmDetailScreen> {
                             height: 100.h,
                             child: ListView.separated(
                               scrollDirection: Axis.horizontal,
-                              itemCount: (detail.featureImages ?? []).length,
+                              itemCount: (detail.gear?.featureImages ?? []).length,
                               itemBuilder: (context, index) {
                                 final image =
-                                    (detail.featureImages ?? [])[index];
+                                    (detail.gear?.featureImages ?? [])[index];
                                 return ClipRRect(
                                   borderRadius: BorderRadius.circular(4.r),
                                   child: GlobalImageLoader(
@@ -118,13 +120,13 @@ class _MyArmDetailScreenState extends State<MyArmDetailScreen> {
                         ],
                         SizedBox(height: 10.h),
                         GlobalText(
-                          str: detail.title ?? "",
+                          str: detail.gear?.title ?? "",
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),
                         SizedBox(height: 10.h),
                         GlobalText(
-                          str: (detail.categories ?? [])
+                          str: (detail.gear?.categories ?? [])
                               .map((e) => e.name ?? '')
                               .join(", "),
                           fontSize: 12,
@@ -141,13 +143,13 @@ class _MyArmDetailScreenState extends State<MyArmDetailScreen> {
                             borderRadius: BorderRadius.circular(3.r),
                           ),
                           child: GlobalText(
-                            str: "Selling: \$${detail.price ?? "0"}",
+                            str: "Selling: \$${detail.gear?.price ?? "0"}",
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
                             color: KColor.black.color,
                           ),
                         ),
-                        if (detail.rentalOption == 1) ...[
+                        if (detail.gear?.rentalOption == 1) ...[
                           SizedBox(height: 10.h),
                           Container(
                             padding: EdgeInsets.symmetric(
@@ -160,13 +162,62 @@ class _MyArmDetailScreenState extends State<MyArmDetailScreen> {
                             ),
                             child: GlobalText(
                               str:
-                                  "Renting: \$${detail.dailyRentalPrice ?? 0}/Day",
+                              "Renting: \$${detail.gear?.dailyRentalPrice ?? 0}/Day",
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
                               color: KColor.black.color,
                             ),
                           ),
                         ],
+                        SizedBox(height: 10.h),
+                        InkWell(
+                          onTap: () async {
+                            // final result = await Navigation.push(
+                            //   appRoutes: AppRoutes.review,
+                            //   arguments: ReviewNavModel(
+                            //     id: state.trainingId,
+                            //     averageRating: state.reviewStatistics?.averageRating ?? 0,
+                            //     totalRatings: state.reviewStatistics?.totalReviews ?? 0,
+                            //     serviceType: ServiceType.Training,
+                            //     reviews: state.reviewList.map((e) {
+                            //       return ReviewModel(
+                            //         userId: e.user?.id,
+                            //         userImage:
+                            //         e.user?.profileDetails?.profilePhoto ?? '',
+                            //         userName: e.user?.name ?? '',
+                            //         comment: e.comment ?? '',
+                            //         rating: e.rating ?? 0,
+                            //         reviewId: e.id,
+                            //       );
+                            //     }).toList(),
+                            //   ),
+                            // );
+                            // if (result == true) {
+                            //   controller.loadTrainingDetails();
+                            // }
+                          },
+                          child: Row(
+                            children: [
+                              GlobalImageLoader(
+                                imagePath: KAssetName.starPng.imagePath,
+                                height: 11.h,
+                                width: 11.w,
+                              ),
+                              SizedBox(
+                                width: 4.w,
+                              ),
+                              Flexible(
+                                child: GlobalText(
+                                  str:
+                                  "${detail.reviewStatistics?.averageRating ?? 0} (${detail.reviewStatistics?.totalReviews ?? 0} ${context.loc.reviews})",
+                                  color: KColor.white.color,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                         SizedBox(height: 10.h),
                         Divider(
                           color: KColor.grey.color.withOpacity(0.2),
@@ -179,7 +230,7 @@ class _MyArmDetailScreenState extends State<MyArmDetailScreen> {
                         ),
                         SizedBox(height: 10.h),
                         GlobalText(
-                          str: detail.description ?? "",
+                          str: detail.gear?.description ?? "",
                           fontSize: 12,
                           fontWeight: FontWeight.w300,
                         ),
