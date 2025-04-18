@@ -7,11 +7,13 @@ import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 class GlobalHeaderWidget extends StatelessWidget {
   final String title;
   final bool showBackButton;
+  final Widget? action;
 
   const GlobalHeaderWidget({
     super.key,
     required this.title,
-    this.showBackButton=true,
+    this.showBackButton = true,
+    this.action,
   });
 
   @override
@@ -21,7 +23,7 @@ class GlobalHeaderWidget extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if(showBackButton)...[
+          if (showBackButton) ...[
             Padding(
               padding: EdgeInsets.only(top: 4.h),
               child: InkWell(
@@ -36,8 +38,7 @@ class GlobalHeaderWidget extends StatelessWidget {
               width: 8.w,
             ),
           ],
-
-          Flexible(
+          Expanded(
             child: GlobalText(
               str: title,
               fontSize: 20,
@@ -47,6 +48,7 @@ class GlobalHeaderWidget extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
           ),
+          if (action != null) action!
         ],
       ),
     );

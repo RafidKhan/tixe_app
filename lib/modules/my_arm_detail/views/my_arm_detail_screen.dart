@@ -12,6 +12,7 @@ import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
+import '../../../global/widget/action_consent_confirm_dialog.dart';
 import '/global/widget/global_text.dart';
 import 'package:flutter/material.dart';
 
@@ -56,14 +57,64 @@ class _MyArmDetailScreenState extends State<MyArmDetailScreen> {
     });
   }
 
+  Future<void> deleteArm() async {
+    final result = await showDialog(
+      context: context,
+      builder: (context) {
+        return const ActionConsentConfirmDialog(
+          message:
+              "This item and all it’s related data and usage in all places will be deleted",
+        );
+      },
+    );
+    if (result == true) {
+      final url = "gears/delete/${widget.id}";
+      ViewUtil.showLoaderPage();
+      await ApiClient().request(
+          url: url,
+          method: Method.GET,
+          callback: (response, success) {
+            ViewUtil.hideLoader();
+            if (success) {
+              Navigation.pop();
+              ViewUtil.snackBar("Gear has been deleted");
+            }
+          });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return TixeMainScaffold(
       hasAppBar: true,
       body: Column(
         children: [
-          const GlobalHeaderWidget(
+          GlobalHeaderWidget(
             title: "Details",
+            action: PopupMenuButton<String>(
+              padding: EdgeInsets.only(bottom: 10.h),
+              icon: Icon(
+                Icons.more_horiz,
+                color: KColor.white.color,
+              ),
+              // horizontal 3 dot icon
+              onSelected: (String value) async {
+                if (value == '0') {
+                  await deleteArm();
+                }
+              },
+              itemBuilder: (BuildContext context) {
+                return [
+                  PopupMenuItem<String>(
+                    value: '0',
+                    child: GlobalText(
+                      str: "Delete",
+                      color: KColor.black.color,
+                    ),
+                  ),
+                ];
+              },
+            ),
           ),
           ValueListenableBuilder(
             valueListenable: myArmDetailResponse,
@@ -96,7 +147,8 @@ class _MyArmDetailScreenState extends State<MyArmDetailScreen> {
                             height: 100.h,
                             child: ListView.separated(
                               scrollDirection: Axis.horizontal,
-                              itemCount: (detail.gear?.featureImages ?? []).length,
+                              itemCount:
+                                  (detail.gear?.featureImages ?? []).length,
                               itemBuilder: (context, index) {
                                 final image =
                                     (detail.gear?.featureImages ?? [])[index];
@@ -162,7 +214,7 @@ class _MyArmDetailScreenState extends State<MyArmDetailScreen> {
                             ),
                             child: GlobalText(
                               str:
-                              "Renting: \$${detail.gear?.dailyRentalPrice ?? 0}/Day",
+                                  "Renting: \$${detail.gear?.dailyRentalPrice ?? 0}/Day",
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
                               color: KColor.black.color,
@@ -209,7 +261,7 @@ class _MyArmDetailScreenState extends State<MyArmDetailScreen> {
                               Flexible(
                                 child: GlobalText(
                                   str:
-                                  "${detail.reviewStatistics?.averageRating ?? 0} (${detail.reviewStatistics?.totalReviews ?? 0} ${context.loc.reviews})",
+                                      "${detail.reviewStatistics?.averageRating ?? 0} (${detail.reviewStatistics?.totalReviews ?? 0} ${context.loc.reviews})",
                                   color: KColor.white.color,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w500,

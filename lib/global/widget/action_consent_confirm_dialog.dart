@@ -6,7 +6,13 @@ import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
 class ActionConsentConfirmDialog extends StatelessWidget {
-  const ActionConsentConfirmDialog({super.key});
+  final String message;
+
+  const ActionConsentConfirmDialog({
+    super.key,
+    this.message =
+        "Your information will be updated. Confirm to apply the changes.",
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +43,7 @@ class ActionConsentConfirmDialog extends StatelessWidget {
         ],
       ),
       content: GlobalText(
-        str: "Your information will be updated. Confirm to apply the changes.",
+        str: message,
         fontSize: 14,
         fontWeight: FontWeight.w400,
         color: KColor.black.color,

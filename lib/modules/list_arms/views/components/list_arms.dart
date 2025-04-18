@@ -59,6 +59,7 @@ class ListArms extends ConsumerWidget {
 
   Widget armItem(MyListedArm arm) {
     final context = Navigation.key.currentContext!;
+    final controller = context.read(listArmsControllerProvider.notifier);
     return InkWell(
       splashColor: KColor.transparent.color,
       focusColor: KColor.transparent.color,
@@ -67,7 +68,9 @@ class ListArms extends ConsumerWidget {
         Navigation.push(
           appRoutes: AppRoutes.myArmDetail,
           arguments: arm.id,
-        );
+        ).then((value) {
+          controller.getArms();
+        });
       },
       child: Container(
         padding: EdgeInsets.symmetric(
