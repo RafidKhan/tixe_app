@@ -1,9 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tixe_flutter_app/data_provider/api_client.dart';
+import 'package:tixe_flutter_app/global/widget/custom_location_picker.dart';
 import 'package:tixe_flutter_app/global/widget/global_textformfield.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
 import 'package:tixe_flutter_app/utils/custom_file_picker.dart';
+import 'package:tixe_flutter_app/utils/extension.dart';
+import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 
 import '../../../global/widget/global_bottom_button.dart';
@@ -182,15 +186,27 @@ class _ListTrainingFormScreenState extends State<ListTrainingFormScreen> {
                     SizedBox(height: 10.h),
                     GlobalTextFormfield(
                       textEditingController: location,
-                      readOnly: true,
-                      focusNode: AlwaysDisabledFocusNode(),
                       suffixIcon: Row(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              // ViewUtil.bottomSheet(
+                              //   content: CustomLocationPicker(
+                              //     onPicked: (value) async {
+                              //       'value is: ${value.addressName}'.log();
+                              //       //Navigation.pop();
+                              //       //setLocation(value.address);
+                              //       // Future.delayed(
+                              //       //     const Duration(milliseconds: 100), () {
+                              //       //   FocusScope.of(context).unfocus();
+                              //       // });
+                              //     },
+                              //   ),
+                              // );
+                            },
                             child: Container(
                               margin: EdgeInsets.symmetric(horizontal: 10.w),
                               padding: EdgeInsets.symmetric(
@@ -326,4 +342,17 @@ class _ListTrainingFormScreenState extends State<ListTrainingFormScreen> {
         enrollmentFees.text.trim().isNotEmpty;
     setState(() {});
   }
+
+  setLocation(String address) {
+    location.text = address;
+  }
+
+  // Future<void> createTraining() async {
+  //   ViewUtil.showLoaderPage();
+  //   await ApiClient().request(
+  //     url: url,
+  //     method: method,
+  //     callback: callback,
+  //   );
+  // }
 }
