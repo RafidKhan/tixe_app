@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tixe_flutter_app/constant/app_url.dart';
 import 'package:tixe_flutter_app/data_provider/pref_helper.dart';
 import 'package:tixe_flutter_app/modules/dashboard/views/dashboard_screen.dart';
+import 'package:tixe_flutter_app/modules/list_training_schedules/views/list_training_schedules_screen.dart';
 import 'package:tixe_flutter_app/modules/splash/views/splash_screen.dart';
 import 'package:tixe_flutter_app/utils/app_version.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
@@ -112,7 +113,8 @@ class _MyAppState extends State<MyApp> {
           home: child,
         );
       },
-      child: isLoggedIn ? const DashboardScreen() : const SplashScreen(),
+      child: const ListTrainingSchedulesScreen(),
+     // child: isLoggedIn ? const DashboardScreen() : const SplashScreen(),
     );
   }
 }
