@@ -160,7 +160,10 @@ class ListArmsFormController extends StateNotifier<ListArmFormState> {
       'description': descriptionController.text,
       'price': sellingPriceController.text,
       'daily_rental_price': dailyRentalPriceController.text,
-      'category_ids': state.selectedCategories.map((e) => e.id.toString()).toList().toString(),
+      'category_ids': state.selectedCategories
+          .map((e) => e.id.toString())
+          .toList()
+          .toString(),
       'rental_option': state.isRentalEnabled ? 1 : 0,
       'quantity_available': quantityAvailableController.text,
       // Files will be added separately
@@ -208,4 +211,9 @@ class ListArmsFormController extends StateNotifier<ListArmFormState> {
       },
     );
   }
+
+  // Future<void> getTrainings() async {
+  //   ViewUtil.showLoaderPage();
+  //   await
+  // }
 }

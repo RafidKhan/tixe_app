@@ -1,10 +1,13 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/data_provider/api_client.dart';
 import 'package:tixe_flutter_app/global/widget/custom_location_picker.dart';
+import 'package:tixe_flutter_app/global/widget/global_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_textformfield.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
+import 'package:tixe_flutter_app/modules/list_training_form/model/training_pre_requisitions_response.dart';
 import 'package:tixe_flutter_app/utils/custom_file_picker.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
@@ -31,6 +34,7 @@ class ListTrainingFormScreen extends StatefulWidget {
 class _ListTrainingFormScreenState extends State<ListTrainingFormScreen> {
   File? featuredImage;
   List<File> images = [];
+  List<int> selectedPreRequisitionIds = [];
   final TextEditingController title = TextEditingController();
   final TextEditingController location = TextEditingController();
   final TextEditingController description = TextEditingController();
@@ -40,11 +44,14 @@ class _ListTrainingFormScreenState extends State<ListTrainingFormScreen> {
 
   bool isButtonEnabled = false;
 
+  List<PreRequisition> preRequisitions = [];
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     Future(() {
+      getPrerequisites();
       title.addListener(checkButtonStatus);
       location.addListener(checkButtonStatus);
       description.addListener(checkButtonStatus);
@@ -243,6 +250,27 @@ class _ListTrainingFormScreenState extends State<ListTrainingFormScreen> {
                     GlobalTextFormfield(
                       textEditingController: preRequisite,
                       maxLines: 6,
+                      readOnly: true,
+                      suffixIcon: InkWell(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => ListPrerequieites(
+                              preRequisitions: preRequisitions,
+                              onSelect: (items) {
+                                preRequisite.text = items
+                                    .map((e) => e.title)
+                                    .toList()
+                                    .join(",\n\n");
+                                selectedPreRequisitionIds =
+                                    items.map((e) => e.id ?? 0).toList();
+                                setState(() {});
+                              },
+                            ),
+                          );
+                        },
+                        child: const Icon(Icons.keyboard_arrow_down),
+                      ),
                     ),
                     SizedBox(height: 10.h),
                     _title("Max Enrollment"),
@@ -265,6 +293,7 @@ class _ListTrainingFormScreenState extends State<ListTrainingFormScreen> {
       bottomNavigationBar: GlobalBottomButton(
         onPressed: isButtonEnabled
             ? () {
+                createTraining();
                 //controller.saveArmsForm();
               }
             : null,
@@ -347,12 +376,189 @@ class _ListTrainingFormScreenState extends State<ListTrainingFormScreen> {
     location.text = address;
   }
 
-  // Future<void> createTraining() async {
-  //   ViewUtil.showLoaderPage();
-  //   await ApiClient().request(
-  //     url: url,
-  //     method: method,
-  //     callback: callback,
-  //   );
-  // }
+  Future<void> createTraining() async {
+    ViewUtil.showLoaderPage();
+    final map = {
+      "title": title.text,
+      "description": description.text,
+      "lat": "-6.792354",
+      "lon": "107.679721",
+      "max_enrollment": maxEnrollment.text,
+      "enrollment_fee": enrollmentFees.text,
+      "pre_requisitions": selectedPreRequisitionIds,
+      // Files will be added separately
+    };
+    'here is: $map'.log();
+
+    final formData = FormData.fromMap(map);
+
+    // Add feature image
+    formData.files.add(MapEntry(
+      'image',
+      await MultipartFile.fromFile(
+        featuredImage!.path, // Replace with actual file path
+        filename: featuredImage!.path.split("/").last,
+      ),
+    ));
+
+    final imagePaths = images.map((e) => e.path).toList();
+
+    for (var path in imagePaths) {
+      formData.files.add(MapEntry(
+        'gallery_images', // Note: same key for multiple files
+        await MultipartFile.fromFile(
+          path,
+          filename: path.split('/').last,
+        ),
+      ));
+    }
+
+    // formData.files.forEach((element) {
+    //   'key: ${element.key}, value: ${element.value}'.log();
+    // });
+
+    await await ApiClient().request(
+      url: "training-services/store",
+      method: Method.POST,
+      params: formData,
+      callback: (response, success) {
+        ViewUtil.hideLoader();
+        //Navigation.pop();
+        if (success && response != null) {
+          ViewUtil.snackBar("Training created successfully");
+        }
+      },
+    );
+  }
+
+  Future<void> getPrerequisites() async {
+    ViewUtil.showLoaderPage();
+    await ApiClient().request(
+      url: "pre-requisitions/list",
+      method: Method.GET,
+      callback: (response, success) {
+        Navigation.pop();
+        if (success) {
+          final converted =
+              TrainingPreRequisitionsResponse.fromJson(response?.data);
+          preRequisitions = converted.data ?? [];
+          setState(() {});
+        }
+      },
+    );
+  }
+}
+
+class ListPrerequieites extends StatefulWidget {
+  final List<PreRequisition> preRequisitions;
+  final Function(List<PreRequisition> items) onSelect;
+
+  const ListPrerequieites({
+    super.key,
+    required this.preRequisitions,
+    required this.onSelect,
+  });
+
+  @override
+  State<ListPrerequieites> createState() => _ListPrerequieitesState();
+}
+
+class _ListPrerequieitesState extends State<ListPrerequieites> {
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: 20.w,
+          vertical: 16.h,
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: GlobalText(
+                      str: "Training Pre-requisitions",
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: KColor.black.color,
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () => Navigation.pop(),
+                    child: Icon(
+                      Icons.close,
+                      color: KColor.black.color,
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(height: 20.h),
+              ListView.separated(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: widget.preRequisitions.length,
+                separatorBuilder: (context, index) => SizedBox(
+                  height: 10.h,
+                ),
+                itemBuilder: (context, index) {
+                  final item = widget.preRequisitions[index];
+                  return InkWell(
+                    onTap: () {
+                      item.isSelected = !item.isSelected;
+                      setState(() {});
+                    },
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                            left: item.isSelected ? 0 : 5.w,
+                            bottom: item.isSelected ? 0 : 10.h,
+                            right: item.isSelected ? 2.w : 6.w,
+                          ),
+                          child: GlobalImageLoader(
+                            imagePath: item.isSelected
+                                ? KAssetName.selectedCheckBoxPng.imagePath
+                                : KAssetName.unSelectedCheckboxPng.imagePath,
+                            height: item.isSelected ? 30.h : 20.h,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.only(bottom: 9.h),
+                            child: GlobalText(
+                              str: item.title ?? "",
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: KColor.black.color,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+              SizedBox(height: 20.h),
+              GlobalButton(
+                onPressed: () {
+                  final allSelected = widget.preRequisitions
+                      .where((element) => element.isSelected)
+                      .toList();
+                  widget.onSelect(allSelected);
+                  Navigation.pop();
+                },
+                buttonText: "Confirm",
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
