@@ -1,3 +1,4 @@
+import '../modules/create_training_schedule/views/create_training_schedule_screen.dart';
 import '../modules/list_training_schedules/views/list_training_schedules_screen.dart';
 import '../modules/list_training_form/views/list_training_form_screen.dart';
 import '../modules/list_training/views/list_training_screen.dart';
@@ -59,6 +60,7 @@ import '../modules/workout_flow/my_workout_select_phase/views/my_workout_select_
 
 enum AppRoutes {
   splash,
+  createTrainingSchedule,
   listTrainingSchedules,
   listTrainingForm,
   listTraining,
@@ -108,6 +110,8 @@ extension AppRoutesExtention on AppRoutes {
     switch (this) {
 
 
+      case AppRoutes.createTrainingSchedule:
+        return const CreateTrainingScheduleScreen();
       case AppRoutes.listTrainingSchedules:
         return const ListTrainingSchedulesScreen();
       case AppRoutes.listTrainingForm:

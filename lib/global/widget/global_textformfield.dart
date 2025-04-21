@@ -7,6 +7,7 @@ import '../../utils/styles/k_colors.dart';
 class GlobalTextFormfield extends StatelessWidget {
   final TextEditingController? textEditingController;
   final Function(String value)? onChanged;
+  final Function()? onTap;
   final FormFieldValidator<String?>? validator;
   final bool readOnly;
   final FocusNode? focusNode;
@@ -21,6 +22,7 @@ class GlobalTextFormfield extends StatelessWidget {
     this.textEditingController,
     this.maxLines,
     this.onChanged,
+    this.onTap,
     this.validator,
     this.readOnly = false,
     this.focusNode,
@@ -38,6 +40,7 @@ class GlobalTextFormfield extends StatelessWidget {
       color: KColor.black.color,
     );
     return TextFormField(
+      onTap: onTap,
       maxLines: maxLines,
       controller: textEditingController,
       onChanged: onChanged,
