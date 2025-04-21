@@ -25,8 +25,8 @@ class DurationBasedScheduleRequest {
 }
 
 class DurationBased {
-  DateTime? startDate;
-  DateTime? endDate;
+  String? startDate;
+  String? endDate;
   List<Day>? days;
 
   DurationBased({
@@ -36,21 +36,16 @@ class DurationBased {
   });
 
   factory DurationBased.fromJson(Map<String, dynamic> json) => DurationBased(
-        startDate: json["start_date"] == null
-            ? null
-            : DateTime.parse(json["start_date"]),
-        endDate:
-            json["end_date"] == null ? null : DateTime.parse(json["end_date"]),
+        startDate: json["start_date"],
+        endDate: json["end_date"],
         days: json["days"] == null
             ? []
             : List<Day>.from(json["days"]!.map((x) => Day.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "start_date":
-            "${startDate!.year.toString().padLeft(4, '0')}-${startDate!.month.toString().padLeft(2, '0')}-${startDate!.day.toString().padLeft(2, '0')}",
-        "end_date":
-            "${endDate!.year.toString().padLeft(4, '0')}-${endDate!.month.toString().padLeft(2, '0')}-${endDate!.day.toString().padLeft(2, '0')}",
+        "start_date": startDate,
+        "end_date":endDate,
         "days": days == null
             ? []
             : List<dynamic>.from(days!.map((x) => x.toJson())),

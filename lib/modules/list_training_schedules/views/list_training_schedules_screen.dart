@@ -5,12 +5,16 @@ import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
-import '/global/widget/global_appbar.dart';
 import '/global/widget/global_text.dart';
 import 'package:flutter/material.dart';
 
 class ListTrainingSchedulesScreen extends StatelessWidget {
-  const ListTrainingSchedulesScreen({Key? key}) : super(key: key);
+  final int trainingId;
+
+  const ListTrainingSchedulesScreen({
+    super.key,
+    required this.trainingId,
+  });
 
   @override
   Widget build(BuildContext context) {

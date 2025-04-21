@@ -108,20 +108,24 @@ enum AppRoutes {
 extension AppRoutesExtention on AppRoutes {
   Widget buildWidget<T extends Object>({T? arguments}) {
     switch (this) {
-
-
       case AppRoutes.createTrainingSchedule:
-        return const CreateTrainingScheduleScreen();
+        return CreateTrainingScheduleScreen(
+          trainingId: arguments as int,
+        );
       case AppRoutes.listTrainingSchedules:
-        return const ListTrainingSchedulesScreen();
+        return ListTrainingSchedulesScreen(
+          trainingId: arguments as int,
+        );
       case AppRoutes.listTrainingForm:
         return const ListTrainingFormScreen();
-     case AppRoutes.listTraining:
+      case AppRoutes.listTraining:
         return const ListTrainingScreen();
 
       case AppRoutes.myArmDetail:
-        return  MyArmDetailScreen(id: arguments as int,);
-    case AppRoutes.paymentSuccess:
+        return MyArmDetailScreen(
+          id: arguments as int,
+        );
+      case AppRoutes.paymentSuccess:
         return PaymentSuccessScreen(
           model: arguments as ListingPaymentNavModel,
         );
