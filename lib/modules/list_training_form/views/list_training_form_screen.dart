@@ -8,6 +8,7 @@ import 'package:tixe_flutter_app/global/widget/global_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_textformfield.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
 import 'package:tixe_flutter_app/modules/list_training_form/model/training_pre_requisitions_response.dart';
+import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/custom_file_picker.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
@@ -20,6 +21,7 @@ import '../../../global/widget/global_image_loader.dart';
 import '../../../utils/enum.dart';
 import '../../../utils/styles/k_colors.dart';
 import '../../../utils/view_util.dart';
+import '../model/create_training_response.dart';
 import '/global/widget/global_appbar.dart';
 import '/global/widget/global_text.dart';
 import 'package:flutter/material.dart';
@@ -403,15 +405,15 @@ class _ListTrainingFormScreenState extends State<ListTrainingFormScreen> {
 
     final imagePaths = images.map((e) => e.path).toList();
 
-    for (var path in imagePaths) {
-      formData.files.add(MapEntry(
-        'gallery_images', // Note: same key for multiple files
-        await MultipartFile.fromFile(
-          path,
-          filename: path.split('/').last,
-        ),
-      ));
-    }
+    // for (var path in imagePaths) {
+    //   formData.files.add(MapEntry(
+    //     'gallery_images', // Note: same key for multiple files
+    //     await MultipartFile.fromFile(
+    //       path,
+    //       filename: path.split('/').last,
+    //     ),
+    //   ));
+    // }
 
     // formData.files.forEach((element) {
     //   'key: ${element.key}, value: ${element.value}'.log();
@@ -425,7 +427,13 @@ class _ListTrainingFormScreenState extends State<ListTrainingFormScreen> {
         ViewUtil.hideLoader();
         //Navigation.pop();
         if (success && response != null) {
+          final converted =
+              CreateTrainingResponse.fromJson(response.data);
           ViewUtil.snackBar("Training created successfully");
+          Navigation.push(
+            appRoutes: AppRoutes.listTrainingSchedules,
+            arguments: converted.data?.id,
+          );
         }
       },
     );

@@ -129,6 +129,7 @@ class _CreateTrainingScheduleScreenState
     await ApiClient().request(
       url: "training-services/${widget.trainingId}/adding-schedule",
       method: Method.POST,
+      params: data.toJson(),
       callback: (response, success) {
         ViewUtil.hideLoader();
         if (success) {

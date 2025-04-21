@@ -37,6 +37,7 @@ class ListTrainingSchedulesScreen extends StatelessWidget {
                       onTap: () {
                         Navigation.push(
                           appRoutes: AppRoutes.createTrainingSchedule,
+                          arguments: trainingId,
                         );
                       },
                       child: Container(
