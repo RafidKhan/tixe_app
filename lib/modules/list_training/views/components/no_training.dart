@@ -8,7 +8,12 @@ import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 
 class NoTraining extends StatelessWidget {
-  const NoTraining({super.key});
+  final Function() onBack;
+
+  const NoTraining({
+    super.key,
+    required this.onBack,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +41,9 @@ class NoTraining extends StatelessWidget {
           SizedBox(height: 20.h),
           GlobalButton(
             onPressed: () {
-              Navigation.push(appRoutes: AppRoutes.listTrainingForm).then((value){
+              Navigation.push(appRoutes: AppRoutes.listTrainingForm)
+                  .then((value) {
+                onBack();
                 //controller.getArms();
               });
             },
