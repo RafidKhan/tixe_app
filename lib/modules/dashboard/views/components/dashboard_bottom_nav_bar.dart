@@ -81,7 +81,7 @@ class DashboardBottomNavBar extends StatelessWidget {
       final isSelected = state.selectedIndex == index;
       return Expanded(
         child: InkWell(
-          onTap: () => controller.setSelectedIndex(index),
+          onTap: () => controller.setSelectedIndex(index,context),
           child: Container(
             padding: EdgeInsets.symmetric(
               horizontal: 10.w,

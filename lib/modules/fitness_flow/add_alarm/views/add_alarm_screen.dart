@@ -131,9 +131,9 @@ class _AddAlarmScreenState extends State<AddAlarmScreen> {
                     child: GlobalButton(
                       onPressed: () {
                         if (state.model?.alarmData == null) {
-                          controller.addAlarm();
+                          controller.addAlarm(context);
                         } else {
-                          controller.updateAlarm();
+                          controller.updateAlarm(context);
                         }
                       },
                       buttonText: state.model?.alarmData == null
@@ -153,9 +153,9 @@ class _AddAlarmScreenState extends State<AddAlarmScreen> {
                         onPressed: () {
                           if (state.model?.alarmData?.alarmType ==
                               AlarmType.CUSTOM) {
-                            controller.deleteAlarm();
+                            controller.deleteAlarm(context);
                           } else {
-                            controller.disableAlarm();
+                            controller.disableAlarm(context);
                           }
                         },
                         buttonText: state.model?.alarmData?.alarmType ==

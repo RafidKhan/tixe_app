@@ -77,7 +77,7 @@ class _MyArmDetailScreenState extends State<MyArmDetailScreen> {
             ViewUtil.hideLoader();
             if (success) {
               Navigation.pop();
-              ViewUtil.snackBar("Gear has been deleted");
+              ViewUtil.snackBar("Gear has been deleted", context);
             }
           });
     }

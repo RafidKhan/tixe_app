@@ -26,7 +26,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     final controller = context.read(dashboardController.notifier);
     final sharedCon = context.read(sharedController.notifier);
     Future(() {
-      controller.setSelectedIndex(0);
+      controller.setSelectedIndex(0, context);
       sharedCon.getProfileData();
     });
   }

@@ -88,7 +88,7 @@ class VerifyEmailController extends StateNotifier<VerifyEmailState> {
     );
   }
 
-  Future<void> resendRegistrationVerificationCode() async {
+  Future<void> resendRegistrationVerificationCode(BuildContext context) async {
     startTimer();
     ViewUtil.showLoaderPage();
     await _verifyEmailRepository.resendRegistrationVerificationCode(
@@ -98,7 +98,7 @@ class VerifyEmailController extends StateNotifier<VerifyEmailState> {
         if (isSuccess) {
           final message = response?.message;
           if (message != null) {
-            ViewUtil.snackBar(message);
+            ViewUtil.snackBar(message,context);
           }
         }
       },

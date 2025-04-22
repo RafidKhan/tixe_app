@@ -125,7 +125,6 @@ class _CreateTrainingScheduleScreenState
             .toList(),
       )
     ]);
-    print(data.toJson());
     ViewUtil.showLoaderPage();
     await ApiClient().request(
       url: "training-services/${widget.trainingId}/adding-schedule",
@@ -142,7 +141,6 @@ class _CreateTrainingScheduleScreenState
             ),
           ];
           Navigation.pop(result: result);
-          ViewUtil.snackBar("Schedule Created Successfully");
         }
       },
     );

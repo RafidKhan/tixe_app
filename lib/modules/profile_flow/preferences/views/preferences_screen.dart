@@ -74,7 +74,7 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
         return GlobalBottomButton(
           onPressed: state.isButtonEnabled
               ? () {
-                  controller.savePreference();
+                  controller.savePreference(context);
                 }
               : null,
           buttonText: "Save Changes",

@@ -55,7 +55,7 @@ class _ConfirmTrainingEnrollScreenState
               vertical: 20.h,
             ),
             onPressed: () {
-              controller.setTimeSchedule();
+              controller.setTimeSchedule(context);
             },
             buttonText: context.loc.confirm_and_pay,
           ),

@@ -26,7 +26,7 @@ class VerifyEmailResendOtp extends ConsumerWidget {
         InkWell(
           onTap: state.showResendOtpButton
               ? () {
-                  controller.resendRegistrationVerificationCode();
+                  controller.resendRegistrationVerificationCode(context);
                 }
               : null,
           child: GlobalText(

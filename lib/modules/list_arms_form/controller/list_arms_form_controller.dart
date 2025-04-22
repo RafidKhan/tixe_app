@@ -95,9 +95,12 @@ class ListArmsFormController extends StateNotifier<ListArmFormState> {
     checkButtonStatus();
   }
 
-  void addImage() async {
+  void addImage(BuildContext context) async {
     if (state.images.length >= 5) {
-      ViewUtil.snackBar("You can add maximum 5 images");
+      ViewUtil.snackBar(
+        "You can add maximum 5 images",
+        context,
+      );
       return;
     }
     final file = await pickImage();
@@ -153,7 +156,7 @@ class ListArmsFormController extends StateNotifier<ListArmFormState> {
         state.selectedCategories.map((e) => e.name).join(", ");
   }
 
-  Future<void> saveArmsForm() async {
+  Future<void> saveArmsForm(BuildContext context) async {
     ViewUtil.showLoaderPage();
     final map = {
       'title': titleController.text,
@@ -205,15 +208,18 @@ class ListArmsFormController extends StateNotifier<ListArmFormState> {
           final CreateArmResponse createArmResponse =
               CreateArmResponse.fromJson(response.data);
           if (createArmResponse.message != null) {
-            ViewUtil.snackBar(createArmResponse.message ?? '');
+            ViewUtil.snackBar(
+              createArmResponse.message ?? '',
+              context,
+            );
           }
         }
       },
     );
   }
 
-  // Future<void> getTrainings() async {
-  //   ViewUtil.showLoaderPage();
-  //   await
-  // }
+// Future<void> getTrainings() async {
+//   ViewUtil.showLoaderPage();
+//   await
+// }
 }

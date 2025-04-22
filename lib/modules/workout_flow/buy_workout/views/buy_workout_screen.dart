@@ -52,7 +52,7 @@ class _BuyWorkoutScreenState extends State<BuyWorkoutScreen> {
               vertical: 20.h,
             ),
             onPressed: () {
-              controller.enrollmentPaidWorkout();
+              controller.enrollmentPaidWorkout(context);
             },
             buttonText: context.loc.confirm_and_pay,
           ),

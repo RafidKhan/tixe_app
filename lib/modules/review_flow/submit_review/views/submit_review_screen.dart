@@ -106,9 +106,9 @@ class _SubmitReviewScreenState extends State<SubmitReviewScreen> {
           onPressed: state.isButtonEnabled
               ? () {
                   if (state.model?.isUpdate == true) {
-                    controller.updateReview();
+                    controller.updateReview(context);
                   } else {
-                    controller.submitReview();
+                    controller.submitReview(context);
                   }
                 }
               : null,

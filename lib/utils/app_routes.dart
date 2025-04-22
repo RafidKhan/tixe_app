@@ -1,3 +1,5 @@
+import '../modules/training_gear_select/views/training_gear_select_screen.dart';
+import '../modules/training_selected_gears_list/views/training_selected_gears_list_screen.dart';
 import '../modules/create_training_schedule/views/create_training_schedule_screen.dart';
 import '../modules/list_training_schedules/views/list_training_schedules_screen.dart';
 import '../modules/list_training_form/views/list_training_form_screen.dart';
@@ -60,6 +62,8 @@ import '../modules/workout_flow/my_workout_select_phase/views/my_workout_select_
 
 enum AppRoutes {
   splash,
+  trainingGearSelect,
+  trainingSelectedGearsList,
   createTrainingSchedule,
   listTrainingSchedules,
   listTrainingForm,
@@ -108,14 +112,15 @@ enum AppRoutes {
 extension AppRoutesExtention on AppRoutes {
   Widget buildWidget<T extends Object>({T? arguments}) {
     switch (this) {
+      case AppRoutes.trainingGearSelect:
+        return TrainingGearSelectScreen(trainingId: arguments as int);
+
+      case AppRoutes.trainingSelectedGearsList:
+        return TrainingSelectedGearsListScreen(trainingId: arguments as int);
       case AppRoutes.createTrainingSchedule:
-        return CreateTrainingScheduleScreen(
-          trainingId: arguments as int,
-        );
+        return CreateTrainingScheduleScreen(trainingId: arguments as int);
       case AppRoutes.listTrainingSchedules:
-        return ListTrainingSchedulesScreen(
-          trainingId: arguments as int,
-        );
+        return ListTrainingSchedulesScreen(trainingId: arguments as int);
       case AppRoutes.listTrainingForm:
         return const ListTrainingFormScreen();
       case AppRoutes.listTraining:

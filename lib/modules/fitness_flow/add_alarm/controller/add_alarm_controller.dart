@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:tixe_flutter_app/global/global_module/shared/shared_controller.dart';
@@ -40,7 +41,7 @@ class AddAlarmController extends StateNotifier<AddAlarmState> {
     }
   }
 
-  Future<void> addAlarm() async {
+  Future<void> addAlarm(BuildContext context) async {
     ViewUtil.showLoaderPage();
     await _addalarmRepository.addAlarm(
       alarmTime: DateFormat("HH:mm:ss").format(state.dateTime),
@@ -53,7 +54,10 @@ class AddAlarmController extends StateNotifier<AddAlarmState> {
             ViewUtil.hideLoader();
             Navigation.pop();
             if ((response?.message ?? "").trim().isNotEmpty) {
-              ViewUtil.snackBar(response?.message ?? "");
+              ViewUtil.snackBar(
+                response?.message ?? "",
+                context,
+              );
             }
           });
         } else {
@@ -63,7 +67,7 @@ class AddAlarmController extends StateNotifier<AddAlarmState> {
     );
   }
 
-  Future<void> deleteAlarm() async {
+  Future<void> deleteAlarm(BuildContext context) async {
     ViewUtil.showLoaderPage();
     await _addalarmRepository.deleteAlarm(
       id: (state.model?.alarmData?.id).toString(),
@@ -76,7 +80,10 @@ class AddAlarmController extends StateNotifier<AddAlarmState> {
             ViewUtil.hideLoader();
             Navigation.pop();
             if ((response?.message ?? "").trim().isNotEmpty) {
-              ViewUtil.snackBar(response?.message ?? "");
+              ViewUtil.snackBar(
+                response?.message ?? "",
+                context,
+              );
             }
           });
         } else {
@@ -86,7 +93,7 @@ class AddAlarmController extends StateNotifier<AddAlarmState> {
     );
   }
 
-  Future<void> updateAlarm() async {
+  Future<void> updateAlarm(BuildContext context) async {
     ViewUtil.showLoaderPage();
     await _addalarmRepository.updateAlarm(
       id: (state.model?.alarmData?.id).toString(),
@@ -102,7 +109,10 @@ class AddAlarmController extends StateNotifier<AddAlarmState> {
             ViewUtil.hideLoader();
             Navigation.pop();
             if ((response?.message ?? "").trim().isNotEmpty) {
-              ViewUtil.snackBar(response?.message ?? "");
+              ViewUtil.snackBar(
+                response?.message ?? "",
+                context,
+              );
             }
           });
         } else {
@@ -112,7 +122,7 @@ class AddAlarmController extends StateNotifier<AddAlarmState> {
     );
   }
 
-  Future<void> disableAlarm() async {
+  Future<void> disableAlarm(BuildContext context) async {
     ViewUtil.showLoaderPage();
     await _addalarmRepository.disableAlarm(
       id: (state.model?.alarmData?.id).toString(),
@@ -129,7 +139,10 @@ class AddAlarmController extends StateNotifier<AddAlarmState> {
             ViewUtil.hideLoader();
             Navigation.pop();
             if ((response?.message ?? "").trim().isNotEmpty) {
-              ViewUtil.snackBar(response?.message ?? "");
+              ViewUtil.snackBar(
+                response?.message ?? "",
+                context,
+              );
             }
           });
         } else {

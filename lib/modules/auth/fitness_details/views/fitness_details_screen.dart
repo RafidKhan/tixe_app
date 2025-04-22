@@ -104,7 +104,8 @@ class _FitnessDetailsScreenState extends State<FitnessDetailsScreen> {
                                   state.model?.actionType == ActionType.Update
                                       ? () {
                                           ViewUtil.snackBar(
-                                              "Update height unit from Preferences");
+                                              "Update height unit from Preferences",
+                                              context);
                                         }
                                       : () {
                                           ViewUtil.showOptionPickerBottomSheet(
@@ -143,7 +144,8 @@ class _FitnessDetailsScreenState extends State<FitnessDetailsScreen> {
                             onTap: state.model?.actionType == ActionType.Update
                                 ? () {
                                     ViewUtil.snackBar(
-                                        "Update weight unit from Preferences");
+                                        "Update weight unit from Preferences",
+                                        context);
                                   }
                                 : () {
                                     ViewUtil.showOptionPickerBottomSheet(

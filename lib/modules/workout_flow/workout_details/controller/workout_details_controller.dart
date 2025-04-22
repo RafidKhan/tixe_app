@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/workout_details/repository/workout_details_interface.dart';
 import 'package:tixe_flutter_app/modules/workout_flow/workout_details/repository/workout_details_repository.dart';
@@ -46,7 +47,7 @@ class WorkoutDetailsController extends StateNotifier<WorkoutDetailsState> {
     );
   }
 
-  Future<void> enrollmentFreeWorkout() async {
+  Future<void> enrollmentFreeWorkout(BuildContext context) async {
     ViewUtil.showLoaderPage();
     final params = WorkoutEnrollmentRequest(
       workoutServiceId: state.workoutId,
@@ -62,7 +63,7 @@ class WorkoutDetailsController extends StateNotifier<WorkoutDetailsState> {
         ViewUtil.hideLoader();
         final message = response?.message;
         if (message != null) {
-          ViewUtil.snackBar(message);
+          ViewUtil.snackBar(message,context);
         }
         if (isSuccess) {
           Navigation.pushAndRemoveUntil(appRoutes: AppRoutes.dashboard);

@@ -47,10 +47,9 @@ class PreferenceNotifications extends ConsumerWidget {
               ),
             ),
             Switch(
-              value: notificationEnabled,
-              activeColor: KColor.btnGradient1.color,
-              onChanged: (value) => controller.toggleNotification()
-            )
+                value: notificationEnabled,
+                activeColor: KColor.btnGradient1.color,
+                onChanged: (value) => controller.toggleNotification())
           ],
         ),
         SizedBox(height: 20.h),
@@ -69,7 +68,7 @@ class PreferenceNotifications extends ConsumerWidget {
             onTap: () {
               if (notificationEnabled) {
                 ViewUtil.snackBar(
-                    "Notification is enabled. Turn it off first.");
+                    "Notification is enabled. Turn it off first.", context);
               } else {
                 ViewUtil.showOptionPickerBottomSheet(
                   options: state.notificationPreferences,

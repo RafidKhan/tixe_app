@@ -5,6 +5,7 @@ class MyListedArm {
   String price;
   bool renting;
   String image;
+  bool isSelected;
 
   MyListedArm({
     required this.id,
@@ -13,5 +14,6 @@ class MyListedArm {
     required this.renting,
     required this.price,
     required this.image,
+    this.isSelected = false,
   });
 }

@@ -101,7 +101,7 @@ class _WorkoutDetailsScreenState extends State<WorkoutDetailsScreen> {
                           arguments: state.workoutService,
                         );
                       } else {
-                        controller.enrollmentFreeWorkout();
+                        controller.enrollmentFreeWorkout(context);
                       }
                     },
                     buttonText: isPremium

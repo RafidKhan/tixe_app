@@ -72,7 +72,7 @@ class SubmitReviewController extends StateNotifier<SubmitReviewState> {
     checkButtonStatus();
   }
 
-  Future<void> submitReview() async {
+  Future<void> submitReview(BuildContext context) async {
     ViewUtil.showLoaderPage();
     await _submitreviewRepository.createReview(
       params: getParams(),
@@ -82,13 +82,13 @@ class SubmitReviewController extends StateNotifier<SubmitReviewState> {
         Navigation.pop(result: true);
         final message = response?.message;
         if (isSuccess && message != null) {
-          ViewUtil.snackBar(message);
+          ViewUtil.snackBar(message,context);
         }
       },
     );
   }
 
-  Future<void> updateReview() async {
+  Future<void> updateReview(BuildContext context) async {
     ViewUtil.showLoaderPage();
     await _submitreviewRepository.updateReview(
       id: state.model!.review!.reviewId!,
@@ -99,7 +99,7 @@ class SubmitReviewController extends StateNotifier<SubmitReviewState> {
         Navigation.pop(result: true);
         final message = response?.message;
         if (isSuccess && message != null) {
-          ViewUtil.snackBar(message);
+          ViewUtil.snackBar(message,context);
         }
       },
     );

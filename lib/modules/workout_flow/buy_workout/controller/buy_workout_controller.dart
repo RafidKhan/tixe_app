@@ -62,7 +62,7 @@ class BuyWorkoutController extends StateNotifier<BuyWorkoutState>
     }
   }
 
-  Future<void> enrollmentPaidWorkout() async {
+  Future<void> enrollmentPaidWorkout(BuildContext context) async {
     ViewUtil.showLoaderPage();
     final params = WorkoutEnrollmentRequest(
       workoutServiceId: state.model?.id,
@@ -78,7 +78,7 @@ class BuyWorkoutController extends StateNotifier<BuyWorkoutState>
         ViewUtil.hideLoader();
         final message = response?.message;
         if (message != null) {
-          ViewUtil.snackBar(message);
+          ViewUtil.snackBar(message,context);
         }
         if (isSuccess) {
           Navigation.pushAndRemoveUntil(appRoutes: AppRoutes.dashboard);

@@ -345,7 +345,10 @@ class _ListTrainingFormScreenState extends State<ListTrainingFormScreen> {
 
   void addImage() async {
     if (images.length >= 5) {
-      ViewUtil.snackBar("You can add maximum 5 images");
+      ViewUtil.snackBar(
+        "You can add maximum 5 images",
+        context,
+      );
       return;
     }
     final file = await pickImage();
@@ -427,9 +430,11 @@ class _ListTrainingFormScreenState extends State<ListTrainingFormScreen> {
         ViewUtil.hideLoader();
         //Navigation.pop();
         if (success && response != null) {
-          final converted =
-              CreateTrainingResponse.fromJson(response.data);
-          ViewUtil.snackBar("Training created successfully");
+          final converted = CreateTrainingResponse.fromJson(response.data);
+          ViewUtil.snackBar(
+            "Training created successfully",
+            context,
+          );
           Navigation.push(
             appRoutes: AppRoutes.listTrainingSchedules,
             arguments: converted.data?.id,

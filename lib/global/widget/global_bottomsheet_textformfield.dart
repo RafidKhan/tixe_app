@@ -6,11 +6,13 @@ import '../../utils/styles/k_colors.dart';
 class GlobalBottomSheetTextFormField extends StatelessWidget {
   final TextEditingController? textEditingController;
   final VoidCallback? onTap;
+  final String? hintText;
 
   const GlobalBottomSheetTextFormField({
     super.key,
     this.textEditingController,
-    required this.onTap,
+    this.hintText,
+    this.onTap,
   });
 
   @override
@@ -31,6 +33,7 @@ class GlobalBottomSheetTextFormField extends StatelessWidget {
       ),
       decoration: InputDecoration(
         filled: true,
+        hintText: hintText,
         fillColor: KColor.white.color,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.r),
@@ -41,7 +44,7 @@ class GlobalBottomSheetTextFormField extends StatelessWidget {
             color: KColor.btnGradient1.color,
           ),
         ),
-        suffixIcon: Icon(Icons.keyboard_arrow_down_sharp),
+        suffixIcon: const Icon(Icons.keyboard_arrow_down_sharp),
       ),
     );
   }

@@ -131,7 +131,7 @@ class ListArmsFormScreen extends StatelessWidget {
         bottomNavigationBar: GlobalBottomButton(
           onPressed: state.isButtonEnabled
               ? () {
-                  controller.saveArmsForm();
+                  controller.saveArmsForm(context);
                 }
               : null,
           // onPressed: () {

@@ -20,7 +20,7 @@ class MyWorkoutPhaseItem extends StatelessWidget {
     return InkWell(
       onTap: () {
         if (phase.isCompleted == 1) {
-          ViewUtil.snackBar(context.loc.phase_completed);
+          ViewUtil.snackBar(context.loc.phase_completed,context);
         } else if (phase.isVideo == 1) {
           Navigation.push(
             appRoutes: AppRoutes.myWorkoutVideo,

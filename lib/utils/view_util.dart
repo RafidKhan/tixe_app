@@ -13,12 +13,13 @@ import '/utils/styles/styles.dart';
 
 class ViewUtil {
   static snackBar(
-    String msg, {
+    String msg,
+    BuildContext context, {
     String? btnName,
     void Function()? onPressed,
   }) {
     try {
-      return ScaffoldMessenger.of(Navigation.key.currentContext!).showSnackBar(
+      return ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           behavior: SnackBarBehavior.floating,
           backgroundColor: KColor.btnGradient1.color,

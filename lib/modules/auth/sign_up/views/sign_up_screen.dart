@@ -116,7 +116,7 @@ class SignUpScreen extends StatelessWidget {
                         return GlobalButton(
                           onPressed: state.isButtonEnabled
                               ? () {
-                                  controller.signUpUser();
+                                  controller.signUpUser(context);
                                 }
                               : null,
                           buttonText: context.loc.create_account,

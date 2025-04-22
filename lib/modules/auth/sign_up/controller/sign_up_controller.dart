@@ -44,7 +44,7 @@ class SignUpController extends StateNotifier<SignUpState> {
                 passwordController.text.trim());
   }
 
-  Future<void> signUpUser() async {
+  Future<void> signUpUser(BuildContext context) async {
     ViewUtil.showLoaderPage();
 
     await _signUpRepository.signUpUser(
@@ -56,7 +56,7 @@ class SignUpController extends StateNotifier<SignUpState> {
         if (isSuccess) {
           final message = response?.message;
           if (message != null) {
-            ViewUtil.snackBar(message);
+            ViewUtil.snackBar(message,context);
             Navigation.push(
               appRoutes: AppRoutes.verifyEmail,
               arguments: emailOrPhoneController.text.trim(),

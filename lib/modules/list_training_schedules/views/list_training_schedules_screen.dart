@@ -9,6 +9,7 @@ import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
 import '../../../global/model/training_schedule_data.dart';
+import '../../../utils/view_util.dart';
 import '/global/widget/global_text.dart';
 import 'package:flutter/material.dart';
 
@@ -77,7 +78,14 @@ class _ListTrainingSchedulesScreenState
                           arguments: widget.trainingId,
                         ).then((result) {
                           if (result is List<TrainingScheduleData>) {
-                            schedules = result;
+                            result.forEach((element) {
+                              schedules.add(element);
+                            });
+
+                            ViewUtil.snackBar(
+                              "Schedule Created Successfully",
+                              context,
+                            );
                             setState(() {});
                           }
                         });
@@ -131,7 +139,14 @@ class _ListTrainingSchedulesScreenState
         ],
       ),
       bottomNavigationBar: GlobalBottomButton(
-        onPressed: schedules.isEmpty ? null : () {},
+        onPressed: schedules.isEmpty
+            ? null
+            : () {
+                Navigation.push(
+                  appRoutes: AppRoutes.trainingSelectedGearsList,
+                  arguments: widget.trainingId,
+                );
+              },
         buttonText: "Proceed to Next Steps",
       ),
     );

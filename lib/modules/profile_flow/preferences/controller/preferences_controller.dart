@@ -193,7 +193,7 @@ class PreferencesController extends StateNotifier<PreferencesState> {
     notificationEndController.text = option.value;
   }
 
-  Future<void> savePreference() async {
+  Future<void> savePreference(BuildContext context) async {
     ViewUtil.showLoaderPage();
 
     final params = PreferenceRequest(
@@ -212,7 +212,7 @@ class PreferencesController extends StateNotifier<PreferencesState> {
         ViewUtil.hideLoader();
 
         if (isSuccess && response?.message != null) {
-          ViewUtil.snackBar(response?.message ?? "");
+          ViewUtil.snackBar(response?.message ?? "",context);
           Navigation.key.currentContext!
               .read(sharedController.notifier)
               .getProfileData(

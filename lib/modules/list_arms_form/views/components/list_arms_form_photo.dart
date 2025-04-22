@@ -98,7 +98,7 @@ class ListArmsFormPhoto extends ConsumerWidget {
               }
               return InkWell(
                 onTap: () {
-                  controller.addImage();
+                  controller.addImage(context);
                 },
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(4.r),

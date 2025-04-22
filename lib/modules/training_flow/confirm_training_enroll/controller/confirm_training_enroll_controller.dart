@@ -49,7 +49,7 @@ class ConfirmTrainingEnrollController
 
   int enrollmentId = 0;
 
-  Future<void> setTrainingGears() async {
+  Future<void> setTrainingGears(BuildContext context) async {
     final details = state.model?.trainingDetail;
     final gears = state.model?.selectedGears ?? [];
     final List<GearRequestData> gearsData = [];
@@ -84,14 +84,14 @@ class ConfirmTrainingEnrollController
         ViewUtil.hideLoader();
         if (isSuccess) {
           Future.delayed(const Duration(milliseconds: 200), () {
-            confirmEnrollment();
+            confirmEnrollment(context);
           });
         }
       },
     );
   }
 
-  Future<void> setTimeSchedule() async {
+  Future<void> setTimeSchedule(BuildContext context) async {
     final details = state.model?.trainingDetail;
     final type = (details?.scheduleType ?? '').getScheduleType();
 
@@ -141,14 +141,14 @@ class ConfirmTrainingEnrollController
         if (isSuccess) {
           enrollmentId = response?.data?.id ?? 0;
           Future.delayed(const Duration(milliseconds: 200), () {
-            setTrainingGears();
+            setTrainingGears(context);
           });
         }
       },
     );
   }
 
-  Future<void> confirmEnrollment() async {
+  Future<void> confirmEnrollment(BuildContext context) async {
     final details = state.model?.trainingDetail;
 
     ViewUtil.showLoaderPage();
@@ -166,7 +166,7 @@ class ConfirmTrainingEnrollController
 
         final message = response?.message;
         if (message != null) {
-          ViewUtil.snackBar(message);
+          ViewUtil.snackBar(message,context);
         }
         if (isSuccess) {
           Navigation.pushAndRemoveUntil(appRoutes: AppRoutes.dashboard);
