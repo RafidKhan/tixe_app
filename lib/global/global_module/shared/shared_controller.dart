@@ -5,6 +5,9 @@ import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/user_activity_tracker_services/user_activity_tracker_services.dart';
 
+import '../../../data_provider/pref_helper.dart';
+import '../../../utils/app_routes.dart';
+import '../../../utils/navigation.dart';
 import '../../../utils/view_util.dart';
 import '../../model/sleep_data_model.dart';
 import '../global_interface.dart';
@@ -68,9 +71,7 @@ class SharedController extends StateNotifier<SharedState> {
       await UserActivityTrack.fetchSleepData(
           dateTime: e,
           result: (value) {
-            weeklySleep.add(
-              SleepDataModel(value: value / 60, dateTime: e)
-            );
+            weeklySleep.add(SleepDataModel(value: value / 60, dateTime: e));
           });
       if (weeklySleep.length == 7) {
         weeklySleep.sort((a, b) => a.dateTime.compareTo(b.dateTime));
@@ -176,15 +177,20 @@ class SharedController extends StateNotifier<SharedState> {
   }
 
   Future<void> getProfileData({bool showLoader = false}) async {
-    if(showLoader){
+    if (showLoader) {
       ViewUtil.showLoaderPage();
     }
     state = state.removeProfileData();
     await _globalRepository.getProfileData(callback: (response, success) {
-      if(showLoader){
+      if (showLoader) {
         ViewUtil.hideLoader();
       }
-      state = state.copyWith(profileData: response);
+      if (success) {
+        state = state.copyWith(profileData: response);
+      } else {
+        PrefHelper.logout();
+        Navigation.pushAndRemoveUntil(appRoutes: AppRoutes.splash);
+      }
     });
   }
 

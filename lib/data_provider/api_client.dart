@@ -19,7 +19,7 @@ class ApiClient {
   final Dio _dio = Dio();
   Map<String, dynamic> _header = {};
 
-  final _timeOutDuration = const Duration(milliseconds: 30 * 1000);
+  final _timeOutDuration = const Duration(seconds: 30);
 
   //final _timeOutDuration2 = const Duration(milliseconds: 10);
 
@@ -159,7 +159,7 @@ class ApiClient {
     required String url,
     String? contentType,
     required Method method,
-     Map<String, dynamic>? params,
+    Map<String, dynamic>? params,
     String? token,
     Options? options,
     void Function(int, int)? onReceiveProgress,
@@ -181,7 +181,7 @@ class ApiClient {
         method,
         options: options,
         savePath: savePath,
-        data: params==null?null: FormData.fromMap(params),
+        data: params == null ? null : FormData.fromMap(params),
         onReceiveProgress: onReceiveProgress,
         callback: callback,
       );

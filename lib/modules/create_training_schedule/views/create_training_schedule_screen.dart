@@ -9,6 +9,7 @@ import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 
 import '../../../global/model/global_option_item.dart';
+import '../../../global/model/training_schedule_data.dart';
 import '../../../global/widget/global_bottomsheet_textformfield.dart';
 import '../../../utils/view_util.dart';
 
@@ -133,7 +134,14 @@ class _CreateTrainingScheduleScreenState
       callback: (response, success) {
         ViewUtil.hideLoader();
         if (success) {
-          Navigation.pop();
+          List<TrainingScheduleData> result = [
+            TrainingScheduleData(
+              startDate: CrtTrSchdlController.startDate.text,
+              endDate: CrtTrSchdlController.endDate.text,
+              days: selectedDays.map((e) => e.name).toList(),
+            ),
+          ];
+          Navigation.pop(result: result);
           ViewUtil.snackBar("Schedule Created Successfully");
         }
       },

@@ -405,15 +405,15 @@ class _ListTrainingFormScreenState extends State<ListTrainingFormScreen> {
 
     final imagePaths = images.map((e) => e.path).toList();
 
-    // for (var path in imagePaths) {
-    //   formData.files.add(MapEntry(
-    //     'gallery_images', // Note: same key for multiple files
-    //     await MultipartFile.fromFile(
-    //       path,
-    //       filename: path.split('/').last,
-    //     ),
-    //   ));
-    // }
+    for (var path in imagePaths) {
+      formData.files.add(MapEntry(
+        'gallery_images[]', // Note: same key for multiple files
+        await MultipartFile.fromFile(
+          path,
+          filename: path.split('/').last,
+        ),
+      ));
+    }
 
     // formData.files.forEach((element) {
     //   'key: ${element.key}, value: ${element.value}'.log();
