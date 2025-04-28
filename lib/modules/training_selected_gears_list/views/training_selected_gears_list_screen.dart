@@ -100,7 +100,9 @@ class _TrainingSelectedGearsListScreenState
         ],
       ),
       bottomNavigationBar: GlobalBottomButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigation.push(appRoutes: AppRoutes.dashboard);
+        },
         buttonText: "Proceed to Next Steps",
       ),
     );

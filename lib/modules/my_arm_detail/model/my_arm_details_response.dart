@@ -66,7 +66,7 @@ class Gear {
   int? quantityAvailable;
   String? dailyRentalPrice;
   int? rentalOption;
-  List<dynamic>? categories;
+  List<Category>? categories;
 
   Gear({
     this.id,
@@ -91,7 +91,8 @@ class Gear {
     quantityAvailable: json["quantity_available"],
     dailyRentalPrice: json["daily_rental_price"],
     rentalOption: json["rental_option"],
-    categories: json["categories"] == null ? [] : List<dynamic>.from(json["categories"]!.map((x) => x)),
+    categories: json["categories"] == null ? [] : List<Category>.from(json["categories"]!.map((x) => Category.fromJson(x))),
+
   );
 
   Map<String, dynamic> toJson() => {
@@ -104,7 +105,7 @@ class Gear {
     "quantity_available": quantityAvailable,
     "daily_rental_price": dailyRentalPrice,
     "rental_option": rentalOption,
-    "categories": categories == null ? [] : List<dynamic>.from(categories!.map((x) => x)),
+    "categories": categories == null ? [] : List<dynamic>.from(categories!.map((x) => x.toJson())),
   };
 }
 
@@ -193,5 +194,40 @@ class ReviewStatistics {
   Map<String, dynamic> toJson() => {
     "average_rating": averageRating,
     "total_reviews": totalReviews,
+  };
+}
+
+
+
+
+class Category {
+  int? id;
+  String? name;
+  String? image;
+  String? slug;
+  String? description;
+
+  Category({
+    this.id,
+    this.name,
+    this.image,
+    this.slug,
+    this.description,
+  });
+
+  factory Category.fromJson(Map<String, dynamic> json) => Category(
+    id: json["id"],
+    name: json["name"],
+    image: json["image"],
+    slug: json["slug"],
+    description: json["description"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "name": name,
+    "image": image,
+    "slug": slug,
+    "description": description,
   };
 }
