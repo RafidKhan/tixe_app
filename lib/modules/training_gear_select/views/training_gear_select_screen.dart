@@ -1,4 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tixe_flutter_app/data_provider/api_client.dart';
+import 'package:tixe_flutter_app/global/widget/global_bottom_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
@@ -6,6 +8,7 @@ import 'package:tixe_flutter_app/modules/list_arms/model/my_listed_arms_model.da
 import 'package:tixe_flutter_app/modules/list_arms/repository/list_arms_interface.dart';
 import 'package:tixe_flutter_app/modules/list_arms/repository/list_arms_repository.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
+import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 import '../../../utils/enum.dart';
@@ -64,6 +67,13 @@ class _TrainingGearSelectScreenState extends State<TrainingGearSelectScreen> {
     });
   }
 
+  bool isBtnEnabled = false;
+
+  checkBtnStatus() {
+    isBtnEnabled = myArms.any((arm) => arm.isSelected);
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return TixeMainScaffold(
@@ -82,16 +92,52 @@ class _TrainingGearSelectScreenState extends State<TrainingGearSelectScreen> {
               },
               itemBuilder: (context, index) {
                 final arm = myArms[index];
-                return armItem(arm);
+                return armItem(
+                  arm,
+                  onTap: () {
+                    checkBtnStatus();
+                  },
+                );
               },
             ),
           )
         ],
       ),
+      bottomNavigationBar: GlobalBottomButton(
+        onPressed: isBtnEnabled
+            ? () {
+                confirmGears();
+              }
+            : null,
+        buttonText: "Confirm Gears",
+      ),
     );
   }
 
-  Widget armItem(MyListedArm arm) {
+  Future<void> confirmGears() async {
+    ViewUtil.showLoaderPage();
+    await ApiClient().request(
+      url: "training-services/${widget.trainingId}/gear-set",
+      method: Method.POST,
+      params: {
+        "gear_ids":
+            myArms.where((arm) => arm.isSelected).map((arm) => arm.id).toList(),
+      },
+      callback: (rsp, success) {
+        ViewUtil.hideLoader();
+        if (success) {
+          Navigation.pop(
+            result: myArms.where((arm) => arm.isSelected).toList(),
+          );
+        }
+      },
+    );
+  }
+
+  Widget armItem(
+    MyListedArm arm, {
+    required VoidCallback onTap,
+  }) {
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: 20.w,
@@ -110,6 +156,7 @@ class _TrainingGearSelectScreenState extends State<TrainingGearSelectScreen> {
                 onTap: () {
                   arm.isSelected = !arm.isSelected;
                   setState(() {});
+                  onTap();
                 },
                 child: Padding(
                   padding: EdgeInsets.only(

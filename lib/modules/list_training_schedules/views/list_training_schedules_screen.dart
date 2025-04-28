@@ -78,9 +78,7 @@ class _ListTrainingSchedulesScreenState
                           arguments: widget.trainingId,
                         ).then((result) {
                           if (result is List<TrainingScheduleData>) {
-                            result.forEach((element) {
-                              schedules.add(element);
-                            });
+                            schedules = result;
 
                             ViewUtil.snackBar(
                               "Schedule Created Successfully",

@@ -39,11 +39,11 @@ enum AppUrl {
   armsCategories,
   createArm,
   myListedArmDetail,
-
 }
 
 extension AppUrlExtention on AppUrl {
   static String _baseUrl = "";
+
   //static String _baseStorageUrl = "";
 
   static void setUrl(UrlLink urlLink) {

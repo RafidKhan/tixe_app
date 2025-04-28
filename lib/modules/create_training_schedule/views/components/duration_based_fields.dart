@@ -22,7 +22,10 @@ class DurationBasedFields extends StatelessWidget {
           readOnly: true,
           textEditingController: CrtTrSchdlController.startDate,
           onTap: () {
-            DateUtil.showDatePickerDialog().then((dateTime) {
+            DateUtil.showDatePickerDialog(
+              firstDate: DateTime.now().add(const Duration(days: 1)),
+              lastDate: DateTime.now().add(const Duration(days: 365)),
+            ).then((dateTime) {
               if (dateTime != null) {
                 CrtTrSchdlController.startDate.text =
                     DateFormat("yyyy-MM-dd").format(dateTime);
@@ -36,7 +39,10 @@ class DurationBasedFields extends StatelessWidget {
           readOnly: true,
           textEditingController: CrtTrSchdlController.endDate,
           onTap: () {
-            DateUtil.showDatePickerDialog().then((dateTime) {
+            DateUtil.showDatePickerDialog(
+              firstDate: DateTime.now().add(const Duration(days: 1)),
+              lastDate: DateTime.now().add(const Duration(days: 365)),
+            ).then((dateTime) {
               if (dateTime != null) {
                 CrtTrSchdlController.endDate.text =
                     DateFormat("yyyy-MM-dd").format(dateTime);
