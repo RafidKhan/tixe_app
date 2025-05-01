@@ -5,6 +5,7 @@ import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
 import 'package:tixe_flutter_app/modules/create_training_schedule/controller/create_training_schedule_controller.dart';
 import 'package:tixe_flutter_app/modules/create_training_schedule/model/duration_based_schedule_request.dart';
+import 'package:tixe_flutter_app/modules/create_training_schedule/views/components/date_based_fields.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 
@@ -15,6 +16,7 @@ import '../../../utils/view_util.dart';
 
 import 'package:flutter/material.dart';
 
+import '../model/date_based_request.dart';
 import 'components/duration_based_fields.dart';
 
 class CreateTrainingScheduleScreen extends StatefulWidget {
@@ -89,6 +91,9 @@ class _CreateTrainingScheduleScreenState
                     if (CrtTrSchdlController.selectedScheduleType ==
                         ScheduleType.DurationBased)
                       const DurationBasedFields(),
+                    if (CrtTrSchdlController.selectedScheduleType ==
+                        ScheduleType.DateBased)
+                      const DateBasedFields(),
                   ],
                 ),
               ),
@@ -101,6 +106,10 @@ class _CreateTrainingScheduleScreenState
           if (CrtTrSchdlController.selectedScheduleType ==
               ScheduleType.DurationBased) {
             createDurationBasedSchedule();
+          } else if (CrtTrSchdlController.selectedScheduleType ==
+              ScheduleType.DateBased) {
+            createDateBasedSchedules();
+            // Handle Date Based Schedule Creation
           }
         },
         buttonText: "Proceed to Next Steps",
@@ -140,6 +149,53 @@ class _CreateTrainingScheduleScreenState
               days: selectedDays.map((e) => e.name).toList(),
             ),
           ];
+          Navigation.pop(result: result);
+        }
+      },
+    );
+  }
+
+  Future<void> createDateBasedSchedules() async {
+    final data = DateBasedRequest(
+      dateBased: [
+        DateBased(
+          startDate: "",
+          endDate: "",
+          dates: CrtTrSchdlController.dateBasedFields
+              .map(
+                (e) => DateBasedDate(
+                  date: e.dateController.text,
+                  startAt: e.startTimeController.text,
+                  endAt: e.endTimeController.text,
+                ),
+              )
+              .toList(),
+        )
+      ],
+    );
+    ViewUtil.showLoaderPage();
+    await ApiClient().request(
+      url: "training-services/${widget.trainingId}/adding-schedule",
+      method: Method.POST,
+      params: data.toJson(),
+      callback: (response, success) {
+        ViewUtil.hideLoader();
+        if (success) {
+          List<TrainingScheduleData> result1 = [
+            TrainingScheduleData(
+              startDate: CrtTrSchdlController.startDate.text,
+              endDate: CrtTrSchdlController.endDate.text,
+              days: [],
+            ),
+          ];
+          List<TrainingScheduleData> result =
+              CrtTrSchdlController.dateBasedFields.map((e) {
+            return TrainingScheduleData(
+              startDate: e.dateController.text,
+              endDate: "",
+              days: [],
+            );
+          }).toList();
           Navigation.pop(result: result);
         }
       },

@@ -67,7 +67,7 @@ class DurationBasedFields extends StatelessWidget {
     );
   }
 
-  Widget _itemData(SelectedDay item) {
+  Widget _itemData(SelectedDayData item) {
     return StatefulBuilder(builder: (context, setState) {
       return Column(
         children: [
@@ -159,13 +159,13 @@ class DurationBasedFields extends StatelessWidget {
   }
 }
 
-class SelectedDay {
+class SelectedDayData {
   final String name;
   final TextEditingController start;
   final TextEditingController end;
   bool isSelected;
 
-  SelectedDay({
+  SelectedDayData({
     required this.name,
     required this.start,
     required this.end,

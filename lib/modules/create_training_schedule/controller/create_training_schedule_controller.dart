@@ -7,6 +7,7 @@ import '../../../utils/navigation.dart';
 import '../../../utils/styles/k_colors.dart';
 import '../repository/create_training_schedule_interface.dart';
 import '../repository/create_training_schedule_repository.dart';
+import '../views/components/date_based_fields.dart';
 import '../views/components/duration_based_fields.dart';
 
 class CrtTrSchdlController {
@@ -36,31 +37,38 @@ class CrtTrSchdlController {
     }
   }
 
-  static List<SelectedDay> selectedDays = [
-    SelectedDay(
+  static List<SelectedDayData> selectedDays = [
+    SelectedDayData(
       name: "Monday",
       start: TextEditingController(),
       end: TextEditingController(),
     ),
-    SelectedDay(
+    SelectedDayData(
       name: "Tuesday",
       start: TextEditingController(),
       end: TextEditingController(),
     ),
-    SelectedDay(
+    SelectedDayData(
       name: "Wednesday",
       start: TextEditingController(),
       end: TextEditingController(),
     ),
-    SelectedDay(
+    SelectedDayData(
       name: "Thursday",
       start: TextEditingController(),
       end: TextEditingController(),
     ),
-    SelectedDay(
+    SelectedDayData(
       name: "Friday",
       start: TextEditingController(),
       end: TextEditingController(),
+    ),
+  ];
+  static List<DateBasedData> dateBasedFields = [
+    DateBasedData(
+      dateController: TextEditingController(),
+      startTimeController: TextEditingController(),
+      endTimeController: TextEditingController(),
     ),
   ];
 
@@ -74,6 +82,13 @@ class CrtTrSchdlController {
       day.end.clear();
       day.isSelected = false;
     });
+    dateBasedFields = [
+      DateBasedData(
+        dateController: TextEditingController(),
+        startTimeController: TextEditingController(),
+        endTimeController: TextEditingController(),
+      ),
+    ];
   }
 
   static Future<TimeOfDay?> selectTime() async {
