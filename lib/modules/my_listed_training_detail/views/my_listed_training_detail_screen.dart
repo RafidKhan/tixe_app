@@ -8,8 +8,10 @@ import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart'
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 
+import '../../../global/widget/action_consent_confirm_dialog.dart';
 import '../../../global/widget/global_map_view_widget.dart';
 import '../../../global/widget/global_slot_item_widget.dart';
+import '../../../utils/navigation.dart';
 import '../../../utils/styles/k_colors.dart';
 import '../../../utils/view_util.dart';
 import '../model/list_training_details.dart';
@@ -57,6 +59,34 @@ class _MyListedTrainingDetailScreenState
     );
   }
 
+  Future<void> delete() async {
+    final result = await showDialog(
+      context: context,
+      builder: (context) {
+        return const ActionConsentConfirmDialog(
+          message:
+          "This item and all it’s related data and usage in all places will be deleted",
+        );
+      },
+    );
+    if (result == true) {
+      ViewUtil.showLoaderPage();
+      await ApiClient().request(
+        url: "new/training-services/${widget.id}/delete",
+        method: Method.DELETE,
+        callback: (response, success) {
+          ViewUtil.hideLoader();
+          'resp is: ${jsonEncode(response?.data)}'.log();
+          if (success) {
+            Navigation.pop();
+            ViewUtil.snackBar("Training has been deleted", context);
+          }
+        },
+      );
+    }
+
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -73,7 +103,33 @@ class _MyListedTrainingDetailScreenState
         hasAppBar: true,
         body: Column(
           children: [
-            const GlobalHeaderWidget(title: "Overview"),
+            GlobalHeaderWidget(
+              title: "Overview",
+              action: PopupMenuButton<String>(
+                padding: EdgeInsets.only(bottom: 10.h),
+                icon: Icon(
+                  Icons.more_horiz,
+                  color: KColor.white.color,
+                ),
+                // horizontal 3 dot icon
+                onSelected: (String value) async {
+                  if (value == '0') {
+                    await delete();
+                  }
+                },
+                itemBuilder: (BuildContext context) {
+                  return [
+                    PopupMenuItem<String>(
+                      value: '0',
+                      child: GlobalText(
+                        str: "Delete",
+                        color: KColor.black.color,
+                      ),
+                    ),
+                  ];
+                },
+              ),
+            ),
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
