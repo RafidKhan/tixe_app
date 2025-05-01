@@ -390,7 +390,7 @@ class _ListTrainingFormScreenState extends State<ListTrainingFormScreen> {
       "lon": "107.679721",
       "max_enrollment": maxEnrollment.text,
       "enrollment_fee": enrollmentFees.text,
-      "pre_requisitions": selectedPreRequisitionIds,
+      "pre_requisitions[]": selectedPreRequisitionIds,
       // Files will be added separately
     };
     'here is: $map'.log();

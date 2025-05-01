@@ -120,12 +120,12 @@ class _ListTrainingScreenState extends State<ListTrainingScreen> {
       focusColor: KColor.transparent.color,
       highlightColor: KColor.transparent.color,
       onTap: () {
-        // Navigation.push(
-        //   appRoutes: AppRoutes.myArmDetail,
-        //   arguments: arm.id,
-        // ).then((value) {
-        //   controller.getArms();
-        // });
+        Navigation.push(
+          appRoutes: AppRoutes.myListedTrainingDetail,
+          arguments: data.id,
+        ).then((value) {
+          //controller.getArms();
+        });
       },
       child: Container(
         padding: EdgeInsets.symmetric(
