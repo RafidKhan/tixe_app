@@ -4,6 +4,8 @@ import 'package:tixe_flutter_app/global/widget/global_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
 
 import '../../../../global/widget/global_image_loader.dart';
+import '../../../../utils/app_routes.dart';
+import '../../../../utils/navigation.dart';
 import '../../../../utils/styles/k_assets.dart';
 
 class NoWorkout extends StatelessWidget {
@@ -34,9 +36,9 @@ class NoWorkout extends StatelessWidget {
           SizedBox(height: 20.h),
           GlobalButton(
             onPressed: () {
-              // Navigation.push(appRoutes: AppRoutes.listArmsForm).then((value){
-              //   controller.getArms();
-              // });
+              Navigation.push(appRoutes: AppRoutes.listWorkoutForm).then((value){
+                //controller.getArms();
+              });
             },
             buttonText: "List Workouts",
           )
