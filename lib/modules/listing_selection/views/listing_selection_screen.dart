@@ -47,7 +47,11 @@ class ListingSelectionScreen extends StatelessWidget {
                       KAssetName.listWorkoutsPng.imagePath,
                       "List Workouts",
                       "List your exercise plans that people can enrol and follow",
-                      onTap: () {},
+                      onTap: () {
+                        Navigation.push(
+                          appRoutes: AppRoutes.listWorkouts,
+                        );
+                      },
                     ),
                     SizedBox(
                       height: 20.h,

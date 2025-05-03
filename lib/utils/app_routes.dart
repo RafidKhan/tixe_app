@@ -1,3 +1,4 @@
+import '../modules/list_workouts/views/list_workouts_screen.dart';
 import '../modules/my_listed_training_detail/views/my_listed_training_detail_screen.dart';
 import '../modules/training_gear_select/views/training_gear_select_screen.dart';
 import '../modules/training_selected_gears_list/views/training_selected_gears_list_screen.dart';
@@ -63,6 +64,7 @@ import '../modules/workout_flow/my_workout_select_phase/views/my_workout_select_
 
 enum AppRoutes {
   splash,
+  listWorkouts,
   myListedTrainingDetail,
   trainingGearSelect,
   trainingSelectedGearsList,
@@ -114,7 +116,10 @@ enum AppRoutes {
 extension AppRoutesExtention on AppRoutes {
   Widget buildWidget<T extends Object>({T? arguments}) {
     switch (this) {
-      case AppRoutes.myListedTrainingDetail:
+
+      case AppRoutes.listWorkouts:
+        return const ListWorkoutsScreen();
+     case AppRoutes.myListedTrainingDetail:
         return MyListedTrainingDetailScreen(id: arguments as int);
       case AppRoutes.trainingGearSelect:
         return TrainingGearSelectScreen(trainingId: arguments as int);
