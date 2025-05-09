@@ -1,15 +1,15 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:tixe_flutter_app/constant/app_url.dart';
 import 'package:tixe_flutter_app/data_provider/api_client.dart';
 import 'package:tixe_flutter_app/modules/arm_store/model/arms_category_model.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
-import 'package:tixe_flutter_app/utils/extension.dart'; // For .log() extension
+import 'package:tixe_flutter_app/utils/extension.dart';
 
 class ArmsCategoryRepository {
   final ApiClient _apiClient;
 
-  ArmsCategoryRepository({required ApiClient apiClient})
-      : _apiClient = apiClient;
+  ArmsCategoryRepository({required ApiClient apiClient}) : _apiClient = apiClient;
 
   Future<ArmsCategoryModel> fetchArmsCategories() async {
     try {
@@ -17,7 +17,7 @@ class ArmsCategoryRepository {
       bool isSuccess = false;
 
       await _apiClient.request(
-        url: 'arms/categories',
+        url: AppUrl.armsCategory.url,
         method: Method.GET,
         callback: (Response? response, bool success) {
           isSuccess = success;

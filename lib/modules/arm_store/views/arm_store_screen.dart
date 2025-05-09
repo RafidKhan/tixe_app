@@ -24,13 +24,13 @@ class ArmStoreScreen extends StatefulWidget {
 
 class _ArmStoreScreenState extends State<ArmStoreScreen> {
   String? _selectedCategory;
-  late ArmsCategoryRepository _repository;
+  late ArmsCategoryRepository _categoryRepository;
 
   @override
   void initState() {
     super.initState();
-    // Initialize repository with ApiClient
-    _repository = ArmsCategoryRepository(apiClient: ApiClient());
+
+    _categoryRepository = ArmsCategoryRepository(apiClient: ApiClient());
   }
 
   @override
@@ -97,15 +97,15 @@ class _ArmStoreScreenState extends State<ArmStoreScreen> {
   }
 
   void _armCategoryList(BuildContext context) async {
-    String? localSelectedCategory = _selectedCategory; // Local variable for dialog state
+    String? localSelectedCategory = _selectedCategory;
     bool isLoading = true;
     String? errorMessage;
     List<Data> categories = [];
 
     // Fetch categories from API
     try {
-      final armsCategoryModel = await _repository.fetchArmsCategories();
-      if (armsCategoryModel.data != null && armsCategoryModel.data!.isNotEmpty) {
+      final armsCategoryModel = await _categoryRepository.fetchArmsCategories();
+      if (armsCategoryModel?.data != null && armsCategoryModel.data!.isNotEmpty) {
         categories = armsCategoryModel.data!;
       }
       isLoading = false;
