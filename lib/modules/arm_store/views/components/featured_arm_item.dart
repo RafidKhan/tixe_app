@@ -31,7 +31,9 @@ class FeaturedArmItem extends StatelessWidget {
       splashColor: KColor.transparent.color,
       focusColor: KColor.transparent.color,
       highlightColor: KColor.transparent.color,
-      onTap: () {},
+      onTap: () {
+        Navigation.push(appRoutes: AppRoutes.armsDetails);
+      },
       child: Container(
         height: 340.h,
         padding: EdgeInsets.symmetric(

@@ -1,4 +1,5 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tixe_flutter_app/global/widget/global_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
 import 'package:tixe_flutter_app/modules/arms_cart/views/components/amount_section_widget.dart';
@@ -54,6 +55,14 @@ class PaymentSuccessScreen extends StatelessWidget {
               fontWeight: FontWeight.w400,
               color: KColor.white.color,
               textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 20,),
+
+            GlobalButton(
+              buttonText: "Go to store",
+              onPressed: () {
+                Navigation.pushAndRemoveUntil(appRoutes: AppRoutes.armStore);
+              },
             ),
 
 
