@@ -17,6 +17,7 @@ class ModuleController {
   static final TextEditingController module = TextEditingController();
   static final TextEditingController calorie = TextEditingController();
   static final TextEditingController duration = TextEditingController();
+  static final TextEditingController description = TextEditingController();
   static ModuleTypeEnum? selectedType;
   static File? pickedFile;
 
@@ -76,7 +77,7 @@ class ModuleController {
     final params = {
       "type": selectedType == ModuleTypeEnum.Doc ? "pdf" : "video",
       "title": module.text,
-      "description": "",
+      "description": description.text,
       "cal": calorie.text,
       "duration_time": duration.text,
     };

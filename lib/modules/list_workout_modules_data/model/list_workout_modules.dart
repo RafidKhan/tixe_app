@@ -82,3 +82,30 @@ class PhaseData {
     "pdf": pdf,
   };
 }
+
+
+
+
+class Section {
+  int? id;
+  String? sectionTitle;
+  String? description;
+
+  Section({
+    this.id,
+    this.sectionTitle,
+    this.description,
+  });
+
+  factory Section.fromJson(Map<String, dynamic> json) => Section(
+    id: json["id"],
+    sectionTitle: json["section_title"],
+    description: json["description"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "section_title": sectionTitle,
+    "description": description,
+  };
+}

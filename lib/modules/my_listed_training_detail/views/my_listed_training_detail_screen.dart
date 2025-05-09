@@ -148,6 +148,7 @@ class _MyListedTrainingDetailScreenState
                               child: GlobalImageLoader(
                                 imagePath: image,
                                 imageFor: ImageFor.network,
+                                fit: BoxFit.cover,
                               ),
                             );
                           },

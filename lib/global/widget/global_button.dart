@@ -65,6 +65,9 @@ class GlobalButton extends StatelessWidget {
           child: GlobalText(
             str: buttonText,
             textAlign: TextAlign.center,
+            // fontSize: fontSize??14,
+            // fontWeight: FontWeight.w400,
+            // color: textColor??KColor.black.color,
             style: GoogleFonts.squadaOne(
               fontSize: fontSize??20.sp,
               fontWeight: FontWeight.w400,
