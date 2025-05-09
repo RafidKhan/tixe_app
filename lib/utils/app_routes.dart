@@ -1,5 +1,6 @@
+import 'package:tixe_flutter_app/modules/list_workouts/views/list_workouts_screen.dart';
+
 import '../modules/list_workout_form/views/list_workout_form_screen.dart';
-import '../modules/list_workouts/views/list_workouts_screen.dart';
 import '../modules/my_listed_training_detail/views/my_listed_training_detail_screen.dart';
 import '../modules/training_gear_select/views/training_gear_select_screen.dart';
 import '../modules/training_selected_gears_list/views/training_selected_gears_list_screen.dart';
@@ -118,7 +119,6 @@ enum AppRoutes {
 extension AppRoutesExtention on AppRoutes {
   Widget buildWidget<T extends Object>({T? arguments}) {
     switch (this) {
-
 
       case AppRoutes.listWorkoutForm:
         return const ListWorkoutFormScreen();

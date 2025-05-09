@@ -491,7 +491,7 @@ packages:
       path: "."
       ref: main
       resolved-ref: ec733b8107a18bfd464826a00bec1711bfbe1ff1
-      url: "https://RafidKhan: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@github.com/RafidKhan/health_connect.git"
+      url: "https://github.com/RafidKhan/health_connect"
     source: git
     version: "1.0.0"
   html:
