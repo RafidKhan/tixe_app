@@ -6,6 +6,7 @@ import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 
 import '../../../utils/enum.dart';
+import '../../list_workout_modules/views/list_workout_modules_screen.dart';
 
 class ModuleController {
   static final TextEditingController type = TextEditingController();
@@ -59,9 +60,7 @@ class ModuleController {
       callback: (response, success) {
         ViewUtil.hideLoader();
         if (success) {
-          Navigation.pop(
-            result: params,
-          );
+          Navigation.pop(result: true);
         }
       },
     );
