@@ -1,6 +1,92 @@
-import '../repository/list_workout_add_module_selection_interface.dart';
-import '../repository/list_workout_add_module_selection_repository.dart';
-class ListWorkoutAddModuleSelectionController  {
-  final IListWorkoutAddModuleSelectionRepository _listworkoutaddmoduleselectionRepository = ListWorkoutAddModuleSelectionRepository();
-  
+import 'package:flutter/material.dart';
+import 'package:tixe_flutter_app/data_provider/api_client.dart';
+import 'package:tixe_flutter_app/modules/list_workout_add_module_selection/model/text_module_model.dart';
+import 'package:tixe_flutter_app/modules/list_workout_add_module_selection/views/list_workout_add_module_selection_screen.dart';
+import 'package:tixe_flutter_app/utils/navigation.dart';
+import 'package:tixe_flutter_app/utils/view_util.dart';
+
+import '../../../utils/enum.dart';
+
+class ModuleController {
+  static final TextEditingController type = TextEditingController();
+  static final TextEditingController module = TextEditingController();
+  static final TextEditingController calorie = TextEditingController();
+  static final TextEditingController duration = TextEditingController();
+  static ModuleTypeEnum? selectedType;
+
+  static final List<ModuleType> types = [
+    const ModuleType(
+      type: ModuleTypeEnum.Text,
+      name: "Text",
+    ),
+    const ModuleType(
+      type: ModuleTypeEnum.Doc,
+      name: "Docs(PDF)",
+    ),
+    const ModuleType(
+      type: ModuleTypeEnum.Video,
+      name: "Video",
+    ),
+  ];
+  static List<TextSection> textSections = [
+    TextSection(
+      section: TextEditingController(),
+      description: TextEditingController(),
+    ),
+  ];
+
+  static Future<void> createTextModule(String id) async {
+    ViewUtil.showLoaderPage();
+    final TextModuleModel params = TextModuleModel(
+      type: selectedType,
+      title: module.text,
+      description: "",
+      cal: calorie.text,
+      durationTime: duration.text,
+      sections: textSections
+          .map(
+            (section) => Section(
+              sectionTitle: section.section.text,
+              description: section.description.text,
+            ),
+          )
+          .toList(),
+    );
+    await ApiClient().request(
+      url: "workout-services/$id/adding-text-module",
+      method: Method.POST,
+      params: params.toJson(),
+      callback: (response, success) {
+        ViewUtil.hideLoader();
+        if (success) {
+          Navigation.pop(
+            result: params,
+          );
+        }
+      },
+    );
   }
+
+  static void dispose() {
+    type.text = "";
+    module.text = "";
+    calorie.text = "";
+    duration.text = "";
+    textSections = [
+      TextSection(
+        section: TextEditingController(),
+        description: TextEditingController(),
+      ),
+    ];
+  }
+}
+
+class TextSection {
+  final TextEditingController section;
+  final TextEditingController description;
+
+  const TextSection({
+    required this.section,
+    required this.description,
+  });
+}

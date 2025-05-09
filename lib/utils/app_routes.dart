@@ -122,10 +122,9 @@ enum AppRoutes {
 extension AppRoutesExtention on AppRoutes {
   Widget buildWidget<T extends Object>({T? arguments}) {
     switch (this) {
-   
       case AppRoutes.listWorkoutAddModuleSelection:
-        return const ListWorkoutAddModuleSelectionScreen();
-  case AppRoutes.listWorkoutModules:
+        return ListWorkoutAddModuleSelectionScreen(id: arguments as int);
+      case AppRoutes.listWorkoutModules:
         return ListWorkoutModulesScreen(id: arguments as int);
       case AppRoutes.listWorkoutForm:
         return const ListWorkoutFormScreen();

@@ -5,17 +5,26 @@ import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
 import '../../../utils/app_routes.dart';
 import '../../../utils/navigation.dart';
+import '../../list_workout_add_module_selection/model/text_module_model.dart';
 import '/global/widget/global_appbar.dart';
 import '/global/widget/global_text.dart';
 import 'package:flutter/material.dart';
 
-class ListWorkoutModulesScreen extends StatelessWidget {
+class ListWorkoutModulesScreen extends StatefulWidget {
   final int id;
 
   const ListWorkoutModulesScreen({
     Key? key,
     required this.id,
   }) : super(key: key);
+
+  @override
+  State<ListWorkoutModulesScreen> createState() =>
+      _ListWorkoutModulesScreenState();
+}
+
+class _ListWorkoutModulesScreenState extends State<ListWorkoutModulesScreen> {
+  List<TextModuleModel> modules = [];
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +43,13 @@ class ListWorkoutModulesScreen extends StatelessWidget {
               onTap: () {
                 Navigation.push(
                   appRoutes: AppRoutes.listWorkoutAddModuleSelection,
-                  arguments: id,
-                );
+                  arguments: widget.id,
+                ).then((result) {
+                  if (result is TextModuleModel) {
+                    modules.add(result);
+                    setState(() {});
+                  }
+                });
               },
               child: Container(
                 padding: EdgeInsets.symmetric(
