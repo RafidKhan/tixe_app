@@ -5,6 +5,7 @@ import 'package:tixe_flutter_app/modules/arms_cart/views/components/amount_secti
 import 'package:tixe_flutter_app/modules/arms_cart/views/components/cart_list_widget.dart';
 import 'package:tixe_flutter_app/modules/arms_cart/views/components/custom_container_widget.dart';
 import 'package:tixe_flutter_app/modules/arms_cart/views/components/shopping_section_widget.dart';
+import 'package:tixe_flutter_app/modules/arms_payment/views/payment_success_screen.dart';
 import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
@@ -77,9 +78,7 @@ class ArmsPaymentScreen extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigation.push(
-                            appRoutes: AppRoutes.armsPayment,
-                          );
+                         Navigator.push(context, MaterialPageRoute(builder: (context)=>PaymentSuccessScreen()));
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: KColor.btnGradient1.color,
