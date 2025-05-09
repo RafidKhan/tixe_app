@@ -5,6 +5,7 @@ import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
 import 'package:tixe_flutter_app/global/widget/global_textformfield.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
 import 'package:tixe_flutter_app/modules/list_workout_add_module_selection/views/components/text_type_view.dart';
+import 'package:tixe_flutter_app/modules/list_workout_add_module_selection/views/components/video_type_view.dart';
 import 'package:tixe_flutter_app/modules/list_workout_modules/controller/list_workout_modules_controller.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
@@ -15,6 +16,8 @@ import '../controller/list_workout_add_module_selection_controller.dart';
 import '/global/widget/global_appbar.dart';
 import '/global/widget/global_text.dart';
 import 'package:flutter/material.dart';
+
+import 'components/pdf_type_view.dart';
 
 enum ModuleTypeEnum {
   Text,
@@ -112,6 +115,14 @@ class _ListWorkoutAddModuleSelectionScreenState
                         ModuleTypeEnum.Text) ...[
                       const TextTypeView(),
                     ],
+                    if (ModuleController.selectedType ==
+                        ModuleTypeEnum.Doc) ...[
+                      const PdfTypeView(),
+                    ],
+                    if (ModuleController.selectedType ==
+                        ModuleTypeEnum.Video) ...[
+                      const VideoTypeView(),
+                    ],
                     SizedBox(height: 10.h),
                     Row(
                       children: [
@@ -152,6 +163,8 @@ class _ListWorkoutAddModuleSelectionScreenState
         onPressed: () {
           if (ModuleController.selectedType == ModuleTypeEnum.Text) {
             ModuleController.createTextModule(widget.id.toString());
+          } else {
+            ModuleController.createFileModule(widget.id.toString());
           }
         },
         buttonText: "Save",

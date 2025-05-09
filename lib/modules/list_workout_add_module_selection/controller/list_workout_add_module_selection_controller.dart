@@ -1,7 +1,11 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:tixe_flutter_app/data_provider/api_client.dart';
 import 'package:tixe_flutter_app/modules/list_workout_add_module_selection/model/text_module_model.dart';
 import 'package:tixe_flutter_app/modules/list_workout_add_module_selection/views/list_workout_add_module_selection_screen.dart';
+import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 
@@ -14,6 +18,7 @@ class ModuleController {
   static final TextEditingController calorie = TextEditingController();
   static final TextEditingController duration = TextEditingController();
   static ModuleTypeEnum? selectedType;
+  static File? pickedFile;
 
   static final List<ModuleType> types = [
     const ModuleType(
@@ -66,17 +71,54 @@ class ModuleController {
     );
   }
 
+  static Future<void> createFileModule(String id) async {
+    ViewUtil.showLoaderPage();
+    final params = {
+      "type": selectedType == ModuleTypeEnum.Doc ? "pdf" : "video",
+      "title": module.text,
+      "description": "",
+      "cal": calorie.text,
+      "duration_time": duration.text,
+    };
+
+    final formData = FormData.fromMap(params);
+    final String keyName = selectedType == ModuleTypeEnum.Doc ? "pdf" : "video";
+    if (pickedFile != null) {
+      formData.files.add(MapEntry(
+        keyName,
+        await MultipartFile.fromFile(
+          pickedFile!.path,
+          filename: pickedFile!.fileName,
+        ),
+      ));
+    }
+
+    await ApiClient().request(
+      url: "workout-services/$id/adding-module",
+      method: Method.POST,
+      params: formData,
+      callback: (response, success) {
+        ViewUtil.hideLoader();
+        if (success) {
+          Navigation.pop(result: true);
+        }
+      },
+    );
+  }
+
   static void dispose() {
     type.text = "";
     module.text = "";
     calorie.text = "";
     duration.text = "";
+    selectedType = null;
     textSections = [
       TextSection(
         section: TextEditingController(),
         description: TextEditingController(),
       ),
     ];
+    pickedFile = null;
   }
 }
 

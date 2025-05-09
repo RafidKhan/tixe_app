@@ -1,4 +1,5 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tixe_flutter_app/global/widget/global_bottom_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
@@ -102,7 +103,14 @@ class _ListWorkoutModulesScreenState extends State<ListWorkoutModulesScreen> {
           )
         ],
       ),
+      bottomNavigationBar: GlobalBottomButton(
+        onPressed: count <= 0
+            ? null
+            : () {
+                Navigation.pushAndRemoveUntil(appRoutes: AppRoutes.dashboard);
+              },
+        buttonText: "Save",
+      ),
     );
   }
 }
-

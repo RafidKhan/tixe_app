@@ -51,4 +51,29 @@ class CustomFilePicker {
       return;
     }
   }
+
+  static Future<void> pickPdfFile({
+    required Function(File file) onSuccess,
+}) async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf'],
+    );
+
+    if (result != null && result.files.single.path != null) {
+      return onSuccess(File(result.files.single.path!));
+    }
+  }
+
+  static Future<void> pickVideoFile({
+    required Function(File file) onSuccess,
+  }) async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.video,
+    );
+
+    if (result != null && result.files.single.path != null) {
+      return onSuccess(File(result.files.single.path!));
+    }
+  }
 }
