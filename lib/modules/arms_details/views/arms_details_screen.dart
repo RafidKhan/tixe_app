@@ -56,12 +56,12 @@ class ArmsDetailsScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    width: double.infinity, // Makes the button take full width
+                    width: double.infinity,
                     child: OutlinedButton(
                       onPressed: () {},
                       style: OutlinedButton.styleFrom(
-                        backgroundColor: Colors.black, // Black background
-                        side: BorderSide(color: KColor.btnGradient1.color, width: 2), // Yellow border
+                        backgroundColor: Colors.black,
+                        side: BorderSide(color: KColor.btnGradient1.color, width: 2),
                         padding: EdgeInsets.symmetric(vertical: 12.h),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.r),
@@ -76,13 +76,13 @@ class ArmsDetailsScreen extends StatelessWidget {
         
                     ),
                   ),
-                  const SizedBox(height: 10), // Space between buttons
+                  const SizedBox(height: 10),
                   SizedBox(
-                    width: double.infinity, // Makes the button take full width
+                    width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: KColor.btnGradient1.color, // Yellow background
+                        backgroundColor: KColor.btnGradient1.color,
                         padding: EdgeInsets.symmetric(vertical: 12.h),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.r),
