@@ -233,9 +233,9 @@ class _ListWorkoutFormScreenState extends State<ListWorkoutFormScreen> {
       bottomNavigationBar: GlobalBottomButton(
         onPressed: isButtonEnabled
             ? () {
-          createWorkout();
-          //controller.saveArmsForm();
-        }
+                createWorkout();
+                //controller.saveArmsForm();
+              }
             : null,
         buttonText: "Proceed to Next Steps",
       ),
@@ -309,7 +309,8 @@ class _ListWorkoutFormScreenState extends State<ListWorkoutFormScreen> {
       "title": title.text,
       "notes": note.text,
       "description": description.text,
-      "enrollment_fee": enrollmentFees.text,
+      "enrollment_fee":
+          enrollmentFees.text.trim().isEmpty ? null : enrollmentFees.text,
       "gear_equipment": gearsAndEquipments.text,
       // Files will be added separately
     };
@@ -355,10 +356,10 @@ class _ListWorkoutFormScreenState extends State<ListWorkoutFormScreen> {
             "Training created successfully",
             context,
           );
-          // Navigation.push(
-          //   appRoutes: AppRoutes.listTrainingSchedules,
-          //   arguments: converted.data?.id,
-          // );
+          Navigation.push(
+            appRoutes: AppRoutes.listWorkoutModules,
+            arguments: converted.data?.id,
+          );
         }
       },
     );
