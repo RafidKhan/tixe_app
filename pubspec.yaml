@@ -49,7 +49,8 @@ dev_dependencies:
     sdk: flutter
   health:
     git:
-      url: https://RafidKhan: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@github.com/RafidKhan/health_connect.git
+      //url: https://RafidKhan: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@github.com/RafidKhan/health_connect.git
+      url: https://github.com/RafidKhan/health_connect
       ref: main  # Use the correct branch name
 
 
