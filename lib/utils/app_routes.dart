@@ -1,3 +1,4 @@
+import '../modules/arms_cart/views/arms_cart_screen.dart';
 import 'package:tixe_flutter_app/modules/list_workout_form/views/list_workout_form_screen.dart';
 
 import '../modules/arms_details/views/arms_details_screen.dart';
@@ -68,6 +69,7 @@ import '../modules/workout_flow/my_workout_select_phase/views/my_workout_select_
 
 enum AppRoutes {
   splash,
+  armsCart,
   armsDetails,
   listWorkoutForm,
   listWorkouts,
@@ -267,6 +269,8 @@ extension AppRoutesExtention on AppRoutes {
         return const FitnessScreen();
       case AppRoutes.armsDetails:
         return const ArmsDetailsScreen();
+      case AppRoutes.armsCart:
+        return const ArmsCartScreen();
     }
   }
 }

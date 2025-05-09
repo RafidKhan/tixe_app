@@ -5,7 +5,9 @@ import 'package:tixe_flutter_app/modules/arm_store/views/components/arm_store_he
 import 'package:tixe_flutter_app/modules/arms_details/views/components/custom_image_bg_container_widget.dart';
 import 'package:tixe_flutter_app/modules/arms_details/views/components/details_description_section_widget.dart';
 import 'package:tixe_flutter_app/modules/arms_details/views/components/details_title_section_widget.dart';
+import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
+import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 import '/global/widget/global_appbar.dart';
 import '/global/widget/global_text.dart';
@@ -80,7 +82,11 @@ class ArmsDetailsScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigation.push(
+                          appRoutes: AppRoutes.armsCart,
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: KColor.btnGradient1.color,
                         padding: EdgeInsets.symmetric(vertical: 12.h),
