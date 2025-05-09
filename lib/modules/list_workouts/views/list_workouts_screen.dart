@@ -118,12 +118,12 @@ class _ListWorkoutsScreenState extends State<ListWorkoutsScreen> {
       focusColor: KColor.transparent.color,
       highlightColor: KColor.transparent.color,
       onTap: () {
-        // Navigation.push(
-        //   appRoutes: AppRoutes.myListedTrainingDetail,
-        //   arguments: data.id,
-        // ).then((value) {
-        //   //controller.getArms();
-        // });
+        Navigation.push(
+          appRoutes: AppRoutes.listWorkoutDetails,
+          arguments: data.id,
+        ).then((value) {
+          //controller.getArms();
+        });
       },
       child: Container(
         padding: EdgeInsets.symmetric(
