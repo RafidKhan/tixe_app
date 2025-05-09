@@ -26,6 +26,7 @@ class AmountSectionWidget extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                   color: KColor.white.color,
                 ),
+                SizedBox(height: 5.h,),
                 GlobalText(
                   str: "Shipping",
                   fontSize: 16.sp,
@@ -44,6 +45,7 @@ class AmountSectionWidget extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                   color: KColor.white.color,
                 ),
+                SizedBox(height: 5.h,),
                 GlobalText(
                   str: "\$20.00",
                   fontSize: 16.sp,
@@ -54,6 +56,7 @@ class AmountSectionWidget extends StatelessWidget {
             )
           ],
         ),
+        SizedBox(height: 5.h,),
         GlobalText(
           str: "Discount Code",
           fontSize: 12.sp,
@@ -93,7 +96,7 @@ class AmountSectionWidget extends StatelessWidget {
         ),
 
 
-
+        SizedBox(height: 5.h,),
         Row(
           children: [
             Column(

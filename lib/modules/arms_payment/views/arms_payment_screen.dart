@@ -36,7 +36,7 @@ class ArmsPaymentScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const CartListWidget(),
-                    AmountSectionWidget(),
+                    const AmountSectionWidget(),
 
                     SizedBox(height: 20.h,),
                     GlobalText(
@@ -45,6 +45,7 @@ class ArmsPaymentScreen extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                       color: KColor.white.color,
                     ) ,
+                    SizedBox(height: 5.h,),
                     Stack(
                       children: [
                         CustomContainerWidget(

@@ -53,6 +53,7 @@ enum KAssetName {
   noTrainingPng,
   noArmsPng,
   noWorkoutPng,
+  paymentSuccessPng,
   paymentCompletePng,
   pdfPlaceholderPng,
   selectedCheckBoxPng,
@@ -185,6 +186,8 @@ extension AssetsExtension on KAssetName {
         return '$_imagesDir/no_arms.png';
       case KAssetName.noWorkoutPng:
         return '$_imagesDir/no_workout.png';
+      case KAssetName.paymentSuccessPng:
+        return '$_imagesDir/paymentSuccess.png';
       case KAssetName.paymentCompletePng:
         return '$_imagesDir/payment_complete.png';
       case KAssetName.pdfPlaceholderPng:
