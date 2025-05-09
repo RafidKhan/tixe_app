@@ -44,7 +44,7 @@ class ArmStoreGridview extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            height: (height / 2).h,
+            height: (height / 2.2).h,
             width: context.width,
             padding: EdgeInsets.all(16.r),
             decoration: BoxDecoration(

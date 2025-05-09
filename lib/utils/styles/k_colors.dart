@@ -42,8 +42,9 @@ extension KColorExtention on KColor {
         return const Color(0xffE1CB02);
       case KColor.btnGradient2:
         return const Color(0xffD1B41B);
-      case KColor.bodyGradient1:
-        return const Color(0xff272408);
+      case KColor.bodyGradient1: background:
+
+      return const Color(0xff272408);
       case KColor.bodyGradient2:
         return const Color(0xff161A22);
       case KColor.transparent:

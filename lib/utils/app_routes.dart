@@ -4,6 +4,14 @@ import '../modules/list_workout_add_module_selection/views/list_workout_add_modu
 import '../modules/list_workout_modules/views/list_workout_modules_screen.dart';
 import '../modules/list_workout_form/views/list_workout_form_screen.dart';
 import '../modules/list_workouts/views/list_workouts_screen.dart';
+import 'package:tixe_flutter_app/modules/list_workout_form/views/list_workout_form_screen.dart';
+
+import '../modules/arms_payment/views/arms_payment_screen.dart';
+import '../modules/arms_cart/views/arms_cart_screen.dart';
+
+import '../modules/arms_details/views/arms_details_screen.dart';
+import 'package:tixe_flutter_app/modules/list_workouts/views/list_workouts_screen.dart';
+
 import '../modules/my_listed_training_detail/views/my_listed_training_detail_screen.dart';
 import '../modules/training_gear_select/views/training_gear_select_screen.dart';
 import '../modules/training_selected_gears_list/views/training_selected_gears_list_screen.dart';
@@ -73,6 +81,9 @@ enum AppRoutes {
   listWorkoutDetails,
   listWorkoutAddModuleSelection,
   listWorkoutModules,
+  armsPayment,
+  armsCart,
+  armsDetails,
   listWorkoutForm,
   listWorkouts,
   myListedTrainingDetail,
@@ -126,7 +137,7 @@ enum AppRoutes {
 extension AppRoutesExtention on AppRoutes {
   Widget buildWidget<T extends Object>({T? arguments}) {
     switch (this) {
-  
+
       case AppRoutes.listWorkoutModulesData:
         return  ListWorkoutModulesDataScreen(id: arguments as int);
    case AppRoutes.listWorkoutDetails:
@@ -135,6 +146,7 @@ extension AppRoutesExtention on AppRoutes {
         return ListWorkoutAddModuleSelectionScreen(id: arguments as int);
       case AppRoutes.listWorkoutModules:
         return ListWorkoutModulesScreen(id: arguments as int);
+
       case AppRoutes.listWorkoutForm:
         return const ListWorkoutFormScreen();
       case AppRoutes.listWorkouts:
@@ -277,6 +289,12 @@ extension AppRoutesExtention on AppRoutes {
         return const AllWorkoutHistory();
       case AppRoutes.fitness:
         return const FitnessScreen();
+      case AppRoutes.armsDetails:
+        return const ArmsDetailsScreen();
+      case AppRoutes.armsCart:
+        return const ArmsCartScreen();
+      case AppRoutes.armsPayment:
+        return const ArmsPaymentScreen();
     }
   }
 }
