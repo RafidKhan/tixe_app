@@ -1,6 +1,8 @@
+import 'package:tixe_flutter_app/modules/list_workout_form/views/list_workout_form_screen.dart';
+
+import '../modules/arms_details/views/arms_details_screen.dart';
 import 'package:tixe_flutter_app/modules/list_workouts/views/list_workouts_screen.dart';
 
-import '../modules/list_workout_form/views/list_workout_form_screen.dart';
 import '../modules/my_listed_training_detail/views/my_listed_training_detail_screen.dart';
 import '../modules/training_gear_select/views/training_gear_select_screen.dart';
 import '../modules/training_selected_gears_list/views/training_selected_gears_list_screen.dart';
@@ -66,6 +68,7 @@ import '../modules/workout_flow/my_workout_select_phase/views/my_workout_select_
 
 enum AppRoutes {
   splash,
+  armsDetails,
   listWorkoutForm,
   listWorkouts,
   myListedTrainingDetail,
@@ -262,6 +265,8 @@ extension AppRoutesExtention on AppRoutes {
         return const AllWorkoutHistory();
       case AppRoutes.fitness:
         return const FitnessScreen();
+      case AppRoutes.armsDetails:
+        return const ArmsDetailsScreen();
     }
   }
 }
