@@ -21,13 +21,19 @@ import '../../../global/widget/global_image_loader.dart';
 import '../../../utils/enum.dart';
 import '../../../utils/styles/k_colors.dart';
 import '../../../utils/view_util.dart';
+import '../../my_listed_training_detail/model/list_training_details.dart';
 import '../model/create_training_response.dart';
 import '/global/widget/global_appbar.dart';
 import '/global/widget/global_text.dart';
 import 'package:flutter/material.dart';
 
 class ListTrainingFormScreen extends StatefulWidget {
-  const ListTrainingFormScreen({super.key});
+  final ListTrainingDetails? details;
+
+  const ListTrainingFormScreen({
+    super.key,
+    this.details,
+  });
 
   @override
   State<ListTrainingFormScreen> createState() => _ListTrainingFormScreenState();
@@ -48,6 +54,8 @@ class _ListTrainingFormScreenState extends State<ListTrainingFormScreen> {
 
   List<PreRequisition> preRequisitions = [];
 
+  bool isEdit = false;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -60,7 +68,31 @@ class _ListTrainingFormScreenState extends State<ListTrainingFormScreen> {
       preRequisite.addListener(checkButtonStatus);
       maxEnrollment.addListener(checkButtonStatus);
       enrollmentFees.addListener(checkButtonStatus);
+      checkIsEdit();
     });
+  }
+
+  void checkIsEdit() {
+    isEdit = widget.details != null;
+    if (isEdit) {
+      final data = widget.details?.data?.trainingService;
+      title.text = data?.title ?? "";
+      location.text = data?.address ?? "";
+      description.text = data?.description ?? "";
+      preRequisite.text =
+          data?.prerequisites?.map((e) => e.title).toList().join(",\n\n") ?? "";
+      maxEnrollment.text = data?.maxEnrollment.toString() ?? "";
+      enrollmentFees.text = data?.enrollmentFee.toString() ?? "";
+
+      //selectedPreRequisitionIds = preRequisitions.where((e)=>e.title).toList();
+
+      // selectedPreRequisitionIds = preRequisitions.where((e)=>)
+      // selectedPreRequisitionIds =
+      //     data?.prerequisites?.map((e) => e.title ?? 0).toList() ?? [];
+      //featuredImage = data?.g;
+      //images = widget.details?.galleryImages.map((e) => File(e)).toList() ?? [];
+    }
+    setState(() {});
   }
 
   @override

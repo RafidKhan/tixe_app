@@ -1,3 +1,5 @@
+import 'package:tixe_flutter_app/modules/my_listed_training_detail/model/list_training_details.dart';
+
 import '../modules/list_workout_modules_data/views/list_workout_modules_data_screen.dart';
 import '../modules/list_workout_details/views/list_workout_details_screen.dart';
 import '../modules/list_workout_add_module_selection/views/list_workout_add_module_selection_screen.dart';
@@ -163,7 +165,7 @@ extension AppRoutesExtention on AppRoutes {
       case AppRoutes.listTrainingSchedules:
         return ListTrainingSchedulesScreen(trainingId: arguments as int);
       case AppRoutes.listTrainingForm:
-        return const ListTrainingFormScreen();
+        return  ListTrainingFormScreen(details: arguments as ListTrainingDetails?,);
       case AppRoutes.listTraining:
         return const ListTrainingScreen();
 
