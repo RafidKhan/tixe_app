@@ -250,18 +250,22 @@ class Day {
 }
 
 class GearsEquipment {
+  int? id;
   String? title;
 
   GearsEquipment({
+    this.id,
     this.title,
   });
 
   factory GearsEquipment.fromJson(Map<String, dynamic> json) => GearsEquipment(
         title: json["title"],
+        id: json["id"],
       );
 
   Map<String, dynamic> toJson() => {
         "title": title,
+        "id": id,
       };
 }
 
