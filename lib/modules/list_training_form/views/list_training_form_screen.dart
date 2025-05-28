@@ -57,7 +57,8 @@ class _ListTrainingFormScreenState extends State<ListTrainingFormScreen> {
   List<PreRequisition> preRequisitions = [];
 
   bool isEdit = false;
-  bool showImageFromNetwork = false;
+  bool showFeaturedImageFromNetwork = false;
+  bool showListImageFromNetwork = false;
 
   @override
   void initState() {
@@ -78,7 +79,8 @@ class _ListTrainingFormScreenState extends State<ListTrainingFormScreen> {
   void checkIsEdit() {
     isEdit = widget.details != null;
     if (isEdit) {
-      showImageFromNetwork = true;
+      showFeaturedImageFromNetwork = true;
+      showListImageFromNetwork = true;
       final data = widget.details?.data?.trainingService;
       title.text = data?.title ?? "";
       location.text = data?.address ?? "";
@@ -102,7 +104,7 @@ class _ListTrainingFormScreenState extends State<ListTrainingFormScreen> {
 
       featuredNetworkImage = data?.image;
       networkImages = (data?.galleryImages ?? [])
-          .map((e) => CustomImage(path: e , imageFor: ImageFor.network))
+          .map((e) => CustomImage(path: e, imageFor: ImageFor.network))
           .toList();
     }
     setState(() {});
@@ -126,13 +128,13 @@ class _ListTrainingFormScreenState extends State<ListTrainingFormScreen> {
                   children: [
                     Column(
                       children: [
-                        if (showImageFromNetwork) ...[
+                        if (showFeaturedImageFromNetwork) ...[
                           Stack(
                             children: [
                               InkWell(
                                 onTap: featuredNetworkImage == null
                                     ? () {
-                                        showImageFromNetwork = false;
+                                        showFeaturedImageFromNetwork = false;
                                         selectFeaturedImage();
                                       }
                                     : null,
@@ -155,8 +157,16 @@ class _ListTrainingFormScreenState extends State<ListTrainingFormScreen> {
                                   alignment: Alignment.topRight,
                                   child: IconButton(
                                     onPressed: () {
-                                      featuredNetworkImage = null;
-                                      setState(() {});
+                                      deleteImage(
+                                        featuredNetworkImage!,
+                                        onSuccess: () {
+                                          showFeaturedImageFromNetwork = false;
+                                          featuredNetworkImage = null;
+                                          setState(() {});
+                                        },
+                                      );
+                                      // featuredNetworkImage = null;
+                                      // setState(() {});
                                       //removeFeaturedImage();
                                     },
                                     icon: Icon(
@@ -209,7 +219,7 @@ class _ListTrainingFormScreenState extends State<ListTrainingFormScreen> {
                         SizedBox(
                           height: 20.h,
                         ),
-                        if (showImageFromNetwork) ...[
+                        if (showListImageFromNetwork) ...[
                           SizedBox(
                             height: 100.h,
                             child: ListView.separated(
@@ -238,7 +248,15 @@ class _ListTrainingFormScreenState extends State<ListTrainingFormScreen> {
                                         ),
                                         child: InkWell(
                                           onTap: () {
-                                            removeNetworkImage(index);
+                                            if (image.imageFor ==
+                                                ImageFor.network) {
+                                              deleteImage(image.path,
+                                                  onSuccess: () {
+                                                removeNetworkImage(index);
+                                              });
+                                            } else {
+                                              removeNetworkImage(index);
+                                            }
                                           },
                                           child: Icon(
                                             Icons.delete,
@@ -449,7 +467,12 @@ class _ListTrainingFormScreenState extends State<ListTrainingFormScreen> {
       bottomNavigationBar: GlobalBottomButton(
         onPressed: isButtonEnabled
             ? () {
-                createTraining();
+                if (isEdit) {
+                  updateTraining();
+                } else {
+                  createTraining();
+                }
+
                 //controller.saveArmsForm();
               }
             : null,
@@ -542,14 +565,16 @@ class _ListTrainingFormScreenState extends State<ListTrainingFormScreen> {
   }
 
   void checkButtonStatus() {
-    isButtonEnabled = featuredImage != null &&
-        images.isNotEmpty &&
-        title.text.trim().isNotEmpty &&
-        location.text.trim().isNotEmpty &&
-        description.text.trim().isNotEmpty &&
-        preRequisite.text.trim().isNotEmpty &&
-        maxEnrollment.text.trim().isNotEmpty &&
-        enrollmentFees.text.trim().isNotEmpty;
+    isButtonEnabled = isEdit
+        ? true
+        : featuredImage != null &&
+            images.isNotEmpty &&
+            title.text.trim().isNotEmpty &&
+            location.text.trim().isNotEmpty &&
+            description.text.trim().isNotEmpty &&
+            preRequisite.text.trim().isNotEmpty &&
+            maxEnrollment.text.trim().isNotEmpty &&
+            enrollmentFees.text.trim().isNotEmpty;
     setState(() {});
   }
 
@@ -615,6 +640,97 @@ class _ListTrainingFormScreenState extends State<ListTrainingFormScreen> {
             appRoutes: AppRoutes.listTrainingSchedules,
             arguments: converted.data?.id,
           );
+        }
+      },
+    );
+  }
+
+  Future<void> updateTraining() async {
+    ViewUtil.showLoaderPage();
+    final map = {
+      "title": title.text,
+      "description": description.text,
+      "lat": "-6.792354",
+      "lon": "107.679721",
+      "max_enrollment": maxEnrollment.text,
+      "enrollment_fee": enrollmentFees.text,
+      "pre_requisitions[]": selectedPreRequisitionIds,
+      // Files will be added separately
+    };
+    'here is: $map'.log();
+    'featuredImage is: ${featuredImage?.path}'.log();
+
+    final formData = FormData.fromMap(map);
+
+    // Add feature image
+    if (featuredImage != null) {
+      formData.files.add(MapEntry(
+        'image',
+        await MultipartFile.fromFile(
+          featuredImage!.path, // Replace with actual file path
+          filename: featuredImage!.path.split("/").last,
+        ),
+      ));
+    }
+
+    final imagePaths = images.map((e) => e.path).toList();
+
+    for (var path in imagePaths) {
+      formData.files.add(MapEntry(
+        'gallery_images[]', // Note: same key for multiple files
+        await MultipartFile.fromFile(
+          path,
+          filename: path.split('/').last,
+        ),
+      ));
+    }
+
+    // formData.files.forEach((element) {
+    //   'key: ${element.key}, value: ${element.value}'.log();
+    // });
+
+    await await ApiClient().request(
+      url:
+          "training-services/${widget.details?.data?.trainingService?.id}/update",
+      method: Method.POST,
+      params: formData,
+      callback: (response, success) {
+        ViewUtil.hideLoader();
+        //Navigation.pop();
+        if (success && response != null) {
+          final converted = CreateTrainingResponse.fromJson(response.data);
+          ViewUtil.snackBar(
+            "Training updated successfully",
+            context,
+          );
+          Navigation.push(
+            appRoutes: AppRoutes.listTrainingSchedules,
+            arguments: converted.data?.id,
+          );
+        }
+      },
+    );
+  }
+
+  Future<void> deleteImage(
+    String filePath, {
+    required Function() onSuccess,
+  }) async {
+    ViewUtil.showLoaderPage();
+    await ApiClient().request(
+      url: 'media/delete',
+      method: Method.POST,
+      params: {
+        "service_type": 'training',
+        'id': widget.details?.data?.trainingService?.id,
+        "image_or_video": 'image',
+        "file_path": filePath,
+      },
+      callback: (response, success) {
+        ViewUtil.hideLoader();
+        if (success) {
+          onSuccess();
+          ViewUtil.snackBar("Image Deleted", context);
         }
       },
     );

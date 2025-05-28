@@ -92,7 +92,7 @@ class TrainingService {
   dynamic conveiencesFee;
   List<GearsEquipment>? prerequisites;
   List<GearsEquipment>? gearsEquipments;
-  dynamic address;
+  String? address;
   String? scheduleType;
   dynamic discountCode;
   dynamic timeSchedule;
