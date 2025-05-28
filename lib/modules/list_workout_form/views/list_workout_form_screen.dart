@@ -18,12 +18,19 @@ import '../../../utils/navigation.dart';
 import '../../../utils/styles/k_assets.dart';
 import '../../../utils/styles/k_colors.dart';
 import '../../../utils/view_util.dart';
+import '../../list_training_form/views/list_training_form_screen.dart';
+import '../../list_workout_modules/model/list_workout_detail.dart';
 import '../model/list_workout_response.dart';
 import '/global/widget/global_text.dart';
 import 'package:flutter/material.dart';
 
 class ListWorkoutFormScreen extends StatefulWidget {
-  const ListWorkoutFormScreen({Key? key}) : super(key: key);
+  final ListWorkoutData? data;
+
+  const ListWorkoutFormScreen({
+    Key? key,
+    this.data,
+  }) : super(key: key);
 
   @override
   State<ListWorkoutFormScreen> createState() => _ListWorkoutFormScreenState();
@@ -33,11 +40,19 @@ class _ListWorkoutFormScreenState extends State<ListWorkoutFormScreen> {
   bool isButtonEnabled = false;
   File? featuredImage;
   List<File> images = [];
+
+  String? featuredNetworkImage;
+  List<CustomImage> networkImages = [];
+
   final TextEditingController title = TextEditingController();
   final TextEditingController description = TextEditingController();
   final TextEditingController note = TextEditingController();
   final TextEditingController gearsAndEquipments = TextEditingController();
   final TextEditingController enrollmentFees = TextEditingController();
+
+  bool get isEdit => widget.data != null;
+  bool showFeaturedImageFromNetwork = false;
+  bool showListImageFromNetwork = false;
 
   @override
   void initState() {
@@ -49,16 +64,37 @@ class _ListWorkoutFormScreenState extends State<ListWorkoutFormScreen> {
       note.addListener(checkButtonStatus);
       gearsAndEquipments.addListener(checkButtonStatus);
       enrollmentFees.addListener(checkButtonStatus);
+      checkIsEdit();
     });
   }
 
+  checkIsEdit() {
+    if (isEdit) {
+      title.text = widget.data?.title ?? '';
+      description.text = widget.data?.description ?? '';
+      note.text = widget.data?.notices ?? '';
+      gearsAndEquipments.text = widget.data?.gearEquipment ?? '';
+      enrollmentFees.text = widget.data?.enrollmentFee ?? '';
+
+      featuredNetworkImage = widget.data?.image;
+      networkImages = (widget.data?.galleryImages ?? [])
+          .map((e) => CustomImage(path: e, imageFor: ImageFor.network))
+          .toList();
+
+      showFeaturedImageFromNetwork = featuredNetworkImage != null;
+      showListImageFromNetwork = networkImages.isNotEmpty;
+    }
+  }
+
   void checkButtonStatus() {
-    isButtonEnabled = featuredImage != null &&
-        images.isNotEmpty &&
-        title.text.trim().isNotEmpty &&
-        description.text.trim().isNotEmpty &&
-        note.text.trim().isNotEmpty &&
-        gearsAndEquipments.text.trim().isNotEmpty;
+    isButtonEnabled = isEdit
+        ? true
+        : featuredImage != null &&
+            images.isNotEmpty &&
+            title.text.trim().isNotEmpty &&
+            description.text.trim().isNotEmpty &&
+            note.text.trim().isNotEmpty &&
+            gearsAndEquipments.text.trim().isNotEmpty;
     setState(() {});
   }
 
@@ -80,107 +116,225 @@ class _ListWorkoutFormScreenState extends State<ListWorkoutFormScreen> {
                   children: [
                     Column(
                       children: [
-                        Stack(
-                          children: [
-                            InkWell(
-                              onTap: featuredImage == null
-                                  ? () {
-                                      selectFeaturedImage();
-                                    }
-                                  : null,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(4.r),
-                                child: GlobalImageLoader(
-                                  imagePath: featuredImage != null
-                                      ? featuredImage!.path
-                                      : KAssetName.addPhoto1Png.imagePath,
-                                  height: 200.h,
-                                  width: double.infinity,
-                                  imageFor: featuredImage != null
-                                      ? ImageFor.file
-                                      : ImageFor.asset,
-                                ),
-                              ),
-                            ),
-                            if (featuredImage != null)
-                              Align(
-                                alignment: Alignment.topRight,
-                                child: IconButton(
-                                  onPressed: () {
-                                    removeFeaturedImage();
-                                  },
-                                  icon: Icon(
-                                    Icons.delete,
-                                    color: KColor.white.color,
-                                  ),
-                                ),
-                              ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 20.h,
-                        ),
-                        SizedBox(
-                          height: 100.h,
-                          child: ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: images.length + 1,
-                            itemBuilder: (context, index) {
-                              if (index < images.length) {
-                                final image = images[index];
-                                return Stack(
-                                  alignment: Alignment.topRight,
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(4.r),
-                                      child: GlobalImageLoader(
-                                        imagePath: image.path,
-                                        height: 100.h,
-                                        width: 100.w,
-                                        imageFor: ImageFor.file,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 6.w,
-                                        vertical: 6.h,
-                                      ),
-                                      child: InkWell(
-                                        onTap: () {
-                                          removeImage(index);
-                                        },
-                                        child: Icon(
-                                          Icons.delete,
-                                          color: KColor.white.color,
-                                          size: 18.w,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              }
-                              return InkWell(
-                                onTap: () {
-                                  addImage();
-                                },
+                        if (showFeaturedImageFromNetwork) ...[
+                          Stack(
+                            children: [
+                              InkWell(
+                                onTap: featuredNetworkImage == null
+                                    ? () {
+                                        selectFeaturedImage();
+                                      }
+                                    : null,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(4.r),
                                   child: GlobalImageLoader(
-                                    imagePath:
-                                        KAssetName.addPhoto2Png.imagePath,
-                                    height: 100.h,
-                                    width: 100.w,
+                                    imagePath: featuredNetworkImage ?? "",
+                                    height: 200.h,
+                                    width: double.infinity,
+                                    imageFor: ImageFor.network,
                                   ),
                                 ),
-                              );
-                            },
-                            separatorBuilder: (context, index) {
-                              return SizedBox(
-                                width: 10.w,
-                              );
-                            },
+                              ),
+                              if (featuredNetworkImage != null)
+                                Align(
+                                  alignment: Alignment.topRight,
+                                  child: IconButton(
+                                    onPressed: () {
+                                      deleteImage(
+                                        featuredNetworkImage!,
+                                        onSuccess: () {
+                                          showFeaturedImageFromNetwork = false;
+                                          featuredNetworkImage = null;
+                                          setState(() {});
+                                        },
+                                      );
+                                      //removeFeaturedImage();
+                                    },
+                                    icon: Icon(
+                                      Icons.delete,
+                                      color: KColor.white.color,
+                                    ),
+                                  ),
+                                ),
+                            ],
                           ),
-                        )
+                        ] else ...[
+                          Stack(
+                            children: [
+                              InkWell(
+                                onTap: featuredImage == null
+                                    ? () {
+                                        selectFeaturedImage();
+                                      }
+                                    : null,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(4.r),
+                                  child: GlobalImageLoader(
+                                    imagePath: featuredImage != null
+                                        ? featuredImage!.path
+                                        : KAssetName.addPhoto1Png.imagePath,
+                                    height: 200.h,
+                                    width: double.infinity,
+                                    imageFor: featuredImage != null
+                                        ? ImageFor.file
+                                        : ImageFor.asset,
+                                  ),
+                                ),
+                              ),
+                              if (featuredImage != null)
+                                Align(
+                                  alignment: Alignment.topRight,
+                                  child: IconButton(
+                                    onPressed: () {
+                                      removeFeaturedImage();
+                                    },
+                                    icon: Icon(
+                                      Icons.delete,
+                                      color: KColor.white.color,
+                                    ),
+                                  ),
+                                ),
+                            ],
+                          ),
+                        ],
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        if (showListImageFromNetwork) ...[
+                          SizedBox(
+                            height: 100.h,
+                            child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: networkImages.length + 1,
+                              itemBuilder: (context, index) {
+                                if (index < networkImages.length) {
+                                  final image = networkImages[index];
+                                  return Stack(
+                                    alignment: Alignment.topRight,
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(4.r),
+                                        child: GlobalImageLoader(
+                                          imagePath: image.path,
+                                          height: 100.h,
+                                          width: 100.w,
+                                          imageFor: image.imageFor,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 6.w,
+                                          vertical: 6.h,
+                                        ),
+                                        child: InkWell(
+                                          onTap: () {
+                                            if (image.imageFor ==
+                                                ImageFor.network) {
+                                              deleteImage(image.path,
+                                                  onSuccess: () {
+                                                removeNetworkImage(index);
+                                              });
+                                            } else {
+                                              removeNetworkImage(index);
+                                            }
+                                          },
+                                          child: Icon(
+                                            Icons.delete,
+                                            color: KColor.white.color,
+                                            size: 18.w,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                }
+                                return InkWell(
+                                  onTap: () {
+                                    addNetworkImage();
+                                  },
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(4.r),
+                                    child: GlobalImageLoader(
+                                      imagePath:
+                                          KAssetName.addPhoto2Png.imagePath,
+                                      height: 100.h,
+                                      width: 100.w,
+                                    ),
+                                  ),
+                                );
+                              },
+                              separatorBuilder: (context, index) {
+                                return SizedBox(
+                                  width: 10.w,
+                                );
+                              },
+                            ),
+                          )
+                        ] else ...[
+                          SizedBox(
+                            height: 100.h,
+                            child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: images.length + 1,
+                              itemBuilder: (context, index) {
+                                if (index < images.length) {
+                                  final image = images[index];
+                                  return Stack(
+                                    alignment: Alignment.topRight,
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(4.r),
+                                        child: GlobalImageLoader(
+                                          imagePath: image.path,
+                                          height: 100.h,
+                                          width: 100.w,
+                                          imageFor: ImageFor.file,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 6.w,
+                                          vertical: 6.h,
+                                        ),
+                                        child: InkWell(
+                                          onTap: () {
+                                            removeImage(index);
+                                          },
+                                          child: Icon(
+                                            Icons.delete,
+                                            color: KColor.white.color,
+                                            size: 18.w,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                }
+                                return InkWell(
+                                  onTap: () {
+                                    addImage();
+                                  },
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(4.r),
+                                    child: GlobalImageLoader(
+                                      imagePath:
+                                          KAssetName.addPhoto2Png.imagePath,
+                                      height: 100.h,
+                                      width: 100.w,
+                                    ),
+                                  ),
+                                );
+                              },
+                              separatorBuilder: (context, index) {
+                                return SizedBox(
+                                  width: 10.w,
+                                );
+                              },
+                            ),
+                          )
+                        ],
                       ],
                     ),
                     SizedBox(height: 10.h),
@@ -233,12 +387,63 @@ class _ListWorkoutFormScreenState extends State<ListWorkoutFormScreen> {
       bottomNavigationBar: GlobalBottomButton(
         onPressed: isButtonEnabled
             ? () {
-                createWorkout();
+                if (isEdit) {
+                  updateWorkout();
+                } else {
+                  createWorkout();
+                }
+
                 //controller.saveArmsForm();
               }
             : null,
         buttonText: "Proceed to Next Steps",
       ),
+    );
+  }
+
+  void removeNetworkImage(int index) {
+    networkImages.removeAt(index);
+    checkButtonStatus();
+    setState(() {});
+  }
+
+  void addNetworkImage() async {
+    if (networkImages.length >= 5) {
+      ViewUtil.snackBar(
+        "You can add maximum 5 images",
+        context,
+      );
+      return;
+    }
+    final file = await pickImage();
+    if (file != null) {
+      networkImages.add(CustomImage(path: file.path, imageFor: ImageFor.file));
+      checkButtonStatus();
+      setState(() {});
+    }
+  }
+
+  Future<void> deleteImage(
+    String filePath, {
+    required Function() onSuccess,
+  }) async {
+    ViewUtil.showLoaderPage();
+    await ApiClient().request(
+      url: 'media/delete',
+      method: Method.POST,
+      params: {
+        "service_type": 'workout',
+        'id': widget.data?.id,
+        "image_or_video": 'image',
+        "file_path": filePath,
+      },
+      callback: (response, success) {
+        ViewUtil.hideLoader();
+        if (success) {
+          onSuccess();
+          ViewUtil.snackBar("Image Deleted", context);
+        }
+      },
     );
   }
 
@@ -316,7 +521,6 @@ class _ListWorkoutFormScreenState extends State<ListWorkoutFormScreen> {
     };
     'here is: $map'.log();
 
-
     final formData = FormData.fromMap(map);
 
     // Add feature image
@@ -354,7 +558,71 @@ class _ListWorkoutFormScreenState extends State<ListWorkoutFormScreen> {
         if (success && response != null) {
           final converted = ListWorkoutFormResponse.fromJson(response.data);
           ViewUtil.snackBar(
-            "Training created successfully",
+            "Workout created successfully",
+            context,
+          );
+          Navigation.push(
+            appRoutes: AppRoutes.listWorkoutModules,
+            arguments: converted.data?.id,
+          );
+        }
+      },
+    );
+  }
+
+  Future<void> updateWorkout() async {
+    ViewUtil.showLoaderPage();
+    final map = {
+      "title": title.text,
+      "notes": note.text,
+      "description": description.text,
+      "enrollment_fee":
+          enrollmentFees.text.trim().isEmpty ? null : enrollmentFees.text,
+      "gear_equipment": gearsAndEquipments.text,
+      // Files will be added separately
+    };
+    'here is: $map'.log();
+
+    final formData = FormData.fromMap(map);
+
+    // Add feature image
+    if (featuredImage != null) {
+      formData.files.add(MapEntry(
+        'image',
+        await MultipartFile.fromFile(
+          featuredImage!.path, // Replace with actual file path
+          filename: featuredImage!.path.split("/").last,
+        ),
+      ));
+    }
+
+    final imagePaths = images.map((e) => e.path).toList();
+
+    for (var path in imagePaths) {
+      formData.files.add(MapEntry(
+        'gallery_images[]', // Note: same key for multiple files
+        await MultipartFile.fromFile(
+          path,
+          filename: path.split('/').last,
+        ),
+      ));
+    }
+
+    // formData.files.forEach((element) {
+    //   'key: ${element.key}, value: ${element.value}'.log();
+    // });
+
+    await await ApiClient().request(
+      url: "workout-services/${widget.data?.id}/update",
+      method: Method.POST,
+      params: formData,
+      callback: (response, success) {
+        ViewUtil.hideLoader();
+        'response: ${jsonEncode(response?.data)}'.log();
+        if (success && response != null) {
+          final converted = ListWorkoutFormResponse.fromJson(response.data);
+          ViewUtil.snackBar(
+            "Workout updated successfully",
             context,
           );
           Navigation.push(

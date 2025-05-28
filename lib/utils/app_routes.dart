@@ -1,3 +1,4 @@
+import 'package:tixe_flutter_app/modules/list_workout_modules/model/list_workout_detail.dart';
 import 'package:tixe_flutter_app/modules/my_listed_training_detail/model/list_training_details.dart';
 
 import '../modules/list_workout_modules_data/views/list_workout_modules_data_screen.dart';
@@ -139,10 +140,9 @@ enum AppRoutes {
 extension AppRoutesExtention on AppRoutes {
   Widget buildWidget<T extends Object>({T? arguments}) {
     switch (this) {
-
       case AppRoutes.listWorkoutModulesData:
-        return  ListWorkoutModulesDataScreen(id: arguments as int);
-   case AppRoutes.listWorkoutDetails:
+        return ListWorkoutModulesDataScreen(id: arguments as int);
+      case AppRoutes.listWorkoutDetails:
         return ListWorkoutDetailsScreen(id: arguments as int);
       case AppRoutes.listWorkoutAddModuleSelection:
         return ListWorkoutAddModuleSelectionScreen(id: arguments as int);
@@ -150,7 +150,7 @@ extension AppRoutesExtention on AppRoutes {
         return ListWorkoutModulesScreen(id: arguments as int);
 
       case AppRoutes.listWorkoutForm:
-        return const ListWorkoutFormScreen();
+        return ListWorkoutFormScreen(data: arguments as ListWorkoutData);
       case AppRoutes.listWorkouts:
         return const ListWorkoutsScreen();
       case AppRoutes.myListedTrainingDetail:
@@ -165,7 +165,9 @@ extension AppRoutesExtention on AppRoutes {
       case AppRoutes.listTrainingSchedules:
         return ListTrainingSchedulesScreen(trainingId: arguments as int);
       case AppRoutes.listTrainingForm:
-        return  ListTrainingFormScreen(details: arguments as ListTrainingDetails?,);
+        return ListTrainingFormScreen(
+          details: arguments as ListTrainingDetails?,
+        );
       case AppRoutes.listTraining:
         return const ListTrainingScreen();
 

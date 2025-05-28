@@ -79,8 +79,6 @@ class _ListTrainingFormScreenState extends State<ListTrainingFormScreen> {
   void checkIsEdit() {
     isEdit = widget.details != null;
     if (isEdit) {
-      showFeaturedImageFromNetwork = true;
-      showListImageFromNetwork = true;
       final data = widget.details?.data?.trainingService;
       title.text = data?.title ?? "";
       location.text = data?.address ?? "";
@@ -106,6 +104,9 @@ class _ListTrainingFormScreenState extends State<ListTrainingFormScreen> {
       networkImages = (data?.galleryImages ?? [])
           .map((e) => CustomImage(path: e, imageFor: ImageFor.network))
           .toList();
+
+      showFeaturedImageFromNetwork = featuredNetworkImage != null;
+      showListImageFromNetwork = networkImages.isNotEmpty;
     }
     setState(() {});
   }

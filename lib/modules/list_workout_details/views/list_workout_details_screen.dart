@@ -266,14 +266,29 @@ class _ListWorkoutDetailsScreenState extends State<ListWorkoutDetailsScreen> {
           )
         ],
       ),
-      bottomNavigationBar: GlobalBottomButton(
-        onPressed: () {
-          Navigation.push(
-            appRoutes: AppRoutes.listWorkoutModulesData,
-            arguments: widget.id,
-          );
-        },
-        buttonText: "Go to modules",
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          GlobalBottomButton(
+            onPressed: () {
+              Navigation.push(
+                appRoutes: AppRoutes.listWorkoutModulesData,
+                arguments: widget.id,
+              );
+            },
+            buttonText: "Go to modules",
+          ),
+          SizedBox(height: 10.h),
+          GlobalBottomButton(
+            onPressed: () {
+              Navigation.push(
+                appRoutes: AppRoutes.listWorkoutForm,
+                arguments: data,
+              );
+            },
+            buttonText: "Edit",
+          ),
+        ],
       ),
     );
   }
