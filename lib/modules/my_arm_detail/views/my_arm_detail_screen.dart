@@ -6,6 +6,7 @@ import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
 import 'package:tixe_flutter_app/modules/my_arm_detail/model/my_arm_details_response.dart';
+import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
@@ -296,7 +297,12 @@ class _MyArmDetailScreenState extends State<MyArmDetailScreen> {
         ],
       ),
       bottomNavigationBar: GlobalBottomButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigation.push(
+            appRoutes: AppRoutes.listArmsForm,
+            arguments: myArmDetailResponse.value,
+          );
+        },
         buttonText: "Edit",
       ),
     );

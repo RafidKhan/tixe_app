@@ -25,7 +25,7 @@ class _ListArmsCategoriesState extends ConsumerState<ListArmsCategories> {
     super.initState();
     Future(() {
       final controller = ref.read(listArmsFormController.notifier);
-      controller.getArmsCategories();
+      //controller.getArmsCategories();
     });
   }
 

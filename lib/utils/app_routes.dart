@@ -15,6 +15,7 @@ import '../modules/arms_cart/views/arms_cart_screen.dart';
 import '../modules/arms_details/views/arms_details_screen.dart';
 import 'package:tixe_flutter_app/modules/list_workouts/views/list_workouts_screen.dart';
 
+import '../modules/my_arm_detail/model/my_arm_details_response.dart';
 import '../modules/my_listed_training_detail/views/my_listed_training_detail_screen.dart';
 import '../modules/training_gear_select/views/training_gear_select_screen.dart';
 import '../modules/training_selected_gears_list/views/training_selected_gears_list_screen.dart';
@@ -185,7 +186,7 @@ extension AppRoutesExtention on AppRoutes {
         );
 
       case AppRoutes.listArmsForm:
-        return const ListArmsFormScreen();
+        return  ListArmsFormScreen(data: arguments as MyArmDetailResponse?,);
       case AppRoutes.listArms:
         return const ListArmsScreen();
       case AppRoutes.listingSelection:

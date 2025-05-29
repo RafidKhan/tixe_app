@@ -9,11 +9,36 @@ import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart'
 import 'package:tixe_flutter_app/modules/list_arms_form/controller/list_arms_form_controller.dart';
 import 'package:tixe_flutter_app/modules/list_arms_form/views/components/list_arms_categories.dart';
 import 'package:tixe_flutter_app/modules/list_arms_form/views/components/list_arms_form_photo.dart';
+import 'package:tixe_flutter_app/modules/my_arm_detail/model/my_arm_details_response.dart';
+import 'package:tixe_flutter_app/utils/extension.dart';
 
 import '/global/widget/global_text.dart';
 
-class ListArmsFormScreen extends StatelessWidget {
-  const ListArmsFormScreen({super.key});
+class ListArmsFormScreen extends StatefulWidget {
+  final MyArmDetailResponse? data;
+
+  const ListArmsFormScreen({
+    super.key,
+    this.data,
+  });
+
+  @override
+  State<ListArmsFormScreen> createState() => _ListArmsFormScreenState();
+}
+
+class _ListArmsFormScreenState extends State<ListArmsFormScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    final controller = context.read(listArmsFormController.notifier);
+    Future(() async {
+      await controller.getArmsCategories();
+      if (widget.data != null) {
+        controller.setDetailData(widget.data!);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +156,11 @@ class ListArmsFormScreen extends StatelessWidget {
         bottomNavigationBar: GlobalBottomButton(
           onPressed: state.isButtonEnabled
               ? () {
-                  controller.saveArmsForm(context);
+                  if (state.isEdit) {
+                    controller.updateGear(context);
+                  } else {
+                    controller.saveArmsForm(context);
+                  }
                 }
               : null,
           // onPressed: () {
