@@ -375,6 +375,7 @@ class _ListWorkoutFormScreenState extends State<ListWorkoutFormScreen> {
                     SizedBox(height: 10.h),
                     GlobalTextFormfield(
                       textEditingController: enrollmentFees,
+                      keyboardType: TextInputType.number,
                     ),
                     SizedBox(height: 30.h),
                   ],

@@ -151,7 +151,7 @@ extension AppRoutesExtention on AppRoutes {
         return ListWorkoutModulesScreen(id: arguments as int);
 
       case AppRoutes.listWorkoutForm:
-        return ListWorkoutFormScreen(data: arguments as ListWorkoutData);
+        return ListWorkoutFormScreen(data: arguments as ListWorkoutData?);
       case AppRoutes.listWorkouts:
         return const ListWorkoutsScreen();
       case AppRoutes.myListedTrainingDetail:

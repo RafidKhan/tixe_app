@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -8,8 +9,10 @@ import 'package:talker_dio_logger/talker_dio_logger_settings.dart';
 import 'package:tixe_flutter_app/constant/app_url.dart';
 import 'package:tixe_flutter_app/constant/constant_key.dart';
 import 'package:tixe_flutter_app/data_provider/pref_helper.dart';
+import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
+import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/network_connection.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 
@@ -269,6 +272,10 @@ class ApiClient {
       Function(Response? data, bool isSuccess) callback) async {
     if (response.statusCode == 200 || response.statusCode == 201) {
       callback(response, true); // Success
+    } else if (response.statusCode == 401) {
+      await ViewUtil.showError('Unauthorized access. Please log in again.');
+      PrefHelper.logout();
+      Navigation.pushAndRemoveUntil(appRoutes: AppRoutes.splash);
     } else {
       final globalResponse = GlobalResponse.fromJson(response.data);
       await ViewUtil.showError(globalResponse.message);
@@ -279,6 +286,12 @@ class ApiClient {
   // Global error handler
   Future<void> _handleError(dynamic error, {String? errorText}) async {
     String errorMessage;
+    if (error is DioException && error.response?.statusCode == 401) {
+      await ViewUtil.showError('Unauthorized access. Please log in again.');
+      PrefHelper.logout();
+      Navigation.pushAndRemoveUntil(appRoutes: AppRoutes.splash);
+      return;
+    }
 
     if (error is DioException &&
         error.response?.data is Map<String, dynamic> &&

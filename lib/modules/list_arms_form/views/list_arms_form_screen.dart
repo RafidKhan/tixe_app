@@ -102,6 +102,7 @@ class _ListArmsFormScreenState extends State<ListArmsFormScreen> {
                         textEditingController:
                             controller.sellingPriceController,
                         hintText: "\$",
+                        keyboardType: TextInputType.number,
                       ),
                       SizedBox(height: 10.h),
 
@@ -120,6 +121,7 @@ class _ListArmsFormScreenState extends State<ListArmsFormScreen> {
                       GlobalTextFormfield(
                         textEditingController:
                             controller.quantityAvailableController,
+                        keyboardType: TextInputType.number,
                       ),
                       SizedBox(height: 10.h),
 
@@ -143,6 +145,7 @@ class _ListArmsFormScreenState extends State<ListArmsFormScreen> {
                         GlobalTextFormfield(
                           textEditingController:
                               controller.dailyRentalPriceController,
+                          keyboardType: TextInputType.number,
                         ),
                         SizedBox(height: 10.h),
                       ],

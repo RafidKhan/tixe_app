@@ -450,12 +450,16 @@ class _ListTrainingFormScreenState extends State<ListTrainingFormScreen> {
                     SizedBox(height: 10.h),
                     _title("Max Enrollment"),
                     SizedBox(height: 10.h),
-                    GlobalTextFormfield(textEditingController: maxEnrollment),
+                    GlobalTextFormfield(
+                      textEditingController: maxEnrollment,
+                      keyboardType: TextInputType.number,
+                    ),
                     SizedBox(height: 10.h),
                     _title("Enrollment Fee (\$)"),
                     SizedBox(height: 10.h),
                     GlobalTextFormfield(
                       textEditingController: enrollmentFees,
+                      keyboardType: TextInputType.number,
                     ),
                     SizedBox(height: 30.h),
                   ],
