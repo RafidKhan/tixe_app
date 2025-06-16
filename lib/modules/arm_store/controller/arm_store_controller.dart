@@ -1,10 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:tixe_flutter_app/constant/app_url.dart';
 import 'package:tixe_flutter_app/data_provider/api_client.dart';
+import 'package:tixe_flutter_app/modules/list_arms/repository/list_arms_interface.dart';
+import 'package:tixe_flutter_app/modules/list_arms/repository/list_arms_repository.dart';
+import 'package:tixe_flutter_app/modules/list_arms_form/repository/list_arms_form_interface.dart';
+import 'package:tixe_flutter_app/modules/list_arms_form/repository/list_arms_form_repository.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
+import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 
+import '../../list_arms_form/model/arms_category_response.dart';
 import '../model/all_arms_list_response.dart';
 
 class ArmStoreController {
@@ -12,12 +18,14 @@ class ArmStoreController {
   static int pageCount = 1;
   static int totalArms = 0;
   static final ScrollController scrollController = ScrollController();
+  static List<ArmItem> allArms = [];
+  static List<ArmCategory> categories = [];
+  static ArmCategory? selectedCategory;
 
   static void listenToScrollChange() {
     scrollController.addListener(() {
       if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
-        'here is: ${pageCount}, $totalArms, ${allArms.length}'.log();
         if (allArms.length < totalArms) {
           pageCount = pageCount + 1;
 
@@ -30,8 +38,6 @@ class ArmStoreController {
   static void setPageIndex(int index) {
     pageIndex = index;
   }
-
-  static List<ArmItem> allArms = [];
 
   static Future<void> getAllArms() async {
     if (pageCount == 1) {
@@ -51,7 +57,7 @@ class ArmStoreController {
           final arms = allArmsListResponse.data?.arms ?? [];
           totalArms = allArmsListResponse.data?.pagination?.totalRecords ?? 0;
           allArms.addAll(arms);
-          await WidgetsBinding.instance.performReassemble();
+          await updateState();
         }
       },
     );
@@ -62,6 +68,33 @@ class ArmStoreController {
     pageCount = 1;
     totalArms = 0;
     allArms.clear();
+    categories.clear();
     listenToScrollChange();
+  }
+
+  static Future<void> getArmsCategories() async {
+    final IListArmsFormRepository _listarmsformRepository =
+        ListArmsFormRepository();
+    categories.clear();
+    await _listarmsformRepository.getArmsCategories(
+      callback: (response, isSuccess) async {
+        categories = response?.data ?? [];
+        await updateState();
+      },
+    );
+  }
+
+  static Future<void> updateState() async {
+    await WidgetsBinding.instance.performReassemble();
+  }
+
+  static void selectCategory(ArmCategory category) async {
+    if (selectedCategory?.id == category.id) {
+      selectedCategory = null;
+    } else {
+      selectedCategory = category;
+    }
+    await updateState();
+    Navigation.pop();
   }
 }

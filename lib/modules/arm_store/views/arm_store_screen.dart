@@ -12,6 +12,7 @@ import 'package:tixe_flutter_app/modules/arm_store/views/components/arm_store_gr
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
+import 'components/arm_store_categories.dart';
 import 'components/arm_store_header.dart';
 import 'components/featured_arms.dart';
 
@@ -31,6 +32,7 @@ class _ArmStoreScreenState extends State<ArmStoreScreen> {
     Future(() {
       ArmStoreController.initialize();
       ArmStoreController.getAllArms();
+      ArmStoreController.getArmsCategories();
     });
   }
 
@@ -63,21 +65,30 @@ class _ArmStoreScreenState extends State<ArmStoreScreen> {
                           fontWeight: FontWeight.w500,
                         ),
                         const Spacer(),
-                        GlobalImageLoader(
-                          imagePath: KAssetName.icCategoriesPng.imagePath,
-                          height: 14.h,
-                          width: 14.w,
-                        ),
-                        SizedBox(
-                          width: 4.w,
-                        ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: GlobalText(
-                            str: "Categories",
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: KColor.btnGradient1.color,
+                        InkWell(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => const ArmStoreCategories(),
+                            );
+                          },
+                          child: Row(
+                            children: [
+                              GlobalImageLoader(
+                                imagePath: KAssetName.icCategoriesPng.imagePath,
+                                height: 14.h,
+                                width: 14.w,
+                              ),
+                              SizedBox(
+                                width: 4.w,
+                              ),
+                              GlobalText(
+                                str: "Categories",
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: KColor.btnGradient1.color,
+                              ),
+                            ],
                           ),
                         ),
                       ],
