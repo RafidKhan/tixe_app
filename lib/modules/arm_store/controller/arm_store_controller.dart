@@ -17,6 +17,7 @@ class ArmStoreController {
   static int pageIndex = 0;
   static int pageCount = 1;
   static int totalArms = 0;
+  static num totalCartPrice = 0;
   static final ScrollController scrollController = ScrollController();
   static List<ArmItem> allArms = [];
   static List<ArmItem> cartItems = [];
@@ -71,6 +72,7 @@ class ArmStoreController {
     allArms.clear();
     cartItems.clear();
     categories.clear();
+    totalCartPrice = 0;
     listenToScrollChange();
   }
 
@@ -100,7 +102,7 @@ class ArmStoreController {
     Navigation.pop();
   }
 
-  static void addToCard(BuildContext context, int armId) async{
+  static void addToCard(BuildContext context, int armId) async {
     final arm = allArms.where((e) => e.id == armId).firstOrNull;
     if (arm != null) {
       final indexInCart = cartItems.indexWhere((e) => e.id == arm.id);
@@ -110,7 +112,14 @@ class ArmStoreController {
       } else {
         ViewUtil.snackBar("Already added to cart", context);
       }
+      calculateCartTotal();
       await updateState();
     }
+  }
+
+  static void calculateCartTotal() async {
+    totalCartPrice = cartItems.fold(
+        0, (sum, item) => sum + (num.tryParse(item.price ?? "0") ?? 0));
+    await updateState();
   }
 }

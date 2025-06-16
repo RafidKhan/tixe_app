@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
+import 'package:tixe_flutter_app/modules/arm_store/controller/arm_store_controller.dart';
 import 'package:tixe_flutter_app/modules/arms_cart/views/components/custom_container_widget.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
@@ -38,9 +39,10 @@ class AmountSectionWidget extends StatelessWidget {
 
             const Spacer(),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 GlobalText(
-                  str: "\$270.00",
+                  str: "\$${ArmStoreController.totalCartPrice}",
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w400,
                   color: KColor.white.color,
