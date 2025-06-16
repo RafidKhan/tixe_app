@@ -25,6 +25,7 @@ class ArmStoreGridview extends StatelessWidget {
       itemBuilder: (_, index) {
         final arm = ArmStoreController.allArms[index];
         return _gridItem(
+          arm.id,
           arm.featureImage ?? "",
           arm.title ?? "",
           arm.price ?? "",
@@ -35,6 +36,7 @@ class ArmStoreGridview extends StatelessWidget {
   }
 
   Widget _gridItem(
+    int? id,
     String imagePath,
     String title,
     String price,
@@ -44,7 +46,10 @@ class ArmStoreGridview extends StatelessWidget {
     final height = 206.h;
     return InkWell(
       onTap: () {
-        Navigation.push(appRoutes: AppRoutes.armsDetails);
+        Navigation.push(
+          appRoutes: AppRoutes.armsDetails,
+          arguments: id,
+        );
       },
       child: SizedBox(
         height: height,

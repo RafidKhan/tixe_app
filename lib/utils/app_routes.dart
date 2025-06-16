@@ -295,7 +295,7 @@ extension AppRoutesExtention on AppRoutes {
       case AppRoutes.fitness:
         return const FitnessScreen();
       case AppRoutes.armsDetails:
-        return const ArmsDetailsScreen();
+        return  ArmsDetailsScreen(armId: arguments as int,);
       case AppRoutes.armsCart:
         return const ArmsCartScreen();
       case AppRoutes.armsPayment:

@@ -1,11 +1,14 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
+import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
 import 'package:tixe_flutter_app/modules/arm_store/views/components/arm_store_header.dart';
+import 'package:tixe_flutter_app/modules/arms_details/controller/arms_details_controller.dart';
 import 'package:tixe_flutter_app/modules/arms_details/views/components/custom_image_bg_container_widget.dart';
 import 'package:tixe_flutter_app/modules/arms_details/views/components/details_description_section_widget.dart';
 import 'package:tixe_flutter_app/modules/arms_details/views/components/details_title_section_widget.dart';
 import 'package:tixe_flutter_app/utils/app_routes.dart';
+import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
@@ -13,11 +16,31 @@ import '/global/widget/global_appbar.dart';
 import '/global/widget/global_text.dart';
 import 'package:flutter/material.dart';
 
-class ArmsDetailsScreen extends StatelessWidget {
-  const ArmsDetailsScreen({Key? key}) : super(key: key);
+class ArmsDetailsScreen extends StatefulWidget {
+  final int armId;
+
+  const ArmsDetailsScreen({
+    Key? key,
+    required this.armId,
+  }) : super(key: key);
+
+  @override
+  State<ArmsDetailsScreen> createState() => _ArmsDetailsScreenState();
+}
+
+class _ArmsDetailsScreenState extends State<ArmsDetailsScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Future(() {
+      ArmsDetailsController.getDetails(widget.armId);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final detail = ArmsDetailsController.details?.gear;
     return TixeMainScaffold(
       hasAppBar: true,
       body: SingleChildScrollView(
@@ -27,34 +50,55 @@ class ArmsDetailsScreen extends StatelessWidget {
             const GlobalHeaderWidget(
               title: "Details",
             ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: CustomImageBGContainerWidget(
-                height: 200.h,
-                child: const Icon(Icons.image),
+            if (detail?.featureImage != null) ...[
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: CustomImageBGContainerWidget(
+                  height: 200.h,
+                  child: GlobalImageLoader(
+                    imagePath: detail?.featureImage ?? "",
+                    imageFor: ImageFor.network,
+                  ),
+                ),
               ),
-            ),
+            ],
+            if (detail?.featureImages != null &&
+                detail?.featureImages?.isNotEmpty == true) ...[
+              SizedBox(
+                height: 120.h,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: (detail?.featureImages ?? []).length,
+                  itemBuilder: (context, index) {
+                    final arm = (detail?.featureImages ?? [])[index];
+                    return Padding(
+                      padding: EdgeInsets.only(left: 16.w), // Adjust spacing
+                      child: CustomImageBGContainerWidget(
+                        height: 100.h,
+                        width: 120.w,
+                        child: GlobalImageLoader(
+                          imagePath: arm,
+                          imageFor: ImageFor.network,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+            ],
+            const DetailsTitleSectionWidget(),
             SizedBox(
-              height: 120.h,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 6,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.only(left:16.w), // Adjust spacing
-                    child: CustomImageBGContainerWidget(
-                      height: 100.h,
-                      width: 120.w,
-                      child: const Icon(Icons.image),
-                    ),
-                  );
-                },
-              ),
+              height: 20.h,
             ),
-            DetailsTitleSectionWidget(),
-            DetailsDescriptionSectionWidget(),
+            const DetailsDescriptionSectionWidget(),
+            SizedBox(
+              height: 20.h,
+            ),
             Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 16.w),
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Column(
                 children: [
                   SizedBox(
@@ -63,7 +107,8 @@ class ArmsDetailsScreen extends StatelessWidget {
                       onPressed: () {},
                       style: OutlinedButton.styleFrom(
                         backgroundColor: Colors.black,
-                        side: BorderSide(color: KColor.btnGradient1.color, width: 2),
+                        side: BorderSide(
+                            color: KColor.btnGradient1.color, width: 2),
                         padding: EdgeInsets.symmetric(vertical: 12.h),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.r),
@@ -75,34 +120,32 @@ class ArmsDetailsScreen extends StatelessWidget {
                         fontWeight: FontWeight.w400,
                         color: KColor.white.color,
                       ),
-        
                     ),
                   ),
-                  const SizedBox(height: 10),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigation.push(
-                          appRoutes: AppRoutes.armsCart,
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: KColor.btnGradient1.color,
-                        padding: EdgeInsets.symmetric(vertical: 12.h),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                      ),
-                      child:  GlobalText(
-                        str: "Buy Now",
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w400,
-                        color: KColor.black.color,
-                      ),
-        
-                    ),
-                  ),
+                  // const SizedBox(height: 10),
+                  // SizedBox(
+                  //   width: double.infinity,
+                  //   child: ElevatedButton(
+                  //     onPressed: () {
+                  //       Navigation.push(
+                  //         appRoutes: AppRoutes.armsCart,
+                  //       );
+                  //     },
+                  //     style: ElevatedButton.styleFrom(
+                  //       backgroundColor: KColor.btnGradient1.color,
+                  //       padding: EdgeInsets.symmetric(vertical: 12.h),
+                  //       shape: RoundedRectangleBorder(
+                  //         borderRadius: BorderRadius.circular(8.r),
+                  //       ),
+                  //     ),
+                  //     child: GlobalText(
+                  //       str: "Buy Now",
+                  //       fontSize: 16.sp,
+                  //       fontWeight: FontWeight.w400,
+                  //       color: KColor.black.color,
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -112,4 +155,3 @@ class ArmsDetailsScreen extends StatelessWidget {
     );
   }
 }
-
