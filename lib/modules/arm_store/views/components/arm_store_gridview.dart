@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
+import 'package:tixe_flutter_app/modules/arm_store/controller/arm_store_controller.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 import 'package:tixe_flutter_app/utils/app_routes.dart';
-
 
 class ArmStoreGridview extends StatelessWidget {
   const ArmStoreGridview({super.key});
@@ -23,13 +23,14 @@ class ArmStoreGridview extends StatelessWidget {
           childAspectRatio: 165 / 206,
           crossAxisSpacing: 20.w),
       itemBuilder: (_, index) {
+        final arm = ArmStoreController.allArms[index];
         return _gridItem(
-          KAssetName.dummyGearPng.imagePath,
-          "AXR325 Night Vision Goggles",
-          "275",
+          arm.featureImage ?? "",
+          arm.title ?? "",
+          arm.price ?? "",
         );
       },
-      itemCount: 9,
+      itemCount: ArmStoreController.allArms.length,
     );
   }
 
@@ -38,10 +39,11 @@ class ArmStoreGridview extends StatelessWidget {
     String title,
     String price,
   ) {
+    'here: $imagePath'.log();
     final context = Navigation.key.currentContext!;
     final height = 206.h;
     return InkWell(
-      onTap: (){
+      onTap: () {
         Navigation.push(appRoutes: AppRoutes.armsDetails);
       },
       child: SizedBox(
@@ -52,7 +54,7 @@ class ArmStoreGridview extends StatelessWidget {
             Container(
               height: (height / 2.2).h,
               width: context.width,
-              padding: EdgeInsets.all(16.r),
+              //padding: EdgeInsets.all(16.r),
               decoration: BoxDecoration(
                 color: KColor.shadeGradient1.color,
                 borderRadius: BorderRadius.only(
@@ -60,10 +62,16 @@ class ArmStoreGridview extends StatelessWidget {
                   topRight: Radius.circular(10.r),
                 ),
               ),
-              child: GlobalImageLoader(
-                imagePath: imagePath,
-                fit: BoxFit.contain,
-                imageFor: ImageFor.network,
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10.r),
+                  topRight: Radius.circular(10.r),
+                ),
+                child: GlobalImageLoader(
+                  imagePath: imagePath,
+                  fit: BoxFit.cover,
+                  imageFor: ImageFor.network,
+                ),
               ),
             ),
             Container(
@@ -82,7 +90,7 @@ class ArmStoreGridview extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GlobalText(
-                    str: "AXR325 Night Vision Goggles",
+                    str: title,
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
                     maxLines: 2,
@@ -98,7 +106,7 @@ class ArmStoreGridview extends StatelessWidget {
                       borderRadius: BorderRadius.circular(3.r),
                     ),
                     child: GlobalText(
-                      str: "\$200",
+                      str: "\$$price",
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                       color: KColor.white.color,

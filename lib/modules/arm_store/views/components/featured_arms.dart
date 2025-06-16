@@ -6,13 +6,16 @@ import 'package:tixe_flutter_app/modules/arm_store/views/components/featured_arm
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
-class FeaturedArms extends ConsumerWidget {
+class FeaturedArms extends StatefulWidget {
   const FeaturedArms({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(armStoreController);
-    final controller = ref.read(armStoreController.notifier);
+  State<FeaturedArms> createState() => _FeaturedArmsState();
+}
+
+class _FeaturedArmsState extends State<FeaturedArms> {
+  @override
+  Widget build(BuildContext context) {
     return Column(
       children: [
         SizedBox(
@@ -29,7 +32,10 @@ class FeaturedArms extends ConsumerWidget {
                 image: KAssetName.dummyGearPng.imagePath,
               );
             },
-            onPageChanged: controller.setPageIndex,
+            onPageChanged: (index) {
+              ArmStoreController.setPageIndex(index);
+              setState(() {});
+            },
           ),
         ),
         SizedBox(
@@ -40,7 +46,7 @@ class FeaturedArms extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: List.generate(5, (index) {
-            final isSelected = state.pageIndex == index;
+            final isSelected = ArmStoreController.pageIndex == index;
             return Container(
               height: 10.h,
               width: 10.w,

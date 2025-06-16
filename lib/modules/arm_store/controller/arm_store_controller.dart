@@ -1,24 +1,67 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tixe_flutter_app/modules/arm_store/controller/state/arm_store_state.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:tixe_flutter_app/constant/app_url.dart';
+import 'package:tixe_flutter_app/data_provider/api_client.dart';
+import 'package:tixe_flutter_app/utils/enum.dart';
+import 'package:tixe_flutter_app/utils/extension.dart';
+import 'package:tixe_flutter_app/utils/view_util.dart';
 
-import '../repository/arm_store_interface.dart';
-import '../repository/arm_store_repository.dart';
+import '../model/all_arms_list_response.dart';
 
-final armStoreController =
-    StateNotifierProvider.autoDispose<ArmStoreController, ArmStoreState>(
-        (ref) => ArmStoreController());
+class ArmStoreController {
+  static int pageIndex = 0;
+  static int pageCount = 1;
+  static int totalArms = 0;
+  static final ScrollController scrollController = ScrollController();
 
-class ArmStoreController extends StateNotifier<ArmStoreState> {
-  final IArmStoreRepository _armstoreRepository = ArmStoreRepository();
+  static void listenToScrollChange() {
+    scrollController.addListener(() {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        'here is: ${pageCount}, $totalArms, ${allArms.length}'.log();
+        if (allArms.length < totalArms) {
+          pageCount = pageCount + 1;
 
-  ArmStoreController()
-      : super(
-          const ArmStoreState(
-            pageIndex: 0,
-          ),
-        );
+          getAllArms();
+        }
+      }
+    });
+  }
 
-  void setPageIndex(int index) {
-    state = state.copyWith(pageIndex: index);
+  static void setPageIndex(int index) {
+    pageIndex = index;
+  }
+
+  static List<ArmItem> allArms = [];
+
+  static Future<void> getAllArms() async {
+    if (pageCount == 1) {
+      ViewUtil.showLoaderPage();
+    }
+    await ApiClient().request(
+      url: AppUrl.allArmsList.url.replaceAll("{PAGE_NO}", "$pageCount"),
+      method: Method.GET,
+      callback: (response, _) async {
+        if (pageCount == 1) {
+          ViewUtil.hideLoader();
+        }
+
+        if (_) {
+          final AllArmsListResponse allArmsListResponse =
+              AllArmsListResponse.fromJson(response?.data);
+          final arms = allArmsListResponse.data?.arms ?? [];
+          totalArms = allArmsListResponse.data?.pagination?.totalRecords ?? 0;
+          allArms.addAll(arms);
+          await WidgetsBinding.instance.performReassemble();
+        }
+      },
+    );
+  }
+
+  static void initialize() {
+    pageIndex = 0;
+    pageCount = 1;
+    totalArms = 0;
+    allArms.clear();
+    listenToScrollChange();
   }
 }

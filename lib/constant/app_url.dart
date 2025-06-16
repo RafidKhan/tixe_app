@@ -41,6 +41,7 @@ enum AppUrl {
   myListedArmDetail,
   armsCategory,
   armsSlideList,
+  allArmsList,
 }
 
 extension AppUrlExtention on AppUrl {
@@ -150,6 +151,8 @@ extension AppUrlExtention on AppUrl {
         return "arms/categories";
       case AppUrl.armsSlideList:
         return "store/arms/slider-list/";
+      case AppUrl.allArmsList:
+        return "store/arms/list?page_size=10&page={PAGE_NO}";
     }
   }
 }
