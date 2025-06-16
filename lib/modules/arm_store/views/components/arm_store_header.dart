@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
+import 'package:tixe_flutter_app/modules/arm_store/controller/arm_store_controller.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
 import '../../../../utils/navigation.dart';
