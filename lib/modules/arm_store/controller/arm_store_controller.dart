@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:tixe_flutter_app/constant/app_url.dart';
 import 'package:tixe_flutter_app/data_provider/api_client.dart';
+import 'package:tixe_flutter_app/modules/arm_store/model/slider_arms_list_response.dart';
 import 'package:tixe_flutter_app/modules/list_arms/repository/list_arms_interface.dart';
 import 'package:tixe_flutter_app/modules/list_arms/repository/list_arms_repository.dart';
 import 'package:tixe_flutter_app/modules/list_arms_form/repository/list_arms_form_interface.dart';
@@ -14,12 +15,14 @@ import '../../list_arms_form/model/arms_category_response.dart';
 import '../model/all_arms_list_response.dart';
 
 class ArmStoreController {
-  static int pageIndex = 0;
+  //static int pageIndex = 0;
   static int pageCount = 1;
   static int totalArms = 0;
   static num totalCartPrice = 0;
   static final ScrollController scrollController = ScrollController();
+  static List<ArmItem> togetherAllArms = [];
   static List<ArmItem> allArms = [];
+  static List<ArmItem> sliderArms = [];
   static List<ArmItem> cartItems = [];
   static List<ArmCategory> categories = [];
   static ArmCategory? selectedCategory;
@@ -37,9 +40,9 @@ class ArmStoreController {
     });
   }
 
-  static void setPageIndex(int index) {
-    pageIndex = index;
-  }
+  // static void setPageIndex(int index) {
+  //   pageIndex = index;
+  // }
 
   static Future<void> getAllArms() async {
     if (pageCount == 1) {
@@ -59,6 +62,26 @@ class ArmStoreController {
           final arms = allArmsListResponse.data?.arms ?? [];
           totalArms = allArmsListResponse.data?.pagination?.totalRecords ?? 0;
           allArms.addAll(arms);
+          togetherAllArms.addAll(arms);
+          await updateState();
+        }
+      },
+    );
+  }
+
+  static Future<void> getSliderArms() async {
+    ViewUtil.showLoaderPage();
+    await ApiClient().request(
+      url: AppUrl.armsSlideList.url,
+      method: Method.GET,
+      callback: (response, _) async {
+        ViewUtil.hideLoader();
+        if (_) {
+          final SliderArmsListResponse sliderArmsListResponse =
+              SliderArmsListResponse.fromJson(response?.data);
+          final arms = sliderArmsListResponse.arms ?? [];
+          sliderArms.addAll(arms);
+          togetherAllArms.addAll(arms);
           await updateState();
         }
       },
@@ -66,12 +89,15 @@ class ArmStoreController {
   }
 
   static void initialize() {
-    pageIndex = 0;
+    //pageIndex = 0;
     pageCount = 1;
     totalArms = 0;
     allArms.clear();
     cartItems.clear();
     categories.clear();
+    sliderArms.clear();
+    togetherAllArms.clear();
+    selectedCategory = null;
     totalCartPrice = 0;
     listenToScrollChange();
   }
@@ -103,8 +129,14 @@ class ArmStoreController {
   }
 
   static void addToCard(BuildContext context, int armId) async {
-    final arm = allArms.where((e) => e.id == armId).firstOrNull;
+    final arm = togetherAllArms.where((e) => e.id == armId).firstOrNull;
+
     if (arm != null) {
+      // if (togetherAllArms.isNotEmpty) {
+      //   //final firstArmOwner = togetherAllArms.firstOrNull?.;
+      //   return;
+      // }
+
       final indexInCart = cartItems.indexWhere((e) => e.id == arm.id);
       if (indexInCart < 0) {
         cartItems.add(arm);

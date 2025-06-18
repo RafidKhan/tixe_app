@@ -16,53 +16,57 @@ class FeaturedArms extends StatefulWidget {
 class _FeaturedArmsState extends State<FeaturedArms> {
   @override
   Widget build(BuildContext context) {
+    final featuredArms = ArmStoreController.sliderArms;
+    if (featuredArms.isEmpty) {
+      return const SizedBox.shrink();
+    }
     return Column(
       children: [
         SizedBox(
           height: 340.h,
           child: PageView.builder(
-            itemCount: 5,
+            itemCount: featuredArms.length,
             itemBuilder: (context, index) {
+              final arm = featuredArms[index];
               return FeaturedArmItem(
-                id: 0,
-                title: "AR 775B8 - AR Rifle",
-                amount: "275",
-                shortDescription:
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus mi non egestas",
-                image: KAssetName.dummyGearPng.imagePath,
+                id: arm.id,
+                title: arm.title ?? "",
+                amount: arm.price ?? "0.00",
+                shortDescription: arm.description ?? "",
+                image: arm.featureImage ?? "",
               );
             },
             onPageChanged: (index) {
-              ArmStoreController.setPageIndex(index);
-              setState(() {});
+              //ArmStoreController.setPageIndex(index);
+              //setState(() {});
             },
           ),
         ),
-        SizedBox(
-          height: 20.w,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: List.generate(5, (index) {
-            final isSelected = ArmStoreController.pageIndex == index;
-            return Container(
-              height: 10.h,
-              width: 10.w,
-              margin: EdgeInsets.symmetric(horizontal: 5.w),
-              decoration: BoxDecoration(
-                color: isSelected ? KColor.btnGradient1.color : null,
-                border: Border.all(
-                  color: isSelected
-                      ? KColor.btnGradient1.color
-                      : KColor.grey.color,
-                ),
-                shape: BoxShape.circle,
-              ),
-            );
-          }),
-        )
+        // SizedBox(
+        //   height: 20.w,
+        // ),
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   crossAxisAlignment: CrossAxisAlignment.center,
+        //   mainAxisSize: MainAxisSize.min,
+        //   children: List.generate(featuredArms.length, (index) {
+        //     final isSelected = ArmStoreController.pageIndex == index;
+        //     return Container(
+        //       height: 10.h,
+        //       width: 10.w,
+        //       margin: EdgeInsets.symmetric(horizontal: 5.w),
+        //       decoration: BoxDecoration(
+        //         color: isSelected ? KColor.btnGradient1.color : null,
+        //         border: Border.all(
+        //           color: isSelected
+        //               ? KColor.btnGradient1.color
+        //               : KColor.grey.color,
+        //         ),
+        //         shape: BoxShape.circle,
+        //       ),
+        //     );
+        //   }),
+        // )
       ],
     );
   }

@@ -41,7 +41,6 @@ class ArmStoreGridview extends StatelessWidget {
     String title,
     String price,
   ) {
-    'here: $imagePath'.log();
     final context = Navigation.key.currentContext!;
     final height = 206.h;
     return InkWell(

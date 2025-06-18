@@ -46,7 +46,6 @@ class _ListWorkoutDetailsScreenState extends State<ListWorkoutDetailsScreen> {
         ViewUtil.hideLoader();
         if (success) {
           data = ListWorkoutDetail.fromJson(response?.data).data;
-          'here: ${jsonEncode(data?.toJson())}'.log();
           setState(() {});
         }
       },

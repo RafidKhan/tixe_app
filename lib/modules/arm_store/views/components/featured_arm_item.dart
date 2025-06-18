@@ -32,7 +32,10 @@ class FeaturedArmItem extends StatelessWidget {
       focusColor: KColor.transparent.color,
       highlightColor: KColor.transparent.color,
       onTap: () {
-        Navigation.push(appRoutes: AppRoutes.armsDetails);
+        Navigation.push(
+          appRoutes: AppRoutes.armsDetails,
+          arguments: id,
+        );
       },
       child: Container(
         height: 340.h,
@@ -65,7 +68,7 @@ class FeaturedArmItem extends StatelessWidget {
                     child: GlobalImageLoader(
                       imagePath: image ?? "",
                       height: 85.h,
-                      fit: BoxFit.contain,
+                      fit: BoxFit.fill,
                       imageFor: ImageFor.network,
                     ),
                   ),

@@ -150,7 +150,7 @@ extension AppUrlExtention on AppUrl {
       case AppUrl.armsCategory:
         return "arms/categories";
       case AppUrl.armsSlideList:
-        return "store/arms/slider-list/";
+        return "store/arms/slider-list";
       case AppUrl.allArmsList:
         return "store/arms/list?page_size=10&page={PAGE_NO}";
     }

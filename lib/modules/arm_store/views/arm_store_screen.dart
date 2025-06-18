@@ -32,6 +32,7 @@ class _ArmStoreScreenState extends State<ArmStoreScreen> {
     Future(() {
       ArmStoreController.initialize();
       ArmStoreController.getAllArms();
+      ArmStoreController.getSliderArms();
       ArmStoreController.getArmsCategories();
     });
   }
