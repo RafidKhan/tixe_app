@@ -54,6 +54,7 @@ class ArmItem {
   String? featureImage;
   String? price;
   int? quantityAvailable;
+  ArmOwner? armOwner;
 
   ArmItem({
     this.id,
@@ -62,6 +63,7 @@ class ArmItem {
     this.featureImage,
     this.price,
     this.quantityAvailable,
+    this.armOwner,
   });
 
   factory ArmItem.fromJson(Map<String, dynamic> json) {
@@ -72,6 +74,9 @@ class ArmItem {
       featureImage: json['feature_image'],
       price: json['price'],
       quantityAvailable: json['quantity_available'],
+      armOwner: json['arm_owner'] != null
+          ? ArmOwner.fromJson(json['arm_owner'])
+          : null,
     );
   }
 
@@ -83,6 +88,7 @@ class ArmItem {
       'feature_image': featureImage,
       'price': price,
       'quantity_available': quantityAvailable,
+      'arm_owner': armOwner?.toJson(),
     };
   }
 }
@@ -115,6 +121,30 @@ class Pagination {
       'page': page,
       'total_page': totalPage,
       'total_records': totalRecords,
+    };
+  }
+}
+
+class ArmOwner {
+  int? id;
+  String? name;
+
+  ArmOwner({
+    this.id,
+    this.name,
+  });
+
+  factory ArmOwner.fromJson(Map<String, dynamic> json) {
+    return ArmOwner(
+      id: json['id'],
+      name: json['name'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
     };
   }
 }

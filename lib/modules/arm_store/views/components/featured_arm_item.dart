@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
+import 'package:tixe_flutter_app/modules/arm_store/controller/arm_store_controller.dart';
 import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
@@ -124,8 +125,12 @@ class FeaturedArmItem extends StatelessWidget {
                 child: Row(
                   children: [
                     GlobalButton(
-                      onPressed: () {},
-                      buttonText: "Buy Now",
+                      onPressed: () {
+                        if (id != null) {
+                          ArmStoreController.addToCard(context, id!);
+                        }
+                      },
+                      buttonText: "Add to Cart",
                     ),
                     SizedBox(
                       width: 10.w,

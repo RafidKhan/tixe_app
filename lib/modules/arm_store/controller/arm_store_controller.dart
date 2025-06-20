@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:tixe_flutter_app/constant/app_url.dart';
 import 'package:tixe_flutter_app/data_provider/api_client.dart';
 import 'package:tixe_flutter_app/modules/arm_store/model/slider_arms_list_response.dart';
+import 'package:tixe_flutter_app/modules/arm_store/views/components/same_owner_dialog.dart';
 import 'package:tixe_flutter_app/modules/list_arms/repository/list_arms_interface.dart';
 import 'package:tixe_flutter_app/modules/list_arms/repository/list_arms_repository.dart';
 import 'package:tixe_flutter_app/modules/list_arms_form/repository/list_arms_form_interface.dart';
@@ -132,13 +134,19 @@ class ArmStoreController {
     final arm = togetherAllArms.where((e) => e.id == armId).firstOrNull;
 
     if (arm != null) {
-      // if (togetherAllArms.isNotEmpty) {
-      //   //final firstArmOwner = togetherAllArms.firstOrNull?.;
-      //   return;
-      // }
-
       final indexInCart = cartItems.indexWhere((e) => e.id == arm.id);
       if (indexInCart < 0) {
+        if (togetherAllArms.isNotEmpty) {
+          final firstArmOwner = togetherAllArms.firstOrNull?.armOwner?.id;
+          if (firstArmOwner != arm.armOwner?.id) {
+            showDialog(
+              context: context,
+              builder: (context) => const SameOwnerDialog(),
+            );
+            return;
+          }
+        }
+
         cartItems.add(arm);
         ViewUtil.snackBar("Added to cart", context);
       } else {
