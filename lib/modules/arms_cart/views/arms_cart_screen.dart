@@ -1,11 +1,12 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
+import 'package:tixe_flutter_app/modules/arms_cart/controller/arms_cart_controller.dart';
 import 'package:tixe_flutter_app/modules/arms_cart/views/components/amount_section_widget.dart';
 import 'package:tixe_flutter_app/modules/arms_cart/views/components/cart_list_widget.dart';
 import 'package:tixe_flutter_app/modules/arms_cart/views/components/custom_container_widget.dart';
 import 'package:tixe_flutter_app/modules/arms_cart/views/components/custom_image_bg_container_widget.dart';
-import 'package:tixe_flutter_app/modules/arms_cart/views/components/shopping_section_widget.dart';
+import 'package:tixe_flutter_app/modules/arms_cart/views/components/shipping_section_widget.dart';
 import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
@@ -15,8 +16,23 @@ import '/global/widget/global_appbar.dart';
 import '/global/widget/global_text.dart';
 import 'package:flutter/material.dart';
 
-class ArmsCartScreen extends StatelessWidget {
+import 'components/billing_section_widget.dart';
+
+class ArmsCartScreen extends StatefulWidget {
   const ArmsCartScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ArmsCartScreen> createState() => _ArmsCartScreenState();
+}
+
+class _ArmsCartScreenState extends State<ArmsCartScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    ArmsCartController.init();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +44,6 @@ class ArmsCartScreen extends StatelessWidget {
           const GlobalHeaderWidget(
             title: "Arms Cart",
           ),
-
           Expanded(
             child: SingleChildScrollView(
               child: Padding(
@@ -37,22 +52,33 @@ class ArmsCartScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const CartListWidget(),
-                   AmountSectionWidget(),
-                   ShoppingSectionWidget(),
-                    SizedBox(height: 20.h,),
-                    GlobalText(
-                      str: "Billing Address",
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w400,
-                      color: KColor.white.color,
-                    ) ,
-                    GlobalText(
-                      str: "Same as shipping address",
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w400,
-                      color: KColor.white.color,
-                    ) ,
-                    SizedBox(height: 20.h,),
+                    AmountSectionWidget(),
+                    ShippingSectionWidget(),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Row(
+                      children: [
+                        Checkbox(
+                          checkColor: KColor.white.color,
+                          activeColor: KColor.btnGradient1.color,
+                          value: ArmsCartController.sameAsShipping,
+                          onChanged: (v) {
+                            ArmsCartController.toggleSameAddress();
+                          },
+                        ),
+                        GlobalText(
+                          str: "Same as shipping address",
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w400,
+                          color: KColor.white.color,
+                        ),
+                      ],
+                    ),
+                    BillingSectionWidget(),
+                    SizedBox(
+                      height: 20.h,
+                    ),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
@@ -68,13 +94,12 @@ class ArmsCartScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8.r),
                           ),
                         ),
-                        child:  GlobalText(
+                        child: GlobalText(
                           str: "Proceed To Payment",
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w400,
                           color: KColor.black.color,
                         ),
-
                       ),
                     ),
                   ],
@@ -82,17 +107,8 @@ class ArmsCartScreen extends StatelessWidget {
               ),
             ),
           ),
-
         ],
       ),
     );
   }
 }
-
-
-
-
-
-
-
-

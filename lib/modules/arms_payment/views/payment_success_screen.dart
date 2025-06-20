@@ -5,7 +5,7 @@ import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart'
 import 'package:tixe_flutter_app/modules/arms_cart/views/components/amount_section_widget.dart';
 import 'package:tixe_flutter_app/modules/arms_cart/views/components/cart_list_widget.dart';
 import 'package:tixe_flutter_app/modules/arms_cart/views/components/custom_container_widget.dart';
-import 'package:tixe_flutter_app/modules/arms_cart/views/components/shopping_section_widget.dart';
+import 'package:tixe_flutter_app/modules/arms_cart/views/components/shipping_section_widget.dart';
 import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
