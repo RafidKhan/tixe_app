@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tixe_flutter_app/global/widget/global_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
 import 'package:tixe_flutter_app/global/widget/global_textformfield.dart';
 import 'package:tixe_flutter_app/modules/arm_store/controller/arm_store_controller.dart';
@@ -33,15 +34,15 @@ class AmountSectionWidget extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                   color: KColor.white.color,
                 ),
-                SizedBox(
-                  height: 5.h,
-                ),
-                GlobalText(
-                  str: "Shipping",
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w400,
-                  color: KColor.white.color,
-                ),
+                // SizedBox(
+                //   height: 5.h,
+                // ),
+                // GlobalText(
+                //   str: "Shipping",
+                //   fontSize: 16.sp,
+                //   fontWeight: FontWeight.w400,
+                //   color: KColor.white.color,
+                // ),
               ],
             ),
             const Spacer(),
@@ -54,31 +55,46 @@ class AmountSectionWidget extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                   color: KColor.white.color,
                 ),
-                SizedBox(
-                  height: 5.h,
-                ),
-                GlobalText(
-                  str: "\$20.00",
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w400,
-                  color: KColor.white.color,
-                ),
+                // SizedBox(
+                //   height: 5.h,
+                // ),
+                // GlobalText(
+                //   str: "\$20.00",
+                //   fontSize: 16.sp,
+                //   fontWeight: FontWeight.w400,
+                //   color: KColor.white.color,
+                // ),
               ],
             )
           ],
         ),
         SizedBox(
-          height: 5.h,
+          height: 10.h,
         ),
-        GlobalText(
-          str: "Discount Code",
-          fontSize: 12.sp,
+        const GlobalText(
+          str: "Shipping charges will calculated during checkout",
+          fontSize: 14,
           fontWeight: FontWeight.w400,
-          color: KColor.grey.color,
         ),
         SizedBox(
-          height: 3.h,
+          height: 10.h,
         ),
+        GlobalButton(
+          onPressed: () {},
+          buttonText: "Proceed to checkout",
+        ),
+        // SizedBox(
+        //   height: 5.h,
+        // ),
+        // GlobalText(
+        //   str: "Discount Code",
+        //   fontSize: 12.sp,
+        //   fontWeight: FontWeight.w400,
+        //   color: KColor.grey.color,
+        // ),
+        // SizedBox(
+        //   height: 3.h,
+        // ),
         // Stack(
         //   children: [
         //     CustomContainerWidget(
@@ -109,70 +125,70 @@ class AmountSectionWidget extends StatelessWidget {
         //         ))
         //   ],
         // ),
-        GlobalTextFormfield(
-          textEditingController: ArmsCartController.code,
-          suffixIcon: _applyCodeButton(
-            context,
-            onTap: () {
-              //ArmsCartController.applyDiscountCode();
-            },
-          ),
-        ),
-        SizedBox(
-          height: 5.h,
-        ),
-        Row(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                GlobalText(
-                  str: "Discount",
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w400,
-                  color: KColor.white.color,
-                ),
-              ],
-            ),
-            const Spacer(),
-            Column(
-              children: [
-                GlobalText(
-                  str: "-\$5.00",
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w400,
-                  color: KColor.white.color,
-                ),
-              ],
-            )
-          ],
-        ),
-        const Divider(
-          color: Color(0xffD1C9C9),
-        ),
-        Align(
-          alignment: Alignment.center,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              GlobalText(
-                str: "Grand Total",
-                fontSize: 20.sp,
-                fontWeight: FontWeight.w600,
-                color: KColor.white.color,
-              ),
-              GlobalText(
-                str: "\$500.00",
-                fontSize: 20.sp,
-                fontWeight: FontWeight.w600,
-                color: KColor.white.color,
-              ),
-            ],
-          ),
-        ),
-        const Divider(
-          color: Color(0xffD1C9C9),
-        ),
+        // GlobalTextFormfield(
+        //   textEditingController: ArmsCartController.code,
+        //   suffixIcon: _applyCodeButton(
+        //     context,
+        //     onTap: () {
+        //       //ArmsCartController.applyDiscountCode();
+        //     },
+        //   ),
+        // ),
+        // SizedBox(
+        //   height: 5.h,
+        // ),
+        // Row(
+        //   children: [
+        //     Column(
+        //       crossAxisAlignment: CrossAxisAlignment.start,
+        //       children: [
+        //         GlobalText(
+        //           str: "Discount",
+        //           fontSize: 16.sp,
+        //           fontWeight: FontWeight.w400,
+        //           color: KColor.white.color,
+        //         ),
+        //       ],
+        //     ),
+        //     const Spacer(),
+        //     Column(
+        //       children: [
+        //         GlobalText(
+        //           str: "-\$5.00",
+        //           fontSize: 16.sp,
+        //           fontWeight: FontWeight.w400,
+        //           color: KColor.white.color,
+        //         ),
+        //       ],
+        //     )
+        //   ],
+        // ),
+        // const Divider(
+        //   color: Color(0xffD1C9C9),
+        // ),
+        // Align(
+        //   alignment: Alignment.center,
+        //   child: Column(
+        //     crossAxisAlignment: CrossAxisAlignment.center,
+        //     children: [
+        //       GlobalText(
+        //         str: "Grand Total",
+        //         fontSize: 20.sp,
+        //         fontWeight: FontWeight.w600,
+        //         color: KColor.white.color,
+        //       ),
+        //       GlobalText(
+        //         str: "\$500.00",
+        //         fontSize: 20.sp,
+        //         fontWeight: FontWeight.w600,
+        //         color: KColor.white.color,
+        //       ),
+        //     ],
+        //   ),
+        // ),
+        // const Divider(
+        //   color: Color(0xffD1C9C9),
+        // ),
       ],
     );
   }

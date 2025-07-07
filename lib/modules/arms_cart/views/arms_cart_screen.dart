@@ -26,7 +26,6 @@ class ArmsCartScreen extends StatefulWidget {
 }
 
 class _ArmsCartScreenState extends State<ArmsCartScreen> {
-
   @override
   void initState() {
     // TODO: implement initState
@@ -47,61 +46,61 @@ class _ArmsCartScreenState extends State<ArmsCartScreen> {
           Expanded(
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                padding:  EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const CartListWidget(),
+                    CartListWidget(),
                     AmountSectionWidget(),
-                    ShippingSectionWidget(),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    Row(
-                      children: [
-                        Checkbox(
-                          checkColor: KColor.white.color,
-                          activeColor: KColor.btnGradient1.color,
-                          value: ArmsCartController.sameAsShipping,
-                          onChanged: (v) {
-                            ArmsCartController.toggleSameAddress();
-                          },
-                        ),
-                        GlobalText(
-                          str: "Same as shipping address",
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w400,
-                          color: KColor.white.color,
-                        ),
-                      ],
-                    ),
-                    BillingSectionWidget(),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigation.push(
-                            appRoutes: AppRoutes.armsPayment,
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: KColor.btnGradient1.color,
-                          padding: EdgeInsets.symmetric(vertical: 12.h),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
-                        ),
-                        child: GlobalText(
-                          str: "Proceed To Payment",
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w400,
-                          color: KColor.black.color,
-                        ),
-                      ),
-                    ),
+                    // ShippingSectionWidget(),
+                    // SizedBox(
+                    //   height: 20.h,
+                    // ),
+                    // Row(
+                    //   children: [
+                    //     Checkbox(
+                    //       checkColor: KColor.white.color,
+                    //       activeColor: KColor.btnGradient1.color,
+                    //       value: ArmsCartController.sameAsShipping,
+                    //       onChanged: (v) {
+                    //         ArmsCartController.toggleSameAddress();
+                    //       },
+                    //     ),
+                    //     GlobalText(
+                    //       str: "Same as shipping address",
+                    //       fontSize: 16.sp,
+                    //       fontWeight: FontWeight.w400,
+                    //       color: KColor.white.color,
+                    //     ),
+                    //   ],
+                    // ),
+                    // BillingSectionWidget(),
+                    // SizedBox(
+                    //   height: 20.h,
+                    // ),
+                    // SizedBox(
+                    //   width: double.infinity,
+                    //   child: ElevatedButton(
+                    //     onPressed: () {
+                    //       Navigation.push(
+                    //         appRoutes: AppRoutes.armsPayment,
+                    //       );
+                    //     },
+                    //     style: ElevatedButton.styleFrom(
+                    //       backgroundColor: KColor.btnGradient1.color,
+                    //       padding: EdgeInsets.symmetric(vertical: 12.h),
+                    //       shape: RoundedRectangleBorder(
+                    //         borderRadius: BorderRadius.circular(8.r),
+                    //       ),
+                    //     ),
+                    //     child: GlobalText(
+                    //       str: "Proceed To Payment",
+                    //       fontSize: 16.sp,
+                    //       fontWeight: FontWeight.w400,
+                    //       color: KColor.black.color,
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),

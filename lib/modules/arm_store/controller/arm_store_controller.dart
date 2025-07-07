@@ -162,4 +162,10 @@ class ArmStoreController {
         0, (sum, item) => sum + (num.tryParse(item.price ?? "0") ?? 0));
     await updateState();
   }
+
+  static void removeFromCart(ArmItem item) {
+    cartItems.removeWhere((e) => e.id == item.id);
+    calculateCartTotal();
+    updateState();
+  }
 }
