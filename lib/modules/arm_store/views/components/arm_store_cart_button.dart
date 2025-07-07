@@ -6,6 +6,7 @@ import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
+import 'package:tixe_flutter_app/utils/view_util.dart';
 
 import '../../controller/arm_store_controller.dart';
 
@@ -20,7 +21,11 @@ class ArmStoreCartButton extends StatelessWidget {
       padding: EdgeInsets.only(top: 4.h),
       child: InkWell(
         onTap: () {
-          Navigation.push(appRoutes: AppRoutes.armsCart);
+          if (ArmStoreController.cartItems.isNotEmpty) {
+            Navigation.push(appRoutes: AppRoutes.armsCart);
+          } else {
+            ViewUtil.snackBar("No arm added in cart", context);
+          }
         },
         child: SizedBox(
           height: 40.h,

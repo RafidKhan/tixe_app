@@ -12,6 +12,7 @@ import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
+import '../../arm_store/controller/arm_store_controller.dart';
 import '/global/widget/global_appbar.dart';
 import '/global/widget/global_text.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,6 @@ class _ArmsCartScreenState extends State<ArmsCartScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    ArmsCartController.init();
   }
 
   @override
@@ -46,11 +46,11 @@ class _ArmsCartScreenState extends State<ArmsCartScreen> {
           Expanded(
             child: SingleChildScrollView(
               child: Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 16.0),
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CartListWidget(),
+                    CartListWidget(isShipping: false,),
                     AmountSectionWidget(),
                     // ShippingSectionWidget(),
                     // SizedBox(

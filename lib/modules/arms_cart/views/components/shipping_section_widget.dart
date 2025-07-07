@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
 import 'package:tixe_flutter_app/global/widget/global_textformfield.dart';
+import 'package:tixe_flutter_app/modules/arm_store/controller/arm_store_controller.dart';
 import 'package:tixe_flutter_app/modules/arms_cart/controller/arms_cart_controller.dart';
 import 'package:tixe_flutter_app/modules/arms_cart/views/components/custom_container_widget.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
@@ -35,7 +36,7 @@ class ShippingSectionWidget extends StatelessWidget {
           color: KColor.grey.color,
         ),
         GlobalTextFormfield(
-          textEditingController: ArmsCartController.shippingName,
+          textEditingController: ArmStoreController.shippingName,
         ),
         SizedBox(
           height: 10.h,
@@ -47,7 +48,7 @@ class ShippingSectionWidget extends StatelessWidget {
           color: KColor.grey.color,
         ),
         GlobalTextFormfield(
-          textEditingController: ArmsCartController.shippingCountry,
+          textEditingController: ArmStoreController.shippingCountry,
         ),
         Row(
           children: [
@@ -62,7 +63,7 @@ class ShippingSectionWidget extends StatelessWidget {
                     color: KColor.white.color,
                   ),
                   GlobalTextFormfield(
-                    textEditingController: ArmsCartController.shippingState,
+                    textEditingController: ArmStoreController.shippingState,
                   ),
                 ],
               ),
@@ -81,7 +82,7 @@ class ShippingSectionWidget extends StatelessWidget {
                     color: KColor.white.color,
                   ),
                   GlobalTextFormfield(
-                    textEditingController: ArmsCartController.shippingCity,
+                    textEditingController: ArmStoreController.shippingCity,
                   ),
                 ],
               ),
@@ -98,7 +99,7 @@ class ShippingSectionWidget extends StatelessWidget {
           color: KColor.grey.color,
         ),
         GlobalTextFormfield(
-          textEditingController: ArmsCartController.shippingAddress,
+          textEditingController: ArmStoreController.shippingAddress,
         ),
         SizedBox(
           height: 10.h,
@@ -110,7 +111,7 @@ class ShippingSectionWidget extends StatelessWidget {
           color: KColor.grey.color,
         ),
         GlobalTextFormfield(
-          textEditingController: ArmsCartController.sippingMobile,
+          textEditingController: ArmStoreController.sippingMobile,
         ),
         SizedBox(
           height: 10.h,
@@ -122,7 +123,7 @@ class ShippingSectionWidget extends StatelessWidget {
           color: KColor.grey.color,
         ),
         GlobalTextFormfield(
-          textEditingController: ArmsCartController.sippingEmail,
+          textEditingController: ArmStoreController.sippingEmail,
         ),
         SizedBox(
           height: 10.h,

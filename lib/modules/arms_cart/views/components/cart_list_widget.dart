@@ -11,8 +11,11 @@ import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 import '../../../arm_store/controller/arm_store_controller.dart';
 
 class CartListWidget extends StatelessWidget {
+  final bool isShipping;
+
   const CartListWidget({
     super.key,
+    required this.isShipping,
   });
 
   @override
@@ -105,9 +108,13 @@ class CartListWidget extends StatelessWidget {
                           ),
                           onPressed: () {
                             ArmStoreController.removeFromCart(item);
-                            Future.delayed(const Duration(milliseconds: 100), () {
+                            Future.delayed(const Duration(milliseconds: 100),
+                                () {
                               if (cartItems.isEmpty) {
                                 Navigation.pop();
+                                if(isShipping){
+                                  Navigation.pop();
+                                }
                               }
                             });
                           },

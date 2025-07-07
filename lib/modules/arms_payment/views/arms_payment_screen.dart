@@ -36,7 +36,7 @@ class ArmsPaymentScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const CartListWidget(),
+                    const CartListWidget(isShipping: false,),
                     const AmountSectionWidget(),
 
                     SizedBox(height: 20.h,),

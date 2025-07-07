@@ -6,6 +6,8 @@ import 'package:tixe_flutter_app/modules/arms_cart/controller/arms_cart_controll
 import 'package:tixe_flutter_app/modules/arms_cart/views/components/custom_container_widget.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
+import '../../../arm_store/controller/arm_store_controller.dart';
+
 class BillingSectionWidget extends StatelessWidget {
   const BillingSectionWidget({
     super.key,
@@ -35,7 +37,7 @@ class BillingSectionWidget extends StatelessWidget {
           color: KColor.grey.color,
         ),
         GlobalTextFormfield(
-          textEditingController: ArmsCartController.billingName,
+          textEditingController: ArmStoreController.billingName,
         ),
         SizedBox(
           height: 10.h,
@@ -47,7 +49,7 @@ class BillingSectionWidget extends StatelessWidget {
           color: KColor.grey.color,
         ),
         GlobalTextFormfield(
-          textEditingController: ArmsCartController.billingCountry,
+          textEditingController: ArmStoreController.billingCountry,
         ),
         Row(
           children: [
@@ -62,7 +64,7 @@ class BillingSectionWidget extends StatelessWidget {
                     color: KColor.white.color,
                   ),
                   GlobalTextFormfield(
-                    textEditingController: ArmsCartController.billingState,
+                    textEditingController: ArmStoreController.billingState,
                   ),
                 ],
               ),
@@ -81,7 +83,7 @@ class BillingSectionWidget extends StatelessWidget {
                     color: KColor.white.color,
                   ),
                   GlobalTextFormfield(
-                    textEditingController: ArmsCartController.billingCity,
+                    textEditingController: ArmStoreController.billingCity,
                   ),
                 ],
               ),
@@ -98,7 +100,7 @@ class BillingSectionWidget extends StatelessWidget {
           color: KColor.grey.color,
         ),
         GlobalTextFormfield(
-          textEditingController: ArmsCartController.billingAddress,
+          textEditingController: ArmStoreController.billingAddress,
         ),
         SizedBox(
           height: 10.h,
@@ -110,7 +112,7 @@ class BillingSectionWidget extends StatelessWidget {
           color: KColor.grey.color,
         ),
         GlobalTextFormfield(
-          textEditingController: ArmsCartController.billingMobile,
+          textEditingController: ArmStoreController.billingMobile,
         ),
         SizedBox(
           height: 10.h,
@@ -122,7 +124,7 @@ class BillingSectionWidget extends StatelessWidget {
           color: KColor.grey.color,
         ),
         GlobalTextFormfield(
-          textEditingController: ArmsCartController.billingEmail,
+          textEditingController: ArmStoreController.billingEmail,
         ),
         SizedBox(
           height: 10.h,

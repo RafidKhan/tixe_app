@@ -1,3 +1,4 @@
+import '../modules/cart_address/views/cart_address_screen.dart';
 import 'package:tixe_flutter_app/modules/list_workout_modules/model/list_workout_detail.dart';
 import 'package:tixe_flutter_app/modules/my_listed_training_detail/model/list_training_details.dart';
 
@@ -81,6 +82,7 @@ import '../modules/workout_flow/my_workout_select_phase/views/my_workout_select_
 
 enum AppRoutes {
   splash,
+  cartAddress,
   listWorkoutModulesData,
   listWorkoutDetails,
   listWorkoutAddModuleSelection,
@@ -141,7 +143,10 @@ enum AppRoutes {
 extension AppRoutesExtention on AppRoutes {
   Widget buildWidget<T extends Object>({T? arguments}) {
     switch (this) {
-      case AppRoutes.listWorkoutModulesData:
+
+      case AppRoutes.cartAddress:
+        return const CartAddressScreen();
+     case AppRoutes.listWorkoutModulesData:
         return ListWorkoutModulesDataScreen(id: arguments as int);
       case AppRoutes.listWorkoutDetails:
         return ListWorkoutDetailsScreen(id: arguments as int);

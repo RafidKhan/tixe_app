@@ -20,7 +20,7 @@ class ArmStoreController {
   //static int pageIndex = 0;
   static int pageCount = 1;
   static int totalArms = 0;
-  static num totalCartPrice = 0;
+
   static final ScrollController scrollController = ScrollController();
   static List<ArmItem> togetherAllArms = [];
   static List<ArmItem> allArms = [];
@@ -28,6 +28,91 @@ class ArmStoreController {
   static List<ArmItem> cartItems = [];
   static List<ArmCategory> categories = [];
   static ArmCategory? selectedCategory;
+
+  static final TextEditingController code = TextEditingController();
+
+  static final TextEditingController shippingName = TextEditingController();
+  static final TextEditingController shippingAddress = TextEditingController();
+  static final TextEditingController shippingState = TextEditingController();
+  static final TextEditingController shippingCountry = TextEditingController();
+  static final TextEditingController shippingCity = TextEditingController();
+  static final TextEditingController sippingEmail = TextEditingController();
+  static final TextEditingController sippingMobile = TextEditingController();
+
+  static final TextEditingController billingName = TextEditingController();
+  static final TextEditingController billingAddress = TextEditingController();
+  static final TextEditingController billingState = TextEditingController();
+  static final TextEditingController billingCountry = TextEditingController();
+  static final TextEditingController billingCity = TextEditingController();
+  static final TextEditingController billingEmail = TextEditingController();
+  static final TextEditingController billingMobile = TextEditingController();
+
+  static num totalCartPrice = 0;
+  static bool sameAsShipping = true;
+  static String shippingCharge = "0";
+  static String discountAmount = "0";
+  static String grandTotal = "0";
+
+  static Future<void> updateState() async {
+    await WidgetsBinding.instance.performReassemble();
+  }
+
+  static void toggleSameAddress() {
+    sameAsShipping = !sameAsShipping;
+
+    onTextChange();
+
+    updateState();
+  }
+
+
+
+  static void listenToTextChange() {
+    shippingName.addListener(onTextChange);
+    shippingAddress.addListener(onTextChange);
+    shippingState.addListener(onTextChange);
+    shippingCountry.addListener(onTextChange);
+    shippingCity.addListener(onTextChange);
+    sippingEmail.addListener(onTextChange);
+    sippingMobile.addListener(onTextChange);
+  }
+
+  static void onTextChange() {
+    if (sameAsShipping) {
+      billingName.text = shippingName.text;
+      billingAddress.text = shippingAddress.text;
+      billingState.text = shippingState.text;
+      billingCountry.text = shippingCountry.text;
+      billingCity.text = shippingCity.text;
+      billingEmail.text = sippingEmail.text;
+      billingMobile.text = sippingMobile.text;
+    } else {
+      billingName.clear();
+      billingAddress.clear();
+      billingState.clear();
+      billingCountry.clear();
+      billingCity.clear();
+      billingEmail.clear();
+      billingMobile.clear();
+    }
+  }
+
+  static void calculateCartTotal() async {
+    totalCartPrice = cartItems.fold(
+        0, (sum, item) => sum + (num.tryParse(item.price ?? "0") ?? 0));
+    await updateState();
+  }
+
+  static Future<void> applyDiscountCode() async {
+    ViewUtil.showLoaderPage();
+    await ApiClient().request(
+      url: "store/arms/discount-code/verify",
+      method: Method.POST,
+      callback: (response, success) {
+        ViewUtil.hideLoader();
+      },
+    );
+  }
 
   static void listenToScrollChange() {
     scrollController.addListener(() {
@@ -100,7 +185,28 @@ class ArmStoreController {
     sliderArms.clear();
     togetherAllArms.clear();
     selectedCategory = null;
+    shippingName.clear();
+    shippingAddress.clear();
+    shippingState.clear();
+    shippingCountry.clear();
+    shippingCity.clear();
+    sippingEmail.clear();
+    sippingMobile.clear();
+
+    billingName.clear();
+    billingAddress.clear();
+    billingState.clear();
+    billingCountry.clear();
+    billingCity.clear();
+    billingEmail.clear();
+    billingMobile.clear();
+
+    sameAsShipping = true;
     totalCartPrice = 0;
+    shippingCharge = "0";
+    discountAmount = "0";
+    grandTotal = "0";
+    listenToTextChange();
     listenToScrollChange();
   }
 
@@ -116,9 +222,7 @@ class ArmStoreController {
     );
   }
 
-  static Future<void> updateState() async {
-    await WidgetsBinding.instance.performReassemble();
-  }
+
 
   static void selectCategory(ArmCategory category) async {
     if (selectedCategory?.id == category.id) {
@@ -157,11 +261,7 @@ class ArmStoreController {
     }
   }
 
-  static void calculateCartTotal() async {
-    totalCartPrice = cartItems.fold(
-        0, (sum, item) => sum + (num.tryParse(item.price ?? "0") ?? 0));
-    await updateState();
-  }
+
 
   static void removeFromCart(ArmItem item) {
     cartItems.removeWhere((e) => e.id == item.id);
