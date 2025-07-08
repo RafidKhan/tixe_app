@@ -108,15 +108,6 @@ class CartListWidget extends StatelessWidget {
                           ),
                           onPressed: () {
                             ArmStoreController.removeFromCart(item);
-                            Future.delayed(const Duration(milliseconds: 100),
-                                () {
-                              if (cartItems.isEmpty) {
-                                Navigation.pop();
-                                if(isShipping){
-                                  Navigation.pop();
-                                }
-                              }
-                            });
                           },
                         ),
                       ],

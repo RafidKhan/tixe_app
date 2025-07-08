@@ -17,8 +17,22 @@ import '/global/widget/global_appbar.dart';
 import '/global/widget/global_text.dart';
 import 'package:flutter/material.dart';
 
-class CartAddressScreen extends StatelessWidget {
+class CartAddressScreen extends StatefulWidget {
   const CartAddressScreen({Key? key}) : super(key: key);
+
+  @override
+  State<CartAddressScreen> createState() => _CartAddressScreenState();
+}
+
+class _CartAddressScreenState extends State<CartAddressScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Future(() {
+      ArmStoreController.fetchStates();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -145,12 +159,12 @@ class CartAddressScreen extends StatelessWidget {
                     SizedBox(
                       height: 5.h,
                     ),
-                    GlobalText(
-                      str: "Discount Code",
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w400,
-                      color: KColor.grey.color,
-                    ),
+                    // GlobalText(
+                    //   str: "Discount Code",
+                    //   fontSize: 12.sp,
+                    //   fontWeight: FontWeight.w400,
+                    //   color: KColor.grey.color,
+                    // ),
                     SizedBox(
                       height: 3.h,
                     ),
@@ -184,47 +198,47 @@ class CartAddressScreen extends StatelessWidget {
                     //         ))
                     //   ],
                     // ),
-                    GlobalTextFormfield(
-                      textEditingController: ArmStoreController.code,
-                      suffixIcon: _applyCodeButton(
-                        context,
-                        onTap: () {
-                          ArmStoreController.applyDiscountCode();
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      height: 5.h,
-                    ),
-                    Row(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            GlobalText(
-                              str: "Discount",
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w400,
-                              color: KColor.white.color,
-                            ),
-                          ],
-                        ),
-                        const Spacer(),
-                        Column(
-                          children: [
-                            GlobalText(
-                              str: "-\$${ArmStoreController.discountAmount}",
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w400,
-                              color: KColor.white.color,
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                    const Divider(
-                      color: Color(0xffD1C9C9),
-                    ),
+                    // GlobalTextFormfield(
+                    //   textEditingController: ArmStoreController.code,
+                    //   suffixIcon: _applyCodeButton(
+                    //     context,
+                    //     onTap: () {
+                    //       ArmStoreController.applyDiscountCode();
+                    //     },
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: 5.h,
+                    // ),
+                    // Row(
+                    //   children: [
+                    //     Column(
+                    //       crossAxisAlignment: CrossAxisAlignment.start,
+                    //       children: [
+                    //         GlobalText(
+                    //           str: "Discount",
+                    //           fontSize: 16.sp,
+                    //           fontWeight: FontWeight.w400,
+                    //           color: KColor.white.color,
+                    //         ),
+                    //       ],
+                    //     ),
+                    //     const Spacer(),
+                    //     Column(
+                    //       children: [
+                    //         GlobalText(
+                    //           str: "-\$${ArmStoreController.discountAmount}",
+                    //           fontSize: 16.sp,
+                    //           fontWeight: FontWeight.w400,
+                    //           color: KColor.white.color,
+                    //         ),
+                    //       ],
+                    //     )
+                    //   ],
+                    // ),
+                    // const Divider(
+                    //   color: Color(0xffD1C9C9),
+                    // ),
                     Align(
                       alignment: Alignment.center,
                       child: Column(
@@ -254,7 +268,8 @@ class CartAddressScreen extends StatelessWidget {
 
                     GlobalButton(
                       onPressed: () {
-                        Navigation.push(appRoutes: AppRoutes.armsPayment);
+                        ArmStoreController.createInitialOrder();
+
                       },
                       buttonText: "Proceed To Payment",
                     ),

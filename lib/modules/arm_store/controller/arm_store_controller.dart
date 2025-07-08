@@ -4,6 +4,7 @@ import 'package:tixe_flutter_app/constant/app_url.dart';
 import 'package:tixe_flutter_app/data_provider/api_client.dart';
 import 'package:tixe_flutter_app/modules/arm_store/model/slider_arms_list_response.dart';
 import 'package:tixe_flutter_app/modules/arm_store/views/components/same_owner_dialog.dart';
+import 'package:tixe_flutter_app/modules/cart_address/model/state_list_response.dart';
 import 'package:tixe_flutter_app/modules/list_arms/repository/list_arms_interface.dart';
 import 'package:tixe_flutter_app/modules/list_arms/repository/list_arms_repository.dart';
 import 'package:tixe_flutter_app/modules/list_arms_form/repository/list_arms_form_interface.dart';
@@ -13,8 +14,11 @@ import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 
+import '../../../utils/app_routes.dart';
+import '../../cart_address/model/city_list_response.dart';
 import '../../list_arms_form/model/arms_category_response.dart';
 import '../model/all_arms_list_response.dart';
+import '../model/arm_order_create_response.dart';
 
 class ArmStoreController {
   //static int pageIndex = 0;
@@ -48,10 +52,18 @@ class ArmStoreController {
   static final TextEditingController billingMobile = TextEditingController();
 
   static num totalCartPrice = 0;
+  static num grandTotal = 0;
   static bool sameAsShipping = true;
   static String shippingCharge = "0";
   static String discountAmount = "0";
-  static String grandTotal = "0";
+  static List<StateData> states = [];
+  static StateData? selectedShippingState;
+  static StateData? selectedBillingState;
+  static List<CityData> citiesForShipping = [];
+  static List<CityData> citiesForBilling = [];
+  static CityData? selectedShippingCity;
+  static CityData? selectedBillingCity;
+  static int orderId = -1;
 
   static Future<void> updateState() async {
     await WidgetsBinding.instance.performReassemble();
@@ -64,8 +76,6 @@ class ArmStoreController {
 
     updateState();
   }
-
-
 
   static void listenToTextChange() {
     shippingName.addListener(onTextChange);
@@ -100,10 +110,19 @@ class ArmStoreController {
   static void calculateCartTotal() async {
     totalCartPrice = cartItems.fold(
         0, (sum, item) => sum + (num.tryParse(item.price ?? "0") ?? 0));
+    final num shippingChargeValue = num.tryParse(shippingCharge) ?? 0;
+    final discountValue = num.tryParse(discountAmount) ?? 0;
+    grandTotal = totalCartPrice + shippingChargeValue - discountValue;
+
     await updateState();
   }
 
   static Future<void> applyDiscountCode() async {
+    if (selectedShippingCity == null) {
+      ViewUtil.snackBar(
+          "Please select a shipping city", Navigation.key.currentContext!);
+      return;
+    }
     ViewUtil.showLoaderPage();
     await ApiClient().request(
       url: "store/arms/discount-code/verify",
@@ -205,7 +224,15 @@ class ArmStoreController {
     totalCartPrice = 0;
     shippingCharge = "0";
     discountAmount = "0";
-    grandTotal = "0";
+    grandTotal = 0;
+    states.clear();
+    selectedShippingState = null;
+    selectedBillingState = null;
+    citiesForShipping.clear();
+    citiesForBilling.clear();
+    selectedShippingCity = null;
+    selectedBillingCity = null;
+    orderId = -1;
     listenToTextChange();
     listenToScrollChange();
   }
@@ -221,8 +248,6 @@ class ArmStoreController {
       },
     );
   }
-
-
 
   static void selectCategory(ArmCategory category) async {
     if (selectedCategory?.id == category.id) {
@@ -261,11 +286,130 @@ class ArmStoreController {
     }
   }
 
-
-
   static void removeFromCart(ArmItem item) {
     cartItems.removeWhere((e) => e.id == item.id);
     calculateCartTotal();
     updateState();
+  }
+
+  static void fetchStates() async {
+    selectedShippingState = null;
+    selectedBillingState = null;
+    selectedShippingCity = null;
+    selectedBillingCity = null;
+    shippingState.clear();
+    shippingCity.clear();
+    billingState.clear();
+    billingCity.clear();
+    ViewUtil.showLoaderPage();
+    await ApiClient().request(
+      url: "store/all/states",
+      method: Method.GET,
+      callback: (response, isSuccess) {
+        ViewUtil.hideLoader();
+        if (isSuccess) {
+          final StateListResponse stateListResponse =
+              StateListResponse.fromJson(response?.data);
+          states = stateListResponse.data ?? [];
+          updateState();
+        }
+      },
+    );
+  }
+
+  static void fetchCities(
+    int stateId, {
+    required Function(List<CityData> cities) onResponse,
+  }) async {
+    ViewUtil.showLoaderPage();
+    await ApiClient().request(
+      url: "store/state/$stateId/cities",
+      method: Method.GET,
+      callback: (response, isSuccess) {
+        ViewUtil.hideLoader();
+        if (isSuccess) {
+          final CityListResponse cityListResponse =
+              CityListResponse.fromJson(response?.data);
+          onResponse(cityListResponse.data ?? []);
+        }
+      },
+    );
+  }
+
+  static void selectShippingState(StateData state) async {
+    if (selectedShippingState?.id == state.id) {
+      selectedShippingState = null;
+    } else {
+      selectedShippingState = state;
+      selectedShippingCity = null; // Reset city when state changes
+      shippingCity.clear();
+      fetchCities(state.id ?? -1, onResponse: (cities) {
+        citiesForShipping = cities;
+        shippingCity.text = "";
+        selectedShippingCity = null;
+        updateState();
+      }); // Fetch cities for the selected state
+    }
+    shippingState.text = selectedShippingState?.stateName ?? "";
+
+    await updateState();
+  }
+
+  static void selectShippingCity(CityData city) async {
+    if (selectedShippingCity?.id == city.id) {
+      selectedShippingCity = null;
+    } else {
+      selectedShippingCity = city;
+    }
+    shippingCity.text = selectedShippingCity?.cityName ?? "";
+    shippingCharge = selectedShippingCity?.shippingCharge ?? "0";
+    calculateCartTotal();
+    await updateState();
+  }
+
+  static void selectBillingState(StateData state) {
+    billingState.text = state.stateName ?? "";
+    billingCity.clear();
+    billingCity.text = "";
+    selectedBillingState = state;
+    ArmStoreController.fetchCities(state.id ?? -1, onResponse: (cities) {
+      citiesForBilling = cities;
+      selectedBillingCity = null; // Reset city when state changes
+      updateState();
+    });
+  }
+
+  static void selectBillingCity(CityData city) {
+    billingCity.text = city.cityName ?? "";
+    selectedBillingCity = city;
+    updateState();
+  }
+
+  static Future<void> createInitialOrder() async {
+    ViewUtil.showLoaderPage();
+    final params = {
+      "gears": cartItems
+          .map((item) => {
+                "gear_id": item.id,
+                "quantity": 1,
+              })
+          .toList(),
+      "subtotal": grandTotal,
+      "total": grandTotal
+    };
+    await ApiClient().request(
+      url: "store/arms/order-placed",
+      method: Method.POST,
+      params: params,
+      callback: (response, success) {
+        ViewUtil.hideLoader();
+        if (success) {
+          final ArmOrderCreateResponse armOrderCreateResponse =
+              ArmOrderCreateResponse.fromJson(response?.data);
+          orderId = armOrderCreateResponse.order?.id ?? -1;
+          Navigation.push(appRoutes: AppRoutes.armsPayment);
+        }
+      },
+    );
   }
 }

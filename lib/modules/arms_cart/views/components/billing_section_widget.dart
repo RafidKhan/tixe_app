@@ -6,6 +6,9 @@ import 'package:tixe_flutter_app/modules/arms_cart/controller/arms_cart_controll
 import 'package:tixe_flutter_app/modules/arms_cart/views/components/custom_container_widget.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
+import '../../../../global/model/global_option_item.dart';
+import '../../../../global/widget/global_bottomsheet_textformfield.dart';
+import '../../../../utils/view_util.dart';
 import '../../../arm_store/controller/arm_store_controller.dart';
 
 class BillingSectionWidget extends StatelessWidget {
@@ -63,8 +66,35 @@ class BillingSectionWidget extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                     color: KColor.white.color,
                   ),
-                  GlobalTextFormfield(
+                  // GlobalTextFormfield(
+                  //   textEditingController: ArmStoreController.billingState,
+                  // ),
+                  GlobalBottomSheetTextFormField(
                     textEditingController: ArmStoreController.billingState,
+                    onTap: () {
+                      ViewUtil.showOptionPickerBottomSheet(
+                        options: List.generate(
+                          ArmStoreController.states.length,
+                              (index) => GlobalOptionData(
+                            id: ArmStoreController.states[index].id,
+                            value: ArmStoreController.states[index].stateName ??
+                                "",
+                          ),
+                        ),
+                        onSelect: (option) {
+                          final selectedState = ArmStoreController.states
+                              .where((state) => state.id == option.id)
+                              .firstOrNull;
+                          if (selectedState != null) {
+                            Future.delayed(const Duration(milliseconds: 100), () {
+                              ArmStoreController.selectBillingState(selectedState);
+                            });
+                          }
+
+                          //controller.setCountryData(option);
+                        },
+                      );
+                    },
                   ),
                 ],
               ),
@@ -82,8 +112,35 @@ class BillingSectionWidget extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                     color: KColor.white.color,
                   ),
-                  GlobalTextFormfield(
+                  // GlobalTextFormfield(
+                  //   textEditingController: ArmStoreController.billingCity,
+                  // ),
+                  GlobalBottomSheetTextFormField(
                     textEditingController: ArmStoreController.billingCity,
+                    onTap: () {
+                      ViewUtil.showOptionPickerBottomSheet(
+                        options: List.generate(
+                          ArmStoreController.citiesForBilling.length,
+                              (index) => GlobalOptionData(
+                            id: ArmStoreController.citiesForBilling[index].id,
+                            value: ArmStoreController.citiesForBilling[index].cityName ??
+                                "",
+                          ),
+                        ),
+                        onSelect: (option) {
+                          final selectedCity = ArmStoreController.citiesForBilling
+                              .where((state) => state.id == option.id)
+                              .firstOrNull;
+                          if (selectedCity != null) {
+                            Future.delayed(const Duration(milliseconds: 100), () {
+                              ArmStoreController.selectBillingCity(selectedCity);
+                            });
+                          }
+
+                          //controller.setCountryData(option);
+                        },
+                      );
+                    },
                   ),
                 ],
               ),
