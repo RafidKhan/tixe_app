@@ -19,6 +19,7 @@ import '../../cart_address/model/city_list_response.dart';
 import '../../list_arms_form/model/arms_category_response.dart';
 import '../model/all_arms_list_response.dart';
 import '../model/arm_order_create_response.dart';
+import '../model/arm_store_dicsount_response.dart';
 
 class ArmStoreController {
   //static int pageIndex = 0;
@@ -118,17 +119,22 @@ class ArmStoreController {
   }
 
   static Future<void> applyDiscountCode() async {
-    if (selectedShippingCity == null) {
-      ViewUtil.snackBar(
-          "Please select a shipping city", Navigation.key.currentContext!);
-      return;
-    }
     ViewUtil.showLoaderPage();
     await ApiClient().request(
       url: "store/arms/discount-code/verify",
       method: Method.POST,
+      params: {
+        "discount_code": code.text.trim(),
+        "order_id": orderId,
+      },
       callback: (response, success) {
         ViewUtil.hideLoader();
+        if (success) {
+          final ArmStoreDiscountResponse armStoreDiscountResponse =
+              ArmStoreDiscountResponse.fromJson(response?.data);
+          discountAmount = armStoreDiscountResponse.data?.discountAmount ?? "0";
+          calculateCartTotal();
+        }
       },
     );
   }

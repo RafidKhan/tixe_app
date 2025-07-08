@@ -283,38 +283,5 @@ class _CartAddressScreenState extends State<CartAddressScreen> {
     );
   }
 
-  Widget _applyCodeButton(
-    BuildContext context, {
-    required VoidCallback? onTap,
-  }) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        InkWell(
-          onTap: onTap,
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 10.w),
-            padding: EdgeInsets.symmetric(
-              horizontal: 10.w,
-              vertical: 6.h,
-            ),
-            decoration: BoxDecoration(
-              color: KColor.btnGradient1.color,
-              borderRadius: BorderRadius.circular(3.r),
-            ),
-            child: Center(
-              child: GlobalText(
-                str: context.loc.apply_code,
-                color: KColor.black.color,
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
+
 }
