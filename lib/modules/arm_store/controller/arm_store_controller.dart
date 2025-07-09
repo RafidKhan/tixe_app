@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tixe_flutter_app/constant/app_url.dart';
 import 'package:tixe_flutter_app/data_provider/api_client.dart';
+import 'package:tixe_flutter_app/global/model/global_response.dart';
 import 'package:tixe_flutter_app/modules/arm_store/model/slider_arms_list_response.dart';
 import 'package:tixe_flutter_app/modules/arm_store/views/components/same_owner_dialog.dart';
 import 'package:tixe_flutter_app/modules/cart_address/model/state_list_response.dart';
@@ -9,6 +10,7 @@ import 'package:tixe_flutter_app/modules/list_arms/repository/list_arms_interfac
 import 'package:tixe_flutter_app/modules/list_arms/repository/list_arms_repository.dart';
 import 'package:tixe_flutter_app/modules/list_arms_form/repository/list_arms_form_interface.dart';
 import 'package:tixe_flutter_app/modules/list_arms_form/repository/list_arms_form_repository.dart';
+import 'package:tixe_flutter_app/modules/listing_payment/model/listing_payment_nav_model.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
@@ -119,6 +121,11 @@ class ArmStoreController {
   }
 
   static Future<void> applyDiscountCode() async {
+    if (code.text.trim().isEmpty) {
+      ViewUtil.snackBar(
+          "Please enter discount code", Navigation.key.currentContext!);
+      return;
+    }
     ViewUtil.showLoaderPage();
     await ApiClient().request(
       url: "store/arms/discount-code/verify",
@@ -357,6 +364,9 @@ class ArmStoreController {
       }); // Fetch cities for the selected state
     }
     shippingState.text = selectedShippingState?.stateName ?? "";
+    if (sameAsShipping) {
+      selectedBillingState = selectedShippingState;
+    }
 
     await updateState();
   }
@@ -370,6 +380,9 @@ class ArmStoreController {
     shippingCity.text = selectedShippingCity?.cityName ?? "";
     shippingCharge = selectedShippingCity?.shippingCharge ?? "0";
     calculateCartTotal();
+    if (sameAsShipping) {
+      selectedBillingCity = selectedShippingCity;
+    }
     await updateState();
   }
 
@@ -391,7 +404,27 @@ class ArmStoreController {
     updateState();
   }
 
-  static Future<void> createInitialOrder() async {
+  static Future<void> createInitialOrder(BuildContext context) async {
+    //return if shipping and billing details are not filled
+    if (shippingName.text.isEmpty ||
+        shippingAddress.text.isEmpty ||
+        shippingState.text.isEmpty ||
+        shippingCountry.text.isEmpty ||
+        shippingCity.text.isEmpty ||
+        sippingEmail.text.isEmpty ||
+        sippingMobile.text.isEmpty ||
+        billingName.text.isEmpty ||
+        billingAddress.text.isEmpty ||
+        billingState.text.isEmpty ||
+        billingCountry.text.isEmpty ||
+        billingCity.text.isEmpty ||
+        billingEmail.text.isEmpty ||
+        billingMobile.text.isEmpty ||
+        cartItems.isEmpty) {
+      ViewUtil.snackBar(
+          "Please fill all shipping and billing details", context);
+      return;
+    }
     ViewUtil.showLoaderPage();
     final params = {
       "gears": cartItems
@@ -413,7 +446,99 @@ class ArmStoreController {
           final ArmOrderCreateResponse armOrderCreateResponse =
               ArmOrderCreateResponse.fromJson(response?.data);
           orderId = armOrderCreateResponse.order?.id ?? -1;
-          Navigation.push(appRoutes: AppRoutes.armsPayment);
+          Future.delayed(Duration(milliseconds: 100), () async {
+            await createShippingAddress(context);
+          });
+        }
+      },
+    );
+  }
+
+  static Future<void> createShippingAddress(BuildContext context) async {
+    final params = {
+      "name": shippingName.text.trim(),
+      "order_id": orderId,
+      "email": sippingEmail.text.trim(),
+      "phone": sippingMobile.text.trim(),
+      "address_line": shippingAddress.text.trim(),
+      "city_id": selectedShippingCity?.id ?? -1,
+      "state_id": selectedShippingState?.id ?? -1,
+      "postal_code": "",
+      "country": shippingCountry.text.trim(),
+      "type": "shipping",
+    };
+    'here is: ${params}'.log();
+    ViewUtil.showLoaderPage();
+    await ApiClient().request(
+      url: "store/arms/shipping-billing-address",
+      method: Method.POST,
+      params: params,
+      callback: (response, success) {
+        ViewUtil.hideLoader();
+        if (success) {
+          Future.delayed(Duration(milliseconds: 100), () async {
+            await createBillingAddress(context);
+          });
+        }
+      },
+    );
+  }
+
+  static Future<void> createBillingAddress(BuildContext context) async {
+    final params = {
+      "name": billingName.text.trim(),
+      "order_id": orderId,
+      "email": billingEmail.text.trim(),
+      "phone": billingMobile.text.trim(),
+      "address_line": billingAddress.text.trim(),
+      "city_id": selectedBillingCity?.id ?? -1,
+      "state_id": selectedBillingState?.id ?? -1,
+      "postal_code": "",
+      "country": billingCountry.text.trim(),
+      "type": "billing",
+    };
+    'here is:2: ${params}'.log();
+    ViewUtil.showLoaderPage();
+    await ApiClient().request(
+      url: "store/arms/shipping-billing-address",
+      method: Method.POST,
+      params: params,
+      callback: (response, success) {
+        ViewUtil.hideLoader();
+        if (success) {
+          Future.delayed(Duration(milliseconds: 100), () async {
+            Navigation.push(appRoutes: AppRoutes.armsPayment);
+          });
+        }
+      },
+    );
+  }
+
+  static Future<void> confirmPayment(BuildContext context) async {
+    ViewUtil.showLoaderPage();
+    final params = {
+      "amount": grandTotal,
+      "order_id": orderId,
+      "status": "pending",
+      "transaction_id": "123123",
+    };
+    await ApiClient().request(
+      url: "payment",
+      params: params,
+      method: Method.POST,
+      callback: (response, success) {
+        ViewUtil.hideLoader();
+        if (success) {
+          final GlobalResponse globalResponse =
+              GlobalResponse.fromJson(response?.data);
+          Navigation.pushAndRemoveUntil(
+            appRoutes: AppRoutes.paymentSuccess,
+            arguments: const ListingPaymentNavModel(
+              type: ListingType.Arms,
+              subTitle:
+                  "Your payment has been received. Your Order will be delivered to you soon",
+            ),
+          );
         }
       },
     );

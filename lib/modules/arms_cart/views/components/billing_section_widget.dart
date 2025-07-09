@@ -21,15 +21,7 @@ class BillingSectionWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
-          height: 10.h,
-        ),
-        GlobalText(
-          str: "Billing Address",
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w400,
-          color: KColor.white.color,
-        ),
+
         SizedBox(
           height: 15.h,
         ),

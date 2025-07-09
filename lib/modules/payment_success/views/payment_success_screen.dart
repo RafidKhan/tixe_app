@@ -3,7 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/modules/listing_payment/model/listing_payment_nav_model.dart';
+import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
+import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
@@ -17,7 +19,7 @@ class PaymentSuccessScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late final String title;
+    late String title;
     switch (model.type) {
       case ListingType.Arms:
         title = "arms";
@@ -69,14 +71,19 @@ class PaymentSuccessScreen extends StatelessWidget {
             ),
             SizedBox(height: 20.h),
             GlobalText(
-              str: "Your $title has been listed",
+              str: model.subTitle ?? "Your $title has been listed",
               fontSize: 12,
               fontWeight: FontWeight.w300,
+              textAlign: TextAlign.center,
             ),
             SizedBox(height: 20.h),
             GlobalButton(
-              onPressed: () {},
-              buttonText: "View ${title.toCapitalized()}",
+              onPressed: () {
+                Navigation.pushAndRemoveUntil(
+                  appRoutes: AppRoutes.dashboard,
+                );
+              },
+              buttonText: "Go to Home",
             )
           ],
         ),

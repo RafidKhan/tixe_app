@@ -1,5 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tixe_flutter_app/global/widget/global_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/global_textformfield.dart';
@@ -277,30 +278,11 @@ class ArmsPaymentScreen extends StatelessWidget {
                     SizedBox(
                       height: 20.h,
                     ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      PaymentSuccessScreen()));
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: KColor.btnGradient1.color,
-                          padding: EdgeInsets.symmetric(vertical: 12.h),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
-                        ),
-                        child: GlobalText(
-                          str: "Proceed To Payment",
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w400,
-                          color: KColor.black.color,
-                        ),
-                      ),
+                    GlobalButton(
+                      onPressed: () {
+                        ArmStoreController.confirmPayment(context);
+                      },
+                      buttonText: "Confirm Payment",
                     ),
                   ],
                 ),

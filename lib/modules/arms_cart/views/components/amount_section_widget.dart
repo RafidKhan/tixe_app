@@ -9,6 +9,7 @@ import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
+import 'package:tixe_flutter_app/utils/view_util.dart';
 
 import '../../controller/arms_cart_controller.dart';
 
@@ -83,6 +84,10 @@ class AmountSectionWidget extends StatelessWidget {
         ),
         GlobalButton(
           onPressed: () {
+            if(ArmStoreController.cartItems.isEmpty){
+              ViewUtil.snackBar("No arm added in cart", context);
+              return;
+            }
             Navigation.push(appRoutes: AppRoutes.cartAddress);
           },
           buttonText: "Proceed to checkout",

@@ -61,6 +61,13 @@ class _CartAddressScreenState extends State<CartAddressScreen> {
                     SizedBox(
                       height: 20.h,
                     ),
+
+                    GlobalText(
+                      str: "Billing Address",
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w400,
+                      color: KColor.white.color,
+                    ),
                     Row(
                       children: [
                         Checkbox(
@@ -79,7 +86,8 @@ class _CartAddressScreenState extends State<CartAddressScreen> {
                         ),
                       ],
                     ),
-                    BillingSectionWidget(),
+                    if (!ArmStoreController.sameAsShipping)
+                      BillingSectionWidget(),
                     SizedBox(
                       height: 20.h,
                     ),
@@ -268,8 +276,7 @@ class _CartAddressScreenState extends State<CartAddressScreen> {
 
                     GlobalButton(
                       onPressed: () {
-                        ArmStoreController.createInitialOrder();
-
+                        ArmStoreController.createInitialOrder(context);
                       },
                       buttonText: "Proceed To Payment",
                     ),
@@ -282,6 +289,4 @@ class _CartAddressScreenState extends State<CartAddressScreen> {
       ),
     );
   }
-
-
 }
