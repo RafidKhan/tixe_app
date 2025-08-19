@@ -177,6 +177,7 @@ class SharedController extends StateNotifier<SharedState> {
   }
 
   Future<void> getProfileData({bool showLoader = false}) async {
+    if (!PrefHelper.getLoginStatus()) return;
     if (showLoader) {
       ViewUtil.showLoaderPage();
     }

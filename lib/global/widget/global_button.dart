@@ -39,10 +39,11 @@ class GlobalButton extends StatelessWidget {
             },
       child: Container(
         margin: margin,
-        padding: contentPadding??EdgeInsets.symmetric(
-          horizontal: 30.w,
-          vertical: 10.h,
-        ),
+        padding: contentPadding ??
+            EdgeInsets.symmetric(
+              horizontal: 30.w,
+              vertical: 10.h,
+            ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.r),
           border: Border.all(
@@ -68,10 +69,10 @@ class GlobalButton extends StatelessWidget {
             // fontSize: fontSize??14,
             // fontWeight: FontWeight.w400,
             // color: textColor??KColor.black.color,
-            style: GoogleFonts.squadaOne(
-              fontSize: fontSize??20.sp,
+            style: GoogleFonts.poppins(
+              fontSize: fontSize ?? 14.sp,
               fontWeight: FontWeight.w400,
-              color: textColor??KColor.black.color,
+              color: textColor ?? KColor.black.color,
             ),
           ),
         ),
