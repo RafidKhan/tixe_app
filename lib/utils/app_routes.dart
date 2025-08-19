@@ -1,3 +1,4 @@
+import '../modules/my_purchase_history_detail/views/my_purchase_history_detail_screen.dart';
 import '../modules/my_purchase_history/views/my_purchase_history_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/model/personal_detail_nav_model.dart';
@@ -77,6 +78,7 @@ import '../modules/workout_flow/my_workout_select_phase/views/my_workout_select_
 
 enum AppRoutes {
   splash,
+  myPurchaseHistoryDetail,
   myPurchaseHistory,
   cartAddress,
   listWorkoutModulesData,
@@ -139,13 +141,15 @@ enum AppRoutes {
 extension AppRoutesExtention on AppRoutes {
   Widget buildWidget<T extends Object>({T? arguments}) {
     switch (this) {
-
-
+      case AppRoutes.myPurchaseHistoryDetail:
+        return MyPurchaseHistoryDetailScreen(
+          id: arguments as int,
+        );
       case AppRoutes.myPurchaseHistory:
         return const MyPurchaseHistoryScreen();
-     case AppRoutes.cartAddress:
+      case AppRoutes.cartAddress:
         return const CartAddressScreen();
-     case AppRoutes.listWorkoutModulesData:
+      case AppRoutes.listWorkoutModulesData:
         return ListWorkoutModulesDataScreen(id: arguments as int);
       case AppRoutes.listWorkoutDetails:
         return ListWorkoutDetailsScreen(id: arguments as int);
@@ -190,7 +194,9 @@ extension AppRoutesExtention on AppRoutes {
         );
 
       case AppRoutes.listArmsForm:
-        return  ListArmsFormScreen(data: arguments as MyArmDetailResponse?,);
+        return ListArmsFormScreen(
+          data: arguments as MyArmDetailResponse?,
+        );
       case AppRoutes.listArms:
         return const ListArmsScreen();
       case AppRoutes.listingSelection:
@@ -299,7 +305,9 @@ extension AppRoutesExtention on AppRoutes {
       case AppRoutes.fitness:
         return const FitnessScreen();
       case AppRoutes.armsDetails:
-        return  ArmsDetailsScreen(armId: arguments as int,);
+        return ArmsDetailsScreen(
+          armId: arguments as int,
+        );
       case AppRoutes.armsCart:
         return const ArmsCartScreen();
       case AppRoutes.armsPayment:

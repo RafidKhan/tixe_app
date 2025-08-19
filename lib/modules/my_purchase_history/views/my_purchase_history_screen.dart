@@ -3,8 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
+import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
+import 'package:tixe_flutter_app/utils/navigation.dart';
 
 import '../controller/my_purchase_history_controller.dart';
 import '../model/my_pucrahse_history_response.dart';
@@ -60,117 +62,125 @@ class _MyPurchaseHistoryScreenState extends State<MyPurchaseHistoryScreen> {
   }
 
   Widget _item(MyOrderData data) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: const Color(0xFF1E1E1C), // dark background
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Order header (ID + Date + Total)
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Order ID: ${data.id ?? ''}",
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                        color: Colors.white,
+    return InkWell(
+      onTap: () {
+        Navigation.push(
+          appRoutes: AppRoutes.myPurchaseHistoryDetail,
+          arguments: data.id,
+        );
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: const Color(0xFF1E1E1C), // dark background
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Order header (ID + Date + Total)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Order ID: ${data.id ?? ''}",
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                          color: Colors.white,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Text(
-                  "\$${data.total?.toStringAsFixed(2) ?? '0.00'}",
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                    ],
                   ),
                 ),
-              )
-            ],
-          ),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    "\$${data.total?.toStringAsFixed(2) ?? '0.00'}",
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                )
+              ],
+            ),
 
-          const SizedBox(height: 8),
+            const SizedBox(height: 8),
 
-          // Status
-          Row(
-            children: [
-              Container(
-                width: 8,
-                height: 8,
-                decoration: const BoxDecoration(
-                  color: Colors.orange, // you can map to status color
-                  shape: BoxShape.circle,
+            // Status
+            Row(
+              children: [
+                Container(
+                  width: 8,
+                  height: 8,
+                  decoration: const BoxDecoration(
+                    color: Colors.orange, // you can map to status color
+                    shape: BoxShape.circle,
+                  ),
                 ),
-              ),
-              const SizedBox(width: 6),
-              Text(
-                data.status ?? '',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
+                const SizedBox(width: 6),
+                Text(
+                  data.status ?? '',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                  ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
 
-          const SizedBox(height: 12),
+            const SizedBox(height: 12),
 
-          // Items List
-          Column(
-            children: data.items?.map(
-                  (item) {
-                    return Container(
-                      margin: const EdgeInsets.only(bottom: 12),
-                      child: Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: GlobalImageLoader(
-                              imagePath: item.image ?? '',
-                              width: 100,
-                              height: 100,
-                              fit: BoxFit.cover,
-                              imageFor: ImageFor.network,
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Text(
-                              item.gearName ?? '',
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white,
+            // Items List
+            Column(
+              children: data.items?.map(
+                    (item) {
+                      return Container(
+                        margin: const EdgeInsets.only(bottom: 12),
+                        child: Row(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: GlobalImageLoader(
+                                imagePath: item.image ?? '',
+                                width: 100,
+                                height: 100,
+                                fit: BoxFit.cover,
+                                imageFor: ImageFor.network,
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ).toList() ??
-                [],
-          ),
-        ],
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Text(
+                                item.gearName ?? '',
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ).toList() ??
+                  [],
+            ),
+          ],
+        ),
       ),
     );
   }
