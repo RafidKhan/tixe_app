@@ -7,6 +7,8 @@ import 'package:tixe_flutter_app/utils/view_util.dart';
 import '../../../global/widget/global_header_widget.dart';
 import '../../../global/widget/global_image_loader.dart';
 import '../../../global/widget/scaffold/tixe_main_scaffold.dart';
+import '../../../utils/app_routes.dart';
+import '../../../utils/navigation.dart';
 import '/global/widget/global_appbar.dart';
 import '/global/widget/global_text.dart';
 import 'package:flutter/material.dart';
@@ -72,10 +74,10 @@ class _MyReceivedOrdersScreenState extends State<MyReceivedOrdersScreen> {
   Widget _item(MyReceivedOrderData data) {
     return InkWell(
       onTap: () {
-        // Navigation.push(
-        //   appRoutes: AppRoutes.myPurchaseHistoryDetail,
-        //   arguments: data.id,
-        // );
+        Navigation.push(
+          appRoutes: AppRoutes.myReceivedOrderDetail,
+          arguments: data.id,
+        );
       },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
