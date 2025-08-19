@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
 import 'package:tixe_flutter_app/global/widget/global_textformfield.dart';
-import 'package:tixe_flutter_app/modules/arms_cart/controller/arms_cart_controller.dart';
-import 'package:tixe_flutter_app/modules/arms_cart/views/components/custom_container_widget.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
 import '../../../../global/model/global_option_item.dart';

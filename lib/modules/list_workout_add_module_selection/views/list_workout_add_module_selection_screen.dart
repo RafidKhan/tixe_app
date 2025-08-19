@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/model/global_option_item.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottom_button.dart';
@@ -6,17 +7,12 @@ import 'package:tixe_flutter_app/global/widget/global_textformfield.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
 import 'package:tixe_flutter_app/modules/list_workout_add_module_selection/views/components/text_type_view.dart';
 import 'package:tixe_flutter_app/modules/list_workout_add_module_selection/views/components/video_type_view.dart';
-import 'package:tixe_flutter_app/modules/list_workout_modules/controller/list_workout_modules_controller.dart';
-import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 
+import '/global/widget/global_text.dart';
 import '../../../global/widget/global_bottomsheet_textformfield.dart';
 import '../../../utils/styles/k_colors.dart';
 import '../controller/list_workout_add_module_selection_controller.dart';
-import '/global/widget/global_appbar.dart';
-import '/global/widget/global_text.dart';
-import 'package:flutter/material.dart';
-
 import 'components/pdf_type_view.dart';
 
 enum ModuleTypeEnum {

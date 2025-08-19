@@ -1,5 +1,4 @@
-import 'dart:convert';
-
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/data_provider/api_client.dart';
 import 'package:tixe_flutter_app/global/widget/global_button.dart';
@@ -11,14 +10,12 @@ import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 
+import '/global/widget/global_text.dart';
 import '../../../global/widget/global_header_widget.dart';
 import '../../../global/widget/global_image_loader.dart';
 import '../../../utils/app_routes.dart';
 import '../../../utils/styles/k_colors.dart';
 import '../model/list_workouts_response.dart';
-import '/global/widget/global_appbar.dart';
-import '/global/widget/global_text.dart';
-import 'package:flutter/material.dart';
 
 class ListWorkoutsScreen extends StatefulWidget {
   const ListWorkoutsScreen({Key? key}) : super(key: key);

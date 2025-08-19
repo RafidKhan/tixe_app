@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tixe_flutter_app/global/widget/global_button.dart';
@@ -5,21 +6,13 @@ import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/global_textformfield.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
-import 'package:tixe_flutter_app/modules/arms_cart/views/components/amount_section_widget.dart';
 import 'package:tixe_flutter_app/modules/arms_cart/views/components/cart_list_widget.dart';
-import 'package:tixe_flutter_app/modules/arms_cart/views/components/custom_container_widget.dart';
-import 'package:tixe_flutter_app/modules/arms_cart/views/components/shipping_section_widget.dart';
-import 'package:tixe_flutter_app/modules/arms_payment/views/payment_success_screen.dart';
-import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
-import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
-import '../../arm_store/controller/arm_store_controller.dart';
-import '/global/widget/global_appbar.dart';
 import '/global/widget/global_text.dart';
-import 'package:flutter/material.dart';
+import '../../arm_store/controller/arm_store_controller.dart';
 
 class ArmsPaymentScreen extends StatelessWidget {
   const ArmsPaymentScreen({Key? key}) : super(key: key);

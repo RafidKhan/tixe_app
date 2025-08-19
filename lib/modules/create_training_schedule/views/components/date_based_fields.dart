@@ -5,10 +5,7 @@ import 'package:tixe_flutter_app/global/widget/global_text.dart';
 import 'package:tixe_flutter_app/global/widget/global_textformfield.dart';
 import 'package:tixe_flutter_app/utils/date_util.dart';
 
-import '../../../../global/widget/global_image_loader.dart';
-import '../../../../utils/styles/k_assets.dart';
 import '../../controller/create_training_schedule_controller.dart';
-import 'duration_based_fields.dart';
 
 class DateBasedFields extends StatelessWidget {
   const DateBasedFields({super.key});

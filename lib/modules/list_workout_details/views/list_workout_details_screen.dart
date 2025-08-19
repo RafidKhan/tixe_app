@@ -1,5 +1,4 @@
-import 'dart:convert';
-
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/data_provider/api_client.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottom_button.dart';
@@ -8,7 +7,6 @@ import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
 import 'package:tixe_flutter_app/modules/list_workout_modules/model/list_workout_detail.dart';
-import 'package:tixe_flutter_app/modules/review_flow/review/model/review_nav_model.dart';
 import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
@@ -17,9 +15,7 @@ import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 
-import '/global/widget/global_appbar.dart';
 import '/global/widget/global_text.dart';
-import 'package:flutter/material.dart';
 
 class ListWorkoutDetailsScreen extends StatefulWidget {
   final int id;

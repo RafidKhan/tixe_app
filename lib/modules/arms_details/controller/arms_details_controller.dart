@@ -4,9 +4,6 @@ import 'package:tixe_flutter_app/modules/arms_details/model/store_arm_detail.dar
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 
-import '../repository/arms_details_interface.dart';
-import '../repository/arms_details_repository.dart';
-
 class ArmsDetailsController {
   static GearDetailData? details;
 

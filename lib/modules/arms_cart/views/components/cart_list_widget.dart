@@ -5,7 +5,6 @@ import 'package:tixe_flutter_app/global/widget/global_text.dart';
 import 'package:tixe_flutter_app/modules/arms_cart/views/components/custom_image_bg_container_widget.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
-import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
 import '../../../arm_store/controller/arm_store_controller.dart';

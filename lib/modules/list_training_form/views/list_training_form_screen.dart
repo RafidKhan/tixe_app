@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/data_provider/api_client.dart';
-import 'package:tixe_flutter_app/global/widget/custom_location_picker.dart';
 import 'package:tixe_flutter_app/global/widget/global_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_textformfield.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
@@ -14,8 +14,8 @@ import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 
+import '/global/widget/global_text.dart';
 import '../../../global/widget/global_bottom_button.dart';
-import '../../../global/widget/global_bottomsheet_textformfield.dart';
 import '../../../global/widget/global_header_widget.dart';
 import '../../../global/widget/global_image_loader.dart';
 import '../../../utils/enum.dart';
@@ -23,9 +23,6 @@ import '../../../utils/styles/k_colors.dart';
 import '../../../utils/view_util.dart';
 import '../../my_listed_training_detail/model/list_training_details.dart';
 import '../model/create_training_response.dart';
-import '/global/widget/global_appbar.dart';
-import '/global/widget/global_text.dart';
-import 'package:flutter/material.dart';
 
 class ListTrainingFormScreen extends StatefulWidget {
   final ListTrainingDetails? details;

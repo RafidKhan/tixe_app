@@ -1,13 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tixe_flutter_app/data_provider/api_client.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
 import 'package:tixe_flutter_app/modules/arm_store/controller/arm_store_controller.dart';
-import 'package:tixe_flutter_app/modules/arm_store/model/arms_category_model.dart';
 import 'package:tixe_flutter_app/modules/arm_store/views/components/arm_store_gridview.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
@@ -24,8 +20,6 @@ class ArmStoreScreen extends StatefulWidget {
 }
 
 class _ArmStoreScreenState extends State<ArmStoreScreen> {
-  String? _selectedCategory;
-
   @override
   void initState() {
     super.initState();
@@ -55,7 +49,6 @@ class _ArmStoreScreenState extends State<ArmStoreScreen> {
                 child: Column(
                   children: [
                     const FeaturedArms(),
-
                     Row(
                       children: [
                         const GlobalText(

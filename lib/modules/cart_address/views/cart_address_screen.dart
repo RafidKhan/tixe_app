@@ -1,21 +1,15 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_button.dart';
-import 'package:tixe_flutter_app/global/widget/global_textformfield.dart';
 import 'package:tixe_flutter_app/modules/arm_store/controller/arm_store_controller.dart';
-import 'package:tixe_flutter_app/modules/arms_cart/controller/arms_cart_controller.dart';
-import 'package:tixe_flutter_app/utils/app_routes.dart';
-import 'package:tixe_flutter_app/utils/extension.dart';
-import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
+import '/global/widget/global_text.dart';
 import '../../../global/widget/global_header_widget.dart';
 import '../../../global/widget/scaffold/tixe_main_scaffold.dart';
 import '../../arms_cart/views/components/billing_section_widget.dart';
 import '../../arms_cart/views/components/cart_list_widget.dart';
 import '../../arms_cart/views/components/shipping_section_widget.dart';
-import '/global/widget/global_appbar.dart';
-import '/global/widget/global_text.dart';
-import 'package:flutter/material.dart';
 
 class CartAddressScreen extends StatefulWidget {
   const CartAddressScreen({Key? key}) : super(key: key);

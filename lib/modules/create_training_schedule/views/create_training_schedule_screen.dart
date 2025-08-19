@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/data_provider/api_client.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottom_button.dart';
@@ -13,9 +14,6 @@ import '../../../global/model/global_option_item.dart';
 import '../../../global/model/training_schedule_data.dart';
 import '../../../global/widget/global_bottomsheet_textformfield.dart';
 import '../../../utils/view_util.dart';
-
-import 'package:flutter/material.dart';
-
 import '../model/date_based_request.dart';
 import 'components/duration_based_fields.dart';
 

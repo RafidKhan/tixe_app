@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottom_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
@@ -8,10 +9,9 @@ import 'package:tixe_flutter_app/utils/extension.dart';
 import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
+import '/global/widget/global_text.dart';
 import '../../../global/model/training_schedule_data.dart';
 import '../../../utils/view_util.dart';
-import '/global/widget/global_text.dart';
-import 'package:flutter/material.dart';
 
 class ListTrainingSchedulesScreen extends StatefulWidget {
   final int trainingId;

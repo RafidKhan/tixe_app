@@ -1,21 +1,17 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
 import 'package:tixe_flutter_app/global/widget/global_image_loader.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
 import 'package:tixe_flutter_app/modules/arm_store/controller/arm_store_controller.dart';
-import 'package:tixe_flutter_app/modules/arm_store/views/components/arm_store_header.dart';
 import 'package:tixe_flutter_app/modules/arms_details/controller/arms_details_controller.dart';
 import 'package:tixe_flutter_app/modules/arms_details/views/components/custom_image_bg_container_widget.dart';
 import 'package:tixe_flutter_app/modules/arms_details/views/components/details_description_section_widget.dart';
 import 'package:tixe_flutter_app/modules/arms_details/views/components/details_title_section_widget.dart';
-import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
-import 'package:tixe_flutter_app/utils/extension.dart';
-import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
-import '/global/widget/global_appbar.dart';
+
 import '/global/widget/global_text.dart';
-import 'package:flutter/material.dart';
 
 class ArmsDetailsScreen extends StatefulWidget {
   final int armId;

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottom_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottomsheet_textformfield.dart';
@@ -10,11 +11,9 @@ import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
 
+import '/global/widget/global_text.dart';
 import '../../../global/widget/global_image_loader.dart';
 import '../../../utils/enum.dart';
-import '/global/widget/global_appbar.dart';
-import '/global/widget/global_text.dart';
-import 'package:flutter/material.dart';
 
 class TrainingSelectedGearsListScreen extends StatefulWidget {
   final int trainingId;

@@ -1,23 +1,8 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter/material.dart';
 import 'package:tixe_flutter_app/global/widget/global_header_widget.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
-import 'package:tixe_flutter_app/modules/arms_cart/controller/arms_cart_controller.dart';
 import 'package:tixe_flutter_app/modules/arms_cart/views/components/amount_section_widget.dart';
 import 'package:tixe_flutter_app/modules/arms_cart/views/components/cart_list_widget.dart';
-import 'package:tixe_flutter_app/modules/arms_cart/views/components/custom_container_widget.dart';
-import 'package:tixe_flutter_app/modules/arms_cart/views/components/custom_image_bg_container_widget.dart';
-import 'package:tixe_flutter_app/modules/arms_cart/views/components/shipping_section_widget.dart';
-import 'package:tixe_flutter_app/utils/app_routes.dart';
-import 'package:tixe_flutter_app/utils/extension.dart';
-import 'package:tixe_flutter_app/utils/navigation.dart';
-import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
-
-import '../../arm_store/controller/arm_store_controller.dart';
-import '/global/widget/global_appbar.dart';
-import '/global/widget/global_text.dart';
-import 'package:flutter/material.dart';
-
-import 'components/billing_section_widget.dart';
 
 class ArmsCartScreen extends StatefulWidget {
   const ArmsCartScreen({Key? key}) : super(key: key);

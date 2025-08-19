@@ -5,8 +5,6 @@ import 'package:tixe_flutter_app/utils/enum.dart';
 
 import '../../../utils/navigation.dart';
 import '../../../utils/styles/k_colors.dart';
-import '../repository/create_training_schedule_interface.dart';
-import '../repository/create_training_schedule_repository.dart';
 import '../views/components/date_based_fields.dart';
 import '../views/components/duration_based_fields.dart';
 

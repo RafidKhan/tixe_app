@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tixe_flutter_app/global/widget/global_button.dart';
 import 'package:tixe_flutter_app/global/widget/global_textformfield.dart';
 import 'package:tixe_flutter_app/modules/list_workout_add_module_selection/controller/list_workout_add_module_selection_controller.dart';
 import 'package:tixe_flutter_app/utils/custom_file_picker.dart';

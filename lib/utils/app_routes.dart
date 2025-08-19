@@ -1,30 +1,4 @@
-import '../modules/cart_address/views/cart_address_screen.dart';
-import 'package:tixe_flutter_app/modules/list_workout_modules/model/list_workout_detail.dart';
-import 'package:tixe_flutter_app/modules/my_listed_training_detail/model/list_training_details.dart';
-
-import '../modules/list_workout_modules_data/views/list_workout_modules_data_screen.dart';
-import '../modules/list_workout_details/views/list_workout_details_screen.dart';
-import '../modules/list_workout_add_module_selection/views/list_workout_add_module_selection_screen.dart';
-import '../modules/list_workout_modules/views/list_workout_modules_screen.dart';
-import '../modules/list_workout_form/views/list_workout_form_screen.dart';
-import '../modules/list_workouts/views/list_workouts_screen.dart';
-import 'package:tixe_flutter_app/modules/list_workout_form/views/list_workout_form_screen.dart';
-
-import '../modules/arms_payment/views/arms_payment_screen.dart';
-import '../modules/arms_cart/views/arms_cart_screen.dart';
-
-import '../modules/arms_details/views/arms_details_screen.dart';
-import 'package:tixe_flutter_app/modules/list_workouts/views/list_workouts_screen.dart';
-
-import '../modules/my_arm_detail/model/my_arm_details_response.dart';
-import '../modules/my_listed_training_detail/views/my_listed_training_detail_screen.dart';
-import '../modules/training_gear_select/views/training_gear_select_screen.dart';
-import '../modules/training_selected_gears_list/views/training_selected_gears_list_screen.dart';
-import '../modules/create_training_schedule/views/create_training_schedule_screen.dart';
-import '../modules/list_training_schedules/views/list_training_schedules_screen.dart';
-import '../modules/list_training_form/views/list_training_form_screen.dart';
-import '../modules/list_training/views/list_training_screen.dart';
-import '../modules/my_arm_detail/views/my_arm_detail_screen.dart';
+import '../modules/my_purchase_history/views/my_purchase_history_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/model/personal_detail_nav_model.dart';
 import 'package:tixe_flutter_app/modules/auth/personal_details/views/personal_details_screen.dart';
@@ -34,7 +8,9 @@ import 'package:tixe_flutter_app/modules/auth/verify_email/views/verify_email_sc
 import 'package:tixe_flutter_app/modules/fitness_flow/add_alarm/model/add_alarm_nav_model.dart';
 import 'package:tixe_flutter_app/modules/fitness_flow/exercise_detail/views/exercise_detail_screen.dart';
 import 'package:tixe_flutter_app/modules/fitness_flow/fitness/views/fitness_screen.dart';
+import 'package:tixe_flutter_app/modules/list_workout_modules/model/list_workout_detail.dart';
 import 'package:tixe_flutter_app/modules/listing_payment/model/listing_payment_nav_model.dart';
+import 'package:tixe_flutter_app/modules/my_listed_training_detail/model/list_training_details.dart';
 import 'package:tixe_flutter_app/modules/review_flow/submit_review/model/submit_review_nav_model.dart';
 import 'package:tixe_flutter_app/modules/splash/views/splash_screen.dart';
 import 'package:tixe_flutter_app/modules/training_flow/confirm_training_enroll/model/confirm_training_enrollment_nav_model.dart';
@@ -54,15 +30,32 @@ import 'package:tixe_flutter_app/modules/workout_flow/workout_details/model/work
 import 'package:tixe_flutter_app/modules/workout_flow/workout_details/views/workout_details_screen.dart';
 
 import '../modules/arm_store/views/arm_store_screen.dart';
+import '../modules/arms_cart/views/arms_cart_screen.dart';
+import '../modules/arms_details/views/arms_details_screen.dart';
+import '../modules/arms_payment/views/arms_payment_screen.dart';
 import '../modules/auth/fitness_details/views/fitness_details_screen.dart';
+import '../modules/cart_address/views/cart_address_screen.dart';
+import '../modules/create_training_schedule/views/create_training_schedule_screen.dart';
 import '../modules/dashboard/views/dashboard_screen.dart';
 import '../modules/fitness_flow/add_alarm/views/add_alarm_screen.dart';
 import '../modules/fitness_flow/sleep_and_alarm/views/sleep_and_alarm_screen.dart';
 import '../modules/home/views/home_screen.dart';
 import '../modules/list_arms/views/list_arms_screen.dart';
 import '../modules/list_arms_form/views/list_arms_form_screen.dart';
+import '../modules/list_training/views/list_training_screen.dart';
+import '../modules/list_training_form/views/list_training_form_screen.dart';
+import '../modules/list_training_schedules/views/list_training_schedules_screen.dart';
+import '../modules/list_workout_add_module_selection/views/list_workout_add_module_selection_screen.dart';
+import '../modules/list_workout_details/views/list_workout_details_screen.dart';
+import '../modules/list_workout_form/views/list_workout_form_screen.dart';
+import '../modules/list_workout_modules/views/list_workout_modules_screen.dart';
+import '../modules/list_workout_modules_data/views/list_workout_modules_data_screen.dart';
+import '../modules/list_workouts/views/list_workouts_screen.dart';
 import '../modules/listing_payment/views/listing_payment_screen.dart';
 import '../modules/listing_selection/views/listing_selection_screen.dart';
+import '../modules/my_arm_detail/model/my_arm_details_response.dart';
+import '../modules/my_arm_detail/views/my_arm_detail_screen.dart';
+import '../modules/my_listed_training_detail/views/my_listed_training_detail_screen.dart';
 import '../modules/payment_success/views/payment_success_screen.dart';
 import '../modules/profile_flow/preferences/views/preferences_screen.dart';
 import '../modules/profile_flow/profile/views/profile_screen.dart';
@@ -76,12 +69,15 @@ import '../modules/training_flow/training_details/views/training_details_screen.
 import '../modules/training_flow/training_enrollment/model/training_enrollment_nav_model.dart';
 import '../modules/training_flow/training_enrollment/views/training_enrollment_screen.dart';
 import '../modules/training_flow/training_gears_checklist/views/training_gears_checklist_screen.dart';
+import '../modules/training_gear_select/views/training_gear_select_screen.dart';
+import '../modules/training_selected_gears_list/views/training_selected_gears_list_screen.dart';
 import '../modules/workout_flow/my_workout_detail/model/my_enrolled_workout_detail_response.dart';
 import '../modules/workout_flow/my_workout_detail/views/my_workout_detail_screen.dart';
 import '../modules/workout_flow/my_workout_select_phase/views/my_workout_select_phase_screen.dart';
 
 enum AppRoutes {
   splash,
+  myPurchaseHistory,
   cartAddress,
   listWorkoutModulesData,
   listWorkoutDetails,
@@ -144,7 +140,10 @@ extension AppRoutesExtention on AppRoutes {
   Widget buildWidget<T extends Object>({T? arguments}) {
     switch (this) {
 
-      case AppRoutes.cartAddress:
+
+      case AppRoutes.myPurchaseHistory:
+        return const MyPurchaseHistoryScreen();
+     case AppRoutes.cartAddress:
         return const CartAddressScreen();
      case AppRoutes.listWorkoutModulesData:
         return ListWorkoutModulesDataScreen(id: arguments as int);

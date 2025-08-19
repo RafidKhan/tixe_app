@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/global_text.dart';
-import 'package:tixe_flutter_app/modules/arm_store/controller/arm_store_controller.dart';
+import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 
 import '../../../../utils/navigation.dart';
@@ -42,7 +42,62 @@ class ArmStoreHeader extends StatelessWidget {
           SizedBox(
             width: 8.w,
           ),
-          const ArmStoreCartButton(),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const ArmStoreCartButton(),
+              PopupMenuButton<String>(
+                onSelected: (String value) {
+                  switch (value) {
+                    case 'history':
+                      Navigation.push(appRoutes: AppRoutes.myPurchaseHistory);
+                      break;
+                    case 'order':
+                      break;
+                  }
+                },
+                elevation: 2,
+                shadowColor: Colors.black.withOpacity(0.3),
+                color: Colors.white,
+                itemBuilder: (BuildContext context) {
+                  return [
+                    PopupMenuItem<String>(
+                      value: 'history',
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20.w,
+                        vertical: 10.h,
+                      ),
+                      child: const GlobalText(
+                        str: 'My Purchase History',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
+                        color: Colors.black,
+                      ),
+                    ),
+                    PopupMenuItem<String>(
+                      value: 'orders',
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20.w,
+                        vertical: 10.h,
+                      ),
+                      child: const GlobalText(
+                        str: 'Received Orders',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ];
+                },
+                padding: EdgeInsets.zero,
+                menuPadding: EdgeInsets.zero,
+                child: const Icon(
+                  Icons.more_horiz,
+                  color: Colors.white,
+                ),
+              )
+            ],
+          ),
         ],
       ),
     );

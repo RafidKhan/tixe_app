@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 
 class ListingPaymentNavModel{

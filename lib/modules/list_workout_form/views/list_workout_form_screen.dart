@@ -2,10 +2,12 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/global/widget/scaffold/tixe_main_scaffold.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 
+import '/global/widget/global_text.dart';
 import '../../../data_provider/api_client.dart';
 import '../../../global/widget/global_bottom_button.dart';
 import '../../../global/widget/global_header_widget.dart';
@@ -21,8 +23,6 @@ import '../../../utils/view_util.dart';
 import '../../list_training_form/views/list_training_form_screen.dart';
 import '../../list_workout_modules/model/list_workout_detail.dart';
 import '../model/list_workout_response.dart';
-import '/global/widget/global_text.dart';
-import 'package:flutter/material.dart';
 
 class ListWorkoutFormScreen extends StatefulWidget {
   final ListWorkoutData? data;

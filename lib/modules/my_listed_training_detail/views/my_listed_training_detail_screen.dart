@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/data_provider/api_client.dart';
 import 'package:tixe_flutter_app/global/widget/global_bottom_button.dart';
@@ -10,6 +11,7 @@ import 'package:tixe_flutter_app/utils/app_routes.dart';
 import 'package:tixe_flutter_app/utils/enum.dart';
 import 'package:tixe_flutter_app/utils/extension.dart';
 
+import '/global/widget/global_text.dart';
 import '../../../global/widget/action_consent_confirm_dialog.dart';
 import '../../../global/widget/global_map_view_widget.dart';
 import '../../../global/widget/global_slot_item_widget.dart';
@@ -17,9 +19,6 @@ import '../../../utils/navigation.dart';
 import '../../../utils/styles/k_colors.dart';
 import '../../../utils/view_util.dart';
 import '../model/list_training_details.dart';
-import '/global/widget/global_appbar.dart';
-import '/global/widget/global_text.dart';
-import 'package:flutter/material.dart';
 
 class MyListedTrainingDetailScreen extends StatefulWidget {
   final int id;

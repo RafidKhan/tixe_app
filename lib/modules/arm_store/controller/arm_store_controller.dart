@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tixe_flutter_app/constant/app_url.dart';
 import 'package:tixe_flutter_app/data_provider/api_client.dart';
@@ -6,8 +5,6 @@ import 'package:tixe_flutter_app/global/model/global_response.dart';
 import 'package:tixe_flutter_app/modules/arm_store/model/slider_arms_list_response.dart';
 import 'package:tixe_flutter_app/modules/arm_store/views/components/same_owner_dialog.dart';
 import 'package:tixe_flutter_app/modules/cart_address/model/state_list_response.dart';
-import 'package:tixe_flutter_app/modules/list_arms/repository/list_arms_interface.dart';
-import 'package:tixe_flutter_app/modules/list_arms/repository/list_arms_repository.dart';
 import 'package:tixe_flutter_app/modules/list_arms_form/repository/list_arms_form_interface.dart';
 import 'package:tixe_flutter_app/modules/list_arms_form/repository/list_arms_form_repository.dart';
 import 'package:tixe_flutter_app/modules/listing_payment/model/listing_payment_nav_model.dart';

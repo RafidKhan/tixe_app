@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tixe_flutter_app/constant/app_url.dart';
 import 'package:tixe_flutter_app/data_provider/api_client.dart';
@@ -13,9 +14,9 @@ import 'package:tixe_flutter_app/utils/navigation.dart';
 import 'package:tixe_flutter_app/utils/styles/k_assets.dart';
 import 'package:tixe_flutter_app/utils/styles/k_colors.dart';
 import 'package:tixe_flutter_app/utils/view_util.dart';
-import '../../../global/widget/action_consent_confirm_dialog.dart';
+
 import '/global/widget/global_text.dart';
-import 'package:flutter/material.dart';
+import '../../../global/widget/action_consent_confirm_dialog.dart';
 
 class MyArmDetailScreen extends StatefulWidget {
   final int id;

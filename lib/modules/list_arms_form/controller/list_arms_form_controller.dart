@@ -6,7 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tixe_flutter_app/constant/app_url.dart';
 import 'package:tixe_flutter_app/data_provider/api_client.dart';
 import 'package:tixe_flutter_app/modules/list_arms_form/controller/state/list_arms_form_state.dart';
-import 'package:tixe_flutter_app/modules/list_arms_form/model/create_arm_request.dart';
 import 'package:tixe_flutter_app/modules/list_arms_form/model/create_arm_response.dart';
 import 'package:tixe_flutter_app/modules/list_training_form/views/list_training_form_screen.dart';
 import 'package:tixe_flutter_app/modules/my_arm_detail/model/my_arm_details_response.dart';
