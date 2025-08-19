@@ -55,9 +55,7 @@ class _ArmStoreScreenState extends State<ArmStoreScreen> {
                 child: Column(
                   children: [
                     const FeaturedArms(),
-                    SizedBox(
-                      height: 20.h,
-                    ),
+
                     Row(
                       children: [
                         const GlobalText(

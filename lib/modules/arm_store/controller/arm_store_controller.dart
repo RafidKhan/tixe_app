@@ -167,8 +167,13 @@ class ArmStoreController {
     if (pageCount == 1) {
       ViewUtil.showLoaderPage();
     }
+    //category_id
+    String url = AppUrl.allArmsList.url.replaceAll("{PAGE_NO}", "$pageCount");
+    if (selectedCategory != null) {
+      url = "$url&category_id=${selectedCategory?.id}";
+    }
     await ApiClient().request(
-      url: AppUrl.allArmsList.url.replaceAll("{PAGE_NO}", "$pageCount"),
+      url: url,
       method: Method.GET,
       callback: (response, _) async {
         if (pageCount == 1) {
@@ -178,7 +183,7 @@ class ArmStoreController {
         if (_) {
           final AllArmsListResponse allArmsListResponse =
               AllArmsListResponse.fromJson(response?.data);
-          final arms = allArmsListResponse.data?.arms ?? [];
+          var arms = allArmsListResponse.data?.arms ?? [];
           totalArms = allArmsListResponse.data?.pagination?.totalRecords ?? 0;
           allArms.addAll(arms);
           togetherAllArms.addAll(arms);
@@ -268,7 +273,9 @@ class ArmStoreController {
     } else {
       selectedCategory = category;
     }
+    pageCount = 1;
     await updateState();
+    await getAllArms();
     Navigation.pop();
   }
 

@@ -42,31 +42,9 @@ class _FeaturedArmsState extends State<FeaturedArms> {
             },
           ),
         ),
-        // SizedBox(
-        //   height: 20.w,
-        // ),
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   crossAxisAlignment: CrossAxisAlignment.center,
-        //   mainAxisSize: MainAxisSize.min,
-        //   children: List.generate(featuredArms.length, (index) {
-        //     final isSelected = ArmStoreController.pageIndex == index;
-        //     return Container(
-        //       height: 10.h,
-        //       width: 10.w,
-        //       margin: EdgeInsets.symmetric(horizontal: 5.w),
-        //       decoration: BoxDecoration(
-        //         color: isSelected ? KColor.btnGradient1.color : null,
-        //         border: Border.all(
-        //           color: isSelected
-        //               ? KColor.btnGradient1.color
-        //               : KColor.grey.color,
-        //         ),
-        //         shape: BoxShape.circle,
-        //       ),
-        //     );
-        //   }),
-        // )
+        SizedBox(
+          height: 20.h,
+        ),
       ],
     );
   }
