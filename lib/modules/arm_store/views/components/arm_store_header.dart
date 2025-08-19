@@ -53,6 +53,7 @@ class ArmStoreHeader extends StatelessWidget {
                       Navigation.push(appRoutes: AppRoutes.myPurchaseHistory);
                       break;
                     case 'order':
+                      Navigation.push(appRoutes: AppRoutes.myReceivedOrders);
                       break;
                   }
                 },
@@ -75,7 +76,7 @@ class ArmStoreHeader extends StatelessWidget {
                       ),
                     ),
                     PopupMenuItem<String>(
-                      value: 'orders',
+                      value: 'order',
                       padding: EdgeInsets.symmetric(
                         horizontal: 20.w,
                         vertical: 10.h,

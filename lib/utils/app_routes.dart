@@ -1,3 +1,4 @@
+import '../modules/my_received_orders/views/my_received_orders_screen.dart';
 import '../modules/my_purchase_history_detail/views/my_purchase_history_detail_screen.dart';
 import '../modules/my_purchase_history/views/my_purchase_history_screen.dart';
 import 'package:flutter/material.dart';
@@ -78,6 +79,7 @@ import '../modules/workout_flow/my_workout_select_phase/views/my_workout_select_
 
 enum AppRoutes {
   splash,
+  myReceivedOrders,
   myPurchaseHistoryDetail,
   myPurchaseHistory,
   cartAddress,
@@ -141,7 +143,10 @@ enum AppRoutes {
 extension AppRoutesExtention on AppRoutes {
   Widget buildWidget<T extends Object>({T? arguments}) {
     switch (this) {
-      case AppRoutes.myPurchaseHistoryDetail:
+ 
+      case AppRoutes.myReceivedOrders:
+        return const MyReceivedOrdersScreen();
+    case AppRoutes.myPurchaseHistoryDetail:
         return MyPurchaseHistoryDetailScreen(
           id: arguments as int,
         );
